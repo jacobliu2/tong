@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>오약(五若) 상태 진단 — 자가진단 | 경영전환전략연구소 통 TONG</title><meta property="og:type" content="website"/><meta property="og:title" content="오약(五若) 상태 진단 · 자가진단 | 통 TONG"/><meta property="og:description" content="玄·芽·烈·岩·刃 다섯 상태 중 지금 회사의 지배적 상태를 읽는 진단"/><meta property="og:url" content="https://www.workstong.com/diagnosis/oyak/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><meta property="og:locale" content="ko_KR"/><meta name="description" content="기업은 오행처럼 다섯 상태를 순환합니다 — 玄(비어 있음)·芽(싹틈)·烈(타오름)·岩(굳어짐)·刃(벼려짐). 지금 우리 회사가 어느 상태에 있는지, 그리고 다음 한 수는 무엇인지 읽습니다."/><link rel="canonical" href="https://www.workstong.com/diagnosis/oyak/"/><link rel="icon" href="../../assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><style>
+:root{--blue:#3684FF;--blue-d:#1f57c3;--ink:#161d29;--body:#48546b;--sub:#8a95a6;--line:#e9eef7}
+.dg{background:linear-gradient(180deg,#fff,#fbfdff 40%,#fff);color:var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased;min-height:70vh}
+.dg-wrap{max-width:760px;margin:0 auto;padding:clamp(96px,13vw,150px) clamp(20px,5vw,32px) clamp(80px,10vw,120px)}
+.eyebrow{font-size:11.5px;letter-spacing:.2em;font-weight:600;color:#9aa5b6;text-transform:uppercase}
+.dg-card{background:linear-gradient(165deg,#fff,#f6f9ff);border:1px solid #e6efff;border-radius:22px;padding:clamp(28px,4vw,44px);box-shadow:0 20px 50px rgba(54,132,255,.08)}
+.dg-card h1{font-weight:780;font-size:clamp(26px,4vw,38px);letter-spacing:-.04em;color:var(--ink);line-height:1.25;margin-top:14px}
+.dg-card .desc{margin-top:16px;font-size:16px;line-height:1.85;color:var(--body)}
+.dg-meta{margin-top:18px;font-size:13px;color:var(--sub)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:700;font-size:15.5px;padding:14px 28px;border-radius:999px;border:0;cursor:pointer;transition:.2s;font-family:inherit}
+.btn.p{background:linear-gradient(135deg,#4a90ff,#2f6fe0);color:#fff;box-shadow:0 10px 30px rgba(54,132,255,.3)}.btn.p:hover{transform:translateY(-2px)}
+.btn.g{background:#fff;color:var(--ink);border:1px solid #d9e5fb}.btn.g:hover{border-color:var(--blue);color:var(--blue)}
+.btn.t{background:transparent;color:var(--sub);padding:10px 14px}
+/* quiz */
+.prog{height:6px;background:#eef3fb;border-radius:999px;overflow:hidden;margin-bottom:22px}.prog i{display:block;height:100%;background:linear-gradient(90deg,#4a90ff,#2f6fe0);width:0;transition:width .3s}
+.qn{font-size:12px;letter-spacing:.1em;color:var(--blue);font-weight:700}
+.qt{margin:12px 0 26px;font-size:clamp(18px,2.4vw,22px);font-weight:700;color:var(--ink);line-height:1.5;letter-spacing:-.02em;min-height:3.2em}
+.qdim{font-size:12px;color:var(--sub);margin-top:-16px;margin-bottom:22px}
+.lik{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.lik button{padding:16px 6px;border-radius:14px;border:1px solid #e3ebf9;background:#fff;font-family:inherit;font-size:13px;color:var(--body);cursor:pointer;transition:.15s;line-height:1.3}
+.lik button b{display:block;font-size:20px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.lik button:hover{border-color:var(--blue);background:#f4f8ff;transform:translateY(-2px)}
+.lik button.sel{border-color:var(--blue);background:linear-gradient(135deg,#4a90ff,#2f6fe0);color:#fff}.lik button.sel b{color:#fff}
+.qnav{margin-top:20px;display:flex;justify-content:space-between}
+@media(max-width:520px){.lik{grid-template-columns:repeat(5,1fr);gap:5px}.lik button{padding:12px 2px;font-size:11px}.lik button b{font-size:17px}}
+/* result */
+.rs-hero{text-align:center;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.rs-big{font-size:clamp(56px,9vw,88px);font-weight:900;line-height:1;letter-spacing:-.03em;margin:14px 0 6px}
+.rs-title{font-size:clamp(22px,3.2vw,30px);font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.rs-sub{margin-top:8px;font-size:15px;color:var(--sub)}
+.rs-score{display:inline-block;margin-top:14px;padding:8px 16px;border-radius:999px;background:#f0f5ff;color:var(--blue-d);font-weight:800;font-size:14px}
+.rs-sec{margin-top:28px}.rs-sec h3{font-size:13px;letter-spacing:.12em;color:var(--sub);font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:110px 1fr 44px;gap:12px;align-items:center;font-size:14px}
+.bar .n{color:var(--ink);font-weight:700}.bar .tr{height:10px;background:#eef3fb;border-radius:999px;overflow:hidden}.bar .tr i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#7aa9ff,#3684FF);width:0;transition:width .8s cubic-bezier(.22,.61,.36,1)}
+.bar .v{text-align:right;color:var(--sub);font-weight:700;font-size:13px}
+.bar.weak .tr i{background:linear-gradient(90deg,#e0b8a0,#c96545)}.bar.top .tr i{background:linear-gradient(90deg,#4a90ff,#1f57c3)}
+.rs-box{padding:20px 22px;border-radius:16px;background:#fff;border:1px solid var(--line);font-size:15.5px;line-height:1.85;color:var(--body)}
+.rs-next{padding:20px 22px;border-radius:16px;background:linear-gradient(160deg,#fff,#f0f5ff);border-left:3px solid var(--blue);font-size:15.5px;line-height:1.8;color:var(--ink);font-weight:600}
+.rs-quote{margin-top:22px;text-align:center;font-size:14px;color:var(--sub);line-height:1.7}
+.dx-teaser{margin:28px 0 18px;padding:24px 22px;border-radius:18px;background:linear-gradient(160deg,#fff,#f2f7ff);border:1px solid #e6efff;text-align:center;box-shadow:0 12px 30px rgba(54,132,255,.08)}
+.dx-teaser-k{font-size:12px;letter-spacing:.16em;color:#9aa5b6;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.dx-teaser-t{font-size:15px;line-height:1.8;color:#3a4657;max-width:46ch;margin:0 auto}.dx-teaser-t b{color:#161d29}
+.rs-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+.oyak-mini{display:flex;justify-content:center;margin:18px 0 6px}.oyak-mini svg{width:min(300px,80%);height:auto}
+.oyak-mini .oyak-ring,.oyak-mini .oyak-cell{animation:none!important}
+.oyak-mini .oyak-cell{transition:transform .5s,opacity .5s}
+.oyak-mini .oyak-cell.dom{transform:scale(1.22)}
+.oyak-mini .oyak-cell.dom text{font-size:34px}
+
+.oyak-art{position:relative;width:100%;aspect-ratio:1/1;margin:0 auto}
+.oyak-art .oa-node{position:absolute;transform:translate(-50%,-50%);width:clamp(110px,17vw,176px);height:auto;mix-blend-mode:multiply;z-index:1;transition:transform .35s cubic-bezier(.22,.61,.36,1),opacity .4s}
+.oyak-art .oa-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;font-size:clamp(18px,2.1vw,25px);font-weight:800;color:#2f6fe0;letter-spacing:.08em;background:rgba(255,255,255,.85);border:1px solid rgba(54,132,255,.28);border-radius:50%;width:clamp(68px,8.5vw,90px);height:clamp(68px,8.5vw,90px);display:flex;align-items:center;justify-content:center}
+.oyak-art .oa-flow{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.oyak-art .oa-ring{transform-box:fill-box;transform-origin:center;animation:oaSpin 70s linear infinite}
+@keyframes oaSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.oyak-art .oa-ring{animation:none}}
+.oyak-mini{max-width:400px;margin:18px auto 6px}.oyak-mini .oa-ring{animation:none}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "오약(五若) 상태 진단", "description": "玄·芽·烈·岩·刃 다섯 상태 중 지금 회사의 지배적 상태를 읽는 진단", "url": "https://www.workstong.com/diagnosis/oyak/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "오약(五若) 상태 진단", "item": "https://www.workstong.com/diagnosis/oyak/"}]}</script></head><body data-nav="diagnosis" data-depth="2"><div id="tong-nav-root"></div><main class="dg"><div class="dg-wrap">
+  <section id="s-intro" class="dg-card"><div class="eyebrow">Self-check · 오약</div><h1>오약(五若) 상태 진단</h1><p class="desc">기업은 오행처럼 다섯 상태를 순환합니다 — 玄(비어 있음)·芽(싹틈)·烈(타오름)·岩(굳어짐)·刃(벼려짐).<br>지금 우리 회사가 어느 상태에 있는지, 그리고 다음 한 수는 무엇인지 읽습니다.</p><div class="dg-meta">15문항 · 약 4분 · 오행 상생 순환 기반</div><div style="margin-top:26px"><button class="btn p" id="start">진단 시작 →</button></div></section>
+  <section id="s-quiz" class="dg-card" hidden><div class="prog"><i></i></div><div class="qn" id="qn"></div><div class="qt" id="qt"></div><div class="qdim" id="qdim"></div><div class="lik" id="lik"></div><div class="qnav"><button class="btn t" id="prev">← 이전</button><span></span></div></section>
+  <section id="s-result" class="dg-card" hidden>
+    <div class="rs-hero"><div class="eyebrow">Result · 진단 결과</div><div class="rs-big" id="rs-big"></div><div class="rs-title" id="rs-title"></div><div class="rs-sub" id="rs-sub"></div><div class="rs-score" id="rs-score"></div><div class="oyak-mini" id="oyak-mini"><div class="oyak-art" role="group" aria-label="오약 · 玄芽烈岩刃"><svg class="oa-flow" viewBox="0 0 100 100" aria-hidden="true"><circle class="oa-ring" cx="50" cy="50" r="36" fill="none" stroke="#3684FF" stroke-opacity=".26" stroke-width=".8" stroke-dasharray="2.2 3.6" stroke-linecap="round"/></svg><div class="oa-center">五若</div><img class="oa-node" data-oyak="hyeon" src="../../assets/images/oyak/hyeon.png" style="left:50.0%;top:14.0%" loading="lazy" alt="약현 · 비어 있기에 무엇이든 될 수 있다"/><img class="oa-node" data-oyak="a" src="../../assets/images/oyak/a.png" style="left:84.2%;top:38.9%" loading="lazy" alt="약아 · 작게 시작되어 쉽게 무너질 수 있다"/><img class="oa-node" data-oyak="yeol" src="../../assets/images/oyak/yeol.png" style="left:71.2%;top:79.1%" loading="lazy" alt="약렬 · 타오르기에 성장하고 소모된다"/><img class="oa-node" data-oyak="am" src="../../assets/images/oyak/am.png" style="left:28.8%;top:79.1%" loading="lazy" alt="약암 · 완성은 안정이자 멈춤이다"/><img class="oa-node" data-oyak="in" src="../../assets/images/oyak/in.png" style="left:15.8%;top:38.9%" loading="lazy" alt="약인 · 날카롭기에 강하고 부러진다"/></div></div></div>
+    <div class="rs-sec"><h3>영역별 상태</h3><div class="bars" id="bars"></div></div>
+    <div class="rs-sec"><h3>해석</h3><div class="rs-box" id="rs-interp"></div></div>
+    <div class="rs-sec"><h3>다음 한 수</h3><div class="rs-next" id="rs-next"></div></div>
+    <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div>
+    <div class="rs-cta"><a class="btn p" href="../../contact/index.html">이 결과로 상담 신청 →</a><button class="btn g" id="retry">다시 진단</button></div>
+    <p class="rs-quote">본 진단은 자가 점검용 간이 도구로, 정밀한 컨설팅 진단을 대체하지 않습니다.</p>
+  </section>
+</div></main><div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script><script>window.DG_CONFIG={
+ scale:["전혀 아니다", "아니다", "보통", "그렇다", "매우 그렇다"],
+ dims:[{key:'hyeon',name:'玄 약현'},{key:'a',name:'芽 약아'},{key:'yeol',name:'烈 약렬'},{key:'am',name:'岩 약암'},{key:'in',name:'刃 약인'}],
+ q:[{"d": 0, "t": "회사의 방향이 아직 명확히 정해지지 않았고, 여러 가능성을 열어두고 있다."}, {"d": 0, "t": "조직의 형태(역할·구조)가 아직 뚜렷하게 잡히지 않았다."}, {"d": 0, "t": "무엇이든 될 수 있지만, 지금은 무엇을 할지 정하기가 어렵다."}, {"d": 1, "t": "사업이 막 시작되어 가능성은 보이지만 기반(사람·자금·프로세스)은 아직 얕다."}, {"d": 1, "t": "성장 기회가 보이면 기반 확인 없이 먼저 확장하려는 경향이 있다."}, {"d": 1, "t": "작은 성과가 나기 시작했지만, 반복 가능한 구조는 아직 없다."}, {"d": 2, "t": "매출·성장 속도가 빠르고, 외부에서는 잘 되는 회사로 보인다."}, {"d": 2, "t": "성장을 따라가느라 사람과 자원이 계속 소모되고 있다."}, {"d": 2, "t": "바쁘게 돌아가지만, 무엇이 남고 있는지는 잘 보이지 않는다."}, {"d": 3, "t": "규칙과 매뉴얼이 잘 갖춰져 있어 사람이 바뀌어도 회사가 돌아간다."}, {"d": 3, "t": "정해진 방식이 있어 새로운 시도가 잘 받아들여지지 않는다."}, {"d": 3, "t": "시장이 바뀌어도 기존 방식을 그대로 유지하는 경우가 많다."}, {"d": 4, "t": "불필요한 것을 정리해 핵심에만 집중하고 있다."}, {"d": 4, "t": "결정이 빠르고 집중력이 강하지만, 예외 상황에 유연하게 대응하기는 어렵다."}, {"d": 4, "t": "한 방향으로 날카롭게 정렬되어 있어, 방향이 틀리면 크게 흔들릴 수 있다."}],
+ verdict:function(d){
+   var info={hyeon:{han:'玄',ko:'약현',c:'#33619f',name:'비어 있기에 무엇이든 될 수 있다',interp:'검고 깊고 비어 있는 근원의 상태입니다. 형태가 드러나지 않고 방향이 흩어져 있어 붕괴 직전처럼 보일 수 있지만, 비어 있기에 어떤 형태로든 새로 만들어질 수 있습니다.',next:'빈 그릇에 무엇을 담을지 — <b>형태를 만드는 첫 결정</b>을 내리십시오. 방향 하나를 정하는 것이 다음 상태(芽·싹틈)로 가는 길입니다.'},
+   a:{han:'芽',ko:'약아',c:'#3e9169',name:'작게 시작되었기에 쉽게 무너질 수 있다',interp:'막 싹이 튼 상태입니다. 살아 있고 가능성이 있지만 나무가 되려면 멀었습니다. 지면 위 싹만 보고 확장하면 싹을 잡아당기는 꼴이 됩니다.',next:'지면 위 싹이 아니라 <b>땅속 뿌리(사람·자금·프로세스)</b>를 먼저 확인하십시오. 확장보다 기반이 먼저입니다.'},
+   yeol:{han:'烈',ko:'약렬',c:'#c96545',name:'타오르기에 성장하고 타오르기에 소모된다',interp:'맹렬히 타오르는 상태입니다. 성장 추진력과 속도가 강하고 외부에서도 성공처럼 보입니다. 그러나 불은 빛을 내면서 동시에 자신을 태웁니다.',next:'<b>무엇이 남고 있는지</b>를 확인하십시오. 소모를 구조로 바꾸지 않으면 타오름은 성장과 소진을 동시에 일으킵니다.'},
+   am:{han:'岩',ko:'약암',c:'#bd9a52',name:'완성은 안정이지만 동시에 멈춤이다',interp:'단단해져 움직이기 어려운 상태입니다. 규칙과 매뉴얼이 있고 사람이 바뀌어도 조직이 돌아갑니다. 그러나 규칙이 목적이 되고 매뉴얼이 판단을 대신하면 새로운 시장의 언어를 놓칩니다.',next:'<b>규칙이 목적이 되지 않았는지</b>, 새 시장의 언어를 놓치고 있지 않은지 보십시오. 안정은 목표가 아니라 점검 대상입니다.'},
+   in:{han:'刃',ko:'약인',c:'#7c8798',name:'날카롭기에 강하고 날카롭기에 부러진다',interp:'벼려져 날카로운 상태입니다. 불필요한 것이 제거되고 본질만 남았습니다. 집중과 결정의 힘이 강하지만, 칼날은 휘지 못하면 부러집니다.',next:'<b>휘어질 여지(유연성)</b>를 남기십시오. 날카로움은 방향이 맞을 때만 강점입니다.'}};
+   var top=d.reduce(function(a,b){return b.score>a.score?b:a});var x=info[top.key];
+   return {big:x.han,color:x.c,title:x.ko+' · '+x.name,sub:'지금 우리 회사의 지배적 상태',score:top.score,scoreLabel:'해당도 '+top.score+'%',interp:x.interp,next:x.next,key:top.key};
+ }
+};</script><script>
+(function(){
+var C=window.DG_CONFIG; var ans=new Array(C.q.length).fill(null); var i=0;
+var $=function(s){return document.querySelector(s)};
+function show(id){['s-intro','s-quiz','s-result'].forEach(function(x){document.getElementById(x).hidden=(x!==id);});window.scrollTo({top:0,behavior:'smooth'});}
+function render(){
+  var q=C.q[i];$('#qn').textContent=(i+1)+' / '+C.q.length;$('#qt').textContent=q.t;$('#qdim').textContent=C.dims[q.d].name;
+  $('.prog i').style.width=(i/C.q.length*100)+'%';
+  var lk=$('#lik');lk.innerHTML='';C.scale.forEach(function(lab,v){var b=document.createElement('button');b.innerHTML='<b>'+(v+1)+'</b>'+lab;if(ans[i]===v+1)b.classList.add('sel');b.onclick=function(){ans[i]=v+1;lk.querySelectorAll('button').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');setTimeout(next,220);};lk.appendChild(b);});
+  $('#prev').style.visibility=i>0?'visible':'hidden';
+}
+function next(){if(ans[i]==null)return;if(i<C.q.length-1){i++;render();}else{result();}}
+function prev(){if(i>0){i--;render();}}
+function result(){
+  var dims=C.dims.map(function(d,di){var qs=C.q.map(function(q,qi){return q.d===di?(q.r?6-ans[qi]:ans[qi]):null}).filter(function(x){return x!=null});var avg=qs.reduce(function(a,b){return a+b},0)/qs.length;return {name:d.name,key:d.key,score:Math.round((avg-1)/4*100),avg:avg};});
+  var v=C.verdict(dims);
+  show('s-result');
+  var big=$('#rs-big');big.textContent=v.big||'';big.style.color=v.color||'#3684FF';
+  $('#rs-title').textContent=v.title;$('#rs-sub').textContent=v.sub||'';
+  var sc=$('#rs-score');if(v.score!=null){sc.textContent=v.scoreLabel||('지수 '+v.score);sc.hidden=false;}else sc.hidden=true;
+  var bars=$('#bars');bars.innerHTML='';var top=Math.max.apply(null,dims.map(function(d){return d.score}));var low=Math.min.apply(null,dims.map(function(d){return d.score}));
+  dims.forEach(function(d){var cls=d.score===top?' top':(d.score===low?' weak':'');bars.innerHTML+='<div class="bar'+cls+'"><span class="n">'+d.name+'</span><span class="tr"><i data-w="'+d.score+'"></i></span><span class="v">'+d.score+'</span></div>';});
+  setTimeout(function(){bars.querySelectorAll('i').forEach(function(x){x.style.width=x.getAttribute('data-w')+'%'})},80);
+  $('#rs-interp').textContent=v.interp;$('#rs-next').innerHTML=v.next;
+  if(C.afterResult)C.afterResult(v,dims);
+}
+$('#start').onclick=function(){i=0;ans=new Array(C.q.length).fill(null);show('s-quiz');render();};
+$('#prev').onclick=prev;$('#retry').onclick=function(){show('s-intro');};
+})();
+</script><script>window.DG_CONFIG.afterResult=function(v){document.querySelectorAll('#oyak-mini .oa-node').forEach(function(n){var d=n.getAttribute('data-oyak')===v.key;n.style.opacity=d?'1':'.22';n.style.transform='translate(-50%,-50%) scale('+(d?'1.18':'1')+')';});};</script></body></html>

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조직유형 16 정밀 진단 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.progress-wrap{position:sticky;top:12px;z-index:20;margin:24px 0 28px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden;backdrop-filter:blur(8px)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.input-group{margin-bottom:18px}
+.input-group label{display:block;font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;letter-spacing:-0.01em}
+.input-group label .req{color:var(--primary);font-weight:600}
+.input-group input,.input-group select,.input-group textarea{width:100%;padding:12px 14px;border:1.5px solid rgba(54,132,255,0.18);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;background:rgba(255,255,255,0.7);color:var(--text);transition:all .25s}
+.input-group input:focus,.input-group select:focus,.input-group textarea:focus{outline:none;border-color:var(--primary);background:#fff}
+.input-group textarea{resize:vertical;min-height:80px}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.input-row{grid-template-columns:1fr}}
+.axis-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.axis-header .char{font-family:'Pretendard',sans-serif;font-style:normal;font-size:24px;color:var(--primary);line-height:1}
+.axis-header .name{font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.01em}
+.axis-header .desc{flex:1;font-size:11px;color:var(--text-muted);letter-spacing:0.3px}
+.question-num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:13px;color:var(--primary);letter-spacing:1px;margin-bottom:10px}
+.question-text{font-size:18px;line-height:1.55;font-weight:500;color:var(--text);margin-bottom:24px;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{width:100%;padding:14px 18px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:14px}
+.option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.option:active{transform:translateY(0)}
+.option .num{width:28px;height:28px;border-radius:8px;background:rgba(54,132,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--primary);flex-shrink:0;transition:all .25s}
+.option:hover .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.code-headline-wrap{text-align:center;margin-bottom:32px}
+.code-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.code-letters{display:flex;justify-content:center;gap:6px;margin-bottom:16px}
+.code-letter{width:54px;height:64px;display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:36px;font-weight:bold;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(54,132,255,0.25);letter-spacing:-0.02em}
+.code-type-name{font-family:'Pretendard',sans-serif;font-style:normal;font-size:28px;color:var(--text);letter-spacing:-0.02em;line-height:1.2;margin-bottom:6px}
+.code-type-name .accent{color:var(--primary)}
+.code-sub{font-size:14px;color:var(--text-soft);margin-bottom:16px;letter-spacing:-0.01em}
+.code-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:99px;font-size:12px;font-weight:500;letter-spacing:-0.01em}
+.chip-strength{background:rgba(54,132,255,0.10);color:var(--primary)}
+.chip-weakness{background:rgba(255,140,90,0.10);color:#e07449}
+.chip-direction{background:rgba(54,132,255,0.06);color:var(--text-soft)}
+.chip .label{font-size:10px;color:var(--text-muted);letter-spacing:0.5px}
+.company-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.co-item{padding:10px 12px;background:rgba(255,255,255,0.5);border:1px solid var(--glass-border);border-radius:10px}
+.co-label{font-size:10px;color:var(--text-muted);letter-spacing:0.5px;margin-bottom:2px}
+.co-val{font-size:13px;color:var(--text);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.company-bar{grid-template-columns:repeat(2,1fr)}}
+.axis-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.axis-cell{text-align:center;padding:14px 6px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:12px}
+.axis-cell.strong{background:linear-gradient(135deg,rgba(54,132,255,0.10),rgba(107,163,255,0.06));border-color:var(--primary)}
+.axis-cell .char{font-family:'Pretendard',sans-serif;font-style:normal;font-size:24px;color:var(--text);margin-bottom:2px}
+.axis-cell.strong .char{color:var(--primary)}
+.axis-cell .name{font-size:11px;color:var(--text-muted);letter-spacing:0.5px;margin-bottom:6px}
+.axis-cell .letter{display:inline-block;padding:2px 10px;border-radius:6px;font-family:'Pretendard',sans-serif;font-style:normal;font-size:14px;font-weight:bold;letter-spacing:0.5px;margin-bottom:6px}
+.axis-cell.strong .letter{background:rgba(54,132,255,0.15);color:var(--primary)}
+.axis-cell:not(.strong) .letter{background:rgba(138,150,172,0.15);color:var(--text-muted)}
+.axis-cell .score{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px;color:var(--text)}
+.axis-cell .score .unit{font-size:10px;color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;font-weight:500;margin-left:1px}
+.radar-wrap{display:flex;justify-content:center;margin:20px 0 16px}
+.radar-svg{width:100%;max-width:340px;height:auto}
+.box{padding:22px 22px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:14px;margin-bottom:14px}
+.box-title{font-family:'Pretendard',sans-serif;font-style:normal;font-size:15px;color:var(--primary);margin-bottom:10px;letter-spacing:-0.01em}
+.box-content{font-size:14px;color:var(--text);line-height:1.7;letter-spacing:-0.01em}
+.strategy-grid{display:flex;flex-direction:column;gap:12px}
+.strategy-item{padding:18px 20px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:14px;border-left:3px solid var(--primary)}
+.strategy-period{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.strategy-period .term{font-family:'Pretendard',sans-serif;font-style:normal;font-size:16px;color:var(--primary);letter-spacing:-0.01em}
+.strategy-period .month{font-size:11px;color:var(--text-muted)}
+.strategy-list{display:flex;flex-direction:column;gap:6px}
+.strategy-list li{list-style:none;font-size:13px;color:var(--text);line-height:1.6;padding-left:14px;position:relative}
+.strategy-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--primary);opacity:0.5}
+.caution-box{padding:18px 20px;background:linear-gradient(135deg,rgba(255,140,90,0.06),rgba(255,140,90,0.03));border:1px solid rgba(255,140,90,0.2);border-left:3px solid #ff8c5a;border-radius:12px;font-size:13px;color:var(--text);line-height:1.7}
+.caution-box .label{display:block;font-size:11px;color:#e07449;font-weight:600;letter-spacing:1px;margin-bottom:6px}
+.matrix-wrap{margin:20px 0}
+.matrix-svg{width:100%;max-width:600px;height:auto;display:block;margin:0 auto}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em;width:100%}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .question-text{font-size:16px}
+  .card{padding:26px 22px}
+  .code-letter{width:46px;height:54px;font-size:30px}
+  .code-type-name{font-size:24px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+
+
+/* 조직유형 결과 · 캐릭터 프로필 (homepage tone) */
+.type-profile{position:relative;display:flex;gap:clamp(24px,4vw,44px);align-items:center;margin-bottom:32px;padding:clamp(26px,4vw,42px);background:linear-gradient(160deg,#ffffff 0%,#f4f8ff 60%,#eef4ff 100%);border:1px solid #e9f0fb;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(54,132,255,.10)}
+.type-profile::before{content:"";position:absolute;right:-6%;top:-30%;width:56%;height:160%;background:radial-gradient(circle at 60% 40%,rgba(54,132,255,.10),transparent 70%);pointer-events:none}
+.tp-char-wrap{position:relative;flex:0 0 auto;width:clamp(120px,18vw,168px);display:flex;justify-content:center;align-items:flex-end}
+.tp-rings{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:150%;height:auto;z-index:0;pointer-events:none}
+.tp-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120%;height:120%;border-radius:50%;background:radial-gradient(circle,rgba(54,132,255,.13),transparent 68%);z-index:0}
+.tp-char{position:relative;z-index:1;width:100%;height:auto;display:block;filter:drop-shadow(0 16px 30px rgba(54,132,255,.20))}
+.type-profile .tp-meta{position:relative;z-index:1;flex:1 1 auto;min-width:0;text-align:left;margin-bottom:0}
+.type-profile .code-eyebrow{font-size:11px;letter-spacing:.22em;color:#9aa5b6;font-weight:600;text-transform:uppercase;margin-bottom:14px}
+.type-profile .code-letters{display:flex;justify-content:flex-start;gap:8px;margin-bottom:16px}
+.type-profile .code-letter{width:46px;height:54px;font-size:26px;border-radius:12px;background:linear-gradient(135deg,#4a90ff,#2f6fe0);box-shadow:0 8px 20px rgba(54,132,255,.22);font-weight:800;letter-spacing:-.02em;color:#fff;display:flex;align-items:center;justify-content:center}
+.type-profile .code-type-name{font-weight:780;font-size:clamp(23px,3vw,32px);letter-spacing:-.035em;color:#161d29;line-height:1.2;margin-bottom:8px}
+.type-profile .code-type-name .accent{color:#3684FF;font-weight:800}
+.type-profile .code-sub{font-size:15px;color:#6b7788;margin-bottom:18px;line-height:1.6}
+.type-profile .code-chips{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:8px}
+.type-profile .code-chips .chip{background:rgba(255,255,255,.75);border:1px solid #e6eefb;border-radius:999px;padding:7px 14px;font-size:12.5px;box-shadow:0 4px 12px rgba(54,132,255,.05)}
+@media (max-width:560px){.type-profile{flex-direction:column;text-align:center;padding:26px 22px}.type-profile .tp-meta{text-align:center}.type-profile .code-letters,.type-profile .code-chips{justify-content:center}.tp-char-wrap{width:150px}}
+
+/* 좌표·핵심질문·읽는법 (homepage tone) */
+.tp-axes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.tpa{display:inline-flex;flex-direction:column;align-items:center;min-width:64px;padding:8px 10px 7px;border-radius:12px;border:1px solid #e6eefb;background:rgba(255,255,255,.7);line-height:1.1}
+.tpa b{font-size:16px;font-weight:800;color:#161d29;font-style:normal}
+.tpa i{font-size:10.5px;color:#8a95a6;font-style:normal;margin-top:3px;letter-spacing:.02em}
+.tpa em{font-size:12px;font-weight:800;font-style:normal;margin-top:5px}
+.tpa.on{border-color:#cfe0ff;background:linear-gradient(160deg,#fff,#eef4ff)}
+.tpa.on em{color:#2f6fe0}
+.tpa.off em{color:#b5713a}
+.tpa.off{background:rgba(255,255,255,.55)}
+.tp-read{margin:0 0 18px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.65);border:1px solid #e9f0fb}
+.tpq{font-size:15.5px;font-weight:700;color:#161d29;line-height:1.55;letter-spacing:-.02em;margin-bottom:10px}
+.tpr{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:#48546b;line-height:1.6}
+.tpr+.tpr{margin-top:4px}
+.tpr .k{flex:0 0 auto;font-size:11.5px;font-weight:700;color:#3684FF;letter-spacing:.04em}
+.tpr .k.next{color:#b5713a}
+@media (max-width:560px){.tp-axes{justify-content:center}.tpa{min-width:58px}}
+
+/* 공개용 티저 */
+.tp-teaser{opacity:1!important;animation:none!important;margin:28px 0;padding:26px 24px;border-radius:18px;background:linear-gradient(160deg,#fff,#f2f7ff);border:1px solid #e6efff;text-align:center;box-shadow:0 12px 30px rgba(54,132,255,.08)}
+.tp-teaser-k{font-size:12px;letter-spacing:.16em;color:#9aa5b6;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.tp-teaser-t{font-size:15px;line-height:1.8;color:#3a4657;max-width:46ch;margin:0 auto 18px}
+.tp-teaser-t b{color:#161d29}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/organization/"/><meta name="description" content="조직의 의사결정·운영·사람과 성과의 구조를 40문항으로 진단해 16가지 조직유형과 개선 방향을 확인합니다."/><meta property="og:title" content="조직유형 16 정밀 진단 — 통 TONG"/><meta property="og:description" content="조직의 의사결정·운영·사람과 성과의 구조를 40문항으로 진단해 16가지 조직유형과 개선 방향을 확인합니다."/><meta property="og:url" content="https://www.workstong.com/diagnosis/organization/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "조직유형 16 진단", "description": "40문항으로 조직의 의사결정·운영 구조를 16가지 유형으로 분석", "url": "https://www.workstong.com/diagnosis/organization/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "조직유형 16 진단", "item": "https://www.workstong.com/diagnosis/organization/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+        <h1>조직유형 16<br><span class="accent">자가진단</span></h1>
+    <p>40개 질문, 4개 축(人·營·財·産)으로 귀사의 조직 상태를 정밀 진단합니다.<br>진단은 판단이 아닙니다.<br>전략의 출발점입니다.</p>
+  </div>
+  <div class="card popIn" id="step1-card">
+    <div class="section-title">STEP 1 · 기업 기본 정보</div>
+    <div class="input-group">
+      <label>기업명 <span class="req">*</span></label>
+      <input type="text" id="f-company" placeholder="예) (주)한국기업">
+    </div>
+    <div class="input-row">
+      <div class="input-group">
+        <label>업종</label>
+        <select id="f-industry">
+          <option value="">선택</option>
+          <option>제조업</option>
+          <option>IT/소프트웨어</option>
+          <option>유통/물류</option>
+          <option>서비스업</option>
+          <option>건설/부동산</option>
+          <option>식품/외식</option>
+          <option>의료/바이오</option>
+          <option>금융/보험</option>
+          <option>교육</option>
+          <option>기타</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>업력</label>
+        <select id="f-age">
+          <option value="">선택</option>
+          <option>창업 1년 미만</option>
+          <option>1~3년</option>
+          <option>3~7년</option>
+          <option>7~15년</option>
+          <option>15년 이상</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-group">
+        <label>직원 수</label>
+        <select id="f-emp">
+          <option value="">선택</option>
+          <option>5인 미만</option>
+          <option>5~20인</option>
+          <option>20~50인</option>
+          <option>50~200인</option>
+          <option>200인 이상</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>연매출 규모</label>
+        <select id="f-rev">
+          <option value="">선택</option>
+          <option>1억 미만</option>
+          <option>1~5억</option>
+          <option>5~20억</option>
+          <option>20~100억</option>
+          <option>100억 이상</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group">
+      <label>영업이익률</label>
+      <select id="f-profit">
+        <option value="">선택</option>
+        <option>적자</option>
+        <option>0~3%</option>
+        <option>3~7%</option>
+        <option>7~15%</option>
+        <option>15% 이상</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>현재 가장 큰 경영 고민</label>
+      <textarea id="f-concern" placeholder="예) 매출 성장 정체, 핵심 인재 이탈, 자금 압박 등"></textarea>
+    </div>
+    <div class="notice-box">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      조직의 본질은 4축(人·營·財·産)의 코드 조합에서 드러납니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px" onclick="startQuiz()">
+      진단 시작하기 →
+    </button>
+  </div>
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span id="progress-text">1 / 40</span>
+        <span id="progress-axis">人 · 조직·리더십</span>
+      </div>
+    </div>
+    <div class="card popIn" id="question-card">
+      <div class="axis-header">
+        <span class="char serif" id="axis-char">人</span>
+        <span class="name" id="axis-name">조직·리더십</span>
+        <span class="desc" id="axis-desc">PEOPLE</span>
+      </div>
+      <div class="question-num serif" id="question-num">QUESTION 01</div>
+      <div class="question-text" id="question-text">문항을 불러오는 중...</div>
+      <div class="options" id="options-container"></div>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none">
+    <div class="card popIn" id="result-card">
+      <div class="type-profile">
+        <div class="tp-char-wrap"><span class="tp-glow"></span><svg class="tp-rings" viewBox="0 0 300 300" aria-hidden="true"><g fill="none" stroke="#3684FF" stroke-opacity=".10"><circle cx="150" cy="150" r="76"/><circle cx="150" cy="150" r="104"/><circle cx="150" cy="150" r="132"/></g></svg><img class="tp-char" id="type-char" src="" alt="" /></div>
+        <div class="code-headline-wrap tp-meta">
+          <div class="code-eyebrow">YOUR ORGANIZATION TYPE</div>
+          <div class="code-letters" id="code-letters"></div>
+          <div class="code-type-name" id="code-type-name">—</div>
+          <div class="code-sub" id="code-sub">—</div>
+          <div class="tp-axes" id="tp-axes"></div>
+          <div class="tp-read" id="tp-read"></div>
+          <div class="code-chips" id="code-chips"></div>
+        </div>
+      </div>
+      <div class="section-title">기업 정보</div>
+      <div class="company-bar" id="company-bar"></div>
+      <div class="section-title">4축 진단 결과</div>
+      <div class="axis-grid" id="axis-grid"></div>
+      <div class="radar-wrap">
+        <svg class="radar-svg" id="radar-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="section-title">조직 상태 해석</div>
+      <div class="box">
+        <div class="box-content" id="r-interp">—</div>
+      </div>
+      <div class="tp-teaser">
+        <div class="tp-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div>
+        <div class="tp-teaser-t">이 유형의 전환 설계도 — 30일·3개월·3년 실행 로드맵과 주의점 — 는 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div>
+        <a class="btn btn-primary" href="../../contact/index.html">이 결과로 진단 상담 신청 →</a>
+      </div>
+      <div class="cta-wrap">
+        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 정밀 컨설팅 상담 →</a>
+        <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const AXES = [
+  {key:'HUM', char:'人', name:'조직·리더십', desc:'리더십 유연성, 조직문화, 인재관리', strongLetter:'P', weakLetter:'I'},
+  {key:'OPS', char:'營', name:'운영·프로세스', desc:'업무체계, 표준화, 시스템 의존도', strongLetter:'O', weakLetter:'A'},
+  {key:'FIN', char:'財', name:'재무', desc:'현금흐름, 수익구조, 재무관리', strongLetter:'S', weakLetter:'V'},
+  {key:'MKT', char:'産', name:'제품·시장', desc:'시장검증, 경쟁력, 고객기반', strongLetter:'E', weakLetter:'U'},
+];
+const QUESTIONS = [
+  {id:1,axis:'HUM',text:'우리 조직의 리더는 새로운 시도와 변화를 적극 수용하며 구성원의 도전을 장려한다.',positive:true},
+  {id:2,axis:'HUM',text:'구성원들은 실패를 두려워하지 않고 자유롭게 의견을 말할 수 있는 심리적 안전감이 있다.',positive:true},
+  {id:3,axis:'HUM',text:'조직 내 의사결정이 소수 상위직에 집중되어 현장 의견이 반영되기 어렵다.',positive:false},
+  {id:4,axis:'HUM',text:'리더십 교체나 외부 자극이 있을 때 조직 전체가 빠르게 방향을 전환할 수 있다.',positive:true},
+  {id:5,axis:'HUM',text:'직원들은 자신의 역할과 권한이 명확하며 주도적으로 업무를 수행한다.',positive:true},
+  {id:6,axis:'HUM',text:'"원래 그래왔으니까"라는 관성이 조직에서 변화 시도보다 더 강하게 작동한다.',positive:false},
+  {id:7,axis:'HUM',text:'신규 채용이나 외부 인재 영입 시 기존 조직과의 통합이 원활하게 이루어진다.',positive:true},
+  {id:8,axis:'HUM',text:'성과 피드백 문화가 정착되어 있으며 평가 기준이 구성원에게 투명하게 공유된다.',positive:true},
+  {id:9,axis:'HUM',text:'세대 또는 부서 간 갈등이 잠재되어 있으며 이를 해소할 공식 채널이 부족하다.',positive:false},
+  {id:10,axis:'HUM',text:'리더는 비전을 구체적 언어로 반복 전달하여 구성원이 방향성을 명확히 인식하고 있다.',positive:true},
+  {id:11,axis:'OPS',text:'핵심 업무 프로세스가 문서화되어 있어 담당자가 바뀌어도 동일한 품질이 유지된다.',positive:true},
+  {id:12,axis:'OPS',text:'주요 업무가 특정 개인의 역량에 의존하여 그 사람이 없으면 업무가 중단된다.',positive:false},
+  {id:13,axis:'OPS',text:'회의와 보고의 흐름이 체계화되어 정보가 적시에 올바른 사람에게 전달된다.',positive:true},
+  {id:14,axis:'OPS',text:'성과 지표(KPI)가 명확하게 설정되어 있고 정기적으로 모니터링된다.',positive:true},
+  {id:15,axis:'OPS',text:'업무 우선순위가 자주 바뀌며 현재 어떤 일이 가장 중요한지 팀 내 혼선이 있다.',positive:false},
+  {id:16,axis:'OPS',text:'신규 프로젝트나 고객 요청 시 표준 대응 절차가 있어 빠르게 착수할 수 있다.',positive:true},
+  {id:17,axis:'OPS',text:'부서 간 협업 시 역할 경계가 불분명하여 중복 업무나 공백이 자주 발생한다.',positive:false},
+  {id:18,axis:'OPS',text:'과거 프로젝트의 성공·실패 사례가 축적되어 다음 업무에 반영되는 학습 구조가 있다.',positive:true},
+  {id:19,axis:'OPS',text:'운영 문제 발생 시 임기응변이 아닌 근본 원인을 분석하고 개선하는 문화가 있다.',positive:true},
+  {id:20,axis:'OPS',text:'디지털 도구(CRM, ERP, 협업툴 등) 활용이 저조하며 아날로그 방식이 주를 이룬다.',positive:false},
+  {id:21,axis:'FIN',text:'월별 현금흐름을 정기적으로 모니터링하며 6개월 이상의 운전자금이 확보되어 있다.',positive:true},
+  {id:22,axis:'FIN',text:'매출 대비 수익률이 안정적으로 유지되며 주요 비용 항목을 통제할 수 있다.',positive:true},
+  {id:23,axis:'FIN',text:'자금 압박이 반복되며 단기 자금 조달(대출, 어음 등)에 의존하는 경우가 많다.',positive:false},
+  {id:24,axis:'FIN',text:'주요 매출처가 3개 이상 분산되어 있어 특정 고객 이탈 시 타격이 제한적이다.',positive:true},
+  {id:25,axis:'FIN',text:'재무제표를 정기적으로 검토하며 경영진이 재무 지표 기반으로 의사결정을 한다.',positive:true},
+  {id:26,axis:'FIN',text:'매출은 발생하지만 실질 이익이 남지 않으며 비용 구조 파악이 불분명하다.',positive:false},
+  {id:27,axis:'FIN',text:'예산 계획이 수립되어 있고 실적과의 차이를 월 단위로 분석하는 관리 체계가 있다.',positive:true},
+  {id:28,axis:'FIN',text:'미수금 또는 외상채권이 과다하여 현금 회수 주기가 길어지고 있다.',positive:false},
+  {id:29,axis:'FIN',text:'정책금융·투자 등 외부 자금 활용 경험이 있으며 적절한 시점에 재무 레버리지를 쓴다.',positive:true},
+  {id:30,axis:'FIN',text:'세무·회계 처리가 내부에서 체계적으로 관리되며 세금 리스크가 적절히 통제된다.',positive:true},
+  {id:31,axis:'MKT',text:'우리 제품·서비스는 시장에서 실제로 반복 구매 또는 재계약이 지속적으로 이루어진다.',positive:true},
+  {id:32,axis:'MKT',text:'주요 경쟁사 대비 우리만의 차별화 요소가 명확하며 고객에게도 인식된다.',positive:true},
+  {id:33,axis:'MKT',text:'신규 고객 획득이 주로 소개·인맥에 의존하며 체계적인 마케팅 채널이 없다.',positive:false},
+  {id:34,axis:'MKT',text:'고객 피드백을 정기적으로 수집하며 이를 제품·서비스 개선에 반영하고 있다.',positive:true},
+  {id:35,axis:'MKT',text:'타겟 시장의 규모와 성장 추세를 파악하고 있으며 구체적 진입 전략이 수립되어 있다.',positive:true},
+  {id:36,axis:'MKT',text:'주력 제품의 수명주기가 성숙·쇠퇴 단계이며 차세대 제품 또는 시장 전환 준비가 미흡하다.',positive:false},
+  {id:37,axis:'MKT',text:'고객 유지율(재구매·재계약)이 70% 이상이며 이탈 고객 분석이 이루어지고 있다.',positive:true},
+  {id:38,axis:'MKT',text:'신제품·신서비스 출시 시 고객 반응이 예측 가능한 수준으로 사전 검증되어 있다.',positive:true},
+  {id:39,axis:'MKT',text:'가격 경쟁에서 자주 밀리며 가격을 올리면 고객 이탈 우려가 있어 가격 방어력이 약하다.',positive:false},
+  {id:40,axis:'MKT',text:'국내외 확장(신규 지역·채널·고객군)을 위한 구체적 계획이 수립되어 있다.',positive:true},
+];
+const SCALE_LABELS = [
+  {num:1,text:'전혀 그렇지 않다'},
+  {num:2,text:'그렇지 않다'},
+  {num:3,text:'보통이다'},
+  {num:4,text:'그렇다'},
+  {num:5,text:'매우 그렇다'},
+];
+const TYPES = {
+  'POSE':{name:'혁신 사령관',sub:'완성된 지배형 조직',strength:'균형·확장성',weakness:'현상 안주',direction:'외부 충격·신사업',
+    interp:'네 축이 모두 최적화된 가장 이상적인 상태입니다. 강력한 실행 기반을 보유하고 있으나, 현상 유지가 오히려 성장의 발목을 잡을 수 있습니다. 외부 시장 변화를 선도하거나 신사업으로의 공격적 확장을 검토할 시점입니다.',
+    consult:'귀사는 경영전환연구소 통이 진단한 16개 유형 중 가장 이상적인 조직 상태에 있습니다. 인사·운영·재무·시장 네 가지 축이 모두 안정권에 진입했습니다. 하지만 바로 이 지점이 함정입니다. 완성된 조직은 종종 자기 성공에 갇힙니다. 지금 필요한 것은 "우리는 잘하고 있다"는 확인이 아니라 "다음 10년은 어디서 싸울 것인가"에 대한 냉정한 질문입니다. 신사업 탐색, 글로벌 확장, 또는 플랫폼 전환을 진지하게 검토하십시오.',
+    short:['현재 4축 상태를 정량 측정하는 내부 KPI 대시보드 구축','경쟁사 동향 분석 및 산업 트렌드 모니터링 체계 수립','임원급 신사업 탐색 TF 구성 및 아이디어 풀 수집'],
+    mid:['신사업 후보 3개 이상 선정 후 소규모 파일럿 실행','글로벌 또는 신채널 진출을 위한 사업성 검토','기존 사업의 자동화·시스템화를 통한 비용 구조 최적화'],
+    long:['핵심 사업 외 1개 이상의 신사업 매출 비중 10% 이상 달성','플랫폼 또는 생태계 중심의 비즈니스 모델 전환','IPO 또는 M&A를 활용한 외형 성장 검토'],
+    caution:'최고의 위험은 성공에서 온다. 현재 구조를 절대 기준으로 삼지 마십시오. 정기적인 자기부정(self-disruption)을 조직 문화로 내재화해야 합니다.'},
+  'POSU':{name:'준비된 전략가',sub:'내부는 완성, 시장은 미완',strength:'실행력',weakness:'시장 감각 부족',direction:'빠른 시장 검증',
+    interp:'조직 내부 인프라는 탄탄합니다. 리더십·운영·재무 모두 안정적이나 시장 검증이 아직 부족한 상태입니다. 내부 역량을 무기로 시장 검증 속도를 높이는 전략이 필요합니다.',
+    consult:'귀사는 싸울 준비는 완벽하게 되어 있지만 어디서 싸워야 할지를 아직 모르는 상태입니다. 내부 역량은 분명 상위권입니다. 문제는 그 역량이 시장의 진짜 수요와 얼마나 맞닿아 있는가입니다. 지금 당장 고객 인터뷰 10건을 실시하고, 핵심 가치 제안을 검증하십시오. 준비된 조직이 빠르게 움직이면 시장은 반드시 응답합니다.',
+    short:['타겟 고객 10명 이상 심층 인터뷰 실시','현재 제품·서비스의 핵심 가치 제안 재정의','소규모 파일럿 세일즈 3건 실행 및 피드백 수집'],
+    mid:['시장 검증 결과 기반 제품·서비스 개선 1차 반영','마케팅 채널 다변화(온라인·오프라인) 시작','재구매율 측정 지표 수립 및 관리'],
+    long:['시장 검증된 제품으로 본격 세일즈 드라이브','파트너십 또는 채널 영업 구조 확립','브랜드 포지셔닝 구축 및 업계 내 인지도 확보'],
+    caution:'내부에서 검증된 것을 시장이 원한다고 착각하지 마십시오. 고객이 돈을 내는 순간만이 진짜 검증입니다.'},
+  'PASE':{name:'야전 지휘관',sub:'감각 중심 성장 조직',strength:'영업력·추진력',weakness:'시스템 부재',direction:'프로세스 구축',
+    interp:'유연한 조직 문화와 강한 시장 기반이 강점입니다. 그러나 운영이 개인 역량에 의존하는 구조는 지속 성장의 병목이 됩니다. 핵심 프로세스의 표준화와 시스템화가 시급합니다.',
+    consult:'귀사는 현장에서 이미 검증된 실력을 가지고 있습니다. 고객은 있고 매출은 나오고 있습니다. 하지만 솔직히 말씀드리면, 지금 구조는 사람이 움직여야만 돌아가는 엔진입니다. 핵심 인재 한 명이 나가면 어떻게 됩니까? 감각을 시스템으로 바꾸십시오. 영업 성공 사례를 매뉴얼화하고, 고객 관리를 CRM으로 전환하십시오. 그래야 성장이 지속됩니다.',
+    short:['핵심 업무 Top 5 프로세스 문서화 착수','영업 성공 사례 3건 이상 매뉴얼화','CRM 도입 검토 및 고객 데이터 정리'],
+    mid:['표준 SOP 전사 배포 및 교육','영업 파이프라인 관리 체계 구축','신입 온보딩 시스템 구축으로 개인 의존도 완화'],
+    long:['ERP 또는 업무 자동화 시스템 도입','조직 구조 재설계로 역할 분리 명확화','시스템 기반 사업 확장 가능 구조 완성'],
+    caution:'시스템화 과정에서 기존 핵심 인재의 반발이 발생할 수 있습니다. 그들의 노하우를 시스템에 반영하는 방식으로 참여를 이끌어내야 합니다.'},
+  'PASU':{name:'패기 있는 개척자',sub:'가능성 중심 조직',strength:'추진력',weakness:'방향성 부재',direction:'전략 구조화',
+    interp:'강한 추진력과 변화 수용력을 가진 조직입니다. 운영 체계와 시장 검증이 미흡합니다. 에너지를 집중할 전략 구조를 먼저 세운 뒤 실행에 돌입해야 합니다.',
+    consult:'귀사에는 분명 강한 에너지가 있습니다. 그 에너지가 아직 방향을 잡지 못한 상태입니다. 지금 당장 가장 중요한 한 가지를 정하십시오. 선택과 집중 없이 모든 것을 동시에 하려 하면 에너지는 소진되고 성과는 나오지 않습니다. 90일 단위 OKR을 설정하고 전체 조직이 같은 방향을 바라보게 하십시오.',
+    short:['조직이 집중할 핵심 목표(OKR) 1개 선정','고객 페르소나 정의 및 타겟 시장 좁히기','90일 실행 계획 수립 및 팀 공유'],
+    mid:['핵심 업무 프로세스 3가지 표준화','첫 번째 시장 검증 완료 및 피봇 여부 결정','재무 기초 체계(현금흐름 모니터링) 수립'],
+    long:['검증된 모델 기반 세일즈 확장','운영 체계 고도화로 스케일업 기반 마련','투자 유치 또는 정책금융 활용 검토'],
+    caution:'에너지가 강한 조직일수록 번아웃(burn-out) 위험이 큽니다. 빠른 실행과 함께 지속 가능한 업무 리듬을 설계하십시오.'},
+  'POVE':{name:'구멍 난 금고',sub:'성장 속 재무 누수',strength:'시장 기반',weakness:'현금흐름',direction:'수익 구조 개선',
+    interp:'시장에서의 경쟁력과 조직의 유연성은 갖춰져 있습니다. 문제는 그 성장이 재무적으로 연결되지 않는다는 점입니다. 매출 확대보다 수익 구조 정비를 먼저 해야 합니다.',
+    consult:'매출은 있고 고객도 있는데 돈이 안 남는다는 것은 구조적 문제입니다. 제품·서비스별 수익성 분석을 즉시 실시하십시오. 매출에서 이익을 갉아먹는 항목을 찾아야 합니다. 가장 많이 파는 것이 가장 돈이 되는 것인지 반드시 확인하십시오. 성장 속도를 조금 늦추더라도 수익 구조를 먼저 잡아야 지속 성장이 가능합니다.',
+    short:['제품·서비스별 공헌이익 분석 실시','원가 구조 분해 및 고비용 항목 파악','미수금 회수 계획 수립 및 실행'],
+    mid:['수익성 낮은 제품·서비스 구조 조정','가격 정책 재검토 및 가격 인상 전략 수립','계약 구조 개선으로 선수금 비중 확대'],
+    long:['고수익 제품·서비스 비중 70% 이상으로 재편','재무 관리 인력 또는 CFO급 역할 내재화','수익성 기반의 신사업 확장'],
+    caution:'매출 성장에 집착하다 수익성을 놓치는 함정을 경계하십시오. 매출 1억의 5% 이익이 매출 2억의 1% 이익보다 낫습니다.'},
+  'POVU':{name:'시끄러운 음유시인',sub:'구조는 있으나 실질 없음',strength:'외형',weakness:'실행력',direction:'KPI 기반 전환',
+    interp:'겉으로는 체계적이고 활발해 보이지만 재무와 시장 검증이 모두 취약한 위험한 조합입니다. KPI 기반 성과 관리가 즉시 필요합니다.',
+    consult:'귀사는 잘 차려진 식탁에 음식이 없는 상태입니다. 조직은 움직이고 있고 프로세스도 있습니다. 하지만 그것이 돈으로 연결되지 않고 있습니다. 지금 하고 있는 모든 활동이 매출과 이익에 어떻게 기여하는지 추적해야 합니다. KPI를 현금 창출과 직결된 지표로 재설정하고, 실질 성과에만 집중하십시오.',
+    short:['현재 운영 중인 KPI 전면 재검토','매출·이익과 직결된 핵심 지표 3개로 재설정','전 구성원 KPI 공유 및 주간 트래킹 시작'],
+    mid:['시장 검증을 위한 파일럿 세일즈 실행','재무 흑자 전환을 위한 비용 구조 개선','고객 획득 채널 분석 및 ROI 기반 채널 집중'],
+    long:['검증된 세일즈 모델 확립 및 확장','재무 안정화 기반 위에 마케팅 투자 재개','브랜드 자산을 실질 매출로 전환하는 구조 완성'],
+    caution:'활동량을 성과로 착각하지 마십시오. 바쁜 것과 잘하는 것은 다릅니다.'},
+  'PAVE':{name:'도박판의 새내기',sub:'기회는 있으나 통제 없음',strength:'기회 포착',weakness:'재무 리스크',direction:'재무 통제',
+    interp:'유연한 조직과 검증된 시장이라는 두 가지 자산을 보유했습니다. 운영의 즉흥성과 재무 불안정이 기회를 소진시킵니다. 재무 통제 체계 구축이 최우선입니다.',
+    consult:'기회는 분명히 있습니다. 시장도 있고 조직도 유연합니다. 하지만 지금 구조에서 기회를 잡을수록 오히려 재무 리스크가 커집니다. 일단 지금 당장 3개월치 현금 흐름을 직접 써보십시오. 어디서 돈이 새는지 반드시 보일 것입니다. 재무를 통제하지 않으면 기회는 독이 됩니다.',
+    short:['3개월 현금흐름 예측표 직접 작성','고정비 vs 변동비 구분 및 고정비 절감 검토','미수금 회수 우선 실행'],
+    mid:['월별 손익 리뷰 체계 수립','운영 핵심 업무 SOP 3개 수립으로 즉흥성 완화','재무 전문가(세무사·CFO) 자문 계약'],
+    long:['재무 안정 기반 마련 후 운영 시스템 고도화','정책금융 또는 외부 투자 유치 검토','수익성 높은 사업에 자원 집중 재편'],
+    caution:'기회가 많다는 것이 곧 실행해야 한다는 뜻은 아닙니다. 재무 여력을 초과하는 기회는 기회가 아닙니다.'},
+  'PAVU':{name:'외줄 타는 야심가',sub:'고위험 성장 상태',strength:'실행력',weakness:'지속 불가능',direction:'생존 구조 확보',
+    interp:'강한 의지와 추진력만으로 달리고 있는 상태입니다. 조직의 유연성이 유일한 강점이며 나머지는 모두 취약합니다. 당장의 생존 구조를 확보하는 것이 전략의 전부입니다.',
+    consult:'솔직하게 말씀드립니다. 지금 귀사의 상태는 매우 위험합니다. 재무·운영·시장 세 축이 모두 위기 상태입니다. 유일한 강점은 조직의 유연성입니다. 이것을 살려서 당장 현금을 확보하십시오. 어떤 방식으로든 3개월 내 현금 유입을 만들어야 합니다. 이것이 전략의 시작입니다.',
+    short:['즉시 현금 창출 가능한 단기 계약·용역 수주 집중','불필요한 고정비 즉시 삭감','긴급 정책금융(소진공·신보 등) 접수 검토'],
+    mid:['월별 흑자 전환을 위한 최소 사업 구조 확립','핵심 고객 2~3개에 집중하는 선택과 집중','운영 매뉴얼 최소 2개 수립으로 개인 의존도 완화'],
+    long:['생존 기반 위에 단계적 시스템 구축','검증된 수요 기반으로 사업 모델 정비','재무·운영·시장 3축 순차적 보강'],
+    caution:'지금은 성장이 아닌 생존이 목표입니다. 모든 자원을 현금 흐름에 집중하십시오. 외형 성장은 생존 이후의 일입니다.'},
+  'IOSE':{name:'늙은 장인',sub:'과거의 강자',strength:'품질',weakness:'변화 거부',direction:'조직 유연화',
+    interp:'체계적 운영, 탄탄한 재무, 검증된 시장을 갖춘 안정적 조직입니다. 조직 문화의 경직성이 미래 성장의 장벽이 됩니다. 조직 내 유연성을 주입하는 변화 관리가 필요합니다.',
+    consult:'귀사는 오랜 시간 쌓아온 진짜 실력이 있습니다. 품질과 운영과 시장을 모두 갖추고 있습니다. 하지만 솔직히 말씀드리면, 지금 조직은 변화를 두려워하고 있습니다. 시장은 이미 변하기 시작했습니다. 내부에서 변화의 불씨를 만들어야 합니다. 젊은 리더를 발탁하거나 외부 충격을 의도적으로 만드십시오. 변화는 선택이 아닙니다.',
+    short:['조직 내 변화 저항 요인 구조적 분석','30~40대 중간 리더 권한 확대 실험','변화 관련 외부 강연·워크숍 1회 실시'],
+    mid:['디지털 전환 로드맵 수립 및 파일럿 적용','신사업 탐색 TF에 내부 젊은 인재 배치','인사 평가 시스템에 혁신 지표 반영'],
+    long:['조직 문화 변혁 프로그램 전사 실행','신성장 동력 사업 매출 비중 20% 달성','리더십 세대 교체 로드맵 실행'],
+    caution:'변화를 강요하면 저항이 커집니다. 성공 사례를 작은 단위에서 먼저 만들고, 그 결과로 조직을 설득하십시오.'},
+  'IOSU':{name:'주름진 관리자',sub:'유지 중심 조직',strength:'안정성',weakness:'성장 정지',direction:'외부 충격',
+    interp:'관리 시스템은 잘 갖춰져 있지만 시장 검증이 미흡하고 조직이 경직되어 있습니다. 외부 충격이나 신규 사업 기회를 통해 성장 동력을 인위적으로 만들어야 합니다.',
+    consult:'귀사는 안정적입니다. 하지만 안정은 곧 정체의 다른 이름일 수 있습니다. 재무는 견고하고 운영도 체계적입니다. 문제는 시장에서 귀사를 아는 고객이 점점 줄어들고 있다는 것입니다. 새로운 고객을 만날 방법을 찾아야 합니다. 내부 자원을 활용해 외부 충격을 스스로 만드십시오.',
+    short:['신규 고객 유입 채널 1개 발굴 및 실험','기존 제품·서비스 패키지 재구성 시도','업계 네트워크 활동 강화'],
+    mid:['신제품·신서비스 개발을 위한 고객 조사','파트너십 또는 채널 영업 확장','조직 내 신사업 담당자 지정'],
+    long:['신사업 또는 신시장 진출 실행','조직 유연성 강화를 위한 인사 제도 개편','시장 검증 완료된 제품으로 성장 재시동'],
+    caution:'안정적인 재무를 소진하는 방향으로 무리한 신사업을 추진하지 마십시오. 작은 실험부터 시작하십시오.'},
+  'IASE':{name:'뒤엉킨 실력자',sub:'실력 대비 비효율',strength:'제품',weakness:'운영 혼선',direction:'운영 정렬',
+    interp:'검증된 제품과 안정적 재무를 갖추고 있으나 조직의 경직성과 즉흥적 운영이 성과를 갉아먹고 있습니다. 실력을 온전히 발휘할 운영 구조 정렬이 핵심 과제입니다.',
+    consult:'귀사의 제품은 이미 시장에서 검증받았고 재무도 안정적입니다. 그럼에도 잠재력을 다 발휘하지 못하고 있다는 느낌이 드신다면 이유는 단 하나입니다. 운영 구조입니다. 누가 무엇을 책임지는지, 어떤 순서로 일이 처리되는지가 불분명합니다. 이것을 정리하는 것만으로도 성과는 20~30% 향상될 수 있습니다.',
+    short:['핵심 업무 역할 분장 명확화','부서 간 협업 프로세스 3가지 표준화','주간 업무 리뷰 회의 체계 수립'],
+    mid:['전사 업무 SOP 수립 및 교육','인사 평가와 역할 분장 연계','조직 내 소통 채널 정비'],
+    long:['운영 시스템 디지털 전환','조직 구조 재설계로 효율 극대화','표준화된 운영 기반으로 사업 확장'],
+    caution:'운영 정렬 과정에서 기존 방식에 익숙한 직원들의 반발이 예상됩니다. 변화의 필요성을 데이터로 설득하십시오.'},
+  'IASU':{name:'방구석 철학자',sub:'실행 없는 조직',strength:'아이디어',weakness:'실행력',direction:'강제 실행 구조',
+    interp:'아이디어와 재무 여력은 있지만 실제로 움직이지 않습니다. 조직은 경직되어 있고 운영은 개인 의존적이며 시장 검증도 부족합니다. 강제로라도 실행을 시작하는 구조를 설계해야 합니다.',
+    consult:'귀사 내부를 들여다보면 좋은 아이디어가 분명히 있습니다. 재무 여력도 있습니다. 그런데 왜 실행이 되지 않을까요? 두 가지입니다. 조직이 변화를 두려워하고, 움직임에 대한 책임 구조가 없기 때문입니다. 지금 당장 작은 실행 하나를 강제로 시작하십시오. 완벽한 계획보다 불완전한 실행이 낫습니다.',
+    short:['실행 가능한 가장 작은 프로젝트 1개 즉시 착수','실행 책임자 지정 및 30일 데드라인 부여','외부 컨설턴트 또는 멘토 계약을 통한 외부 자극'],
+    mid:['분기별 실행 과제 리뷰 체계 수립','고객 접점 활동 강화(세일즈 콜, 전시회 등)','조직 내 소규모 실험 문화 도입'],
+    long:['실행 기반 조직 문화 정착','시장 검증 완료 후 본격 사업 확장','조직 경직성 해소를 위한 인사 제도 혁신'],
+    caution:'계획에만 시간을 쓰는 것은 실행의 부재를 합리화하는 방법입니다. 60%의 준비가 되면 실행을 시작하십시오.'},
+  'IOVE':{name:'버티는 노병',sub:'쇠퇴 속 유지',strength:'기존 고객',weakness:'체력 고갈',direction:'사업 재편',
+    interp:'기존 고객과 시스템으로 간신히 버티고 있는 상태입니다. 재무 압박이 지속되고 있으며 조직 문화는 변화를 거부합니다. 전면적인 사업 재편 없이는 장기 생존이 어렵습니다.',
+    consult:'귀사는 아직 버티고 있습니다. 기존 고객이 있고 운영 체계도 있습니다. 하지만 솔직히 말씀드리면 지금 구조로는 3년 후를 보장할 수 없습니다. 재무 압박이 지속되고 있고 조직은 변화를 거부하고 있습니다. 지금 필요한 것은 과거의 성공 방식을 버리는 용기입니다. 사업의 일부를 전면 재편하십시오.',
+    short:['현재 사업 포트폴리오 수익성 분석','수익성 없는 사업 또는 고객 정리 착수','긴급 운영 비용 절감 방안 실행'],
+    mid:['신규 수익원 개발 또는 기존 제품 피봇','외부 파트너십으로 자원 부족 보완','재무 안정화를 위한 정책금융 활용'],
+    long:['사업 모델 전면 재편 완료','조직 유연성 강화를 위한 세대 교체','신시장 또는 신채널 기반 성장 재시동'],
+    caution:'변화를 거부하는 조직에서 변화를 추진하면 내부 갈등이 극심해질 수 있습니다. 리더의 강한 의지와 명확한 커뮤니케이션이 필수입니다.'},
+  'IOVU':{name:'빈 궁전의 수호자',sub:'형식만 남은 조직',strength:'없음',weakness:'전면 붕괴 위험',direction:'리셋',
+    interp:'체계는 있어 보이지만 실질이 없는 위험한 상태입니다. 조직의 경직성, 재무 위기, 시장 미검증이 동시에 존재합니다. 현재 자원의 선택과 집중, 사업 모델 리셋이 유일한 탈출구입니다.',
+    consult:'귀사의 현재 상태는 매우 심각합니다. 외부에서 보면 체계가 있어 보이지만 실질적인 경쟁력이 없습니다. 이 상태를 방치하면 붕괴가 옵니다. 지금 당장 외부 전문가의 도움을 받으십시오. 혼자 해결할 수 있는 상태가 아닙니다. 무엇을 포기할지를 먼저 결정해야 합니다.',
+    short:['외부 컨설턴트·회계사와 긴급 현황 진단','즉시 현금 확보 가능한 자산 또는 사업 파악','핵심 인력 이탈 방지 조치'],
+    mid:['사업 모델 전면 재검토 및 피봇','비수익 사업 과감히 정리','외부 파트너십 또는 M&A 검토'],
+    long:['생존 가능한 사업 모델로 리셋 완료','새로운 시장 포지셔닝 수립','조직 재건 및 문화 혁신'],
+    caution:'이 상태에서 섣부른 성장 투자는 금물입니다. 생존을 먼저 확보하고 성장은 그 다음입니다.'},
+  'IAVE':{name:'혼란한 생존자',sub:'불안정 속 유지',strength:'생존력',weakness:'방향 부재',direction:'선택과 집중',
+    interp:'시장 기반이라는 마지막 자산으로 버티고 있습니다. 조직·운영·재무 모두 취약한 상태에서 분산된 에너지는 독이 됩니다. 가장 강한 한 곳에 자원을 집중하는 결단이 필요합니다.',
+    consult:'귀사에는 아직 시장이 있습니다. 고객이 귀사를 찾아온다는 것은 의미있는 강점입니다. 하지만 조직과 운영과 재무가 모두 불안정합니다. 지금 모든 것을 잘 하려 하지 마십시오. 가장 수익성 높은 고객 또는 제품 하나에 전부를 거십시오. 집중이 생존의 유일한 방법입니다.',
+    short:['가장 수익성 높은 고객 3개 선정 및 집중 관리','즉각적인 고정비 삭감','현금 회수 주기 단축을 위한 계약 구조 변경'],
+    mid:['선택한 핵심 사업에 자원 80% 집중','운영 최소화(린 운영) 구조로 전환','재무 안정화 후 단계적 체계 구축'],
+    long:['선택과 집중 기반 수익 모델 안정화','조직 재건 및 운영 체계 구축','지속 가능한 성장 구조 완성'],
+    caution:'분산된 에너지는 어떤 것도 이루지 못합니다. 선택하지 않는 것도 하나의 선택임을 기억하십시오.'},
+  'IAVU':{name:'칼날 위의 곡예사',sub:'붕괴 직전',strength:'없음',weakness:'전부',direction:'전면 재설계',
+    interp:'네 축 모두 위기 상태입니다. 지금 당장 외부 전문가의 개입과 전면적인 경영 재설계가 필요합니다. 기존의 방식으로는 생존이 불가능합니다. 무엇을 포기할지를 먼저 결정하십시오.',
+    consult:'이 진단 결과를 보고 충격을 받으셨을 수도 있습니다. 하지만 이 진단이 귀사를 구할 수 있는 시작입니다. 네 축 모두 위기 상태라는 것은 역설적으로 어디를 고쳐도 개선된다는 뜻이기도 합니다. 지금 당장 혼자 해결하려 하지 마십시오. 전문가의 도움을 받으십시오. 경영전환연구소 통과 함께 전면 재설계를 시작할 수 있습니다.',
+    short:['전문 컨설턴트 즉시 접촉','현금 보유고 파악 및 생존 가능 기간 계산','임직원 핵심 인력 이탈 방지 긴급 조치'],
+    mid:['포기할 사업과 살릴 사업 결정','최소 생존 가능한 사업 모델 설계','정책금융·법적 구조조정 옵션 검토'],
+    long:['새로운 비즈니스 모델로 완전한 리셋','조직 재건 및 문화 혁신','4축 순차적 보강을 통한 지속 성장 기반 마련'],
+    caution:'지금 가장 위험한 것은 아무것도 하지 않는 것입니다. 불완전하더라도 즉각적인 행동이 필요합니다.'},
+};
+let currentQ = 0;
+let answers = {};
+let companyInfo = {};
+function startQuiz(){
+  const company = document.getElementById('f-company').value.trim();
+  if(!company){
+    alert('기업명을 입력해 주십시오.');
+    document.getElementById('f-company').focus();
+    return;
+  }
+  companyInfo = {
+    company: company,
+    industry: document.getElementById('f-industry').value || '-',
+    age: document.getElementById('f-age').value || '-',
+    emp: document.getElementById('f-emp').value || '-',
+    rev: document.getElementById('f-rev').value || '-',
+    profit: document.getElementById('f-profit').value || '-',
+    concern: document.getElementById('f-concern').value || '-',
+  };
+  document.getElementById('step1-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  currentQ = 0; answers = {};
+  renderQuestion();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'popIn .4s cubic-bezier(.4,0,.2,1) both';
+  const axis = AXES.find(a => a.key === q.axis);
+  document.getElementById('axis-char').textContent = axis.char;
+  document.getElementById('axis-name').textContent = axis.name;
+  document.getElementById('axis-desc').textContent = axis.desc;
+  document.getElementById('question-num').textContent = 'QUESTION ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('question-text').textContent = q.text;
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('progress-axis').textContent = axis.char + ' · ' + axis.name;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  SCALE_LABELS.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = '<span class="num">'+opt.num+'</span><span>'+opt.text+'</span>';
+    btn.onclick = () => answerQuestion(opt.num);
+    container.appendChild(btn);
+  });
+}
+function answerQuestion(value){
+  if(currentQ >= QUESTIONS.length) return;
+  const q = QUESTIONS[currentQ];
+  if(!q) return;
+  answers[q.id] = value;
+  currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.querySelectorAll('#options-container .option').forEach(b => {
+      b.style.pointerEvents = 'none'; b.style.opacity = '0.5';
+    });
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 300);
+  } else {
+    renderQuestion();
+  }
+}
+function computeAxisScore(axisKey){
+  const qs = QUESTIONS.filter(q => q.axis === axisKey);
+  let total = 0;
+  qs.forEach(q => {
+    const v = answers[q.id] || 3;
+    total += q.positive ? v : (6 - v);
+  });
+  return Math.round(((total - qs.length) / (qs.length * 4)) * 100);
+}
+function computeResult(){
+  const scores = {
+    HUM: computeAxisScore('HUM'),
+    OPS: computeAxisScore('OPS'),
+    FIN: computeAxisScore('FIN'),
+    MKT: computeAxisScore('MKT'),
+  };
+  const code = [
+    scores.HUM >= 50 ? 'P' : 'I',
+    scores.OPS >= 50 ? 'O' : 'A',
+    scores.FIN >= 50 ? 'S' : 'V',
+    scores.MKT >= 50 ? 'E' : 'U',
+  ].join('');
+  return { scores, code };
+}
+function drawRadar(scores, code){
+  const svg = document.getElementById('radar-svg');
+  const cx = 170, cy = 170, R = 110;
+  const axes = AXES;
+  const n = axes.length;
+  const codeArr = code.split('');
+  let html = '';
+  for(let level=1; level<=5; level++){
+    const r = (R / 5) * level; let pts = '';
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+      pts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    pts += 'Z';
+    html += `<path d="${pts}" fill="none" stroke="rgba(54,132,255,${0.05 + level*0.025})" stroke-width="1"/>`;
+  }
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * R; const y = cy + Math.sin(angle) * R;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(54,132,255,0.1)" stroke-width="1"/>`;
+  }
+  let boundaryPts = '';
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * 0.5;
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    boundaryPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+  }
+  boundaryPts += 'Z';
+  html += `<path d="${boundaryPts}" fill="none" stroke="rgba(255,140,90,0.5)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  let dataPts = ''; const dataPoints = [];
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * (scores[axes[i].key] / 100);
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    dataPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    dataPoints.push({x, y, axis: axes[i], score: scores[axes[i].key], isStrong: scores[axes[i].key] >= 50});
+  }
+  dataPts += 'Z';
+  html += `<defs><linearGradient id="radarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.35"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.20"/></linearGradient></defs>`;
+  html += `<path d="${dataPts}" fill="url(#radarGrad)" stroke="#3684FF" stroke-width="2" stroke-linejoin="round"/>`;
+  dataPoints.forEach(pt => {
+    const fill = pt.isStrong ? '#3684FF' : '#8a96ac';
+    html += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="5" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
+  });
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const labelR = R + 24;
+    const x = cx + Math.cos(angle) * labelR; const y = cy + Math.sin(angle) * labelR;
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="20" fill="#3684FF">${axes[i].char}</text>`;
+    const subR = R + 44;
+    const sx = cx + Math.cos(angle) * subR; const sy = cy + Math.sin(angle) * subR;
+    html += `<text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#8a96ac" font-weight="500">${axes[i].name}</text>`;
+  }
+  html += `<line x1="20" y1="320" x2="36" y2="320" stroke="rgba(255,140,90,0.5)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  html += `<text x="42" y="324" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">강·약 경계선 (50점)</text>`;
+  svg.innerHTML = html;
+}
+function drawMatrix(myCode){
+  const svg = document.getElementById('matrix-svg');
+  const codes = [
+    ['POSE','POSU','POVE','POVU'],
+    ['PASE','PASU','PAVE','PAVU'],
+    ['IOSE','IOSU','IOVE','IOVU'],
+    ['IASE','IASU','IAVE','IAVU'],
+  ];
+  const cellSize = 80;
+  const gap = 8;
+  const startX = 130;
+  const startY = 90;
+  const matrixWidth = 4 * cellSize + 3 * gap;
+  let html = '';
+  html += `<defs><linearGradient id="cellActive" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.20"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.10"/></linearGradient></defs>`;
+  const rowLabels = ['人강 營강','人강 營약','人약 營강','人약 營약'];
+  rowLabels.forEach((label, i) => {
+    const y = startY + i * (cellSize + gap) + cellSize/2;
+    html += `<text x="${startX - 12}" y="${y}" text-anchor="end" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="12" fill="#5a6a85" font-weight="500">${label}</text>`;
+  });
+  const colLabels = ['財강 産강','財강 産약','財약 産강','財약 産약'];
+  colLabels.forEach((label, j) => {
+    const x = startX + j * (cellSize + gap) + cellSize/2;
+    html += `<text x="${x}" y="${startY - 18}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="12" fill="#5a6a85" font-weight="500">${label}</text>`;
+  });
+  for(let i=0; i<4; i++){
+    for(let j=0; j<4; j++){
+      const x = startX + j * (cellSize + gap);
+      const y = startY + i * (cellSize + gap);
+      const code = codes[i][j];
+      const typeData = TYPES[code];
+      const isMine = code === myCode;
+      const fill = isMine ? 'url(#cellActive)' : 'rgba(255,255,255,0.6)';
+      const stroke = isMine ? '#3684FF' : 'rgba(54,132,255,0.18)';
+      const strokeW = isMine ? 2.5 : 1;
+      html += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="10" fill="${fill}" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+      const textColor = isMine ? '#3684FF' : '#8a96ac';
+      const textWeight = isMine ? 'bold' : 'normal';
+      const cx = x + cellSize/2;
+      const cy = y + cellSize/2;
+      html += `<text x="${cx}" y="${cy - 8}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-style="normal" font-size="${isMine ? 16 : 14}" fill="${textColor}" font-weight="${textWeight}" letter-spacing="1">${code}</text>`;
+      const nameSize = isMine ? 9 : 8;
+      html += `<text x="${cx}" y="${cy + 12}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="${nameSize}" fill="${textColor}" font-weight="${textWeight}">${typeData.name}</text>`;
+      if(isMine){
+        html += `<circle cx="${x + cellSize - 10}" cy="${y + 10}" r="7" fill="#3684FF"/>`;
+        html += `<text x="${x + cellSize - 10}" y="${y + 13}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="8" fill="#fff" font-weight="bold">★</text>`;
+      }
+    }
+  }
+  const matrixCenterX = startX + matrixWidth / 2;
+  const matrixBottomY = startY + 4 * cellSize + 3 * gap;
+  html += `<text x="${matrixCenterX}" y="${matrixBottomY + 30}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#8a96ac">우리 조직의 좌표는 <tspan fill="#3684FF" font-weight="bold">${myCode}</tspan></text>`;
+  html += `<text x="${matrixCenterX}" y="${matrixBottomY + 46}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">「경영전환론」 4축 이론 · 조직유형 16</text>`;
+  svg.innerHTML = html;
+}
+function showResult(){
+  const result = computeResult();
+  const code = result.code;
+  const scores = result.scores;
+  const t = TYPES[code] || TYPES['IAVU'];
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('code-letters').innerHTML = 
+    code.split('').map(l => `<div class="code-letter">${l}</div>`).join('');
+  var __ch=document.getElementById('type-char'); if(__ch){__ch.src='../../assets/images/org-types/'+code+'.png'; __ch.alt=t.name;}
+  var TP_EXTRA={
+ POVU:{q:'성과 근거 없이 반복하는 일은 무엇인가?',read:'사람과 운영은 움직인다.',next:'재무와 시장 판단 기준을 세운다.'},
+ IASE:{q:'좋은 제품을 반복 생산하지 못하게 막는 병목은 무엇인가?',read:'재무와 사업 축은 있다.',next:'사람과 운영 리듬을 정리한다.'},
+ IASU:{q:'돈을 지키는 동안 무엇을 다시 팔 수 있게 만들 것인가?',read:'재무 축만 기준선 위에 있다.',next:'축소 균형에서 빠져나올 실험이 필요하다.'},
+ IAVE:{q:'이 아이디어를 검증 가능한 제안으로 만들려면 무엇이 필요한가?',read:'사업 아이디어는 있다.',next:'팀·프로세스·손익으로 번역한다.'},
+ IAVU:{q:'이번 달 반드시 지킬 한 줄의 기준은 무엇인가?',read:'네 축이 모두 기준선 아래에 있다.',next:'회복 순서와 최소 실행 단위를 먼저 정한다.'},
+ IOSE:{q:'누가 빠지면 바로 멈추는 일은 무엇인가?',read:'운영·재무·사업은 버틴다.',next:'역할과 승계 구조를 열어야 한다.'},
+ IOSU:{q:'숫자는 맞는데 고객이 떠나는 신호는 없는가?',read:'운영과 재무는 안정적이다.',next:'관리의 정확성을 고객 변화와 연결한다.'},
+ IOVE:{q:'경험으로 처리하던 일을 누가 다시 배울 수 있는가?',read:'운영과 사업 축은 남아 있다.',next:'사람과 재무의 다음 조건을 만든다.'},
+ IOVU:{q:'규칙을 지키느라 놓친 고객의 변화는 무엇인가?',read:'운영 규칙은 남아 있다.',next:'고객가치와 현금 회복으로 다시 연결한다.'},
+ PASE:{q:'반복 가능한 운영 규칙은 어디에서 끊기는가?',read:'사람·재무·사업 감각은 살아 있다.',next:'운영 흐름을 표준화한다.'},
+ PASU:{q:'다음 2주 안에 확인할 고객 반응은 무엇인가?',read:'사람의 의지와 자금 여력은 있다.',next:'운영과 사업 검증을 작게 시작한다.'},
+ PAVE:{q:'좋은 반응을 반복 구조로 바꾸려면 무엇이 먼저인가?',read:'사람과 사업의 축은 살아 있다.',next:'운영과 손익 구조로 내려앉힌다.'},
+ PAVU:{q:'오늘 당장 멈춰야 할 일과 살릴 한 가지는 무엇인가?',read:'사람의 의지는 남아 있다.',next:'생존 가설 하나만 좁게 검증한다.'},
+ POSE:{q:'강한 네 축이 서로 부딪히지 않도록 무엇을 줄일 것인가?',read:'네 축이 모두 강하다.',next:'확장보다 정제와 손실 한도를 먼저 본다.'},
+ POSU:{q:'지금 만들고 있는 것이 고객에게 왜 필요한가?',read:'사람·운영·재무는 단단하다.',next:'사업/고객 검증을 먼저 확인한다.'},
+ POVE:{q:'매출이 늘어도 현금이 남지 않는 지점은 어디인가?',read:'사람·운영·사업 감각은 있다.',next:'현금과 원가 누수를 먼저 막는다.'}
+};
+(function(){
+  var ax=[['人','인사'],['營','운영'],['財','재무'],['産','사업']];
+  var strongSet='POSE';
+  var el=document.getElementById('tp-axes');
+  if(el){el.innerHTML=code.split('').map(function(L,i){var s=strongSet.indexOf(L)>=0;return '<span class="tpa '+(s?'on':'off')+'"><b>'+ax[i][0]+'</b><i>'+ax[i][1]+'</i><em>'+L+' '+(s?'강':'보강')+'</em></span>';}).join('');}
+  var ex=TP_EXTRA[code]; var rd=document.getElementById('tp-read');
+  if(rd&&ex){rd.innerHTML='<div class="tpq">'+ex.q+'</div><div class="tpr"><span class="k">읽는 법</span><span>'+ex.read+'</span></div><div class="tpr"><span class="k next">다음 수</span><span>'+ex.next+'</span></div>';}
+})();
+
+  document.getElementById('code-type-name').innerHTML = `<span class="accent">${code}</span> · ${t.name}`;
+  document.getElementById('code-sub').textContent = t.sub;
+  document.getElementById('code-chips').innerHTML = `
+    <div class="chip chip-strength"><span class="label">강점</span> ${t.strength}</div>
+    <div class="chip chip-weakness"><span class="label">약점</span> ${t.weakness}</div>
+    <div class="chip chip-direction"><span class="label">방향</span> ${t.direction}</div>
+  `;
+  document.getElementById('company-bar').innerHTML = `
+    <div class="co-item"><div class="co-label">기업명</div><div class="co-val">${companyInfo.company}</div></div>
+    <div class="co-item"><div class="co-label">업종</div><div class="co-val">${companyInfo.industry}</div></div>
+    <div class="co-item"><div class="co-label">업력</div><div class="co-val">${companyInfo.age}</div></div>
+    <div class="co-item"><div class="co-label">직원수</div><div class="co-val">${companyInfo.emp}</div></div>
+    <div class="co-item"><div class="co-label">연매출</div><div class="co-val">${companyInfo.rev}</div></div>
+    <div class="co-item"><div class="co-label">이익률</div><div class="co-val">${companyInfo.profit}</div></div>
+  `;
+  const codeArr = code.split('');
+  document.getElementById('axis-grid').innerHTML = AXES.map((ax, i) => {
+    const isStrong = scores[ax.key] >= 50;
+    const cls = isStrong ? 'strong' : '';
+    return `<div class="axis-cell ${cls}">
+      <div class="char serif">${ax.char}</div>
+      <div class="name">${ax.name}</div>
+      <div class="letter">${codeArr[i]}</div>
+      <div class="score serif">${scores[ax.key]}<span class="unit">/100</span></div>
+    </div>`;
+  }).join('');
+  drawRadar(scores, code);
+  document.getElementById('r-interp').textContent = t.interp;
+  (document.getElementById('r-consult')||{}).innerHTML = '<p>' + t.consult + '</p>';
+  (document.getElementById('r-short')||{}).innerHTML = t.short.map(s => '<li>' + s + '</li>').join('');
+  (document.getElementById('r-mid')||{}).innerHTML = t.mid.map(s => '<li>' + s + '</li>').join('');
+  (document.getElementById('r-long')||{}).innerHTML = t.long.map(s => '<li>' + s + '</li>').join('');
+  (document.getElementById('r-caution')||{}).textContent = t.caution;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('step1-card').style.display = 'block';
+  answers = {}; currentQ = 0;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

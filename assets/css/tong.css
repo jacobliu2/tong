@@ -1,0 +1,1030 @@
+/* ===== Pretendard 자체 탑재 · 전역 통일 (명조/serif/궁서 금지) ===== */
+@font-face{font-family:'Pretendard';font-weight:45 920;font-style:normal;font-display:swap;
+  src:url('../fonts/PretendardVariable.woff2') format('woff2-variations'),
+      url('../fonts/PretendardVariable.woff2') format('woff2');}
+html,body,button,input,textarea,select,
+body *,.tong-root,.tong-root *{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Segoe UI',Roboto,sans-serif !important;
+}
+/* ============================================================
+   통 TONG · 공유 디자인시스템 정본 (tong.css)
+   - 원본: workstong.com 메인 embed v5의 인라인 <style>를 단일 파일로 추출
+   - Wix가 제공하던 상단 네비/푸터를 레포가 소유하도록 shell 추가
+   - 폰트: Noto Sans KR(본문) + DM Serif Display(디스플레이) — TONG 마케팅 정본
+   - italic 전면 금지(:root에서 font-style:normal 강제) / 브랜드색 #3684FF
+   ------------------------------------------------------------
+   [v11 절제 모드 전환 훅]  아래 :root override 한 벌만 켜면
+   순백 배경·글래스 최소화의 연구소 톤으로 전체가 바뀝니다(README 참조).
+   ============================================================ */
+
+/* ===== 공유 상단 네비게이션 ===== */
+.tong-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px clamp(20px, 5vw, 64px);
+  background: var(--tong-glass-strong);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--tong-glass-border);
+}
+.tong-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.tong-nav-brand img { height: 34px; width: auto; display: block; }
+.tong-nav-brand span { font-weight: 700; font-size: 17px; color: var(--tong-ink); letter-spacing: -0.01em; }
+.tong-nav-menu { display: flex; align-items: center; gap: clamp(14px, 2vw, 30px); list-style: none; }
+.tong-nav-menu a {
+  text-decoration: none; color: var(--tong-text-sub); font-weight: 500; font-size: 15px;
+  padding: 6px 2px; position: relative; transition: color .2s;
+}
+.tong-nav-menu a:hover, .tong-nav-menu a[aria-current="page"] { color: var(--tong-primary); }
+.tong-nav-menu a[aria-current="page"]::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  background: var(--tong-primary); border-radius: 2px;
+}
+.tong-nav-cta {
+  text-decoration: none; background: var(--tong-primary); color: #fff !important;
+  padding: 9px 18px; border-radius: 999px; font-weight: 700; font-size: 14px;
+  box-shadow: var(--tong-shadow); transition: transform .2s, box-shadow .2s; white-space: nowrap;
+}
+.tong-nav-cta:hover { transform: translateY(-2px); box-shadow: var(--tong-shadow-hover); }
+.tong-nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+.tong-nav-toggle span { display: block; width: 22px; height: 2px; background: var(--tong-ink); margin: 4px 0; border-radius: 2px; }
+
+@media (max-width: 860px) {
+  .tong-nav-toggle { display: block; }
+  .tong-nav-menu {
+    position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 4px;
+    background: var(--tong-glass-strong); backdrop-filter: blur(18px);
+    padding: 14px clamp(20px,5vw,64px) 22px; border-bottom: 1px solid var(--tong-glass-border);
+    transform: translateY(-8px); opacity: 0; pointer-events: none; transition: .2s;
+  }
+  .tong-nav-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .tong-nav-menu a { width: 100%; padding: 10px 2px; font-size: 16px; }
+  .tong-nav-menu .tong-nav-cta { text-align: center; margin-top: 6px; }
+}
+
+/* ===== 공유 푸터 ===== */
+.tong-footer {
+  position: relative; z-index: 1; background: linear-gradient(160deg,#2f6fe0,#1f57c3 55%,#164193); color: rgba(255,255,255,.78);
+  padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 64px) 40px;
+}
+.tong-footer-inner { max-width: 1180px; margin: 0 auto; display: grid; gap: 40px;
+  grid-template-columns: 1.4fr 1fr 1fr; }
+.tong-footer h4 { color: #fff; font-size: 14px; letter-spacing: .12em; margin-bottom: 16px; font-weight: 700; }
+.tong-footer a { color: rgba(255,255,255,.72); text-decoration: none; display: block; padding: 5px 0; font-size: 14px; transition: color .2s; }
+.tong-footer a:hover { color: var(--tong-light); }
+.tong-footer-brand p { font-size: 14px; line-height: 1.7; margin-top: 12px; max-width: 34ch; }
+.tong-footer-brand img { height: 40px; filter: brightness(0) invert(1); opacity: .92; }
+.tong-footer-biz{max-width:1180px;margin:28px auto 0;font-size:12.5px;line-height:1.9;color:rgba(255,255,255,.6)}
+.tong-footer-biz b{color:rgba(255,255,255,.82);font-weight:700}
+.tong-footer-legal {
+  max-width: 1180px; margin: 36px auto 0; padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.12); font-size: 12.5px; color: rgba(255,255,255,.5);
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+@media (max-width: 760px){ .tong-footer-inner { grid-template-columns: 1fr; gap: 28px; } }
+
+/* ===== 페이지 컨테이너(embed 전용 fade 대체) ===== */
+.tong-page { background: var(--tong-bg); }
+
+  /* ===== 통 디자인 시스템 변수 ===== */
+  :root {
+    --tong-primary: #3684FF;
+    --tong-light: #6BA3FF;
+    --tong-dark: #1850c4;
+    --tong-bg: #f8faff;
+    --tong-ink: #0a1530;
+    --tong-glass: rgba(255, 255, 255, 0.72);
+    --tong-glass-strong: rgba(255, 255, 255, 0.88);
+    --tong-glass-border: rgba(54, 132, 255, 0.18);
+    --tong-shadow: 0 8px 40px rgba(54, 132, 255, 0.10);
+    --tong-shadow-hover: 0 24px 60px rgba(54, 132, 255, 0.22);
+    --tong-text: #1a2540;
+    --tong-text-sub: #5a6783;
+    --tong-radius: 20px;
+  }
+
+  .tong-root, .tong-root * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-style: normal !important;
+  }
+
+
+  .tong-root {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--tong-text);
+    background: var(--tong-bg);
+    line-height: 1.6;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .tong-root::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 8%, rgba(54, 132, 255, 0.15) 0%, transparent 45%),
+      radial-gradient(circle at 88% 22%, rgba(107, 163, 255, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 50% 95%, rgba(24, 80, 196, 0.08) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .tong-vertical-mark {
+    position: absolute;
+    left: 24px;
+    top: 200px;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--tong-primary);
+    opacity: 0.4;
+    font-weight: 500;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    .tong-vertical-mark { display: none; }
+  }
+
+  .tong-root > *:not(.tong-page-fade-top):not(.tong-page-fade-bottom):not(.tong-page-fade-left):not(.tong-page-fade-right):not(.tong-vertical-mark) {
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: translateY(24px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-8px, 6px); }
+  }
+
+  @keyframes glyphPulse {
+    0%, 100% { opacity: 0.06; transform: scale(1); }
+    50% { opacity: 0.10; transform: scale(1.02); }
+  }
+
+  @keyframes underlineGrow {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+
+  .tong-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .tong-container-wide {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ============================================================
+     1. HERO
+  ============================================================ */
+  .tong-hero {
+    padding: 50px 24px 40px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    animation: popIn 0.9s ease-out;
+  }
+
+
+  .tong-hero-watermark {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Noto Serif KR', 'DM Serif Display', serif;
+    font-size: clamp(120px, 18vw, 200px);
+    font-weight: 700;
+    color: var(--tong-primary);
+    opacity: 0.05;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+    animation: glyphPulse 8s ease-in-out infinite;
+  }
+
+  .tong-hero > *:not(.tong-hero-watermark) {
+    position: relative;
+    z-index: 3;
+  }
+
+  .tong-hero-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .tong-hero-label-line {
+    width: 32px;
+    height: 1px;
+    background: var(--tong-primary);
+  }
+
+  .tong-hero-label {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--tong-primary);
+    font-weight: 700;
+  }
+
+  .tong-hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(56px, 8vw, 90px);
+    font-weight: 700;
+    line-height: 0.95;
+    color: var(--tong-ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .tong-hero-title-en {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--tong-primary);
+    letter-spacing: 0.15em;
+    line-height: 1;
+    margin-top: 8px;
+  }
+
+  .tong-hero-subtitle {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(15px, 1.8vw, 18px);
+    font-weight: 500;
+    color: var(--tong-text-sub);
+    letter-spacing: 0.4em;
+    margin-bottom: 32px;
+    line-height: 1;
+  }
+
+  .tong-hero-tagline {
+    font-size: clamp(17px, 2vw, 22px);
+    color: var(--tong-ink);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    max-width: 560px;
+    margin: 0 auto 24px;
+  }
+
+  .tong-hero-tagline strong {
+    color: var(--tong-primary);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+  }
+
+  .tong-hero-tagline strong::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 8px;
+    background: rgba(54, 132, 255, 0.18);
+    z-index: -1;
+    transform-origin: left;
+    animation: underlineGrow 1.2s ease-out 0.6s both;
+  }
+
+  .tong-hero-sub-tagline {
+    font-size: 15px;
+    color: var(--tong-text-sub);
+    margin-bottom: 24px;
+  }
+
+  .tong-hero-cta-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tong-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .tong-btn-primary {
+    background: linear-gradient(135deg, #3684FF, #6BA3FF);
+    color: white;
+    box-shadow: 0 6px 20px rgba(54, 132, 255, 0.30);
+  }
+
+  .tong-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(54, 132, 255, 0.40);
+  }
+
+  .tong-btn-ghost {
+    background: var(--tong-glass);
+    color: var(--tong-ink);
+    border: 1px solid var(--tong-glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .tong-btn-ghost:hover {
+    background: white;
+    transform: translateY(-3px);
+  }
+
+  /* ============================================================
+     2. 通 소개
+  ============================================================ */
+  .tong-about {
+    padding: 80px 24px;
+    animation: popIn 0.9s ease-out 0.15s both;
+  }
+
+  .tong-about-card {
+    background: var(--tong-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--tong-glass-border);
+    border-radius: var(--tong-radius);
+    box-shadow: var(--tong-shadow);
+    padding: 64px 56px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  @media (max-width: 720px) {
+    .tong-about-card {
+      grid-template-columns: 1fr;
+      padding: 48px 32px;
+      gap: 32px;
+    }
+  }
+
+  .tong-about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3684FF, #6BA3FF, #3684FF);
+    background-size: 200% 100%;
+    animation: drift 6s ease-in-out infinite;
+  }
+
+  .tong-about-left {
+    text-align: center;
+    border-right: 1px solid var(--tong-glass-border);
+    padding-right: 24px;
+  }
+
+  @media (max-width: 720px) {
+    .tong-about-left {
+      border-right: none;
+      border-bottom: 1px solid var(--tong-glass-border);
+      padding-right: 0;
+      padding-bottom: 24px;
+    }
+  }
+
+  .tong-about-logo {
+    width: 220px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  @media (max-width: 720px) {
+    .tong-about-logo {
+      width: 190px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tong-about-logo {
+      width: 170px;
+    }
+  }
+
+  .tong-about-romanize {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    letter-spacing: 8px;
+    color: var(--tong-text-sub);
+    margin-left: 8px;
+  }
+
+  .tong-about-right .tong-about-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--tong-primary);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .tong-about-headline {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--tong-ink);
+    margin-bottom: 20px;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+  }
+
+  .tong-about-text {
+    font-size: 15px;
+    color: var(--tong-text-sub);
+    line-height: 1.85;
+  }
+
+  .tong-about-text strong {
+    color: var(--tong-ink);
+    font-weight: 700;
+  }
+
+  .tong-about-text + .tong-about-text {
+    margin-top: 14px;
+  }
+
+  .tong-about-deeper {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tong-primary);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  .tong-about-deeper:hover {
+    border-bottom-color: var(--tong-primary);
+    transform: translateX(4px);
+  }
+
+  .tong-acronym {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--tong-glass-border);
+    padding-top: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .tong-acronym {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .tong-acronym-item {
+    text-align: center;
+    padding: 0 8px;
+    border-right: 1px solid var(--tong-glass-border);
+    transition: all 0.3s ease;
+  }
+
+  .tong-acronym-item:last-child {
+    border-right: none;
+  }
+
+  @media (max-width: 600px) {
+    .tong-acronym-item {
+      border-right: none;
+    }
+  }
+
+  .tong-acronym-item:hover {
+    transform: translateY(-4px);
+  }
+
+  .tong-acronym-letter {
+    font-family: 'DM Serif Display', serif;
+    font-size: 44px;
+    color: var(--tong-primary);
+    line-height: 1;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .tong-acronym-word {
+    font-size: 11px;
+    color: var(--tong-text-sub);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ============================================================
+     3. 진단 8종 (모두 LIVE)
+     비대칭 그리드: 01(span 6) + 02·03(span 3) + 04·05(span 3) + 06·07·08(span 2)
+  ============================================================ */
+  .tong-diagnosis {
+    padding: 100px 24px 80px;
+    animation: popIn 0.9s ease-out 0.3s both;
+  }
+
+  .tong-section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .tong-section-eyebrow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .tong-section-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    color: var(--tong-primary);
+    letter-spacing: 2px;
+  }
+
+  .tong-section-divider {
+    width: 24px;
+    height: 1px;
+    background: var(--tong-primary);
+    opacity: 0.4;
+  }
+
+  .tong-section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--tong-primary);
+    font-weight: 700;
+  }
+
+  .tong-section-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    color: var(--tong-ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+  }
+
+  .tong-section-title em {
+    color: var(--tong-primary);
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  .tong-section-sub {
+    color: var(--tong-text-sub);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .tong-diag-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 720px) {
+    .tong-diag-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tong-diag-card {
+    background: var(--tong-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--tong-glass-border);
+    border-radius: var(--tong-radius);
+    box-shadow: var(--tong-shadow);
+    padding: 32px 28px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    grid-column: span 3;
+  }
+
+  /* 01번 시그니처: 전체폭 */
+  .tong-diag-card.featured {
+    grid-column: span 6;
+    padding: 40px 36px;
+  }
+
+  /* 06·07·08번: 3등분 */
+  .tong-diag-card.span-2 {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 720px) {
+    .tong-diag-card,
+    .tong-diag-card.featured,
+    .tong-diag-card.span-2 {
+      grid-column: span 1;
+    }
+  }
+
+  /* hover 색상 반전 (모두 LIVE) */
+  .tong-diag-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #3684FF, #6BA3FF);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 0;
+  }
+
+  .tong-diag-card:hover::before {
+    opacity: 1;
+  }
+
+  .tong-diag-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--tong-shadow-hover);
+    border-color: transparent;
+  }
+
+  .tong-diag-card > * {
+    position: relative;
+    z-index: 1;
+    transition: color 0.35s ease;
+  }
+
+  .tong-diag-card:hover .tong-diag-number,
+  .tong-diag-card:hover .tong-diag-title,
+  .tong-diag-card:hover .tong-diag-desc,
+  .tong-diag-card:hover .tong-diag-time,
+  .tong-diag-card:hover .tong-diag-arrow,
+  .tong-diag-card:hover .tong-diag-meta {
+    color: white;
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  .tong-diag-card:hover .tong-diag-number {
+    opacity: 0.7;
+  }
+
+  .tong-diag-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .tong-diag-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--tong-primary);
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+
+  .tong-diag-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--tong-ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+  }
+
+  .tong-diag-card.featured .tong-diag-title {
+    font-size: 24px;
+  }
+
+  .tong-diag-desc {
+    font-size: 13.5px;
+    color: var(--tong-text-sub);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+
+  .tong-diag-card.featured .tong-diag-desc {
+    font-size: 15px;
+  }
+
+  .tong-diag-card.span-2 .tong-diag-desc {
+    font-size: 13px;
+  }
+
+  .tong-diag-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(54, 132, 255, 0.08);
+  }
+
+  .tong-diag-time {
+    font-size: 11px;
+    color: var(--tong-text-sub);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .tong-diag-arrow {
+    font-size: 18px;
+    color: var(--tong-primary);
+    transition: transform 0.3s ease;
+  }
+
+  .tong-diag-card:hover .tong-diag-arrow {
+    transform: translateX(6px);
+  }
+
+  /* ============================================================
+     4. CTA
+  ============================================================ */
+  .tong-cta {
+    padding: 100px 24px 120px;
+    animation: popIn 0.9s ease-out 0.45s both;
+  }
+
+  .tong-cta-card {
+    background: linear-gradient(135deg, #1850c4 0%, #3684FF 60%, #6BA3FF 100%);
+    border-radius: var(--tong-radius);
+    padding: 72px 48px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 24px 60px rgba(54, 132, 255, 0.30);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tong-cta-card::before {
+    content: '通';
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 360px;
+    color: white;
+    opacity: 0.06;
+    line-height: 0.9;
+    font-weight: 700;
+    pointer-events: none;
+  }
+
+  .tong-cta-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tong-cta-eyebrow {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 100px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .tong-cta-headline {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+  }
+
+  .tong-cta-text {
+    font-size: 16px;
+    opacity: 0.92;
+    margin-bottom: 36px;
+    line-height: 1.75;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tong-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 40px;
+    background: white;
+    color: var(--tong-primary);
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: -0.01em;
+  }
+
+  .tong-cta-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.20);
+  }
+
+  @media (max-width: 600px) {
+    .tong-hero { padding: 36px 20px 30px; }
+    .tong-hero-watermark { font-size: 100px; top: -30px; }
+    .tong-about { padding: 60px 16px; }
+    .tong-about-card { padding: 40px 24px; }
+    .tong-diagnosis { padding: 70px 16px 60px; }
+    .tong-diag-card,
+    .tong-diag-card.featured { padding: 28px 24px; }
+    .tong-diag-card.featured .tong-diag-title { font-size: 20px; }
+    .tong-cta { padding: 70px 16px 90px; }
+    .tong-cta-card { padding: 56px 28px; }
+  }
+
+  /* 페이지 최상단 흰색 페이드 (Wix 메뉴와 자연 연결) */
+  .tong-page-fade-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* 페이지 최하단 흰색 페이드 (CTA 아래) */
+  .tong-page-fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to top, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* 페이지 좌측 흰색 페이드 (가로 100px) */
+  .tong-page-fade-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    background: linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* 페이지 우측 흰색 페이드 (가로 100px) */
+  .tong-page-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    background: linear-gradient(to left, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+
+/* ===== 로고·브랜드 반응형 보강 ===== */
+html,body{max-width:100%;overflow-x:hidden}
+.tong-nav-brand img{height:40px}
+.tong-brand-tx{font-weight:800;font-size:18px;color:var(--tong-ink);letter-spacing:-.01em}
+.tong-brand-tx .tong-brand-full{font-weight:700;color:var(--tong-ink)}
+@media (max-width:560px){
+  .tong-brand-tx .tong-brand-full{display:none}      /* 모바일: '경영전환전략연구소' 숨김 → 'TONG'만 */
+  .tong-nav{padding:12px 18px}
+  .tong-nav-brand img{height:34px}
+  .tong-brand-tx{font-size:17px}
+}
+
+
+/* ===== 부드러운 파랑 톤(첨부 디자인풍) ===== */
+body{background:#fff}
+.tong-nav{background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid #e7eefb}
+.tong-nav-menu a{color:#48546b}
+.tong-nav-menu a:hover,.tong-nav-menu a[aria-current="page"]{color:#3684FF}
+.tong-nav-menu a[aria-current="page"]::after{background:#3684FF}
+.tong-nav-cta{background:linear-gradient(135deg,#4a90ff,#2f6fe0) !important;border-radius:999px;padding:11px 26px !important;letter-spacing:-.01em;line-height:1}
+
+
+
+/* 오약 상생 순환 회전(글자는 정립) */
+@keyframes oyakspin{to{transform:rotate(360deg)}}
+@keyframes oyakspinrev{to{transform:rotate(-360deg)}}
+.oyak-ring{transform-box:view-box;transform-origin:240px 240px;animation:oyakspin 46s linear infinite}
+.oyak-cell{transform-box:fill-box;transform-origin:center;animation:oyakspinrev 46s linear infinite}
+@media (prefers-reduced-motion: reduce){.oyak-ring,.oyak-cell{animation:none}}
+
+/* 진단 공개용 티저 */
+.dx-teaser{margin:26px 0 18px;padding:24px 22px;border-radius:18px;background:linear-gradient(160deg,#fff,#f2f7ff);border:1px solid #e6efff;text-align:center;box-shadow:0 12px 30px rgba(54,132,255,.08)}
+.dx-teaser-k{font-size:12px;letter-spacing:.16em;color:#9aa5b6;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.dx-teaser-t{font-size:15px;line-height:1.8;color:#3a4657;max-width:46ch;margin:0 auto}
+.dx-teaser-t b{color:#161d29}
+.tp-gated{display:none!important}
+
+/* 전역 줄바꿈 균형 — 문장 단위 자연 줄바꿈 + 고아줄 방지 */
+p{text-wrap:pretty}
+h1,h2,h3,h4{text-wrap:balance}
+
+/* ===== 보기 설정(툴) 드롭다운 ===== */
+.tong-nav-tools{position:relative;display:flex;align-items:center;margin-left:4px}
+.tong-tools-btn{width:38px;height:38px;border-radius:50%;border:1px solid #e3ebf9;background:#fff;color:#5a6783;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.18s}
+.tong-tools-btn:hover{border-color:#3684FF;color:#3684FF}
+.tong-tools-pop{position:absolute;right:0;top:48px;width:240px;background:#fff;border:1px solid #e6efff;border-radius:14px;box-shadow:0 18px 46px rgba(20,30,50,.16);padding:14px;z-index:120}
+.tt-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 4px}
+.tt-row+.tt-row{border-top:1px solid #f0f3f9;margin-top:2px}
+.tt-row>span{font-size:13px;color:#5a6783;font-weight:600}
+.tt-seg{display:flex;border:1px solid #e3ebf9;border-radius:9px;overflow:hidden}
+.tt-seg button{border:0;background:#fff;color:#5a6783;font-family:inherit;cursor:pointer;padding:7px 11px;font-size:13px;transition:.15s;border-left:1px solid #eef2f9}
+.tt-seg button:first-child{border-left:0}
+.tt-seg #ttFont button:nth-child(1),.tt-seg button[data-f="0"]{font-size:11px}
+.tt-seg button[data-f="1"]{font-size:13px}.tt-seg button[data-f="2"]{font-size:16px}
+.tt-seg button.on{background:linear-gradient(135deg,#4a90ff,#2f6fe0);color:#fff}
+@media(max-width:900px){.tong-tools-pop{right:0;left:auto}}
+
+/* ===== 다크 모드 ===== */
+html[data-theme="dark"]{color-scheme:dark}
+html[data-theme="dark"] body{background:#0e1522;color:#a9b4c5}
+html[data-theme="dark"] section,html[data-theme="dark"] main,
+html[data-theme="dark"] .ds,html[data-theme="dark"] .ts,html[data-theme="dark"] .tsec,html[data-theme="dark"] .dg,
+html[data-theme="dark"] .signals,html[data-theme="dark"] .manifesto,html[data-theme="dark"] .abcde,html[data-theme="dark"] .iyjs,html[data-theme="dark"] .oyak,html[data-theme="dark"] .practice{background:#0e1522!important}
+html[data-theme="dark"] .ds.soft,html[data-theme="dark"] .ts.soft,html[data-theme="dark"] .tsec.soft,html[data-theme="dark"] .manifesto{background:#0a0f19!important}
+html[data-theme="dark"] .finale,html[data-theme="dark"] .tfin,html[data-theme="dark"] .dfin{background:linear-gradient(180deg,#0e1522,#0a0f19)!important}
+/* 제목/강조 텍스트 */
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] h4,
+html[data-theme="dark"] .rs-title,html[data-theme="dark"] .tl-nm,html[data-theme="dark"] .lk-t,html[data-theme="dark"] .qt,html[data-theme="dark"] .oad-name,html[data-theme="dark"] .pg h3,html[data-theme="dark"] .step .k{color:#eef2f8!important}
+html[data-theme="dark"] .decl,html[data-theme="dark"] .decl b,html[data-theme="dark"] .close{color:#e7edf6!important}
+/* 본문 */
+html[data-theme="dark"] p,html[data-theme="dark"] .lead,html[data-theme="dark"] .body,html[data-theme="dark"] .desc,html[data-theme="dark"] .rs-box,html[data-theme="dark"] .pg li,html[data-theme="dark"] .tl-ex,html[data-theme="dark"] .oad-desc,html[data-theme="dark"] .scenes p{color:#aab4c5!important}
+html[data-theme="dark"] .eyebrow,html[data-theme="dark"] .rs-sub,html[data-theme="dark"] .meta,html[data-theme="dark"] .tl-lv,html[data-theme="dark"] .qdim,html[data-theme="dark"] .hero-micro,html[data-theme="dark"] .lk-s,html[data-theme="dark"] .rs-quote{color:#7f8ba0!important}
+html[data-theme="dark"] b,html[data-theme="dark"] .hl,html[data-theme="dark"] .ac,html[data-theme="dark"] .oad-line,html[data-theme="dark"] .linkarrow{color:#6ba3ff!important}
+/* 카드/표면 */
+html[data-theme="dark"] .dg-card,html[data-theme="dark"] .card,html[data-theme="dark"] .t4,html[data-theme="dark"] .j,html[data-theme="dark"] .st,html[data-theme="dark"] .flow .nd,html[data-theme="dark"] .rs-box,html[data-theme="dark"] .oa-detail,html[data-theme="dark"] .pq,html[data-theme="dark"] .bx,html[data-theme="dark"] .ax,html[data-theme="dark"] .ck,html[data-theme="dark"] .ni>div,html[data-theme="dark"] .tile,html[data-theme="dark"] .rs-next,html[data-theme="dark"] .dx-teaser,html[data-theme="dark"] .lk{background:#161f2e!important;border-color:#28344b!important}
+html[data-theme="dark"] .tl-no{background:#161f2e!important;border-color:#33415c!important}
+html[data-theme="dark"] .lik button{background:#161f2e!important;border-color:#28344b!important;color:#c7d0de!important}
+html[data-theme="dark"] .lik button.sel{background:linear-gradient(135deg,#4a90ff,#2f6fe0)!important;color:#fff!important}
+html[data-theme="dark"] .bars .tr,html[data-theme="dark"] .prog i,html[data-theme="dark"] .meter{background:#26324a!important}
+/* 네비 */
+html[data-theme="dark"] .tong-nav{background:rgba(14,21,34,.82)!important;border-color:rgba(255,255,255,.08)!important}
+html[data-theme="dark"] .tong-nav-menu a{color:#c7d0de!important}
+html[data-theme="dark"] .tong-nav-menu a.active,html[data-theme="dark"] .tong-nav-menu a[aria-current]{color:#6ba3ff!important}
+html[data-theme="dark"] .tong-brand-tx{color:#eef2f8!important}
+html[data-theme="dark"] .tong-tools-btn{background:#161f2e;border-color:#28344b;color:#aab4c5}
+html[data-theme="dark"] .tong-tools-pop{background:#161f2e;border-color:#28344b}
+html[data-theme="dark"] .tt-seg{border-color:#33415c}html[data-theme="dark"] .tt-seg button{background:#161f2e;color:#aab4c5;border-color:#28344b}
+html[data-theme="dark"] .fab{background:#161f2e;color:#e7edf6;border-color:#33415c}
+/* 히어로 */
+html[data-theme="dark"] .hero{background:linear-gradient(180deg,rgba(14,21,34,0) 60%,#0e1522 100%),linear-gradient(90deg,#0e1522 0%,rgba(14,21,34,.86) 34%,rgba(14,21,34,.4) 58%,transparent 78%),url('./assets/images/hero-a.jpg')!important;background-size:cover!important;background-position:center right!important}
+html[data-theme="dark"] .hero h1{color:#f2f6fc!important}
+html[data-theme="dark"] .hero .sub{color:#b7c1d1!important}
+html[data-theme="dark"] .btn.g{background:#161f2e!important;color:#e7edf6!important;border-color:#33415c!important}
+/* 오약 이미지: 다크에서 multiply는 사라지므로 screen로 */
+html[data-theme="dark"] .oyak-art .oa-node{mix-blend-mode:screen!important}
+html[data-theme="dark"] .oa-center{background:rgba(22,31,46,.9)!important;color:#6ba3ff!important;border-color:#33415c!important}
+html[data-theme="dark"] .oyak{background:#0e1522!important}
+/* 구분선/기타 */
+html[data-theme="dark"] hr,html[data-theme="dark"] .sig-nudge,html[data-theme="dark"] .rs-sec h3{border-color:#26324a!important}
+html[data-theme="dark"] .pg{border-color:#3684FF!important}

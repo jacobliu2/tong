@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>간편 재무진단 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+  --warn:#ff8c5a;
+  --danger:#e74c4c;
+  --safe:#3684FF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.industry-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.industry-option{padding:18px 16px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1)}
+.industry-option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.industry-option .name{font-weight:600;font-size:15px;margin-bottom:4px;letter-spacing:-0.01em}
+.industry-option .desc{font-size:12px;color:var(--text-muted);line-height:1.4}
+.input-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding:12px 16px;background:rgba(54,132,255,0.04);border-radius:12px}
+.input-progress .label{font-size:12px;color:var(--text-muted);letter-spacing:0.5px}
+.input-progress .selected{font-size:13px;color:var(--primary);font-weight:600}
+.input-group{margin-bottom:24px}
+.input-group-title{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px;color:var(--primary);margin-bottom:6px;letter-spacing:-0.01em}
+.input-group-desc{font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.5}
+.input-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.input-row label{flex:1;font-size:14px;color:var(--text);font-weight:500}
+.input-row label .help{display:block;font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400}
+.input-row .input-wrap{position:relative;width:160px;flex-shrink:0}
+.input-row input{width:100%;padding:10px 36px 10px 12px;border:1.5px solid rgba(54,132,255,0.18);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;background:rgba(255,255,255,0.7);text-align:right;color:var(--text);transition:all .25s}
+.input-row input:focus{outline:none;border-color:var(--primary);background:#fff}
+.input-row .unit{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text-muted);pointer-events:none}
+.input-row.calculated input{background:rgba(54,132,255,0.04);color:var(--primary);font-weight:600}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em;width:100%}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-primary:disabled{background:rgba(138,150,172,0.3);color:#fff;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);color:var(--text)}
+.btn-ghost:hover{background:rgba(54,132,255,0.04);border-color:var(--primary)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.btn-row{display:flex;gap:10px;margin-top:24px}
+.btn-row .btn{flex:1}
+.result-headline-wrap{text-align:center;margin-bottom:32px}
+.result-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.result-status{font-family:'Pretendard',sans-serif;font-style:normal;font-size:36px;line-height:1.2;color:var(--text);letter-spacing:-0.02em;margin-bottom:8px}
+.result-status .accent{color:var(--primary)}
+.result-status .accent.warn{color:var(--warn)}
+.result-status .accent.danger{color:var(--danger)}
+.result-meta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 16px;background:rgba(54,132,255,0.08);border:1px solid var(--glass-border);border-radius:99px;font-size:13px;font-weight:500;color:var(--primary);letter-spacing:0.3px}
+.result-meta .num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px}
+.radar-wrap{display:flex;justify-content:center;margin:20px 0 16px}
+.radar-svg{width:100%;max-width:380px;height:auto}
+.indicator-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.indicator-cell{padding:14px 14px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.indicator-cell.warn{border-color:rgba(255,140,90,0.4);background:rgba(255,140,90,0.05)}
+.indicator-cell.danger{border-color:rgba(231,76,76,0.4);background:rgba(231,76,76,0.05)}
+.indicator-cell .name-wrap{flex:1;min-width:0}
+.indicator-cell .name{font-size:12px;color:var(--text);font-weight:500;margin-bottom:2px}
+.indicator-cell .compare{font-size:10px;color:var(--text-muted);letter-spacing:0.3px}
+.indicator-cell .value{font-family:'Pretendard',sans-serif;font-style:normal;font-size:20px;color:var(--primary);line-height:1;flex-shrink:0}
+.indicator-cell.warn .value{color:var(--warn)}
+.indicator-cell.danger .value{color:var(--danger)}
+.indicator-cell .value .unit{font-size:11px;color:var(--text-muted);margin-left:2px;font-family:'Noto Sans KR',sans-serif;font-weight:500}
+.pyramid-wrap{margin:20px 0}
+.pyramid-svg{width:100%;max-width:480px;height:auto;display:block;margin:0 auto}
+.signals{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.signal{padding:14px 18px;background:rgba(54,132,255,0.04);border-radius:12px;font-size:14px;color:var(--text);border-left:3px solid var(--primary-light);line-height:1.5}
+.signal.warn{background:rgba(255,140,90,0.06);border-left-color:var(--warn)}
+.signal.danger{background:rgba(231,76,76,0.06);border-left-color:var(--danger)}
+.signal-label{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:1px;margin-right:8px;background:rgba(54,132,255,0.1);color:var(--primary)}
+.signal.warn .signal-label{background:rgba(255,140,90,0.15);color:var(--warn)}
+.signal.danger .signal-label{background:rgba(231,76,76,0.15);color:var(--danger)}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.consultant-text p{margin-bottom:14px}
+.consultant-text p:last-child{margin-bottom:0}
+.consultant-text strong{color:var(--primary);font-weight:600}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .card{padding:26px 22px}
+  .industry-grid{grid-template-columns:1fr}
+  .indicator-grid{grid-template-columns:1fr}
+  .input-row{flex-wrap:wrap}
+  .input-row label{flex:1 0 100%}
+  .input-row .input-wrap{width:100%}
+  .result-status{font-size:28px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/finance/"/><meta name="description" content="현금흐름·수익성·안정성·성장성 등 8개 재무 지표를 업종 평균과 비교해 우리 회사의 재무 건강도를 점검하는 무료 재무 자가진단."/><meta property="og:title" content="재무 건강도 자가진단 — 통 TONG"/><meta property="og:description" content="현금흐름·수익성·안정성·성장성 등 8개 재무 지표를 업종 평균과 비교해 우리 회사의 재무 건강도를 점검하는 무료 재무 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/finance/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "재무 건강도 진단", "description": "현금흐름·수익성·안정성 지표로 재무 상태를 점검", "url": "https://www.workstong.com/diagnosis/finance/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "재무 건강도 진단", "item": "https://www.workstong.com/diagnosis/finance/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+        <h1>재무 건강도<br><span class="accent">자가진단</span></h1>
+    <p>최근 결산 1개년 데이터를 입력하면 8가지 핵심 비율을 자동 계산하여 업종 평균과 비교한 위기 신호와 보완 우선순위를 제시합니다.</p>
+  </div>
+  <div class="card popIn" id="step1-card">
+    <div class="section-title">STEP 1 · 업종 선택</div>
+    <p style="font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:18px">업종에 따라 재무비율의 정상 범위가 달라집니다.<br>가장 가까운 업종을 선택해 주십시오.</p>
+    <div class="industry-grid" id="industry-grid"></div>
+    <div class="notice-box" style="margin-top:18px">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      재무의 본질은 회복 단계의 우선순위에서 결정됩니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+  </div>
+  <div class="card popIn" id="step2-card" style="display:none">
+    <div class="section-title">STEP 2 · 재무 데이터 입력</div>
+    <div class="input-progress">
+      <span class="label">선택 업종</span>
+      <span class="selected" id="selected-industry">—</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px;line-height:1.6">최근 결산 1개년 기준으로 입력해 주십시오.<br>단위는 <strong>천원</strong>입니다.<br>모든 항목을 채우지 않아도 진단 가능하지만, 정확도가 낮아질 수 있습니다.</p>
+    <div class="input-group">
+      <div class="input-group-title">손익계산서</div>
+      <div class="input-group-desc">매출액부터 당기순이익까지 5개 항목</div>
+      <div class="input-row">
+        <label>매출액<span class="help">한 해 동안 발생한 총 매출</span></label>
+        <div class="input-wrap"><input type="text" id="f-sales" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>매출원가<span class="help">제품·상품을 만드는 데 직접 들어간 비용</span></label>
+        <div class="input-wrap"><input type="text" id="f-cogs" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row calculated">
+        <label>매출총이익<span class="help">자동 계산 = 매출액 − 매출원가</span></label>
+        <div class="input-wrap"><input type="text" id="f-gp" readonly placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>판매비와 관리비<span class="help">인건비·임차료·광고비 등 운영비</span></label>
+        <div class="input-wrap"><input type="text" id="f-sga" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row calculated">
+        <label>영업이익<span class="help">자동 계산 = 매출총이익 − 판관비</span></label>
+        <div class="input-wrap"><input type="text" id="f-op" readonly placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>당기순이익<span class="help">세후 최종 이익(손실 시 음수 입력)</span></label>
+        <div class="input-wrap"><input type="text" id="f-ni" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+    </div>
+    <div class="input-group">
+      <div class="input-group-title">재무상태표</div>
+      <div class="input-group-desc">결산일 기준 자산·부채·자본</div>
+      <div class="input-row">
+        <label>유동자산<span class="help">1년 내 현금화 가능 자산(현금·매출채권·재고 등)</span></label>
+        <div class="input-wrap"><input type="text" id="f-ca" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>비유동자산<span class="help">건물·기계·장비 등 1년 이상 보유 자산</span></label>
+        <div class="input-wrap"><input type="text" id="f-nca" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>유동부채<span class="help">1년 내 갚아야 할 부채(외상매입금·단기차입금 등)</span></label>
+        <div class="input-wrap"><input type="text" id="f-cl" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>비유동부채<span class="help">1년 이상 장기 부채(장기차입금 등)</span></label>
+        <div class="input-wrap"><input type="text" id="f-ncl" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>자본총계<span class="help">자기자본(자본금 + 이익잉여금 등)</span></label>
+        <div class="input-wrap"><input type="text" id="f-eq" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>매출채권<span class="help">아직 받지 못한 매출 대금(외상매출금·받을어음)</span></label>
+        <div class="input-wrap"><input type="text" id="f-ar" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+      <div class="input-row">
+        <label>재고자산<span class="help">원재료·재공품·완제품 합계</span></label>
+        <div class="input-wrap"><input type="text" id="f-inv" inputmode="numeric" placeholder="0" /><span class="unit">천원</span></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goBackToStep1()">← 업종 변경</button>
+      <button class="btn btn-primary" id="btn-analyze" onclick="analyze()">진단하기 →</button>
+    </div>
+  </div>
+  <div class="card popIn" id="step3-card" style="display:none">
+    <div class="result-headline-wrap">
+      <div class="result-eyebrow">FINANCIAL HEALTH</div>
+      <div class="result-status serif" id="result-status-headline">—</div>
+      <div class="result-meta">
+        <span>종합 점수</span>
+        <span class="num" id="result-score">0</span>
+        <span>/ 100</span>
+      </div>
+    </div>
+    <div class="section-title">8지표 진단 — 업종 평균 대비</div>
+    <div class="radar-wrap">
+      <svg class="radar-svg" id="radar-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="indicator-grid" id="indicator-grid"></div>
+    <div class="section-title">재무 피라미드 — 자금 우선순위</div>
+    <div class="pyramid-wrap">
+      <svg class="pyramid-svg" id="pyramid-svg" viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="section-title">위기 신호 · 보완 우선순위</div>
+    <div class="signals" id="signals-container"></div>
+    <div class="section-title">경영전환 컨설턴트 진단</div>
+    <div class="consultant-box">
+      <div class="consultant-label">CONSULTANT'S NOTE</div>
+      <div class="consultant-text" id="consultant-text"></div>
+    </div>
+    </div><div class="cta-wrap">
+      <a class="btn btn-primary" href="../../contact/index.html">30분 무료 정밀 재무진단 신청 →</a>
+      <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const INDUSTRIES = {
+  manufacturing: {
+    name: '제조업', desc: '금속·기계·전자·화학·식품 등',
+    benchmark: { grossMargin: 22, opMargin: 5.5, netMargin: 4, debtRatio: 150, currentRatio: 130, equityRatio: 40, arTurnover: 7, invTurnover: 8 },
+  },
+  wholesale: {
+    name: '도·소매업', desc: '유통·도매·소매·전자상거래',
+    benchmark: { grossMargin: 18, opMargin: 3.5, netMargin: 2.5, debtRatio: 180, currentRatio: 120, equityRatio: 36, arTurnover: 9, invTurnover: 10 },
+  },
+  food: {
+    name: '음식·숙박업', desc: '외식·카페·숙박·관광',
+    benchmark: { grossMargin: 35, opMargin: 6, netMargin: 4, debtRatio: 200, currentRatio: 100, equityRatio: 33, arTurnover: 15, invTurnover: 25 },
+  },
+  construction: {
+    name: '건설업', desc: '건축·토목·인테리어·설비',
+    benchmark: { grossMargin: 15, opMargin: 4.5, netMargin: 3, debtRatio: 200, currentRatio: 130, equityRatio: 33, arTurnover: 5, invTurnover: 6 },
+  },
+  service: {
+    name: '서비스업', desc: '교육·전문서비스·기타',
+    benchmark: { grossMargin: 45, opMargin: 8, netMargin: 6, debtRatio: 130, currentRatio: 140, equityRatio: 43, arTurnover: 8, invTurnover: 20 },
+  },
+  it: {
+    name: 'IT·정보통신업', desc: 'SW·SaaS·콘텐츠·정보처리',
+    benchmark: { grossMargin: 50, opMargin: 10, netMargin: 7, debtRatio: 100, currentRatio: 160, equityRatio: 50, arTurnover: 6, invTurnover: 30 },
+  },
+};
+const INDICATORS = [
+  {key:'grossMargin', name:'매출총이익률', unit:'%', category:'수익성', desc:'(매출총이익 / 매출액) × 100'},
+  {key:'opMargin', name:'영업이익률', unit:'%', category:'수익성', desc:'(영업이익 / 매출액) × 100'},
+  {key:'netMargin', name:'순이익률', unit:'%', category:'수익성', desc:'(당기순이익 / 매출액) × 100'},
+  {key:'debtRatio', name:'부채비율', unit:'%', category:'안정성', desc:'(총부채 / 자본총계) × 100, 낮을수록 좋음', reverse:true},
+  {key:'currentRatio', name:'유동비율', unit:'%', category:'안정성', desc:'(유동자산 / 유동부채) × 100'},
+  {key:'equityRatio', name:'자기자본비율', unit:'%', category:'안정성', desc:'(자본총계 / 총자산) × 100'},
+  {key:'arTurnover', name:'매출채권회전율', unit:'회', category:'활동성', desc:'매출액 / 매출채권'},
+  {key:'invTurnover', name:'재고자산회전율', unit:'회', category:'활동성', desc:'매출원가 / 재고자산'},
+];
+let selectedIndustry = null;
+let financials = {};
+let computedIndicators = {};
+function renderIndustries(){
+  const grid = document.getElementById('industry-grid');
+  grid.innerHTML = Object.entries(INDUSTRIES).map(([key, ind]) => `
+    <button class="industry-option" onclick="selectIndustry('${key}')">
+      <div class="name">${ind.name}</div>
+      <div class="desc">${ind.desc}</div>
+    </button>
+  `).join('');
+}
+function selectIndustry(key){
+  selectedIndustry = key;
+  document.getElementById('selected-industry').textContent = INDUSTRIES[key].name;
+  document.getElementById('step1-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('step2-card').style.display = 'block';
+  const card = document.getElementById('step2-card');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'popIn .4s cubic-bezier(.4,0,.2,1) both';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goBackToStep1(){
+  document.getElementById('step2-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('step1-card').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function setupInputs(){
+  const inputs = document.querySelectorAll('input[inputmode="numeric"]');
+  inputs.forEach(input => {
+    input.addEventListener('input', e => {
+      let val = e.target.value.replace(/[^0-9-]/g, '');
+      if(val.length > 0){
+        const isNeg = val.startsWith('-');
+        val = val.replace(/-/g, '');
+        if(val === '') val = isNeg ? '-' : '';
+        else val = (isNeg ? '-' : '') + parseInt(val).toLocaleString();
+      }
+      e.target.value = val;
+      updateCalculated();
+    });
+  });
+}
+function getInputValue(id){
+  const v = document.getElementById(id).value.replace(/,/g, '');
+  return v === '' || v === '-' ? 0 : parseInt(v) || 0;
+}
+function updateCalculated(){
+  const sales = getInputValue('f-sales');
+  const cogs = getInputValue('f-cogs');
+  const sga = getInputValue('f-sga');
+  const gp = sales - cogs;
+  const op = gp - sga;
+  document.getElementById('f-gp').value = gp.toLocaleString();
+  document.getElementById('f-op').value = op.toLocaleString();
+}
+function computeIndicators(){
+  const sales = getInputValue('f-sales');
+  const cogs = getInputValue('f-cogs');
+  const sga = getInputValue('f-sga');
+  const ni = getInputValue('f-ni');
+  const ca = getInputValue('f-ca');
+  const nca = getInputValue('f-nca');
+  const cl = getInputValue('f-cl');
+  const ncl = getInputValue('f-ncl');
+  const eq = getInputValue('f-eq');
+  const ar = getInputValue('f-ar');
+  const inv = getInputValue('f-inv');
+  const gp = sales - cogs;
+  const op = gp - sga;
+  const totalAssets = ca + nca;
+  const totalDebt = cl + ncl;
+  financials = {sales, cogs, sga, ni, ca, nca, cl, ncl, eq, ar, inv, gp, op, totalAssets, totalDebt};
+  return {
+    grossMargin: sales > 0 ? (gp / sales * 100) : 0,
+    opMargin: sales > 0 ? (op / sales * 100) : 0,
+    netMargin: sales > 0 ? (ni / sales * 100) : 0,
+    debtRatio: eq > 0 ? (totalDebt / eq * 100) : 999,
+    currentRatio: cl > 0 ? (ca / cl * 100) : 999,
+    equityRatio: totalAssets > 0 ? (eq / totalAssets * 100) : 0,
+    arTurnover: ar > 0 ? (sales / ar) : 0,
+    invTurnover: inv > 0 ? (cogs / inv) : 0,
+  };
+}
+function evaluateIndicator(key, value, benchmark){
+  const ind = INDICATORS.find(i => i.key === key);
+  const reverse = ind.reverse;
+  const ratio = value / benchmark;
+  if(reverse){
+    if(ratio <= 0.7) return {grade:'good', score:100};
+    if(ratio <= 1.0) return {grade:'good', score:85};
+    if(ratio <= 1.3) return {grade:'normal', score:65};
+    if(ratio <= 1.7) return {grade:'warn', score:40};
+    return {grade:'danger', score:20};
+  } else {
+    if(ratio >= 1.3) return {grade:'good', score:100};
+    if(ratio >= 1.0) return {grade:'good', score:85};
+    if(ratio >= 0.7) return {grade:'normal', score:65};
+    if(ratio >= 0.4) return {grade:'warn', score:40};
+    return {grade:'danger', score:20};
+  }
+}
+function evaluatePyramid(indicators){
+  const layer1 = indicators.currentRatio >= 100;
+  const benchmark = INDUSTRIES[selectedIndustry].benchmark;
+  const layer2 = layer1 && (indicators.grossMargin >= benchmark.grossMargin * 0.7) && (indicators.opMargin > 0);
+  const layer3 = layer2 && (indicators.debtRatio <= benchmark.debtRatio * 1.3) && (indicators.equityRatio >= 25);
+  const layer4 = layer3 && (indicators.netMargin >= benchmark.netMargin) && (indicators.equityRatio >= 35);
+  return { layer1, layer2, layer3, layer4, highest: layer4 ? 4 : layer3 ? 3 : layer2 ? 2 : layer1 ? 1 : 0 };
+}
+function calcOverallScore(evaluations){
+  const scores = Object.values(evaluations).map(e => e.score);
+  const avg = scores.reduce((a,b) => a+b, 0) / scores.length;
+  return Math.round(avg);
+}
+function getOverallStatus(score, pyramid){
+  if(!pyramid.layer1) return {grade:'danger', label:'위험'};
+  if(score >= 80) return {grade:'good', label:'건강'};
+  if(score >= 65) return {grade:'normal', label:'양호'};
+  if(score >= 45) return {grade:'warn', label:'주의'};
+  return {grade:'danger', label:'위험'};
+}
+function detectSignals(indicators, evaluations, pyramid){
+  const signals = [];
+  const benchmark = INDUSTRIES[selectedIndustry].benchmark;
+  if(!pyramid.layer1){
+    signals.push({ level:'danger', label:'생존층',
+      text:`유동비율이 ${indicators.currentRatio.toFixed(0)}%로 100% 미만입니다. 1년 내 갚아야 할 빚을 1년 내 현금화 가능 자산으로 다 막을 수 없는 상태입니다. 「경영전환론」의 표현으로 "1층이 흔들리는 조직은 석 달 안에 문을 닫습니다." 모든 다른 작업에 앞서 단기 유동성 확보가 시급합니다.` });
+  }
+  if(financials.op < 0){
+    signals.push({ level:'danger', label:'수익성',
+      text:`영업이익이 적자입니다(${(financials.op/1000).toFixed(0)}백만원). 본업으로 돈을 벌지 못하는 상태로, 매출 확대보다 비용 구조 점검이 먼저입니다. 「경영전환론」의 표현으로 "영업을 더 늘리는 것이 답이 아니라 회전 주기를 단축시키는 것"이 답일 수 있습니다.` });
+  } else if(evaluations.opMargin.grade === 'danger' || evaluations.opMargin.grade === 'warn'){
+    signals.push({ level:'warn', label:'수익성',
+      text:`영업이익률이 ${indicators.opMargin.toFixed(1)}%로 ${INDUSTRIES[selectedIndustry].name} 평균(${benchmark.opMargin}%)에 크게 못 미칩니다. 매출 대비 본업 수익성이 약하므로 원가·판관비 구조 점검이 필요합니다.` });
+  }
+  if(evaluations.debtRatio.grade === 'danger'){
+    signals.push({ level:'danger', label:'안정성',
+      text:`부채비율이 ${indicators.debtRatio.toFixed(0)}%로 ${INDUSTRIES[selectedIndustry].name} 평균(${benchmark.debtRatio}%) 대비 매우 높습니다. 추가 자금 조달이 어려워질 수 있고, 금리 변동에 취약합니다. 자본 확충 또는 부채 구조조정이 시급합니다.` });
+  } else if(evaluations.debtRatio.grade === 'warn'){
+    signals.push({ level:'warn', label:'안정성',
+      text:`부채비율이 ${indicators.debtRatio.toFixed(0)}%로 ${INDUSTRIES[selectedIndustry].name} 평균(${benchmark.debtRatio}%)보다 높습니다. 부채 의존도를 낮추는 방향의 재무 전략이 필요합니다.` });
+  }
+  if(evaluations.arTurnover.grade === 'danger' || evaluations.arTurnover.grade === 'warn'){
+    const arDays = indicators.arTurnover > 0 ? Math.round(365 / indicators.arTurnover) : 999;
+    signals.push({ level:'warn', label:'활동성',
+      text:`매출채권회전율이 ${indicators.arTurnover.toFixed(1)}회로 평균 회수기간이 약 ${arDays}일입니다. 시흥 금속가공사 사례처럼 "장부는 좋아 보이는데 통장이 비어 있는" 상태에 가까울 수 있습니다. 거래 조건 재협상이나 결제 조건 단축이 필요합니다.` });
+  }
+  if(evaluations.invTurnover.grade === 'danger' || evaluations.invTurnover.grade === 'warn'){
+    if(financials.inv > 0){
+      signals.push({ level:'warn', label:'활동성',
+        text:`재고자산회전율이 ${indicators.invTurnover.toFixed(1)}회로 ${INDUSTRIES[selectedIndustry].name} 평균(${benchmark.invTurnover}회)에 못 미칩니다. 재고에 자금이 묶여 있는 상태로, 진부화 위험과 보관 비용이 누적됩니다.` });
+    }
+  }
+  if(evaluations.equityRatio.grade === 'danger'){
+    signals.push({ level:'danger', label:'안정성',
+      text:`자기자본비율이 ${indicators.equityRatio.toFixed(0)}%로 ${INDUSTRIES[selectedIndustry].name} 평균(${benchmark.equityRatio}%) 대비 매우 낮습니다. 자본 기반이 약해 외부 충격에 매우 취약한 상태입니다.` });
+  }
+  if(evaluations.grossMargin.grade === 'danger' || evaluations.grossMargin.grade === 'warn'){
+    signals.push({ level:'warn', label:'수익성',
+      text:`매출총이익률이 ${indicators.grossMargin.toFixed(1)}%로 ${INDUSTRIES[selectedIndustry].name} 평균(${benchmark.grossMargin}%)에 못 미칩니다. 원가 경쟁력 또는 가격 결정력이 약화된 상태로, 사업 모델의 본질적 점검이 필요할 수 있습니다.` });
+  }
+  if(signals.length === 0){
+    signals.push({ level:'good', label:'안정',
+      text:`8가지 주요 지표 모두 ${INDUSTRIES[selectedIndustry].name} 평균 수준 또는 그 이상입니다. 재무 구조가 건강한 상태입니다. 「경영전환론」의 표현으로, "지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다." 다음 BX Point를 위한 4층 전환 자금을 미리 확보하시기 바랍니다.` });
+  }
+  return signals.slice(0, 5);
+}
+function drawRadar(indicators, evaluations){
+  const svg = document.getElementById('radar-svg');
+  const cx = 190, cy = 190, R = 120;
+  const n = INDICATORS.length;
+  let html = '';
+  const benchmark = INDUSTRIES[selectedIndustry].benchmark;
+  for(let level=1; level<=5; level++){
+    const r = (R / 5) * level; let pts = '';
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+      pts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    pts += 'Z';
+    html += `<path d="${pts}" fill="none" stroke="rgba(54,132,255,${0.05 + level*0.025})" stroke-width="1"/>`;
+  }
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * R; const y = cy + Math.sin(angle) * R;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(54,132,255,0.1)" stroke-width="1"/>`;
+  }
+  let benchPts = '';
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * 0.8;
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    benchPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+  }
+  benchPts += 'Z';
+  html += `<path d="${benchPts}" fill="none" stroke="rgba(138,150,172,0.4)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  let dataPts = ''; const dataPoints = [];
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const ind = INDICATORS[i];
+    const score = evaluations[ind.key].score;
+    const ratio = 0.2 + (score / 100) * 0.8;
+    const r = R * ratio;
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    dataPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    dataPoints.push({x, y, score, key:ind.key});
+  }
+  dataPts += 'Z';
+  html += `<defs><linearGradient id="radarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.35"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.20"/></linearGradient></defs>`;
+  html += `<path d="${dataPts}" fill="url(#radarGrad)" stroke="#3684FF" stroke-width="2" stroke-linejoin="round"/>`;
+  dataPoints.forEach(pt => {
+    const grade = evaluations[pt.key].grade;
+    let color = '#3684FF';
+    if(grade === 'warn') color = '#ff8c5a';
+    if(grade === 'danger') color = '#e74c4c';
+    html += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="4" fill="${color}" stroke="#fff" stroke-width="2"/>`;
+  });
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const labelR = R + 28;
+    const x = cx + Math.cos(angle) * labelR; const y = cy + Math.sin(angle) * labelR;
+    const ind = INDICATORS[i];
+    const shortLabel = ind.name.length > 6 ? ind.name.substring(0,5) : ind.name;
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#5a6a85" font-weight="500">${shortLabel}</text>`;
+  }
+  html += `<text x="${cx}" y="${cy + R + 65}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">점선 = ${INDUSTRIES[selectedIndustry].name} 평균</text>`;
+  svg.innerHTML = html;
+}
+function drawPyramid(pyramid){
+  const svg = document.getElementById('pyramid-svg');
+  const cx = 250;
+  const layerHeight = 56;
+  const baseY = 290;
+  const apexY = 50;
+  const widths = [360, 280, 200, 120, 40];
+  const layers = [
+    { layer:1, name:'1층 · 생존', desc:'월 고정비 3개월치 현금', achieved:pyramid.layer1 },
+    { layer:2, name:'2층 · 회복', desc:'기존 고객 유지·재구매', achieved:pyramid.layer2 },
+    { layer:3, name:'3층 · 확장', desc:'신규 고객·새 채널', achieved:pyramid.layer3 },
+    { layer:4, name:'4층 · 전환', desc:'다음 BX Point 준비', achieved:pyramid.layer4 },
+  ];
+  let html = '';
+  html += `<defs>
+    <linearGradient id="pyramidGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.85"/><stop offset="100%" stop-color="#3684FF" stop-opacity="0.95"/></linearGradient>
+    <linearGradient id="pyramidGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4A92FF" stop-opacity="0.80"/><stop offset="100%" stop-color="#4A92FF" stop-opacity="0.90"/></linearGradient>
+    <linearGradient id="pyramidGrad3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5FA0FF" stop-opacity="0.75"/><stop offset="100%" stop-color="#5FA0FF" stop-opacity="0.85"/></linearGradient>
+    <linearGradient id="pyramidGrad4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6BA3FF" stop-opacity="0.70"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.80"/></linearGradient>
+  </defs>`;
+  layers.forEach((layer, i) => {
+    const yBottom = baseY - (i * layerHeight);
+    const yTop = baseY - ((i + 1) * layerHeight);
+    const wBottom = widths[i];
+    const wTop = widths[i + 1];
+    const xBottomLeft = cx - wBottom / 2;
+    const xBottomRight = cx + wBottom / 2;
+    const xTopLeft = cx - wTop / 2;
+    const xTopRight = cx + wTop / 2;
+    const fill = layer.achieved ? `url(#pyramidGrad${layer.layer})` : 'rgba(200,210,225,0.35)';
+    const strokeColor = layer.achieved ? 'rgba(54,132,255,0.4)' : 'rgba(138,150,172,0.3)';
+    const path = `M ${xBottomLeft} ${yBottom} L ${xBottomRight} ${yBottom} L ${xTopRight} ${yTop} L ${xTopLeft} ${yTop} Z`;
+    html += `<path d="${path.replace(/\s+/g,' ')}" fill="${fill}" stroke="${strokeColor}" stroke-width="1.5"/>`;
+    const yMid = (yBottom + yTop) / 2;
+    const textColor = layer.achieved ? '#fff' : '#8a96ac';
+    const labelOpacity = layer.achieved ? 1 : 0.7;
+    const nameFontSize = layer.layer === 4 ? 12 : 14;
+    const descFontSize = layer.layer === 4 ? 9 : 10;
+    html += `<text x="${cx}" y="${yMid - 5}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="${nameFontSize}" fill="${textColor}" opacity="${labelOpacity}" font-weight="bold">${layer.name}</text>`;
+    html += `<text x="${cx}" y="${yMid + 12}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="${descFontSize}" fill="${textColor}" opacity="${labelOpacity * 0.9}">${layer.desc}</text>`;
+    const checkX = 42;
+    const checkY = yMid;
+    if(layer.achieved){
+      html += `<circle cx="${checkX}" cy="${checkY}" r="13" fill="#3684FF"/>`;
+      html += `<path d="M ${checkX-5.5} ${checkY+0.5} L ${checkX-1} ${checkY+5} L ${checkX+5.5} ${checkY-3.5}" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    } else {
+      html += `<circle cx="${checkX}" cy="${checkY}" r="13" fill="rgba(200,210,225,0.5)" stroke="rgba(138,150,172,0.3)" stroke-width="1"/>`;
+      html += `<line x1="${checkX-4}" y1="${checkY-4}" x2="${checkX+4}" y2="${checkY+4}" stroke="#8a96ac" stroke-width="1.8" stroke-linecap="round"/>`;
+      html += `<line x1="${checkX+4}" y1="${checkY-4}" x2="${checkX-4}" y2="${checkY+4}" stroke="#8a96ac" stroke-width="1.8" stroke-linecap="round"/>`;
+    }
+  });
+  html += `<text x="${cx}" y="320" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">아래 층이 채워진 다음 위 층으로 (경영전환 21장)</text>`;
+  svg.innerHTML = html;
+}
+function generateConsultantNote(indicators, evaluations, pyramid, signals, score, status){
+  const indName = INDUSTRIES[selectedIndustry].name;
+  const benchmark = INDUSTRIES[selectedIndustry].benchmark;
+  let paragraphs = [];
+  let p1 = '';
+  if(status.grade === 'good'){
+    p1 = `귀사의 재무 건강도 종합 점수는 <strong>${score}점</strong>으로, ${indName} 평균을 상회하는 건강한 상태입니다. 8가지 핵심 지표가 대체로 균형 잡혀 있으며, 재무 피라미드 ${pyramid.highest}층까지 채워진 상태입니다. 「경영전환론」의 표현으로, 재 축이 안정적으로 작동하는 조직입니다. <strong>그러나 "지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다."</strong> 다음 BX Point를 위한 4층 전환 자금을 미리 떼어두는 작업이 이 시점의 핵심 과제입니다.`;
+  } else if(status.grade === 'normal'){
+    p1 = `귀사의 재무 건강도 종합 점수는 <strong>${score}점</strong>으로, ${indName} 평균에 근접한 양호한 수준입니다. 재무 피라미드 ${pyramid.highest}층까지 작동하지만, 일부 지표에서 ${indName} 평균에 못 미치는 영역이 있습니다. <strong>지금이 가장 적은 비용으로 재무 구조를 정비할 수 있는 시점입니다.</strong> 위기 신호로 잡힌 영역 1~2개를 우선 보강하시면 다음 단계로 안정적으로 올라갈 수 있습니다.`;
+  } else if(status.grade === 'warn'){
+    p1 = `귀사의 재무 건강도 종합 점수는 <strong>${score}점</strong>으로, ${indName} 평균에 못 미치는 주의 단계입니다. 재무 피라미드 ${pyramid.highest}층까지만 채워진 상태로, 여러 지표에서 위기 신호가 감지됩니다. <strong>「경영전환론」 21장의 원칙대로, 위 층부터 채우려는 유혹을 이겨내야 합니다.</strong> 가장 약한 층부터 차근차근 보강하는 것이 회복의 출발점입니다.`;
+  } else {
+    p1 = `귀사의 재무 건강도 종합 점수는 <strong>${score}점</strong>으로, ${indName} 평균 대비 위험 신호가 다수 감지됩니다. 재무 피라미드 ${pyramid.highest}층까지만 채워진 상태이며, 특히 ${pyramid.layer1 ? '수익성 또는 안정성' : '생존층(유동성)'}에서 즉각적인 대응이 필요합니다. <strong>「경영전환론」의 경고대로, "1층이 흔들리는 조직은 석 달 안에 문을 닫습니다."</strong> 추가 매출 확대보다 현금 회전과 비용 구조 점검이 가장 시급합니다.`;
+  }
+  paragraphs.push(p1);
+  let p2 = '';
+  if(pyramid.highest === 4){
+    p2 = `재무 피라미드 4층(전환)까지 모두 채워진 상태입니다. <strong>드물게 보는 안정된 분포입니다.</strong> 1층(생존), 2층(회복), 3층(확장), 4층(전환)이 순서대로 작동하고 있어, 다음 사이클의 BX Point를 미리 설계할 수 있는 여유가 있습니다. 이 상태에서는 매출 확대보다 다음 5년의 사업 모델 재정의에 자원을 투입하는 것이 맞습니다.`;
+  } else if(pyramid.highest === 3){
+    p2 = `재무 피라미드 3층(확장)까지 채워진 상태입니다. 1층 생존과 2층 회복이 안정되어 있고, 3층 확장의 자금 여력도 있지만, <strong>4층 전환에는 아직 자금이 들어가지 않은 상태</strong>입니다. 「경영전환론」의 경고대로 "4층에 아무것도 넣지 않은 조직은 다음 BX Point를 준비할 수 없습니다." 지금부터 매출의 일정 비율을 4층에 의식적으로 떼어두는 작업이 다음 단계의 출발점입니다.`;
+  } else if(pyramid.highest === 2){
+    p2 = `재무 피라미드 2층(회복)까지 채워진 상태입니다. 1층 생존이 안정되어 있고, 기존 고객 유지의 수익성도 살아 있지만, <strong>3층 확장의 자금 여력이 아직 부족한 상태</strong>입니다. 부채비율 정비와 자기자본비율 강화를 통해 3층 확장 자금을 만들어내는 것이 다음 작업입니다. 3층이 만들어지기 전에는 무리한 확장 투자를 자제하시기 바랍니다.`;
+  } else if(pyramid.highest === 1){
+    p2 = `재무 피라미드 1층(생존)만 채워진 상태입니다. 단기 유동성은 확보되어 있지만, <strong>2층 회복(수익성)이 충분히 작동하지 않는 상태</strong>입니다. 매출총이익률과 영업이익률을 ${indName} 평균 수준으로 끌어올리는 것이 가장 시급한 과제입니다. 매출 확대보다 본업의 마진 회복이 먼저입니다. 「경영전환론」의 표현으로 "영업을 더 늘리는 것이 답이 아니라 회전 주기를 단축시키는 것"이 답일 수 있습니다.`;
+  } else {
+    p2 = `재무 피라미드 1층(생존)조차 무너진 상태입니다. 유동비율이 100% 미만이라는 것은 1년 내 갚아야 할 부채를 1년 내 현금화 가능 자산으로 다 막을 수 없다는 의미입니다. <strong>「경영전환론」의 경고대로 "1층이 흔들리는 조직은 석 달 안에 문을 닫습니다."</strong> 다른 모든 작업에 앞서 단기 유동성 확보가 최우선이며, 자금 조달·매출채권 회수 단축·재고 정리 등 즉각적 조치가 필요합니다.`;
+  }
+  paragraphs.push(p2);
+  let p3 = '';
+  const dangerSignals = signals.filter(s => s.level === 'danger');
+  const warnSignals = signals.filter(s => s.level === 'warn');
+  if(dangerSignals.length > 0){
+    const top = dangerSignals[0];
+    p3 = `가장 시급한 보완 영역은 <strong>${top.label}</strong>입니다. ${dangerSignals.length}개의 위험 신호와 ${warnSignals.length}개의 주의 신호가 감지되었으며, 이 중 ${top.label} 영역의 신호가 가장 즉각적인 대응을 요구합니다. <strong>화복상의(禍福相倚) 원칙대로</strong>, 위기의 순간이 재무 구조를 재설계하는 출발점이 됩니다. 모든 영역을 한꺼번에 손대려 하기보다, 가장 위험한 한 영역에 자원을 집중하는 것이 회복의 출발점입니다.`;
+  } else if(warnSignals.length > 0){
+    const top = warnSignals[0];
+    p3 = `가장 보완이 필요한 영역은 <strong>${top.label}</strong>입니다. ${warnSignals.length}개의 주의 신호가 감지되었으며, 이 영역들이 방치되면 위험 단계로 넘어갈 수 있습니다. 지금이 가장 적은 비용으로 정비 가능한 시점이며, 6개월 안에 이 영역의 지표를 ${indName} 평균 수준으로 끌어올리는 것을 목표로 삼으시기 바랍니다.`;
+  } else {
+    p3 = `현재 위기 신호로 잡힌 영역은 없습니다. 8지표가 모두 ${indName} 평균 수준 또는 그 이상으로 균형 잡혀 있다는 의미입니다. 이 시점에서는 <strong>다음 BX Point를 준비하는 작업이 가장 중요한 과제</strong>입니다. 매출의 5~10%를 4층 전환 자금으로 의식적으로 떼어두고, 새로운 사업 모델·시장·제품에 대한 학습을 시작하시기 바랍니다.`;
+  }
+  paragraphs.push(p3);
+  let p4 = '';
+  if(status.grade === 'danger'){
+    p4 = `<strong>위험 단계의 재무 진단에 가장 비싼 선택은 "조금 더 지켜보자"는 결정입니다.</strong> 이 시점의 시간은 회복의 시간이 아니라 손실 누적의 시간입니다. 외부 시각의 도움 없이 내부에서 회복 경로를 만들기 어려운 상태이며, 30분 무료 정밀 재무진단 상담을 통해 단계적 회복 경로를 함께 설계하시기 바랍니다.`;
+  } else if(status.grade === 'warn'){
+    p4 = `<strong>먼저 움직일 것은 정해졌으니, 미루지 않는 것이 가장 중요합니다.</strong> 주의 신호로 잡힌 영역의 정비가 출발점이며, 이 시기를 놓치면 다음 결산 때는 위험 단계로 바뀌어 있을 가능성이 큽니다. 아직은 작은 비용으로 정비가 가능한 시점이며, 정밀 재무진단을 통해 3개년 추세와 현금흐름을 함께 점검하는 것이 효과적입니다.`;
+  } else {
+    p4 = `<strong>지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다.</strong> 다음 사이클의 BX Point를 미리 설계하기에 가장 좋은 시점이며, 4층 전환 자금 확보가 다음 단계 진입의 첫 작업이 될 것입니다. 정밀 재무진단(3개년 추세 분석·현금흐름표·동종업계 벤치마킹)을 통해 다음 5년의 재무 로드맵을 함께 그려보시기 바랍니다.`;
+  }
+  paragraphs.push(p4);
+  return paragraphs.map(p => '<p>' + p + '</p>').join('');
+}
+function analyze(){
+  const sales = getInputValue('f-sales');
+  if(sales <= 0){
+    alert('매출액을 입력해 주십시오.');
+    return;
+  }
+  const indicators = computeIndicators();
+  const benchmark = INDUSTRIES[selectedIndustry].benchmark;
+  const evaluations = {};
+  INDICATORS.forEach(ind => {
+    evaluations[ind.key] = evaluateIndicator(ind.key, indicators[ind.key], benchmark[ind.key]);
+  });
+  const pyramid = evaluatePyramid(indicators);
+  const score = calcOverallScore(evaluations);
+  const status = getOverallStatus(score, pyramid);
+  const signals = detectSignals(indicators, evaluations, pyramid);
+  document.getElementById('step2-card').style.display = 'none';
+  document.getElementById('step3-card').style.display = 'block';
+  const statusEl = document.getElementById('result-status-headline');
+  const accentClass = status.grade === 'danger' ? 'danger' : (status.grade === 'warn' ? 'warn' : '');
+  if(status.grade === 'good'){
+    statusEl.innerHTML = `재무 건강도 <span class="accent">${status.label}</span>`;
+  } else if(status.grade === 'normal'){
+    statusEl.innerHTML = `재무 건강도 <span class="accent">${status.label}</span>`;
+  } else if(status.grade === 'warn'){
+    statusEl.innerHTML = `재무 건강도 <span class="accent warn">${status.label}</span>`;
+  } else {
+    statusEl.innerHTML = `재무 건강도 <span class="accent danger">${status.label}</span>`;
+  }
+  document.getElementById('result-score').textContent = score;
+  drawRadar(indicators, evaluations);
+  const gridEl = document.getElementById('indicator-grid');
+  gridEl.innerHTML = INDICATORS.map(ind => {
+    const value = indicators[ind.key];
+    const evalRes = evaluations[ind.key];
+    const benchVal = benchmark[ind.key];
+    const cls = evalRes.grade === 'danger' ? 'danger' : (evalRes.grade === 'warn' ? 'warn' : '');
+    return `<div class="indicator-cell ${cls}">
+      <div class="name-wrap">
+        <div class="name">${ind.name}</div>
+        <div class="compare">${indName(selectedIndustry)} 평균 ${benchVal}${ind.unit}</div>
+      </div>
+      <div class="value">${value.toFixed(1)}<span class="unit">${ind.unit}</span></div>
+    </div>`;
+  }).join('');
+  drawPyramid(pyramid);
+  const sigEl = document.getElementById('signals-container');
+  sigEl.innerHTML = signals.map(s => 
+    `<div class="signal ${s.level === 'good' ? '' : s.level}">
+      <span class="signal-label">${s.label}</span>${s.text}
+    </div>`
+  ).join('');
+  document.getElementById('consultant-text').innerHTML = generateConsultantNote(indicators, evaluations, pyramid, signals, score, status);
+  computedIndicators = {indicators, evaluations, pyramid, signals, score, status};
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function indName(key){ return INDUSTRIES[key].name; }
+function restart(){
+  document.getElementById('step3-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('step1-card').style.display = 'block';
+  document.querySelectorAll('input').forEach(i => i.value = '');
+  selectedIndustry = null;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.addEventListener('DOMContentLoaded', () => {
+  renderIndustries();
+  setupInputs();
+});
+renderIndustries();
+setupInputs();
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

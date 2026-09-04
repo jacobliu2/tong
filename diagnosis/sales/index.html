@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영업 신호등 자가진단 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+  --green:#3aaf5a;
+  --green-bg:rgba(58,175,90,0.08);
+  --yellow:#e8a000;
+  --yellow-bg:rgba(232,160,0,0.08);
+  --red:#e74c4c;
+  --red-bg:rgba(231,76,76,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.progress-wrap{position:sticky;top:12px;z-index:20;margin:24px 0 28px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden;backdrop-filter:blur(8px)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.stage-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.stage-header .num{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:16px;font-weight:bold;flex-shrink:0}
+.stage-header .name{font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.01em}
+.stage-header .desc{flex:1;font-size:11px;color:var(--text-muted);letter-spacing:0.3px}
+.question-num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:13px;color:var(--primary);letter-spacing:1px;margin-bottom:10px}
+.question-text{font-size:18px;line-height:1.55;font-weight:500;color:var(--text);margin-bottom:24px;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{width:100%;padding:14px 18px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:14px}
+.option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.option:active{transform:translateY(0)}
+.option .num{width:28px;height:28px;border-radius:8px;background:rgba(54,132,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--primary);flex-shrink:0;transition:all .25s}
+.option:hover .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.headline-wrap{text-align:center;margin-bottom:32px}
+.headline-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.signal-bar{display:flex;justify-content:center;gap:8px;margin-bottom:18px}
+.signal-light{width:60px;height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,0.7);border:2px solid var(--glass-border);position:relative}
+.signal-light .dot{width:24px;height:24px;border-radius:50%;margin-bottom:8px;box-shadow:0 0 16px currentColor}
+.signal-light .label{font-size:10px;color:var(--text-muted);font-weight:600;letter-spacing:0.5px}
+.signal-light.green{border-color:var(--green)}
+.signal-light.green .dot{background:var(--green);color:var(--green)}
+.signal-light.green .label{color:var(--green)}
+.signal-light.yellow{border-color:var(--yellow)}
+.signal-light.yellow .dot{background:var(--yellow);color:var(--yellow)}
+.signal-light.yellow .label{color:var(--yellow)}
+.signal-light.red{border-color:var(--red)}
+.signal-light.red .dot{background:var(--red);color:var(--red)}
+.signal-light.red .label{color:var(--red)}
+.headline-status{font-family:'Pretendard',sans-serif;font-style:normal;font-size:32px;line-height:1.2;color:var(--text);letter-spacing:-0.02em;margin-bottom:6px}
+.headline-status .accent{color:var(--primary)}
+.headline-status .accent-warn{color:var(--yellow)}
+.headline-status .accent-danger{color:var(--red)}
+.headline-meta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 16px;background:rgba(54,132,255,0.08);border:1px solid var(--glass-border);border-radius:99px;font-size:13px;font-weight:500;color:var(--primary);letter-spacing:0.3px}
+.headline-meta .num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px}
+.funnel-wrap{margin:20px 0}
+.funnel-svg{width:100%;max-width:600px;height:auto;display:block;margin:0 auto}
+.stage-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.stage-card{display:flex;align-items:center;gap:16px;padding:18px 20px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:14px;position:relative}
+.stage-card.green{background:linear-gradient(135deg,var(--green-bg),rgba(58,175,90,0.04));border-color:rgba(58,175,90,0.4)}
+.stage-card.yellow{background:linear-gradient(135deg,var(--yellow-bg),rgba(232,160,0,0.04));border-color:rgba(232,160,0,0.4)}
+.stage-card.red{background:linear-gradient(135deg,var(--red-bg),rgba(231,76,76,0.04));border-color:rgba(231,76,76,0.4)}
+.stage-card .signal-mini{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stage-card.green .signal-mini{background:var(--green);box-shadow:0 0 12px rgba(58,175,90,0.5)}
+.stage-card.yellow .signal-mini{background:var(--yellow);box-shadow:0 0 12px rgba(232,160,0,0.5)}
+.stage-card.red .signal-mini{background:var(--red);box-shadow:0 0 12px rgba(231,76,76,0.5)}
+.stage-card .signal-mini-inner{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.3)}
+.stage-card .content{flex:1;min-width:0}
+.stage-card .stage-name{font-size:11px;color:var(--text-muted);letter-spacing:1.5px;font-weight:600;margin-bottom:4px}
+.stage-card .stage-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em}
+.stage-card .stage-detail{font-size:12px;color:var(--text-soft);line-height:1.5}
+.stage-card .stage-score{flex-shrink:0;text-align:right}
+.stage-card .stage-score .pts{font-family:'Pretendard',sans-serif;font-style:normal;font-size:26px;color:var(--primary);line-height:1}
+.stage-card.green .stage-score .pts{color:var(--green)}
+.stage-card.yellow .stage-score .pts{color:var(--yellow)}
+.stage-card.red .stage-score .pts{color:var(--red)}
+.stage-card .stage-score .label{font-size:10px;color:var(--text-muted);margin-top:2px;letter-spacing:1px}
+.signals-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.signal-item{padding:14px 18px;border-radius:12px;font-size:14px;color:var(--text);border-left:3px solid;line-height:1.5}
+.signal-item.green{background:var(--green-bg);border-left-color:var(--green)}
+.signal-item.yellow{background:var(--yellow-bg);border-left-color:var(--yellow)}
+.signal-item.red{background:var(--red-bg);border-left-color:var(--red)}
+.signal-item .signal-label{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:1px;margin-right:8px}
+.signal-item.green .signal-label{background:rgba(58,175,90,0.15);color:var(--green)}
+.signal-item.yellow .signal-label{background:rgba(232,160,0,0.15);color:var(--yellow)}
+.signal-item.red .signal-label{background:rgba(231,76,76,0.15);color:var(--red)}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.consultant-text p{margin-bottom:14px}
+.consultant-text p:last-child{margin-bottom:0}
+.consultant-text strong{color:var(--primary);font-weight:600}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em;width:100%}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .question-text{font-size:17px}
+  .card{padding:26px 22px}
+  .signal-light{width:50px;height:68px}
+  .signal-light .dot{width:20px;height:20px}
+  .headline-status{font-size:26px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/sales/"/><meta name="description" content="유입·전환·재구매·이탈방지 네 단계 영업 깔때기를 신호등으로 진단해 어디서 막혔는지 확인하는 무료 영업 신호등 자가진단."/><meta property="og:title" content="영업 신호등 자가진단 — 통 TONG"/><meta property="og:description" content="유입·전환·재구매·이탈방지 네 단계 영업 깔때기를 신호등으로 진단해 어디서 막혔는지 확인하는 무료 영업 신호등 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/sales/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "영업 신호등 진단", "description": "유입부터 전환까지 영업 파이프라인 건강도를 신호등으로 점검", "url": "https://www.workstong.com/diagnosis/sales/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "영업 신호등 진단", "item": "https://www.workstong.com/diagnosis/sales/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+    <h1>영업 신호등<br><span class="accent">자가진단</span></h1>
+    <p>유입·전환·재구매·이탈 4단계 깔때기를 신호등으로 진단합니다.<br>매출의 문제는 늘 한 곳에서 시작됩니다.</p>
+  </div>
+  <div class="card popIn" id="start-card">
+    <div class="section-title">진단 안내</div>
+    <p style="font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:8px">· 총 20문항, 약 5~7분 소요 · 영업 깔때기 4단계(유입·전환·재구매·이탈) 각 5문항 · 결과: 깔때기 시각화 + 4단계 신호등 + 위기 신호 + 컨설턴트 진단 · 응답 데이터는 저장되지 않습니다</p>
+    <div class="notice-box">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      매출의 문제는 늘 한 곳에서 시작됩니다. 그 한 곳을 찾으면 회복은 그 자리에서 시작됩니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="startQuiz()">
+      진단 시작하기 →
+    </button>
+  </div>
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span id="progress-text">1 / 20</span>
+        <span id="progress-stage">유입</span>
+      </div>
+    </div>
+    <div class="card popIn" id="question-card">
+      <div class="stage-header">
+        <span class="num serif" id="stage-num">1</span>
+        <span class="name" id="stage-name">유입</span>
+        <span class="desc" id="stage-desc">신규 고객이 우리를 알게 되는 단계</span>
+      </div>
+      <div class="question-num serif" id="question-num">QUESTION 01</div>
+      <div class="question-text" id="question-text">문항을 불러오는 중...</div>
+      <div class="options" id="options-container"></div>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none">
+    <div class="card popIn" id="result-card">
+      <div class="headline-wrap">
+        <div class="headline-eyebrow">SALES FUNNEL DIAGNOSIS</div>
+        <div class="signal-bar" id="signal-bar"></div>
+        <div class="headline-status serif" id="result-status">—</div>
+        <div class="headline-meta">
+          <span>종합 점수</span>
+          <span class="num" id="result-score">0</span>
+          <span>/ 100</span>
+        </div>
+      </div>
+      <div class="section-title">영업 깔때기 — 어디서 막혔는가</div>
+      <div class="funnel-wrap">
+        <svg class="funnel-svg" id="funnel-svg" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="section-title">4단계 신호등</div>
+      <div class="stage-grid" id="stage-grid"></div>
+      <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="section-title">위기 신호 · 보완 우선순위</div>
+      <div class="signals-list" id="signals-list"></div>
+      <div class="section-title">경영전환 컨설턴트 진단</div>
+      <div class="consultant-box">
+        <div class="consultant-label">CONSULTANT'S NOTE</div>
+        <div class="consultant-text" id="consultant-text"></div>
+      </div>
+      </div><div class="cta-wrap">
+        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 영업 정밀 컨설팅 →</a>
+        <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const STAGES = [
+  { key:'inflow', num:1, name:'유입', desc:'신규 고객이 우리를 알게 되는 단계', detail:'잠재 고객 발굴, 인지도, 마케팅 채널' },
+  { key:'conversion', num:2, name:'전환', desc:'알게 된 고객이 첫 구매까지 가는 단계', detail:'문의 → 상담 → 구매 전환율' },
+  { key:'retention', num:3, name:'재구매', desc:'첫 구매 고객이 다시 구매하는 단계', detail:'재구매율, 객단가 증가, 충성 고객 비율' },
+  { key:'prevention', num:4, name:'이탈 방지', desc:'고객이 떠나는 신호를 잡고 막는 단계', detail:'이탈 사전 감지, 이탈 사유 파악, 재유치' },
+];
+const QUESTIONS = [
+  {id:1, stage:'inflow', text:'우리는 신규 잠재 고객 유입 채널을 3개 이상 운영하고 있다.', positive:true},
+  {id:2, stage:'inflow', text:'신규 고객의 70% 이상이 특정 1~2개 채널(소개·인맥 등)에 의존한다.', positive:false},
+  {id:3, stage:'inflow', text:'우리 브랜드·제품을 처음 알게 되는 경로를 데이터로 추적·분석하고 있다.', positive:true},
+  {id:4, stage:'inflow', text:'신규 잠재 고객 수가 전년 대비 증가하거나 안정적으로 유지되고 있다.', positive:true},
+  {id:5, stage:'inflow', text:'고객이 우리를 찾기보다 우리가 고객을 찾아다니는 영업 의존도가 높다.', positive:false},
+  {id:6, stage:'conversion', text:'문의나 상담이 들어왔을 때 24시간 이내 1차 응답이 이루어진다.', positive:true},
+  {id:7, stage:'conversion', text:'문의 → 상담 → 구매로 이어지는 전환율을 단계별로 측정하고 있다.', positive:true},
+  {id:8, stage:'conversion', text:'잠재 고객 중 절반 이상이 상담만 받고 구매로 이어지지 않는다.', positive:false},
+  {id:9, stage:'conversion', text:'영업 멘트·제안서·견적이 표준화되어 있어 담당자가 바뀌어도 일정한 품질이 유지된다.', positive:true},
+  {id:10, stage:'conversion', text:'가격 협상 단계에서 고객이 이탈하는 경우가 빈번하다.', positive:false},
+  {id:11, stage:'retention', text:'첫 구매 고객 중 60% 이상이 재구매 또는 재계약으로 이어진다.', positive:true},
+  {id:12, stage:'retention', text:'기존 고객의 객단가(평균 구매 금액)가 시간이 지나며 상승하는 구조가 있다.', positive:true},
+  {id:13, stage:'retention', text:'한 번 거래한 고객을 일회성으로 잃는 경우가 자주 발생한다.', positive:false},
+  {id:14, stage:'retention', text:'기존 고객을 위한 정기 커뮤니케이션·리텐션 활동이 운영되고 있다.', positive:true},
+  {id:15, stage:'retention', text:'고객 등급(VIP·일반 등)을 구분하고 차별화된 관리 체계가 있다.', positive:true},
+  {id:16, stage:'prevention', text:'고객이 이탈하기 전에 사전 신호(주문 감소·접촉 빈도 감소 등)를 감지하는 체계가 있다.', positive:true},
+  {id:17, stage:'prevention', text:'고객 이탈 사유를 정기적으로 파악하고 패턴을 분석하고 있다.', positive:true},
+  {id:18, stage:'prevention', text:'고객이 이탈한 후에야 그 사실을 인지하는 경우가 대부분이다.', positive:false},
+  {id:19, stage:'prevention', text:'이탈 위험이 감지된 고객에게 재유치 활동을 즉시 실행하는 체계가 있다.', positive:true},
+  {id:20, stage:'prevention', text:'경쟁사로 이탈한 고객의 이탈 사유를 구체적으로 알고 있다.', positive:true},
+];
+const SCALE_LABELS = [
+  {num:1, text:'전혀 그렇지 않다'},
+  {num:2, text:'그렇지 않다'},
+  {num:3, text:'보통이다'},
+  {num:4, text:'그렇다'},
+  {num:5, text:'매우 그렇다'},
+];
+let currentQ = 0;
+let answers = {};
+function startQuiz(){
+  document.getElementById('start-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  currentQ = 0; answers = {};
+  renderQuestion();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'popIn .4s cubic-bezier(.4,0,.2,1) both';
+  const stage = STAGES.find(s => s.key === q.stage);
+  document.getElementById('stage-num').textContent = stage.num;
+  document.getElementById('stage-name').textContent = stage.name;
+  document.getElementById('stage-desc').textContent = stage.desc;
+  document.getElementById('question-num').textContent = 'QUESTION ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('question-text').textContent = q.text;
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('progress-stage').textContent = stage.num + ' · ' + stage.name;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  SCALE_LABELS.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = '<span class="num">'+opt.num+'</span><span>'+opt.text+'</span>';
+    btn.onclick = () => answerQuestion(opt.num);
+    container.appendChild(btn);
+  });
+}
+function answerQuestion(value){
+  if(currentQ >= QUESTIONS.length) return;
+  const q = QUESTIONS[currentQ];
+  if(!q) return;
+  answers[q.id] = value;
+  currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.querySelectorAll('#options-container .option').forEach(b => {
+      b.style.pointerEvents = 'none'; b.style.opacity = '0.5';
+    });
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 300);
+  } else {
+    renderQuestion();
+  }
+}
+function computeStageScore(stageKey){
+  const qs = QUESTIONS.filter(q => q.stage === stageKey);
+  let total = 0;
+  qs.forEach(q => {
+    const v = answers[q.id] || 3;
+    total += q.positive ? v : (6 - v);
+  });
+  return Math.round(((total - qs.length) / (qs.length * 4)) * 100);
+}
+function getSignal(score){
+  if(score >= 70) return 'green';
+  if(score >= 40) return 'yellow';
+  return 'red';
+}
+function getSignalLabel(signal){
+  return signal === 'green' ? '정상' : signal === 'yellow' ? '점검' : '긴급';
+}
+function computeResult(){
+  const scores = {};
+  const signals = {};
+  STAGES.forEach(s => {
+    scores[s.key] = computeStageScore(s.key);
+    signals[s.key] = getSignal(scores[s.key]);
+  });
+  const overall = Math.round((scores.inflow + scores.conversion + scores.retention + scores.prevention) / 4);
+  const reds = STAGES.filter(s => signals[s.key] === 'red');
+  const yellows = STAGES.filter(s => signals[s.key] === 'yellow');
+  const greens = STAGES.filter(s => signals[s.key] === 'green');
+  let headline = '';
+  if(reds.length === 0 && yellows.length === 0){
+    headline = `4단계 모두 <span class="accent">정상 작동</span>`;
+  } else if(reds.length >= 2){
+    headline = `<span class="accent-danger">${reds.length}개 단계 긴급 조치</span> 필요`;
+  } else if(reds.length === 1){
+    headline = `<span class="accent-danger">${reds[0].name} 단계 긴급</span>`;
+  } else if(yellows.length >= 2){
+    headline = `<span class="accent-warn">${yellows.length}개 단계 점검</span> 필요`;
+  } else {
+    headline = `<span class="accent-warn">${yellows[0].name} 단계 점검</span> 필요`;
+  }
+  return {scores, signals, overall, headline, reds, yellows, greens};
+}
+function drawFunnel(scores, signals){
+  const svg = document.getElementById('funnel-svg');
+  const cx = 300;
+  const startY = 30;
+  const layerHeight = 90;
+  const widths = [380, 310, 240, 170, 120];
+  let html = '';
+  const colorMap = {
+    green: {fill:'#3aaf5a', light:'rgba(58,175,90,0.85)'},
+    yellow: {fill:'#e8a000', light:'rgba(232,160,0,0.85)'},
+    red: {fill:'#e74c4c', light:'rgba(231,76,76,0.85)'},
+  };
+  html += `<defs>`;
+  ['green','yellow','red'].forEach(c => {
+    html += `<linearGradient id="grad-${c}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${colorMap[c].fill}" stop-opacity="0.65"/><stop offset="100%" stop-color="${colorMap[c].fill}" stop-opacity="0.85"/></linearGradient>`;
+  });
+  html += `</defs>`;
+  STAGES.forEach((stage, i) => {
+    const yTop = startY + i * layerHeight;
+    const yBottom = startY + (i + 1) * layerHeight;
+    const wTop = widths[i];
+    const wBottom = widths[i + 1];
+    const xTL = cx - wTop / 2;
+    const xTR = cx + wTop / 2;
+    const xBL = cx - wBottom / 2;
+    const xBR = cx + wBottom / 2;
+    const signal = signals[stage.key];
+    const fill = `url(#grad-${signal})`;
+    const strokeColor = colorMap[signal].fill;
+    const path = `M ${xTL} ${yTop} L ${xTR} ${yTop} L ${xBR} ${yBottom} L ${xBL} ${yBottom} Z`;
+    html += `<path d="${path}" fill="${fill}" stroke="${strokeColor}" stroke-width="1.5"/>`;
+    const yMid = (yTop + yBottom) / 2;
+    const numX = 60;
+    html += `<circle cx="${numX}" cy="${yMid}" r="18" fill="#fff" stroke="${strokeColor}" stroke-width="2.5"/>`;
+    html += `<text x="${numX}" y="${yMid + 5}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="18" fill="${strokeColor}" font-weight="bold">${stage.num}</text>`;
+    html += `<text x="${cx}" y="${yMid - 10}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="22" fill="#fff" font-weight="bold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.2)">${stage.name}</text>`;
+    html += `<text x="${cx}" y="${yMid + 16}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="20" fill="#fff" font-weight="bold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.2)">${scores[stage.key]}점</text>`;
+    const signalX = 540;
+    const signalRadius = 14;
+    html += `<circle cx="${signalX}" cy="${yMid}" r="${signalRadius}" fill="${strokeColor}" style="filter: drop-shadow(0 0 8px ${strokeColor}88)"/>`;
+    html += `<text x="${signalX}" y="${yMid + signalRadius + 14}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="${strokeColor}" font-weight="600">${getSignalLabel(signal)}</text>`;
+  });
+  html += `<text x="${cx}" y="455" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#8a96ac">위에서 아래로 좁아지는 깔때기 — 어느 단계에서 가장 많이 새는가</text>`;
+  svg.innerHTML = html;
+}
+function drawSignalBar(signals){
+  const bar = document.getElementById('signal-bar');
+  bar.innerHTML = STAGES.map(stage => {
+    const signal = signals[stage.key];
+    return `<div class="signal-light ${signal}">
+      <div class="dot"></div>
+      <div class="label">${stage.name}</div>
+    </div>`;
+  }).join('');
+}
+function drawStageCards(scores, signals){
+  const grid = document.getElementById('stage-grid');
+  grid.innerHTML = STAGES.map(stage => {
+    const signal = signals[stage.key];
+    const score = scores[stage.key];
+    return `<div class="stage-card ${signal}">
+      <div class="signal-mini">
+        <div class="signal-mini-inner"></div>
+      </div>
+      <div class="content">
+        <div class="stage-name">STAGE ${stage.num} · ${getSignalLabel(signal).toUpperCase()}</div>
+        <div class="stage-title">${stage.name}</div>
+        <div class="stage-detail">${stage.detail}</div>
+      </div>
+      <div class="stage-score">
+        <div class="pts">${score}</div>
+        <div class="label">/ 100</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function detectSignals(scores, signals, result){
+  const signalsList = [];
+  result.reds.forEach(stage => {
+    let text = '';
+    if(stage.key === 'inflow'){
+      text = `유입 단계가 ${scores[stage.key]}점으로 긴급 상태입니다. 신규 고객이 들어오지 않으면 4단계 깔때기 전체가 작동하지 않습니다. 채널 다변화와 신규 유입 활동이 즉시 시작되어야 합니다.`;
+    } else if(stage.key === 'conversion'){
+      text = `전환 단계가 ${scores[stage.key]}점으로 긴급 상태입니다. 잠재 고객은 들어오는데 구매로 이어지지 않는 상황입니다. 영업 멘트·제안서·견적 표준화와 응답 속도 점검이 시급합니다.`;
+    } else if(stage.key === 'retention'){
+      text = `재구매 단계가 ${scores[stage.key]}점으로 긴급 상태입니다. 한 번 산 고객을 잃고 있다는 의미로, 신규 유입 비용만 계속 발생하는 가장 비효율적인 구조입니다. 기존 고객 관리 체계를 즉시 만들어야 합니다.`;
+    } else if(stage.key === 'prevention'){
+      text = `이탈 방지 단계가 ${scores[stage.key]}점으로 긴급 상태입니다. 고객이 이미 떠난 후에야 인지하는 상태로, 매월 새는 매출이 누적되고 있습니다. 이탈 사전 감지 체계 구축이 시급합니다.`;
+    }
+    signalsList.push({level:'red', label:`긴급 · ${stage.name}`, text});
+  });
+  result.yellows.forEach(stage => {
+    let text = '';
+    if(stage.key === 'inflow'){
+      text = `유입 단계가 ${scores[stage.key]}점으로 점검이 필요합니다. 작동은 하지만 채널 의존도가 높거나 신규 유입이 제자리걸음일 수 있습니다.`;
+    } else if(stage.key === 'conversion'){
+      text = `전환 단계가 ${scores[stage.key]}점으로 점검이 필요합니다. 절반 가까운 잠재 고객을 잃고 있을 가능성이 있습니다. 어느 지점에서 이탈하는지 구간별 점검이 필요합니다.`;
+    } else if(stage.key === 'retention'){
+      text = `재구매 단계가 ${scores[stage.key]}점으로 점검이 필요합니다. 재구매율이 충성 고객 비율 60%에 못 미치는 상태로, 객단가 증가 구조나 정기 커뮤니케이션 점검이 필요합니다.`;
+    } else if(stage.key === 'prevention'){
+      text = `이탈 방지 단계가 ${scores[stage.key]}점으로 점검이 필요합니다. 이탈 사유 분석과 사전 감지 체계 일부가 작동하지 않을 수 있습니다.`;
+    }
+    signalsList.push({level:'yellow', label:`점검 · ${stage.name}`, text});
+  });
+  if(signalsList.length === 0){
+    signalsList.push({
+      level:'green',
+      label:'정상 · 4단계 모두',
+      text:`4단계 신호등 모두 정상입니다. 종합 점수 ${result.overall}점으로 영업 깔때기가 건강하게 작동하고 있습니다. 다만 가장 점수가 높은 시기에 다음 사이클의 BX Point를 미리 설계하시기 바랍니다.`,
+    });
+  }
+  return signalsList;
+}
+function generateConsultantNote(scores, signals, result){
+  const overall = result.overall;
+  const reds = result.reds;
+  const yellows = result.yellows;
+  const greens = result.greens;
+  let paragraphs = [];
+  let p1 = '';
+  if(reds.length === 0 && yellows.length === 0){
+    p1 = `귀사의 영업 깔때기 4단계가 모두 정상 신호로 작동하고 있습니다. 종합 점수 <strong>${overall}점</strong>으로, 유입부터 이탈 방지까지 흐름이 건강합니다. <strong>다만 「경영전환론」 20장의 경고대로, "가장 좋은 시기일수록 다음 균열이 시작된다"</strong>는 점을 잊지 마시기 바랍니다. 현재의 작동을 유지하기 위한 정기 점검 체계를 갖추는 것이 다음 과제입니다.`;
+  } else if(reds.length >= 2){
+    const redNames = reds.map(s => s.name).join(', ');
+    p1 = `귀사의 영업 깔때기에서 <strong>${redNames} 단계가 긴급 상태</strong>입니다. 종합 점수 ${overall}점이며, 두 개 이상의 단계가 동시에 빨간 신호라는 것은 영업 시스템 전반의 재설계가 필요하다는 의미입니다. <strong>「경영전환론」의 표현으로 "한 단계의 막힘은 다음 단계의 막힘을 부른다"</strong>는 원칙대로, 위에서 아래로 순서대로 풀어가야 합니다.`;
+  } else if(reds.length === 1){
+    p1 = `귀사의 영업 깔때기에서 <strong>${reds[0].name} 단계가 긴급 상태</strong>입니다. 종합 점수 ${overall}점이지만, 한 단계의 빨간 신호는 깔때기 전체의 작동을 무력화시킵니다. <strong>「경영전환론」의 원칙대로, 가장 빨간 단계 한 곳에 자원을 집중</strong>하는 것이 회복의 출발점입니다. 다른 단계는 지금 건드리지 마시기 바랍니다.`;
+  } else if(yellows.length >= 2){
+    const yellowNames = yellows.map(s => s.name).join(', ');
+    p1 = `귀사의 영업 깔때기에서 <strong>${yellowNames} 단계에 점검 신호</strong>가 들어왔습니다. 종합 점수 ${overall}점으로 작동은 하고 있지만, 두 단계 이상의 노란 신호는 6개월 안에 빨간 신호로 바뀔 가능성이 큽니다. <strong>지금이 가장 적은 비용으로 정비할 수 있는 시점</strong>입니다.`;
+  } else {
+    p1 = `귀사의 영업 깔때기에서 <strong>${yellows[0].name} 단계에 점검 신호</strong>가 들어왔습니다. 종합 점수 ${overall}점으로 전반적으로 양호하지만, 한 단계의 정체가 다른 단계로 번지기 전에 정비하는 것이 효율적입니다. 「경영전환론」의 표현으로 "노란 신호를 빨간 신호로 키우는 것은 결국 시간"입니다.`;
+  }
+  paragraphs.push(p1);
+  let p2 = '';
+  let worstStage = STAGES[0];
+  let worstScore = 100;
+  STAGES.forEach(s => {
+    if(scores[s.key] < worstScore){
+      worstScore = scores[s.key];
+      worstStage = s;
+    }
+  });
+  if(worstStage.key === 'inflow'){
+    p2 = `<strong>가장 약한 곳은 유입 단계</strong>입니다(${worstScore}점). 영업 깔때기에서 유입은 모든 흐름의 출발점이며, 이 단계가 막히면 아래의 모든 단계가 작동해도 매출은 정체됩니다. <strong>「경영전환론」의 표현으로 "신규 유입이 멈춘 조직은 살아있는 죽은 조직"</strong>입니다. 채널 다변화·신규 마케팅 활동·고객 발굴 체계가 즉시 가동되어야 합니다.`;
+  } else if(worstStage.key === 'conversion'){
+    p2 = `<strong>가장 약한 곳은 전환 단계</strong>입니다(${worstScore}점). 유입은 되지만 구매로 이어지지 않는 상태로, 영업의 가장 비싼 비효율입니다. 마케팅 비용은 발생하는데 매출은 만들어지지 않는 구조이기 때문입니다. <strong>「경영전환론」의 원칙대로, 이 단계의 회복은 응답 속도·표준화·가격 정책 세 가지 점검</strong>으로 시작합니다. 영업 멘트와 제안서를 표준화하면 전환율은 대부분 30~50% 향상됩니다.`;
+  } else if(worstStage.key === 'retention'){
+    p2 = `<strong>가장 약한 곳은 재구매 단계</strong>입니다(${worstScore}점). 한 번 산 고객을 잃고 있다는 것은 영업의 가장 큰 누수입니다. 신규 유입에 들어가는 비용은 재구매 유도 비용의 5~7배입니다. <strong>「경영전환론」의 표현으로 "기존 고객을 잃으면서 신규를 늘리는 것은 구멍 난 양동이에 물을 붓는 것"</strong>입니다. 정기 커뮤니케이션·고객 등급 관리·VIP 체계 구축이 출발점입니다.`;
+  } else {
+    p2 = `<strong>가장 약한 곳은 이탈 방지 단계</strong>입니다(${worstScore}점). 고객이 떠난 후에야 인지하는 상태로, 매월 보이지 않게 새는 매출이 누적됩니다. <strong>「경영전환론」의 표현으로 "이탈은 갑자기 일어나지 않는다, 이탈은 신호 후에 일어난다"</strong>입니다. 주문 빈도 감소·접촉 빈도 감소·결제 지연 같은 사전 신호를 데이터로 잡는 체계 구축이 우선입니다.`;
+  }
+  paragraphs.push(p2);
+  let p3 = '';
+  let bestStage = STAGES[0];
+  let bestScore = 0;
+  STAGES.forEach(s => {
+    if(scores[s.key] > bestScore){
+      bestScore = scores[s.key];
+      bestStage = s;
+    }
+  });
+  const gap = bestScore - worstScore;
+  if(gap >= 40){
+    p3 = `<strong>${bestStage.name} 단계는 ${bestScore}점으로 강하지만, ${worstStage.name} 단계는 ${worstScore}점으로 약합니다.</strong> 두 단계의 격차가 ${gap}점으로 크게 벌어진 불균형 깔때기입니다. 이런 패턴은 영업 시스템이 한 단계에만 최적화되어 있다는 신호입니다. 「경영전환론」의 원칙대로, 강한 단계는 그대로 두고 약한 단계의 정비에만 집중하셔야 합니다. <strong>강한 곳을 더 강하게 만들어도 약한 단계 때문에 깔때기 전체 매출은 늘지 않습니다.</strong>`;
+  } else if(reds.length === 0 && yellows.length === 0){
+    p3 = `4단계 모두 70점 이상으로 균형 잡힌 깔때기를 가지고 있습니다. <strong>이 상태에서는 매출 확장보다 깔때기 자체의 효율성을 한 단계 끌어올리는 작업이 효과적입니다.</strong> 예를 들어 신규 유입 채널 1개를 추가하거나, 객단가를 20% 인상하거나, 재구매 주기를 6개월에서 4개월로 단축하는 식의 시스템 고도화입니다.`;
+  } else {
+    p3 = `4단계 점수가 비교적 비슷한 수준에서 ${reds.length + yellows.length}개 단계에 신호가 들어왔습니다. <strong>「경영전환론」의 원칙대로, 깔때기는 위에서 아래로 흐르는 구조이므로 가장 위 단계부터 정비하는 것이 정석</strong>입니다. 유입이 막혀 있는데 재구매를 보강해도 회복되지 않습니다. 신호가 들어온 단계 중 가장 위쪽부터 손대시기 바랍니다.`;
+  }
+  paragraphs.push(p3);
+  let p4 = '';
+  if(reds.length >= 1){
+    p4 = `<strong>긴급 신호가 들어온 영업 깔때기에 가장 비싼 선택은 "조금 더 지켜보자"는 결정입니다.</strong> 매주 새는 매출이 누적되며, 한 달이 지나면 회복 비용이 두 배가 됩니다. ${worstStage.name} 단계의 정비가 출발점이며, 이 작업은 외부 시각의 도움 없이 내부에서 시작하기 어렵습니다. 30분 무료 영업 정밀 컨설팅을 통해 단계별 회복 경로를 함께 설계하시기 바랍니다.`;
+  } else if(yellows.length >= 1){
+    p4 = `<strong>먼저 움직일 단계는 정해졌으니, 미루지 않는 것이 가장 중요합니다.</strong> ${worstStage.name} 단계의 정비가 출발점이며, 이 시기를 놓치면 다음 진단 때는 빨간 신호로 바뀌어 있을 가능성이 큽니다. 30분 무료 영업 정밀 컨설팅을 통해 어느 지점부터 손댈지 함께 점검하시기 바랍니다.`;
+  } else {
+    p4 = `<strong>지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다.</strong> 4단계 모두 정상 신호일 때가 깔때기 자체를 한 단계 끌어올리기 가장 좋은 시점입니다. 정밀 영업 컨설팅을 통해 깔때기 효율 20~30% 향상을 위한 다음 작업을 함께 설계하시기 바랍니다.`;
+  }
+  paragraphs.push(p4);
+  return paragraphs.map(p => '<p>' + p + '</p>').join('');
+}
+function showResult(){
+  const result = computeResult();
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('result-status').innerHTML = result.headline;
+  document.getElementById('result-score').textContent = result.overall;
+  drawSignalBar(result.signals);
+  drawFunnel(result.scores, result.signals);
+  drawStageCards(result.scores, result.signals);
+  const signalsList = detectSignals(result.scores, result.signals, result);
+  document.getElementById('signals-list').innerHTML = signalsList.map(s => 
+    `<div class="signal-item ${s.level}">
+      <span class="signal-label">${s.label}</span>${s.text}
+    </div>`
+  ).join('');
+  document.getElementById('consultant-text').innerHTML = generateConsultantNote(result.scores, result.signals, result);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('start-card').style.display = 'block';
+  answers = {}; currentQ = 0;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

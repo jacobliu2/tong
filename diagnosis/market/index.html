@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시장 경쟁력 자가진단 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+  --warn:#ff8c5a;
+  --danger:#e74c4c;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.progress-wrap{position:sticky;top:12px;z-index:20;margin:24px 0 28px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden;backdrop-filter:blur(8px)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.area-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.area-header .num{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:16px;font-weight:bold;flex-shrink:0}
+.area-header .name{font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.01em}
+.area-header .desc{flex:1;font-size:11px;color:var(--text-muted);letter-spacing:0.3px}
+.question-num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:13px;color:var(--primary);letter-spacing:1px;margin-bottom:10px}
+.question-text{font-size:18px;line-height:1.55;font-weight:500;color:var(--text);margin-bottom:24px;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{width:100%;padding:14px 18px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:14px}
+.option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.option:active{transform:translateY(0)}
+.option .num{width:28px;height:28px;border-radius:8px;background:rgba(54,132,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--primary);flex-shrink:0;transition:all .25s}
+.option:hover .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.headline-wrap{text-align:center;margin-bottom:32px}
+.headline-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.headline-status{font-family:'Pretendard',sans-serif;font-style:normal;font-size:36px;line-height:1.2;color:var(--text);letter-spacing:-0.02em;margin-bottom:8px}
+.headline-status .accent{color:var(--primary)}
+.headline-status .accent-warn{color:var(--warn)}
+.headline-status .accent-danger{color:var(--danger)}
+.headline-meta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 16px;background:rgba(54,132,255,0.08);border:1px solid var(--glass-border);border-radius:99px;font-size:13px;font-weight:500;color:var(--primary);letter-spacing:0.3px}
+.headline-meta .num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px}
+.matrix-wrap{margin:20px 0;display:flex;justify-content:center}
+.matrix-svg{width:100%;max-width:480px;height:auto}
+.quadrant-box{padding:22px 22px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:14px}
+.quadrant-name{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px;color:var(--primary);margin-bottom:6px;letter-spacing:-0.01em}
+.quadrant-name .ko{font-size:14px;color:var(--text);margin-left:8px}
+.quadrant-desc{font-size:14px;color:var(--text);line-height:1.7;letter-spacing:-0.01em}
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.area-cell{text-align:center;padding:14px 8px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:12px}
+.area-cell.strong{background:linear-gradient(135deg,rgba(54,132,255,0.10),rgba(107,163,255,0.06));border-color:var(--primary)}
+.area-cell .name{font-size:11px;color:var(--text);font-weight:600;letter-spacing:-0.01em;margin-bottom:6px}
+.area-cell.strong .name{color:var(--primary)}
+.area-cell .score{font-family:'Pretendard',sans-serif;font-style:normal;font-size:22px;color:var(--text);line-height:1;margin-bottom:2px}
+.area-cell.strong .score{color:var(--primary)}
+.area-cell .unit{font-size:10px;color:var(--text-muted);font-weight:500}
+.radar-wrap{display:flex;justify-content:center;margin:16px 0}
+.radar-svg{width:100%;max-width:340px;height:auto}
+.signals-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.signal-item{padding:14px 18px;border-radius:12px;font-size:14px;color:var(--text);border-left:3px solid;line-height:1.5}
+.signal-item.good{background:rgba(54,132,255,0.06);border-left-color:var(--primary)}
+.signal-item.warn{background:rgba(255,140,90,0.06);border-left-color:var(--warn)}
+.signal-item.danger{background:rgba(231,76,76,0.06);border-left-color:var(--danger)}
+.signal-item .signal-label{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:1px;margin-right:8px}
+.signal-item.good .signal-label{background:rgba(54,132,255,0.15);color:var(--primary)}
+.signal-item.warn .signal-label{background:rgba(255,140,90,0.15);color:var(--warn)}
+.signal-item.danger .signal-label{background:rgba(231,76,76,0.15);color:var(--danger)}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.consultant-text p{margin-bottom:14px}
+.consultant-text p:last-child{margin-bottom:0}
+.consultant-text strong{color:var(--primary);font-weight:600}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em;width:100%}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .question-text{font-size:17px}
+  .card{padding:26px 22px}
+  .headline-status{font-size:28px}
+  .area-grid{grid-template-columns:repeat(2,1fr)}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/market/"/><meta name="description" content="차별성·시장적합도·경쟁위치·제품진화 네 영역으로 PMF 매트릭스 상 우리 회사의 시장 위치를 확인하는 무료 시장경쟁력 자가진단."/><meta property="og:title" content="시장경쟁력 자가진단 — 통 TONG"/><meta property="og:description" content="차별성·시장적합도·경쟁위치·제품진화 네 영역으로 PMF 매트릭스 상 우리 회사의 시장 위치를 확인하는 무료 시장경쟁력 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/market/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "시장경쟁력 진단", "description": "차별성·시장적합도·경쟁위치·제품진화로 시장 내 위치를 진단", "url": "https://www.workstong.com/diagnosis/market/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "시장경쟁력 진단", "item": "https://www.workstong.com/diagnosis/market/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+    <h1>시장 경쟁력<br><span class="accent">자가진단</span></h1>
+    <p>차별성·시장 적합도·경쟁 위치·제품 진화 4영역으로 지금 우리가 파는 것이 시장에서 살아있는지 측정합니다.</p>
+  </div>
+  <div class="card popIn" id="start-card">
+    <div class="section-title">진단 안내</div>
+    <p style="font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:8px">· 총 20문항, 약 5~7분 소요 · 4영역(차별성·시장 적합도·경쟁 위치·제품 진화) 각 5문항 · 결과: PMF 매트릭스 + 4영역 점수 + 위기 신호 + 컨설턴트 진단 · 응답 데이터는 저장되지 않습니다</p>
+    <div class="notice-box">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      매출의 본질은 늘 시장 위치에서 결정됩니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="startQuiz()">
+      진단 시작하기 →
+    </button>
+  </div>
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span id="progress-text">1 / 20</span>
+        <span id="progress-area">차별성</span>
+      </div>
+    </div>
+    <div class="card popIn" id="question-card">
+      <div class="area-header">
+        <span class="num serif" id="area-num">1</span>
+        <span class="name" id="area-name">차별성</span>
+        <span class="desc" id="area-desc">우리만의 USP가 명확한가</span>
+      </div>
+      <div class="question-num serif" id="question-num">QUESTION 01</div>
+      <div class="question-text" id="question-text">문항을 불러오는 중...</div>
+      <div class="options" id="options-container"></div>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none">
+    <div class="card popIn" id="result-card">
+      <div class="headline-wrap">
+        <div class="headline-eyebrow">MARKET COMPETITIVENESS</div>
+        <div class="headline-status serif" id="result-status">—</div>
+        <div class="headline-meta">
+          <span>종합 점수</span>
+          <span class="num" id="result-score">0</span>
+          <span>/ 100</span>
+        </div>
+      </div>
+      <div class="section-title">PMF 매트릭스 — 우리 위치</div>
+      <div class="matrix-wrap">
+        <svg class="matrix-svg" id="matrix-svg" viewBox="0 0 480 500" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="quadrant-box">
+        <div class="quadrant-name serif" id="quadrant-name">— <span class="ko">—</span></div>
+        <div class="quadrant-desc" id="quadrant-desc">—</div>
+      </div>
+      <div class="section-title">4영역 점수</div>
+      <div class="area-grid" id="area-grid"></div>
+      <div class="radar-wrap">
+        <svg class="radar-svg" id="radar-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="section-title">위기 신호 · 보완 우선순위</div>
+      <div class="signals-list" id="signals-list"></div>
+      <div class="section-title">경영전환 컨설턴트 진단</div>
+      <div class="consultant-box">
+        <div class="consultant-label">CONSULTANT'S NOTE</div>
+        <div class="consultant-text" id="consultant-text"></div>
+      </div>
+      </div><div class="cta-wrap">
+        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 시장 전략 컨설팅 →</a>
+        <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const AREAS = [
+  { key:'unique', num:1, name:'차별성', desc:'우리만의 USP가 명확한가', en:'UNIQUENESS' },
+  { key:'fit', num:2, name:'시장 적합도', desc:'시장이 우리를 정말 원하는가', en:'PMF' },
+  { key:'position', num:3, name:'경쟁 위치', desc:'경쟁사 대비 우리의 위치', en:'POSITION' },
+  { key:'evolution', num:4, name:'제품 진화', desc:'시장 변화에 맞춰 진화하는가', en:'EVOLUTION' },
+];
+const QUESTIONS = [
+  {id:1, area:'unique', text:'우리 제품·서비스를 고객이 선택하는 이유를 한 문장으로 명확하게 설명할 수 있다.', positive:true},
+  {id:2, area:'unique', text:'경쟁사가 쉽게 따라할 수 없는 우리만의 강점이 있다.', positive:true},
+  {id:3, area:'unique', text:'고객들에게 "왜 우리를 택했는가" 물어보면 답이 제각각이거나 답하지 못한다.', positive:false},
+  {id:4, area:'unique', text:'우리의 차별점은 가격이 아닌 가치(품질·전문성·관계 등)에서 나온다.', positive:true},
+  {id:5, area:'unique', text:'동종업계에서 우리만이 제공할 수 있는 무언가(노하우·기술·고객층 등)가 있다.', positive:true},
+  {id:6, area:'fit', text:'기존 고객 중 60% 이상이 재구매·재계약으로 이어진다.', positive:true},
+  {id:7, area:'fit', text:'고객이 우리 제품·서비스를 다른 사람에게 자발적으로 추천하는 경우가 있다.', positive:true},
+  {id:8, area:'fit', text:'시장의 진짜 수요를 잘 모르고 일단 만들어 파는 식의 영업을 하고 있다.', positive:false},
+  {id:9, area:'fit', text:'우리 타겟 고객이 누구인지 구체적으로(연령·업종·규모 등) 정의되어 있다.', positive:true},
+  {id:10, area:'fit', text:'고객이 우리 제품을 "필요한 것"으로 인식하지 않고 "있으면 좋은 것"으로 인식한다.', positive:false},
+  {id:11, area:'position', text:'주요 경쟁사 3곳을 알고 있고 그들 대비 우리의 강점·약점을 명확히 파악하고 있다.', positive:true},
+  {id:12, area:'position', text:'우리 시장 내 점유율 또는 위치(상위·중위·하위)를 객관적으로 파악하고 있다.', positive:true},
+  {id:13, area:'position', text:'가격 경쟁이 시작되면 쉽게 밀리며 가격을 올릴 협상력이 부족하다.', positive:false},
+  {id:14, area:'position', text:'우리만 노릴 수 있는 틈새 시장 또는 차별화된 포지션을 확보하고 있다.', positive:true},
+  {id:15, area:'position', text:'신규 진입자(스타트업·해외 기업 등)에 의한 시장 잠식 위협을 인식하고 대응하고 있다.', positive:true},
+  {id:16, area:'evolution', text:'시장과 기술 변화에 맞춰 제품·서비스를 정기적으로 업데이트하고 있다.', positive:true},
+  {id:17, area:'evolution', text:'고객 피드백을 정기적으로 수집하며 제품·서비스 개선에 반영하고 있다.', positive:true},
+  {id:18, area:'evolution', text:'주력 제품의 수명주기가 성숙·쇠퇴 단계인데 차세대 제품 준비가 미흡하다.', positive:false},
+  {id:19, area:'evolution', text:'신제품 또는 신서비스 출시 주기가 동종업계 평균 이상으로 빠르거나 비슷하다.', positive:true},
+  {id:20, area:'evolution', text:'5년 후 우리 회사가 무엇을 팔고 있을지 구체적인 그림이 있다.', positive:true},
+];
+const SCALE_LABELS = [
+  {num:1, text:'전혀 그렇지 않다'},
+  {num:2, text:'그렇지 않다'},
+  {num:3, text:'보통이다'},
+  {num:4, text:'그렇다'},
+  {num:5, text:'매우 그렇다'},
+];
+const QUADRANTS = {
+  Q1:{
+    name:'Market Leader',
+    ko:'시장 선도형',
+    desc:'우리만의 차별점이 명확하고 시장도 우리를 원합니다. 「경영전환론」의 표현으로 "이미 통하고 있는" 위치이며, 가장 좋은 시기일수록 다음 BX Point를 미리 설계해야 합니다. 확장보다 다음 사이클의 자각이 우선되는 시점입니다.',
+  },
+  Q2:{
+    name:'Hidden Asset',
+    ko:'숨은 자산형',
+    desc:'우리만의 차별점은 분명한데 시장이 아직 그 가치를 충분히 알지 못하는 상태입니다. 「경영전환론」의 표현으로 "보석을 묻어두고 있는" 상태이며, 핵심 과제는 마케팅과 영업이 아니라 "이 차별점이 누구의 어떤 문제를 해결하는가"를 다시 정의하는 일입니다.',
+  },
+  Q3:{
+    name:'Commodity Trap',
+    ko:'커머디티 함정',
+    desc:'시장에서는 잘 팔리지만 우리만의 차별점이 약합니다. 가격 경쟁에 끌려갈 위험이 가장 큰 위치이며, 신규 진입자나 더 큰 자본이 들어오면 빠르게 잠식됩니다. 「경영전환론」의 경고대로, "잘 팔리는 시기에 차별점을 만드는 것"이 다음 단계의 출발점입니다.',
+  },
+  Q4:{
+    name:'Reset Required',
+    ko:'재설정 필요',
+    desc:'차별점도 약하고 시장 적합도도 약한 상태입니다. 마케팅 강화나 영업 확대로 풀리지 않는 위치이며, "지금 우리가 파는 것이 시장이 진짜 원하는 것인가"라는 근본 질문부터 다시 시작해야 합니다. 「경영전환론」의 표현으로 "사업 모델 자체의 BX Point"가 임박한 상태입니다.',
+  },
+};
+let currentQ = 0;
+let answers = {};
+function startQuiz(){
+  document.getElementById('start-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  currentQ = 0; answers = {};
+  renderQuestion();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'popIn .4s cubic-bezier(.4,0,.2,1) both';
+  const area = AREAS.find(a => a.key === q.area);
+  document.getElementById('area-num').textContent = area.num;
+  document.getElementById('area-name').textContent = area.name;
+  document.getElementById('area-desc').textContent = area.desc;
+  document.getElementById('question-num').textContent = 'QUESTION ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('question-text').textContent = q.text;
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('progress-area').textContent = area.num + ' · ' + area.name;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  SCALE_LABELS.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = '<span class="num">'+opt.num+'</span><span>'+opt.text+'</span>';
+    btn.onclick = () => answerQuestion(opt.num);
+    container.appendChild(btn);
+  });
+}
+function answerQuestion(value){
+  if(currentQ >= QUESTIONS.length) return;
+  const q = QUESTIONS[currentQ];
+  if(!q) return;
+  answers[q.id] = value;
+  currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.querySelectorAll('#options-container .option').forEach(b => {
+      b.style.pointerEvents = 'none'; b.style.opacity = '0.5';
+    });
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 300);
+  } else {
+    renderQuestion();
+  }
+}
+function computeAreaScore(areaKey){
+  const qs = QUESTIONS.filter(q => q.area === areaKey);
+  let total = 0;
+  qs.forEach(q => {
+    const v = answers[q.id] || 3;
+    total += q.positive ? v : (6 - v);
+  });
+  return Math.round(((total - qs.length) / (qs.length * 4)) * 100);
+}
+function computeResult(){
+  const scores = {};
+  AREAS.forEach(a => { scores[a.key] = computeAreaScore(a.key); });
+  const overall = Math.round((scores.unique + scores.fit + scores.position + scores.evolution) / 4);
+  const xAxis = scores.unique;
+  const yAxis = scores.fit;
+  let quadrant;
+  if(xAxis >= 50 && yAxis >= 50) quadrant = 'Q1';
+  else if(xAxis >= 50 && yAxis < 50) quadrant = 'Q2';
+  else if(xAxis < 50 && yAxis >= 50) quadrant = 'Q3';
+  else quadrant = 'Q4';
+  let status;
+  if(overall >= 75) status = {grade:'good', label:'시장 강세', accent:''};
+  else if(overall >= 55) status = {grade:'normal', label:'시장 우위', accent:''};
+  else if(overall >= 35) status = {grade:'warn', label:'시장 정체', accent:'accent-warn'};
+  else status = {grade:'danger', label:'시장 위기', accent:'accent-danger'};
+  return {scores, overall, quadrant, status};
+}
+function drawMatrix(scores, quadrantKey){
+  const svg = document.getElementById('matrix-svg');
+  const ox = 80, oy = 420;
+  const W = 360, H = 360;
+  const cx = ox + W/2;
+  const cy = oy - H/2;
+  let html = '';
+  html += `<defs>
+    <linearGradient id="q1Grad" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3684FF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="q2Grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3684FF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#3684FF" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="q3Grad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ff8c5a" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="q4Grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e74c4c" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#e74c4c" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>`;
+  html += `<rect x="${cx}" y="${oy-H}" width="${W/2}" height="${H/2}" fill="url(#q1Grad)" stroke="rgba(54,132,255,0.15)" stroke-width="1"/>`;
+  html += `<rect x="${cx}" y="${cy}" width="${W/2}" height="${H/2}" fill="url(#q2Grad)" stroke="rgba(54,132,255,0.15)" stroke-width="1"/>`;
+  html += `<rect x="${ox}" y="${oy-H}" width="${W/2}" height="${H/2}" fill="url(#q3Grad)" stroke="rgba(54,132,255,0.15)" stroke-width="1"/>`;
+  html += `<rect x="${ox}" y="${cy}" width="${W/2}" height="${H/2}" fill="url(#q4Grad)" stroke="rgba(54,132,255,0.15)" stroke-width="1"/>`;
+  const labels = [
+    {q:'Q1', name:'Market Leader', ko:'시장 선도형', x: cx + W/4, y: oy - H + 30},
+    {q:'Q2', name:'Hidden Asset', ko:'숨은 자산형', x: cx + W/4, y: cy + 30},
+    {q:'Q3', name:'Commodity Trap', ko:'커머디티 함정', x: ox + W/4, y: oy - H + 30},
+    {q:'Q4', name:'Reset Required', ko:'재설정 필요', x: ox + W/4, y: cy + 30},
+  ];
+  labels.forEach(lab => {
+    const isMine = lab.q === quadrantKey;
+    const fill = isMine ? '#3684FF' : '#8a96ac';
+    const weight = isMine ? 'bold' : '500';
+    html += `<text x="${lab.x}" y="${lab.y}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="${isMine ? 13 : 12}" fill="${fill}" font-weight="${weight}">${lab.name}</text>`;
+    html += `<text x="${lab.x}" y="${lab.y + 16}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="${isMine ? 11 : 10}" fill="${fill}" font-weight="${isMine ? '600' : '400'}" opacity="${isMine ? '1' : '0.85'}">${lab.ko}</text>`;
+  });
+  html += `<line x1="${ox}" y1="${oy}" x2="${ox+W}" y2="${oy}" stroke="rgba(54,132,255,0.4)" stroke-width="1.5"/>`;
+  html += `<line x1="${ox}" y1="${oy-H}" x2="${ox}" y2="${oy}" stroke="rgba(54,132,255,0.4)" stroke-width="1.5"/>`;
+  html += `<line x1="${cx}" y1="${oy-H}" x2="${cx}" y2="${oy}" stroke="rgba(54,132,255,0.3)" stroke-width="1" stroke-dasharray="4,4"/>`;
+  html += `<line x1="${ox}" y1="${cy}" x2="${ox+W}" y2="${cy}" stroke="rgba(54,132,255,0.3)" stroke-width="1" stroke-dasharray="4,4"/>`;
+  html += `<text x="${cx}" y="${oy + 36}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" fill="#3684FF" font-weight="600">차별성 (UNIQUENESS) →</text>`;
+  html += `<text x="${ox - 4}" y="${oy + 22}" text-anchor="end" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">약</text>`;
+  html += `<text x="${ox + W + 4}" y="${oy + 22}" text-anchor="start" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">강</text>`;
+  html += `<text x="${ox - 36}" y="${cy}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="13" fill="#3684FF" font-weight="600" transform="rotate(-90 ${ox - 36} ${cy})">시장 적합도 (PMF) →</text>`;
+  html += `<text x="${ox - 4}" y="${oy + 4}" text-anchor="end" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">약</text>`;
+  html += `<text x="${ox - 4}" y="${oy - H + 4}" text-anchor="end" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">강</text>`;
+  const myX = ox + (scores.unique / 100) * W;
+  const myY = oy - (scores.fit / 100) * H;
+  html += `<circle cx="${myX.toFixed(1)}" cy="${myY.toFixed(1)}" r="14" fill="rgba(54,132,255,0.2)"/>`;
+  html += `<circle cx="${myX.toFixed(1)}" cy="${myY.toFixed(1)}" r="10" fill="#3684FF" stroke="#fff" stroke-width="3"/>`;
+  html += `<text x="${myX.toFixed(1)}" y="${(myY + 4).toFixed(1)}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#fff" font-weight="bold">★</text>`;
+  html += `<text x="${myX.toFixed(1)}" y="${(myY - 18).toFixed(1)}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#3684FF" font-weight="600">YOU</text>`;
+  html += `<text x="${cx}" y="${oy + 56}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">가로축 = 차별성 · 세로축 = 시장 적합도</text>`;
+  svg.innerHTML = html;
+}
+function drawRadar(scores){
+  const svg = document.getElementById('radar-svg');
+  const cx = 170, cy = 170, R = 110;
+  const n = AREAS.length;
+  let html = '';
+  for(let level=1; level<=5; level++){
+    const r = (R / 5) * level; let pts = '';
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+      pts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    pts += 'Z';
+    html += `<path d="${pts}" fill="none" stroke="rgba(54,132,255,${0.05 + level*0.025})" stroke-width="1"/>`;
+  }
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * R; const y = cy + Math.sin(angle) * R;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(54,132,255,0.1)" stroke-width="1"/>`;
+  }
+  let boundaryPts = '';
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * 0.5;
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    boundaryPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+  }
+  boundaryPts += 'Z';
+  html += `<path d="${boundaryPts}" fill="none" stroke="rgba(255,140,90,0.5)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  let dataPts = ''; const dataPoints = [];
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * (scores[AREAS[i].key] / 100);
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    dataPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    dataPoints.push({x, y, area: AREAS[i], score: scores[AREAS[i].key]});
+  }
+  dataPts += 'Z';
+  html += `<defs><linearGradient id="radarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.35"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.20"/></linearGradient></defs>`;
+  html += `<path d="${dataPts}" fill="url(#radarGrad)" stroke="#3684FF" stroke-width="2" stroke-linejoin="round"/>`;
+  dataPoints.forEach(pt => {
+    const fill = pt.score >= 50 ? '#3684FF' : '#8a96ac';
+    html += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="5" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
+  });
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const labelR = R + 24;
+    const x = cx + Math.cos(angle) * labelR; const y = cy + Math.sin(angle) * labelR;
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="12" fill="#3684FF" font-weight="600">${AREAS[i].name}</text>`;
+    const subR = R + 42;
+    const sx = cx + Math.cos(angle) * subR; const sy = cy + Math.sin(angle) * subR;
+    html += `<text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="13" fill="#8a96ac">${scores[AREAS[i].key]}</text>`;
+  }
+  html += `<line x1="20" y1="320" x2="36" y2="320" stroke="rgba(255,140,90,0.5)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  html += `<text x="42" y="324" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">강·약 경계 (50점)</text>`;
+  svg.innerHTML = html;
+}
+function detectSignals(scores){
+  const signals = [];
+  const sorted = AREAS.slice().sort((a,b) => scores[a.key] - scores[b.key]);
+  const weakest = sorted[0];
+  const secondWeakest = sorted[1];
+  if(scores.unique < 40){
+    signals.push({ level:'danger', label:'긴급 · 차별성',
+      text:`차별성이 ${scores.unique}점으로 매우 약합니다. 「경영전환론」의 표현으로 "차별점이 없는 조직은 가격 경쟁의 늪에 빠집니다." 더 큰 자본이나 신규 진입자가 들어오면 빠르게 잠식되는 구조이며, 마케팅 강화로 풀리지 않는 본질적 문제입니다. 우리만의 USP 재정의가 시급합니다.` });
+  } else if(scores.unique < 60){
+    signals.push({ level:'warn', label:'점검 · 차별성',
+      text:`차별성이 ${scores.unique}점으로 정비가 필요합니다. 우리만의 강점이 흐릿한 상태로, 경쟁이 심화되면 빠르게 약화될 수 있습니다.` });
+  }
+  if(scores.fit < 40){
+    signals.push({ level:'danger', label:'긴급 · 시장 적합도',
+      text:`시장 적합도(PMF)가 ${scores.fit}점으로 매우 약합니다. 시장이 우리 제품을 진심으로 원하지 않는 상태입니다. 「경영전환론」의 표현으로 "시장이 외면하는 제품은 어떤 영업으로도 살아나지 않습니다." 제품 자체의 재정의가 필요한 시점입니다.` });
+  } else if(scores.fit < 60){
+    signals.push({ level:'warn', label:'점검 · 시장 적합도',
+      text:`시장 적합도가 ${scores.fit}점으로 정비가 필요합니다. 재구매율과 추천이 충분하지 않은 상태로, 제품 가치를 재정의하거나 타겟을 좁히는 작업이 도움됩니다.` });
+  }
+  if(scores.position < 40){
+    signals.push({ level:'danger', label:'긴급 · 경쟁 위치',
+      text:`경쟁 위치가 ${scores.position}점으로 매우 약합니다. 경쟁사 대비 우리 위치를 객관적으로 파악하지 못하거나 가격 협상력이 부족한 상태입니다. 시장 분석부터 다시 시작해야 합니다.` });
+  } else if(scores.position < 60){
+    signals.push({ level:'warn', label:'점검 · 경쟁 위치',
+      text:`경쟁 위치가 ${scores.position}점으로 정비가 필요합니다. 경쟁사 분석을 정기 업무로 만들고 우리만의 틈새 포지션을 강화하시기 바랍니다.` });
+  }
+  if(scores.evolution < 40){
+    signals.push({ level:'danger', label:'긴급 · 제품 진화',
+      text:`제품 진화가 ${scores.evolution}점으로 매우 약합니다. 시장은 변하는데 우리 제품은 멈춰 있는 상태로, 「경영전환론」의 표현으로 "주력 제품이 진부화되는 조직은 매출이 한순간 무너집니다." 차세대 제품 개발이 시급합니다.` });
+  } else if(scores.evolution < 60){
+    signals.push({ level:'warn', label:'점검 · 제품 진화',
+      text:`제품 진화가 ${scores.evolution}점으로 정비가 필요합니다. 제품 업데이트 주기와 고객 피드백 반영 체계 점검이 필요합니다.` });
+  }
+  if(signals.length === 0){
+    signals.push({ level:'good', label:'안정 · 4영역',
+      text:`4영역 모두 60점 이상으로 균형 잡힌 시장 위치를 확보했습니다. 「경영전환론」의 표현으로 "지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다." 다음 BX Point에서 어떤 시장으로 옮겨갈지 미리 설계하시기 바랍니다.` });
+  }
+  return signals.slice(0, 4);
+}
+function generateConsultantNote(scores, result){
+  const overall = result.overall;
+  const quadrant = result.quadrant;
+  const quadData = QUADRANTS[quadrant];
+  const sorted = AREAS.slice().sort((a,b) => scores[b.key] - scores[a.key]);
+  const strongest = sorted[0];
+  const weakest = sorted[3];
+  let paragraphs = [];
+  let p1 = '';
+  if(quadrant === 'Q1'){
+    p1 = `귀사는 PMF 매트릭스의 <strong>우상단 — ${quadData.ko}</strong>에 위치합니다(${quadData.name}). 차별성 ${scores.unique}점, 시장 적합도 ${scores.fit}점으로 두 축 모두 50점 이상입니다. 「경영전환론」의 표현으로 <strong>"이미 통하고 있는" 위치</strong>이며, 매출과 고객 충성도가 동시에 작동하는 드문 분포입니다. 다만 "가장 좋은 시기일수록 다음 BX Point의 자각이 시작되어야 한다"는 원칙을 잊지 마시기 바랍니다.`;
+  } else if(quadrant === 'Q2'){
+    p1 = `귀사는 PMF 매트릭스의 <strong>우하단 — ${quadData.ko}</strong>에 위치합니다(${quadData.name}). 차별성은 ${scores.unique}점으로 강하지만 시장 적합도가 ${scores.fit}점으로 약한 분포입니다. <strong>"보석을 묻어두고 있는" 상태</strong>로, 이 패턴의 본질은 마케팅 부족이 아니라 "이 차별점이 누구의 어떤 문제를 해결하는가"의 정의 부족입니다. 영업을 늘리기 전에 가치 제안을 다시 써야 합니다.`;
+  } else if(quadrant === 'Q3'){
+    p1 = `귀사는 PMF 매트릭스의 <strong>좌상단 — ${quadData.ko}</strong>에 위치합니다(${quadData.name}). 시장에서는 ${scores.fit}점으로 잘 받아들여지고 있지만 차별성이 ${scores.unique}점으로 약한 분포입니다. <strong>"잘 팔리는데 차별점이 없는" 가장 위험한 위치</strong>입니다. 더 큰 자본이나 더 효율적인 경쟁자가 들어오면 빠르게 잠식됩니다. 잘 팔리는 시기에 차별점을 만드는 것이 다음 단계의 핵심입니다.`;
+  } else {
+    p1 = `귀사는 PMF 매트릭스의 <strong>좌하단 — ${quadData.ko}</strong>에 위치합니다(${quadData.name}). 차별성 ${scores.unique}점, 시장 적합도 ${scores.fit}점으로 두 축 모두 약한 상태입니다. <strong>마케팅 강화나 영업 확대로 풀리지 않는 위치</strong>이며, "지금 우리가 파는 것이 시장이 진짜 원하는 것인가"라는 근본 질문부터 다시 시작해야 합니다. 「경영전환론」의 표현으로 사업 모델 자체의 BX Point가 임박한 상태입니다.`;
+  }
+  paragraphs.push(p1);
+  let p2 = '';
+  const allAbove60 = Object.values(scores).every(s => s >= 60);
+  const allBelow40 = Object.values(scores).every(s => s < 40);
+  if(allAbove60){
+    p2 = `4영역 모두 60점 이상으로 균형 잡힌 분포입니다. 가장 강한 영역은 <strong>${strongest.name}(${scores[strongest.key]}점)</strong>이며, 가장 약한 영역은 <strong>${weakest.name}(${scores[weakest.key]}점)</strong>이지만 그조차 강 영역에 속합니다. 이 상태에서는 약점 보강보다 강점 영역의 한 단계 도약이 더 효과적입니다.`;
+  } else if(allBelow40){
+    p2 = `4영역 모두 40점 미만으로 전반적인 정비가 필요합니다. <strong>가장 약한 ${weakest.name}(${scores[weakest.key]}점)부터 한 영역에 집중</strong>하는 것이 정석이며, 「경영전환론」의 원칙대로 동시 개선은 불가능합니다. 한 영역의 회복이 가시화된 후 다음 영역으로 옮겨가야 합니다.`;
+  } else {
+    p2 = `4영역 중 가장 강한 곳은 <strong>${strongest.name}(${scores[strongest.key]}점)</strong>, 가장 약한 곳은 <strong>${weakest.name}(${scores[weakest.key]}점)</strong>입니다. 격차는 ${scores[strongest.key] - scores[weakest.key]}점입니다. 「경영전환론」의 원칙대로, <strong>약한 영역의 정비가 시장 위치 전체를 끌어올립니다.</strong> 강한 영역은 그대로 두고 ${weakest.name}에 자원을 집중하시기 바랍니다.`;
+  }
+  paragraphs.push(p2);
+  let p3 = '';
+  if(quadrant === 'Q1'){
+    p3 = `<strong>${quadData.ko}의 핵심 과제는 "다음 사이클 준비"입니다.</strong> 지금의 강세가 영원하지 않다는 것을 인지하는 것이 출발점이며, 매출의 5~10%를 다음 5년 사업 모델 탐색에 의식적으로 투입하시기 바랍니다. 신사업·신시장·플랫폼 전환 같은 큰 그림을 그리기에 가장 좋은 시점입니다. 가장 좋은 시기에 가장 빨리 떨어지는 조직은 "이대로면 된다"고 믿는 조직입니다.`;
+  } else if(quadrant === 'Q2'){
+    p3 = `<strong>${quadData.ko}의 핵심 과제는 "가치 제안 재정의"입니다.</strong> 차별점이 분명한데 시장이 모른다는 것은, 우리의 차별점을 시장이 이해하는 언어로 번역하지 못했다는 뜻입니다. 고객 인터뷰 10건부터 시작하시기 바랍니다. "왜 우리를 택했는가"의 답이 일관성 있게 모이면 그 자체가 새 가치 제안입니다. 영업 인력을 늘리기보다 기존 고객의 "선택 이유"를 깊이 파는 것이 우선입니다.`;
+  } else if(quadrant === 'Q3'){
+    p3 = `<strong>${quadData.ko}의 핵심 과제는 "잘 팔릴 때 차별점 만들기"입니다.</strong> 시장이 받아들이고 있는 지금이 차별점을 만들 자원과 시간이 있는 거의 유일한 시기입니다. "우리만의 무엇"을 의식적으로 발굴하고 그것을 강화하는 작업에 매출의 10% 이상을 투입하시기 바랍니다. 가격 경쟁이 시작되기 전에 차별점이 정착되어야 하며, 이 작업을 미루면 다음 진단 때는 좌하단(재설정 필요)으로 떨어져 있을 수 있습니다.`;
+  } else {
+    p3 = `<strong>${quadData.ko}의 핵심 과제는 "사업 모델 자체의 재설정"입니다.</strong> 마케팅 강화·영업 확대·인력 충원으로 풀 수 없는 위치이며, "지금 우리가 파는 것이 시장이 진짜 원하는 것인가"라는 근본 질문부터 다시 시작해야 합니다. 「경영전환론」의 표현으로 "버리는 일과 다시 놓는 일"이 동시에 필요합니다. 지금 하고 있는 것 중 멈출 것을 결정하지 않으면 새 시도를 위한 자원이 만들어지지 않습니다.`;
+  }
+  paragraphs.push(p3);
+  let p4 = '';
+  if(quadrant === 'Q4' || allBelow40){
+    p4 = `<strong>${quadData.ko} 위치에서 가장 비싼 선택은 "조금 더 지켜보자"는 결정입니다.</strong> 사업 모델 재설계는 외부 시각의 도움 없이 내부에서 만들기 어려운 작업이며, 30분 무료 시장 전략 컨설팅을 통해 어디서부터 시작할지 함께 점검하시기 바랍니다.`;
+  } else if(quadrant === 'Q1' && allAbove60){
+    p4 = `<strong>지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다.</strong> 다음 5년의 사업 모델을 미리 그리기에 가장 좋은 시점이며, 정밀 시장 컨설팅을 통해 신사업·신시장 탐색 로드맵을 함께 설계하시기 바랍니다.`;
+  } else {
+    p4 = `<strong>먼저 움직일 영역은 정해졌으니, 미루지 않는 것이 가장 중요합니다.</strong> ${weakest.name} 영역의 정비가 출발점이며, 30분 무료 시장 전략 컨설팅을 통해 구체적 실행 경로를 함께 점검하시기 바랍니다.`;
+  }
+  paragraphs.push(p4);
+  return paragraphs.map(p => '<p>' + p + '</p>').join('');
+}
+function showResult(){
+  const result = computeResult();
+  const scores = result.scores;
+  const quadData = QUADRANTS[result.quadrant];
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  const accentClass = result.status.accent;
+  document.getElementById('result-status').innerHTML = 
+    `시장 경쟁력 <span class="accent ${accentClass}">${result.status.label}</span>`;
+  document.getElementById('result-score').textContent = result.overall;
+  drawMatrix(scores, result.quadrant);
+  document.getElementById('quadrant-name').innerHTML = `${quadData.name} <span class="ko">${quadData.ko}</span>`;
+  document.getElementById('quadrant-desc').textContent = quadData.desc;
+  document.getElementById('area-grid').innerHTML = AREAS.map(a => {
+    const isStrong = scores[a.key] >= 50;
+    const cls = isStrong ? 'strong' : '';
+    return `<div class="area-cell ${cls}">
+      <div class="name">${a.name}</div>
+      <div class="score serif">${scores[a.key]}<span class="unit">/100</span></div>
+    </div>`;
+  }).join('');
+  drawRadar(scores);
+  const signalsList = detectSignals(scores);
+  document.getElementById('signals-list').innerHTML = signalsList.map(s => 
+    `<div class="signal-item ${s.level}">
+      <span class="signal-label">${s.label}</span>${s.text}
+    </div>`
+  ).join('');
+  document.getElementById('consultant-text').innerHTML = generateConsultantNote(scores, result);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('start-card').style.display = 'block';
+  answers = {}; currentQ = 0;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

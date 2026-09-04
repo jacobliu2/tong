@@ -1,0 +1,538 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>DX 단계 진단 — 통 TONG</title><meta name="description" content="디지털 전환(DX)이 지금 몇 단계인지 진단합니다. DX 7단계 중 우리 회사의 현재 위치와 다음으로 나아갈 로드맵을 확인하는 무료 DX 자가진단."/><link rel="canonical" href="https://www.workstong.com/diagnosis/dx/"/><meta property="og:type" content="website"/><meta property="og:title" content="DX 단계 진단 — 통 TONG"/><meta property="og:description" content="디지털 전환(DX)이 지금 몇 단계인지 진단합니다. DX 7단계 중 우리 회사의 현재 위치와 다음으로 나아갈 로드맵을 확인하는 무료 DX 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/dx/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="icon" href="../../assets/images/tong-logo.png"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "DX 단계 진단", "description": "디지털 전환이 지금 몇 단계인지 진단", "url": "https://www.workstong.com/diagnosis/dx/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "DX 단계 진단", "item": "https://www.workstong.com/diagnosis/dx/"}]}</script></head><body data-nav="diagnosis" data-depth="2"><div id="tong-nav-root"></div><link rel="canonical" href="https://www.workstong.com/diagnosis/dx/"/><meta name="description" content="우리 회사의 디지털 전환이 지금 몇 단계인지, 다음 단계는 무엇인지 진단합니다."/><meta property="og:title" content="DX 단계 진단 — 통 TONG"/><meta property="og:description" content="디지털 전환(DX)이 지금 몇 단계인지 진단합니다. DX 7단계 중 우리 회사의 현재 위치와 다음으로 나아갈 로드맵을 확인하는 무료 DX 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/dx/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><!-- ============================================================
+  통 | DX 7단계 자가진단 (15문항)
+  - URL: /DX-자가진단
+  - 결과: DX 7단계 중 현재 위치 + 단계별 로드맵
+  - 통 디자인 시스템 100% / 이탤릭 0 / 4면 페이드
+============================================================ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+  .tong-dxq-root, .tong-dxq-root * {
+    box-sizing:border-box; margin:0; padding:0; font-style:normal !important;
+  }
+  .tong-dxq-root {
+    --p:#3684FF; --l:#6BA3FF; --d:#1850c4;
+    --bg:#f8faff; --ink:#0a1530; --text:#1a2540; --sub:#5a6783;
+    --glass:rgba(255,255,255,0.72); --border:rgba(54,132,255,0.18);
+    --shadow:0 8px 40px rgba(54,132,255,0.10);
+    --shadow-h:0 24px 60px rgba(54,132,255,0.22);
+    --r:20px;
+    width:100%; font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg); position:relative; overflow-x:hidden;
+    line-height:1.7; color:var(--text); padding:80px 24px; min-height:600px;
+  }
+  .tong-dxq-root::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 16% 10%, rgba(54,132,255,0.12) 0%, transparent 48%),
+      radial-gradient(circle at 86% 84%, rgba(107,163,255,0.10) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(54,132,255,0.04) 0%, transparent 60%);
+    pointer-events:none; z-index:0;
+  }
+  .tong-dxq-fade { position:absolute; pointer-events:none; z-index:6; }
+  .tong-dxq-fade.t { top:0; left:0; right:0; height:80px;
+    background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%); }
+  .tong-dxq-fade.b { bottom:0; left:0; right:0; height:80px;
+    background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%); }
+  .tong-dxq-fade.l { top:0; bottom:0; left:0; width:80px;
+    background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%); }
+  .tong-dxq-fade.r { top:0; bottom:0; right:0; width:80px;
+    background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%); }
+
+  .tong-dxq-inner { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+
+  .tong-dxq-card {
+    background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border); border-radius:24px;
+    padding:48px 40px; box-shadow:var(--shadow);
+  }
+
+  /* ===== 인트로 ===== */
+  .tong-dxq-intro { text-align:center; }
+  .tong-dxq-eyebrow {
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:0.2em;
+    color:var(--p); margin-bottom:18px; padding:6px 16px;
+    background:rgba(54,132,255,0.08); border-radius:100px;
+  }
+  .tong-dxq-title {
+    font-family:'Pretendard','Pretendard',sans-serif;
+    font-size:clamp(26px,3.6vw,38px); font-weight:400; line-height:1.3;
+    color:var(--ink); margin-bottom:16px; letter-spacing:-0.02em;
+  }
+  .tong-dxq-desc {
+    font-size:15px; line-height:1.85; color:var(--sub);
+    margin-bottom:32px; word-break:keep-all;
+  }
+  .tong-dxq-meta {
+    display:flex; justify-content:center; gap:28px; margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .tong-dxq-meta-item { text-align:center; }
+  .tong-dxq-meta-num { font-family:'Pretendard',sans-serif; font-weight:800;
+    font-size:28px; color:var(--p); line-height:1; }
+  .tong-dxq-meta-label { font-size:12px; color:var(--sub); margin-top:6px; }
+
+  .tong-dxq-btn {
+    display:inline-flex; align-items:center; gap:10px; padding:15px 36px;
+    border-radius:100px; font-size:15px; font-weight:700; cursor:pointer; border:none;
+    transition:all 0.3s ease; background:linear-gradient(135deg,#3684FF,#6BA3FF);
+    color:#fff; box-shadow:0 8px 24px rgba(54,132,255,0.25); font-family:inherit;
+  }
+  .tong-dxq-btn:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(54,132,255,0.35); }
+  .tong-dxq-btn.ghost { background:transparent; color:var(--p);
+    border:1.5px solid rgba(54,132,255,0.3); box-shadow:none; }
+  .tong-dxq-btn.ghost:hover { background:rgba(54,132,255,0.06); transform:none; }
+
+  /* ===== 진행 바 ===== */
+  .tong-dxq-progress-wrap { margin-bottom:32px; }
+  .tong-dxq-progress-top { display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:12px; }
+  .tong-dxq-progress-count { font-size:13px; font-weight:700; color:var(--p); }
+  .tong-dxq-progress-label { font-size:12px; color:var(--sub); }
+  .tong-dxq-progress-bar { height:6px; background:rgba(54,132,255,0.1);
+    border-radius:100px; overflow:hidden; }
+  .tong-dxq-progress-fill { height:100%; background:linear-gradient(90deg,#3684FF,#6BA3FF);
+    border-radius:100px; transition:width 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+  /* ===== 문항 ===== */
+  .tong-dxq-q-num { font-size:13px; font-weight:700; color:var(--p); margin-bottom:10px; }
+  .tong-dxq-q-text { font-size:clamp(17px,2.2vw,21px); font-weight:700; color:var(--ink);
+    line-height:1.5; margin-bottom:28px; word-break:keep-all; }
+  .tong-dxq-options { display:flex; flex-direction:column; gap:10px; }
+  .tong-dxq-opt {
+    text-align:left; padding:16px 20px; border-radius:14px; cursor:pointer;
+    border:1.5px solid var(--border); background:rgba(255,255,255,0.5);
+    font-size:14px; font-weight:500; color:var(--text); transition:all 0.25s ease;
+    font-family:inherit; line-height:1.5; word-break:keep-all;
+  }
+  .tong-dxq-opt:hover { border-color:var(--p); background:rgba(54,132,255,0.05);
+    transform:translateX(3px); }
+  .tong-dxq-opt.disabled { pointer-events:none; opacity:0.5; }
+
+  /* ===== 결과 ===== */
+  .tong-dxq-result { text-align:center; }
+  .tong-dxq-r-eyebrow { font-size:12px; font-weight:700; letter-spacing:0.18em;
+    color:var(--p); margin-bottom:16px; }
+  .tong-dxq-r-stage-num {
+    font-family:'Pretendard',sans-serif; font-weight:800; font-size:clamp(56px,10vw,84px);
+    line-height:1; color:var(--p); margin-bottom:4px; letter-spacing:-0.03em;
+  }
+  .tong-dxq-r-stage-num span { font-size:0.4em; color:var(--sub); font-weight:700; }
+  .tong-dxq-r-stage-name {
+    font-family:'Pretendard','Pretendard',sans-serif;
+    font-size:clamp(24px,3.4vw,32px); font-weight:400; color:var(--ink);
+    margin-bottom:8px; letter-spacing:-0.01em;
+  }
+  .tong-dxq-r-zone {
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:0.1em;
+    padding:5px 14px; border-radius:100px; margin-bottom:24px;
+    background:rgba(54,132,255,0.1); color:var(--p);
+  }
+  .tong-dxq-r-desc {
+    font-size:15px; line-height:1.85; color:var(--text);
+    margin-bottom:32px; text-align:left; word-break:keep-all;
+    background:rgba(255,255,255,0.5); border:1px solid var(--border);
+    border-radius:16px; padding:24px 26px;
+  }
+
+  /* 7단계 미니 막대 */
+  .tong-dxq-r-ladder { display:flex; align-items:flex-end; justify-content:center;
+    gap:6px; height:90px; margin-bottom:32px; }
+  .tong-dxq-r-ladder-bar { flex:1; max-width:42px; border-radius:6px 6px 0 0;
+    background:rgba(54,132,255,0.15); position:relative; transition:all 0.4s; }
+  .tong-dxq-r-ladder-bar.active {
+    background:linear-gradient(180deg,#3684FF,#6BA3FF);
+    box-shadow:0 6px 16px rgba(54,132,255,0.3); }
+  .tong-dxq-r-ladder-bar.active::after {
+    content:'●'; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    color:var(--p); font-size:12px; }
+  .tong-dxq-r-ladder-num { position:absolute; bottom:-22px; left:50%;
+    transform:translateX(-50%); font-size:11px; font-weight:700; color:var(--sub); }
+  .tong-dxq-r-ladder-bar.active .tong-dxq-r-ladder-num { color:var(--p); }
+
+  /* 로드맵 */
+  .tong-dxq-r-roadmap-title { font-size:13px; font-weight:700; color:var(--p);
+    letter-spacing:0.1em; margin-bottom:18px; text-align:left; }
+  .tong-dxq-r-steps { display:flex; flex-direction:column; gap:0; margin-bottom:32px; text-align:left; }
+  .tong-dxq-r-step { display:flex; gap:16px; align-items:flex-start; padding:14px 0; position:relative; }
+  .tong-dxq-r-step:not(:last-child)::after {
+    content:''; position:absolute; left:13px; top:42px; bottom:-6px; width:2px;
+    background:linear-gradient(to bottom,var(--p),rgba(54,132,255,0.15)); }
+  .tong-dxq-r-step-dot { flex-shrink:0; width:28px; height:28px; border-radius:50%;
+    background:linear-gradient(135deg,#3684FF,#6BA3FF); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+    font-weight:700; z-index:1; }
+  .tong-dxq-r-step-body { padding-top:3px; }
+  .tong-dxq-r-step-t { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+  .tong-dxq-r-step-d { font-size:13px; color:var(--sub); line-height:1.6; word-break:keep-all; }
+
+  .tong-dxq-r-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+  .tong-dxq-disclaimer { font-size:11px; color:#b4b6c2; margin-top:24px; line-height:1.6;
+    word-break:keep-all; }
+
+  @keyframes tongDxqPop { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+  .tong-dxq-stage { animation:tongDxqPop 0.45s ease-out; }
+
+  @media (max-width:768px) {
+    .tong-dxq-root { padding:50px 16px; }
+    .tong-dxq-card { padding:32px 22px; border-radius:20px; }
+    .tong-dxq-fade.t,.tong-dxq-fade.b { height:50px; }
+    .tong-dxq-fade.l,.tong-dxq-fade.r { width:30px; }
+    .tong-dxq-r-ladder-bar { max-width:30px; }
+  }
+</style>
+
+<div class="tong-dxq-root">
+  <div class="tong-dxq-fade t"></div>
+  <div class="tong-dxq-fade b"></div>
+  <div class="tong-dxq-fade l"></div>
+  <div class="tong-dxq-fade r"></div>
+
+  <div class="tong-dxq-inner">
+    <div class="tong-dxq-card">
+
+      <!-- 인트로 -->
+      <div class="tong-dxq-stage" id="dxqIntro">
+        <div class="tong-dxq-intro">
+          <span class="tong-dxq-eyebrow">DX 7 STAGES · 자가진단</span>
+          <h1 class="tong-dxq-title">우리 회사의 디지털 전환,<br>지금 몇 단계인가요</h1>
+          <p class="tong-dxq-desc">15개 질문에 답하면, DX 7단계 중 우리 회사의 현재 위치와 다음으로 나아갈 로드맵을 알려드립니다.</p>
+          <div class="tong-dxq-meta">
+            <div class="tong-dxq-meta-item">
+              <div class="tong-dxq-meta-num">15</div>
+              <div class="tong-dxq-meta-label">문항</div>
+            </div>
+            <div class="tong-dxq-meta-item">
+              <div class="tong-dxq-meta-num">3</div>
+              <div class="tong-dxq-meta-label">분 소요</div>
+            </div>
+            <div class="tong-dxq-meta-item">
+              <div class="tong-dxq-meta-num">7</div>
+              <div class="tong-dxq-meta-label">단계 진단</div>
+            </div>
+          </div>
+          <button class="tong-dxq-btn" id="dxqStartBtn">진단 시작하기 →</button>
+        </div>
+      </div>
+
+      <!-- 문항 -->
+      <div class="tong-dxq-stage" id="dxqQuiz" style="display:none">
+        <div class="tong-dxq-progress-wrap">
+          <div class="tong-dxq-progress-top">
+            <span class="tong-dxq-progress-count" id="dxqCount">1 / 15</span>
+            <span class="tong-dxq-progress-label" id="dxqZone">기반 형성</span>
+          </div>
+          <div class="tong-dxq-progress-bar">
+            <div class="tong-dxq-progress-fill" id="dxqFill" style="width:6.6%"></div>
+          </div>
+        </div>
+        <div class="tong-dxq-q-num" id="dxqQNum">Q1</div>
+        <div class="tong-dxq-q-text" id="dxqQText"></div>
+        <div class="tong-dxq-options" id="dxqOptions"></div>
+      </div>
+
+      <!-- 결과 -->
+      <div class="tong-dxq-stage" id="dxqResult" style="display:none">
+        <div class="tong-dxq-result">
+          <div class="tong-dxq-r-eyebrow">진단 결과</div>
+          <div class="tong-dxq-r-stage-num" id="dxqRNum"></div>
+          <div class="tong-dxq-r-stage-name" id="dxqRName"></div>
+          <div class="tong-dxq-r-zone" id="dxqRZone"></div>
+
+          <div class="tong-dxq-r-ladder" id="dxqRLadder"></div>
+
+          <div class="tong-dxq-r-desc" id="dxqRDesc"></div>
+
+          <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="tong-dxq-r-roadmap-title">다음 단계로 가는 로드맵</div>
+          <div class="tong-dxq-r-steps" id="dxqRSteps"></div>
+
+          </div><div class="tong-dxq-r-actions">
+            <a href="../../contact/index.html" class="tong-dxq-btn">경영전환 상태분석 받기 →</a>
+            <button class="tong-dxq-btn ghost" id="dxqRetry">다시 진단</button>
+          </div>
+
+          <p class="tong-dxq-disclaimer">
+            본 진단은 자가 점검용 간이 도구로, 정밀한 컨설팅 진단을 대체하지 않습니다.<br>
+            정확한 현황 파악은 통과의 상담을 통해 가능합니다.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var root = document.querySelector('.tong-dxq-root');
+  if (!root) return;
+
+  // 15문항: 각 단계 진행도를 측정. 5지선다, 선택지 인덱스가 도달 단계(0~6)에 대응
+  // score 방식: 각 문항에서 "우리 회사가 도달한 수준"을 고름 → 단계별 누적
+  // 결과: 응답들의 가중 평균으로 현재 단계(1~7) 산출
+  var QUESTIONS = [
+    { zone:'기반 형성', q:'우리 회사의 핵심 업무는 어떻게 처리되나요?',
+      opts:[
+        {t:'대부분 종이·수기·개인 경험에 의존한다', s:1},
+        {t:'일부는 엑셀·문서로 컴퓨터에 기록한다', s:2},
+        {t:'업무 시스템에 입력하고 공유한다', s:3},
+        {t:'시스템 데이터로 판단·의사결정까지 한다', s:4},
+        {t:'데이터가 자동으로 흐르고 분석된다', s:5} ] },
+    { zone:'기반 형성', q:'문서와 자료는 어디에 쌓이나요?',
+      opts:[
+        {t:'개인 PC, 종이, 흩어진 메신저', s:1},
+        {t:'공용 폴더나 클라우드에 모은다', s:2},
+        {t:'그룹웨어·협업툴에 체계적으로 보관한다', s:3},
+        {t:'검색·연동이 되는 시스템에 통합돼 있다', s:4},
+        {t:'데이터가 자산으로 분류·활용된다', s:5} ] },
+    { zone:'기반 형성', q:'고객·매출 정보는 어떻게 관리하나요?',
+      opts:[
+        {t:'담당자 머릿속이나 개인 장부에 있다', s:1},
+        {t:'엑셀로 따로 정리한다', s:2},
+        {t:'CRM·관리 시스템에 입력한다', s:3},
+        {t:'데이터로 고객 흐름을 분석한다', s:4},
+        {t:'예측·자동 추천까지 활용한다', s:5} ] },
+    { zone:'기반 형성', q:'IT 인프라(서버·네트워크·보안)는 어떤 상태인가요?',
+      opts:[
+        {t:'특별히 갖춰진 것이 없다', s:1},
+        {t:'기본적인 PC·인터넷 정도다', s:2},
+        {t:'클라우드·보안을 일부 도입했다', s:3},
+        {t:'안정적인 인프라 위에서 운영한다', s:4},
+        {t:'인프라가 사업 확장에 유연하게 대응한다', s:5} ] },
+    { zone:'기반 형성', q:'업무 도구(SaaS·솔루션)는 얼마나 쓰나요?',
+      opts:[
+        {t:'거의 쓰지 않는다', s:1},
+        {t:'한두 개를 개별적으로 쓴다', s:2},
+        {t:'여러 도구를 쓰지만 따로 논다', s:3},
+        {t:'도구들이 연결돼 데이터가 오간다', s:4},
+        {t:'통합된 환경에서 매끄럽게 작동한다', s:5} ] },
+    { zone:'기반 형성', q:'쌓인 데이터를 의사결정에 활용하나요?',
+      opts:[
+        {t:'데이터를 따로 보지 않는다', s:1},
+        {t:'가끔 엑셀로 들여다본다', s:2},
+        {t:'정기적으로 지표를 확인한다', s:3},
+        {t:'데이터 기반으로 결정을 내린다', s:4},
+        {t:'대시보드로 실시간 판단한다', s:5} ] },
+    { zone:'구조 설계', q:'우리 회사에 맞는 맞춤 시스템을 가지고 있나요?',
+      opts:[
+        {t:'전혀 없다, 범용 도구만 쓴다', s:1},
+        {t:'필요성은 느끼지만 시도 못 했다', s:2},
+        {t:'간단한 맞춤 도구를 만들어봤다', s:3},
+        {t:'핵심 업무용 자체 시스템이 있다', s:4},
+        {t:'우리 구조에 맞게 설계된 시스템을 운영한다', s:5} ] },
+    { zone:'구조 설계', q:'기술·시스템에 대한 의사결정 주도권은 누구에게 있나요?',
+      opts:[
+        {t:'외부 업체가 정하는 대로 따른다', s:1},
+        {t:'외부 의견에 주로 의존한다', s:2},
+        {t:'내부와 외부가 함께 판단한다', s:3},
+        {t:'내부가 주도하고 외부는 보조한다', s:4},
+        {t:'기술 설계 주권을 우리가 가지고 있다', s:5} ] },
+    { zone:'구조 설계', q:'업무 프로세스는 얼마나 자동화돼 있나요?',
+      opts:[
+        {t:'대부분 수작업이다', s:1},
+        {t:'일부 반복 업무만 자동화했다', s:2},
+        {t:'주요 프로세스를 자동화했다', s:3},
+        {t:'부서 간 흐름이 자동 연결된다', s:4},
+        {t:'전사 프로세스가 유기적으로 돌아간다', s:5} ] },
+    { zone:'구조 설계', q:'AI를 업무에 활용하고 있나요?',
+      opts:[
+        {t:'전혀 활용하지 않는다', s:1},
+        {t:'개인이 가끔 챗봇을 써본다', s:2},
+        {t:'일부 업무에 AI 도구를 도입했다', s:3},
+        {t:'주요 업무에 AI가 결합돼 있다', s:4},
+        {t:'AI가 운영에 녹아든 AI 네이티브다', s:5} ] },
+    { zone:'구조 설계', q:'데이터와 시스템이 새 사업 기회로 이어지나요?',
+      opts:[
+        {t:'그런 적 없다', s:1},
+        {t:'생각은 해봤다', s:2},
+        {t:'데이터로 기회를 찾아본 적 있다', s:3},
+        {t:'데이터 기반으로 신사업을 시도했다', s:4},
+        {t:'시스템이 새 비즈니스 모델을 만든다', s:5} ] },
+    { zone:'경영전환', q:'비즈니스 모델은 얼마나 유연하게 바뀌나요?',
+      opts:[
+        {t:'한번 정한 방식을 거의 안 바꾼다', s:1},
+        {t:'외부 압력이 있을 때만 바꾼다', s:2},
+        {t:'필요하면 부분적으로 조정한다', s:3},
+        {t:'시장 변화에 능동적으로 바꾼다', s:4},
+        {t:'유연한 BM으로 스스로 진화한다', s:5} ] },
+    { zone:'경영전환', q:'디지털 역량이 경영 전반의 전환으로 이어졌나요?',
+      opts:[
+        {t:'디지털과 경영은 별개다', s:1},
+        {t:'도구 도입 수준에 머문다', s:2},
+        {t:'일부 경영 판단에 영향을 준다', s:3},
+        {t:'경영 의사결정의 기반이 됐다', s:4},
+        {t:'디지털이 경영 진화를 이끈다', s:5} ] },
+    { zone:'경영전환', q:'외부 솔루션·도구에 대한 의존도는 어떤가요?',
+      opts:[
+        {t:'전적으로 외부에 의존한다', s:1},
+        {t:'대부분 외부에 의존한다', s:2},
+        {t:'내부와 외부가 절반씩이다', s:3},
+        {t:'핵심은 내부에서 통제한다', s:4},
+        {t:'사유 주권이 내재화돼 있다', s:5} ] },
+    { zone:'경영전환', q:'환경이 급변해도 스스로 길을 여는 힘이 있나요?',
+      opts:[
+        {t:'외부 변화에 그대로 휘둘린다', s:1},
+        {t:'대응이 늘 한발 늦다', s:2},
+        {t:'어느 정도는 대응한다', s:3},
+        {t:'변화를 기회로 바꾸기도 한다', s:4},
+        {t:'스스로 판을 새로 짤 수 있다', s:5} ] }
+  ];
+
+  // 7단계 정의 + 로드맵
+  var STAGES = {
+    1:{ name:'전통적 운영구조', zone:'외부 종속', zoneLabel:'기반 형성 구간',
+        desc:'아직 디지털 도구보다 종이·수기·개인 경험에 의존하고 있습니다. 나쁜 것이 아니라, 디지털 전환의 출발선에 서 있는 상태입니다. 여기서 가장 중요한 것은 한 번에 다 바꾸려 하지 않고, 가장 자주 막히는 업무 하나부터 디지털로 옮기는 것입니다.',
+        road:[
+          {t:'가장 반복적인 업무부터 전산화', d:'수기로 처리하던 일 중 가장 자주 하는 업무 하나를 엑셀이나 도구로 옮깁니다.'},
+          {t:'문서·자료를 한곳에 모으기', d:'흩어진 자료를 공용 클라우드나 협업툴에 모아 기반을 만듭니다.'},
+          {t:'국산 SaaS 통합 컨설팅 검토', d:'우리 업무에 맞는 도구를 통과 함께 고르고 연결합니다.'} ] },
+    2:{ name:'전산화', zone:'외부 종속', zoneLabel:'기반 형성 구간',
+        desc:'수기 업무를 디지털로 옮기기 시작했습니다. 문서와 장부가 컴퓨터로 들어왔지만, 아직 데이터가 서로 연결되거나 판단을 돕지는 못합니다. 다음은 흩어진 도구와 데이터를 연결해 흐름을 만드는 단계입니다.',
+        road:[
+          {t:'도구 간 연결 정비', d:'따로 노는 도구들을 연결해 데이터가 오가도록 만듭니다.'},
+          {t:'협업툴·그룹웨어 통합', d:'협업툴 등 국산 SaaS로 정보를 한 흐름으로 모읍니다.'},
+          {t:'기본 인프라·보안 점검', d:'안정적으로 쓸 수 있는 기반 인프라를 갖춥니다.'} ] },
+    3:{ name:'인프라 정비', zone:'활용 중심', zoneLabel:'기반 형성 구간',
+        desc:'시스템과 네트워크의 기반을 갖췄습니다. 도구를 쓰는 환경은 마련됐으니, 이제 쌓이는 데이터를 자산으로 만들어 판단에 활용하는 단계로 나아갈 차례입니다.',
+        road:[
+          {t:'데이터 자산화 시작', d:'쌓인 데이터를 분류하고 의미 있는 지표로 정리합니다.'},
+          {t:'데이터 기반 의사결정 습관화', d:'감이 아니라 데이터로 결정하는 회의 구조를 만듭니다.'},
+          {t:'맞춤 도구 필요성 점검', d:'범용 도구의 한계가 느껴지는 지점을 찾습니다.'} ] },
+    4:{ name:'데이터 자산화', zone:'활용 중심', zoneLabel:'기반 형성 구간',
+        desc:'데이터가 자산이 되어 판단을 돕기 시작했습니다. 기반 형성 구간의 마지막 단계입니다. 다음은 범용 도구를 넘어 우리 회사에 맞는 구조를 직접 설계하는 구조 설계 구간으로 진입합니다.',
+        road:[
+          {t:'프라이빗 SaaS 개발 검토', d:'우리 업무에만 맞는 맞춤 도구를 만들 시점입니다. MVP는 통이 직접 빠르게 만들 수 있습니다.'},
+          {t:'기술 설계 주권 확보', d:'외부에 맡기던 기술 판단을 내부로 가져오기 시작합니다.'},
+          {t:'프로세스 자동화 확대', d:'반복 업무를 넘어 부서 간 흐름을 자동으로 연결합니다.'} ] },
+    5:{ name:'디지털 전환', zone:'구조 설계', zoneLabel:'구조 설계 구간',
+        desc:'기술 설계의 주권을 확보하기 시작했습니다. 도구를 쓰는 데서 나아가 우리에게 맞는 구조를 직접 설계하는 단계입니다. 다음은 AI가 운영에 녹아드는 Post-DX로 나아갑니다.',
+        road:[
+          {t:'AI 도구 업무 결합', d:'주요 업무에 AI를 결합해 판단과 실행을 돕게 합니다.'},
+          {t:'대형 시스템 개발 동행', d:'본격적인 시스템은 통이 국내·베트남 외주개발사와 연결해 진행합니다.'},
+          {t:'AI 네이티브 전환 설계', d:'AI가 운영에 녹아드는 구조를 통과 함께 설계합니다.'} ] },
+    6:{ name:'Post-DX', zone:'구조 설계', zoneLabel:'구조 설계 구간',
+        desc:'AI가 운영에 녹아들기 시작했습니다. 데이터와 구조 위에서 AI가 판단을 돕고 운영이 스스로 최적화됩니다. 이제 디지털 역량을 경영 전반의 전환으로 끌어올리는 마지막 단계가 남았습니다.',
+        road:[
+          {t:'유연한 비즈니스 모델 설계', d:'시스템이 만든 가능성을 새 비즈니스 모델로 연결합니다.'},
+          {t:'디지털을 경영전환으로', d:'디지털 역량을 경영 의사결정의 기반으로 끌어올립니다.'},
+          {t:'경영전환 상태분석', d:'통의 경영전환 진단으로 다음 도약의 구조를 설계합니다.'} ] },
+    7:{ name:'비즈니스 트랜스포메이션', zone:'사유 주권의 내재화', zoneLabel:'경영전환 구간',
+        desc:'사유 주권이 내재화된 단계입니다. 유연한 비즈니스 모델과 경영 진화가 가능한, DX의 정점이자 경영전환의 본령에 도달했습니다. 그러나 통함은 한 번으로 끝나지 않습니다. 새로운 막힘을 만나 다시 통할 준비가 되어 있는지, 그 영속성을 점검할 때입니다.',
+        road:[
+          {t:'경영전환 역량 점검', d:'한 번의 전환이 아니라 반복 가능한 역량인지 진단합니다.'},
+          {t:'새로운 BX Point 탐색', d:'다음 전환점이 어디서 올지 미리 살핍니다.'},
+          {t:'통과 함께 영속성 설계', d:'전환에 성공한 뒤에도 다시 찾아올 엔트로피를 견딜 구조를 만듭니다.'} ] }
+  };
+
+  var ZONE_BY_INDEX = function(i){
+    if(i < 6) return '기반 형성';
+    if(i < 11) return '구조 설계';
+    return '경영전환';
+  };
+
+  var answers = [];
+  var currentQ = 0;
+
+  var introEl = document.getElementById('dxqIntro');
+  var quizEl = document.getElementById('dxqQuiz');
+  var resultEl = document.getElementById('dxqResult');
+
+  document.getElementById('dxqStartBtn').addEventListener('click', function(){
+    introEl.style.display='none';
+    quizEl.style.display='block';
+    renderQ();
+  });
+
+  function renderQ(){
+    var q = QUESTIONS[currentQ];
+    if(!q) return;
+    document.getElementById('dxqCount').textContent = (currentQ+1)+' / 15';
+    document.getElementById('dxqZone').textContent = q.zone;
+    document.getElementById('dxqFill').style.width = ((currentQ+1)/15*100)+'%';
+    document.getElementById('dxqQNum').textContent = 'Q'+(currentQ+1);
+    document.getElementById('dxqQText').textContent = q.q;
+    var box = document.getElementById('dxqOptions');
+    box.innerHTML = '';
+    q.opts.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'tong-dxq-opt';
+      b.textContent = o.t;
+      b.addEventListener('click', function(){ pick(o.s, box); });
+      box.appendChild(b);
+    });
+    quizEl.classList.remove('tong-dxq-stage');
+    void quizEl.offsetWidth;
+    quizEl.classList.add('tong-dxq-stage');
+  }
+
+  function pick(score, box){
+    // 안전 가드: 이미 모든 문항 응답 완료 시 추가 클릭 차단
+    if(currentQ >= QUESTIONS.length) return;
+    answers.push(score);
+    Array.prototype.forEach.call(box.children, function(c){ c.classList.add('disabled'); });
+    currentQ++;
+    if(currentQ < QUESTIONS.length){
+      setTimeout(renderQ, 220);
+    } else {
+      setTimeout(showResult, 280);
+    }
+  }
+
+  function showResult(){
+    // 평균 점수(1~5)를 7단계로 매핑
+    var sum = answers.reduce(function(a,b){ return a+b; }, 0);
+    var avg = sum / answers.length; // 1.0 ~ 5.0
+    // 1.0~5.0 → 1~7단계 선형 매핑
+    var stage = Math.round(((avg - 1) / 4) * 6) + 1;
+    if(stage < 1) stage = 1;
+    if(stage > 7) stage = 7;
+    var s = STAGES[stage];
+
+    document.getElementById('dxqRNum').innerHTML = stage + '<span> / 7단계</span>';
+    document.getElementById('dxqRName').textContent = s.name;
+    document.getElementById('dxqRZone').textContent = s.zoneLabel + ' · ' + s.zone;
+    document.getElementById('dxqRDesc').textContent = s.desc;
+
+    // 미니 막대 7개
+    var ladder = document.getElementById('dxqRLadder');
+    ladder.innerHTML = '';
+    var heights = [28,38,48,58,68,80,90];
+    for(var i=1;i<=7;i++){
+      var bar = document.createElement('div');
+      bar.className = 'tong-dxq-r-ladder-bar' + (i===stage?' active':'');
+      bar.style.height = heights[i-1]+'%';
+      var num = document.createElement('div');
+      num.className = 'tong-dxq-r-ladder-num';
+      num.textContent = i;
+      bar.appendChild(num);
+      ladder.appendChild(bar);
+    }
+
+    // 로드맵
+    var steps = document.getElementById('dxqRSteps');
+    steps.innerHTML = '';
+    s.road.forEach(function(r, idx){
+      var step = document.createElement('div');
+      step.className = 'tong-dxq-r-step';
+      step.innerHTML = '<div class="tong-dxq-r-step-dot">'+(idx+1)+'</div>'+
+        '<div class="tong-dxq-r-step-body"><div class="tong-dxq-r-step-t">'+r.t+'</div>'+
+        '<div class="tong-dxq-r-step-d">'+r.d+'</div></div>';
+      steps.appendChild(step);
+    });
+
+    quizEl.style.display='none';
+    resultEl.style.display='block';
+    resultEl.classList.remove('tong-dxq-stage');
+    void resultEl.offsetWidth;
+    resultEl.classList.add('tong-dxq-stage');
+  }
+
+  document.getElementById('dxqRetry').addEventListener('click', function(){
+    answers = []; currentQ = 0;
+    resultEl.style.display='none';
+    introEl.style.display='block';
+  });
+})();
+</script><div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body></html>

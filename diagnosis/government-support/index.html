@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정부지원사업 간편매칭 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.progress-wrap{position:sticky;top:12px;z-index:20;margin:24px 0 28px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden;backdrop-filter:blur(8px)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.question-num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:14px;color:var(--primary);letter-spacing:1px;margin-bottom:12px}
+.question-text{font-size:19px;line-height:1.5;font-weight:500;color:var(--text);margin-bottom:28px;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{width:100%;padding:16px 20px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:14px}
+.option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.option:active{transform:translateY(0)}
+.option .num{width:28px;height:28px;border-radius:8px;background:rgba(54,132,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--primary);flex-shrink:0;transition:all .25s}
+.option:hover .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.eligibility-headline-wrap{text-align:center;margin-bottom:32px}
+.eligibility-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.eligibility-status{font-family:'Pretendard',sans-serif;font-style:normal;font-size:36px;line-height:1.2;color:var(--text);letter-spacing:-0.02em;margin-bottom:8px}
+.eligibility-status .accent{color:var(--primary)}
+.eligibility-meta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 16px;background:rgba(54,132,255,0.08);border:1px solid var(--glass-border);border-radius:99px;font-size:13px;font-weight:500;color:var(--primary);letter-spacing:0.3px}
+.eligibility-meta .num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px}
+.radar-wrap{display:flex;justify-content:center;margin:20px 0 16px;padding:10px 0}
+.radar-svg{width:100%;max-width:380px;height:auto}
+.top3-grid{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.top3-card{display:flex;align-items:center;gap:16px;padding:18px 20px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;position:relative}
+.top3-card.rank-1{background:linear-gradient(135deg,rgba(54,132,255,0.10),rgba(107,163,255,0.06));border-color:var(--primary)}
+.top3-rank{font-family:'Pretendard',sans-serif;font-style:normal;font-size:38px;color:var(--primary);line-height:1;flex-shrink:0;width:48px;text-align:center}
+.top3-content{flex:1;min-width:0}
+.top3-axis{font-size:11px;color:var(--text-muted);letter-spacing:2px;font-weight:600;margin-bottom:4px}
+.top3-name{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em}
+.top3-detail{font-size:12px;color:var(--text-soft);line-height:1.5}
+.top3-score{flex-shrink:0;text-align:right}
+.top3-score .pct{font-family:'Pretendard',sans-serif;font-style:normal;font-size:24px;color:var(--primary);line-height:1}
+.top3-score .label{font-size:10px;color:var(--text-muted);margin-top:2px;letter-spacing:1px}
+.roadmap{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.roadmap-item{display:flex;gap:16px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:12px;position:relative}
+.roadmap-period{flex-shrink:0;min-width:72px}
+.roadmap-period .term{font-family:'Pretendard',sans-serif;font-style:normal;font-size:13px;color:var(--primary);letter-spacing:1px;line-height:1}
+.roadmap-period .month{font-size:11px;color:var(--text-muted);margin-top:4px;font-weight:500}
+.roadmap-content{flex:1}
+.roadmap-content .title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.roadmap-content .desc{font-size:13px;color:var(--text-soft);line-height:1.6}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.consultant-text p{margin-bottom:14px}
+.consultant-text p:last-child{margin-bottom:0}
+.consultant-text strong{color:var(--primary);font-weight:600}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .question-text{font-size:17px}
+  .card{padding:26px 22px}
+  .eligibility-status{font-size:28px}
+  .top3-rank{font-size:32px;width:40px}
+  .top3-name{font-size:15px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/government-support/"/><meta name="description" content="회사 조건을 입력하면 적합한 정부지원사업을 7축으로 매칭해 TOP 3와 간편 로드맵을 안내하는 중소기업 정부지원사업 자가진단."/><meta property="og:title" content="정부지원사업 간편매칭 — 통 TONG"/><meta property="og:description" content="회사 조건을 입력하면 적합한 정부지원사업을 7축으로 매칭해 TOP 3와 간편 로드맵을 안내하는 중소기업 정부지원사업 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/government-support/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "정부지원사업 매칭", "description": "회사 조건에 맞는 정부지원사업을 간편 매칭", "url": "https://www.workstong.com/diagnosis/government-support/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "정부지원사업 매칭", "item": "https://www.workstong.com/diagnosis/government-support/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+        <h1>정부지원사업<br><span class="accent">자가진단</span></h1>
+    <p>자격 진단·7개 영역(성장·수출·기술·디지털·인력·자금·인증) 매칭·방향성 식별을 한 번에 측정해 적합 사업군과 간편 로드맵을 제시합니다.</p>
+  </div>
+  <div class="card popIn" id="start-card">
+    <div class="section-title">진단 안내</div>
+    <p style="font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:8px">· 총 15문항, 약 5~7분 소요 · 자격 진단(4문항) + 7축 매칭 진단(8문항) + 방향성 식별(3문항) · 결과: 자격 판정 + 7축 방사형 그래프 + TOP 3 사업군 + 간편 로드맵 · 응답 데이터는 저장되지 않습니다</p>
+    <div class="notice-box">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      정부지원사업의 본질은 자격 정비와 사업군 매칭 정확도에서 결정됩니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="startQuiz()">
+      진단 시작하기 →
+    </button>
+  </div>
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span id="progress-text">1 / 15</span>
+        <span id="progress-axis">자격 진단</span>
+      </div>
+    </div>
+    <div class="card popIn" id="question-card">
+      <div class="question-num serif" id="question-num">QUESTION 01</div>
+      <div class="question-text" id="question-text">문항을 불러오는 중...</div>
+      <div class="options" id="options-container"></div>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none">
+    <div class="card popIn" id="result-card">
+      <div class="eligibility-headline-wrap">
+        <div class="eligibility-eyebrow">ELIGIBILITY 자격 진단</div>
+        <div class="eligibility-status serif" id="eligibility-status-headline">—</div>
+        <div class="eligibility-meta">
+          <span>충족 항목</span>
+          <span class="num" id="eligibility-count-num">0</span>
+          <span>/ 4</span>
+        </div>
+      </div>
+      <div class="section-title">7축 매칭 진단</div>
+      <div class="radar-wrap">
+        <svg class="radar-svg" id="radar-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="section-title">적합 사업군 TOP 3</div>
+      <div class="top3-grid" id="top3-grid"></div>
+      <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="section-title">간편 로드맵</div>
+      <div class="roadmap" id="roadmap-container"></div>
+      <div class="section-title">경영전환 컨설턴트 진단</div>
+      <div class="consultant-box">
+        <div class="consultant-label">CONSULTANT'S NOTE</div>
+        <div class="consultant-text" id="consultant-text"></div>
+      </div>
+      </div><div class="cta-wrap">
+        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 정밀 매칭 상담 →</a>
+        <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const QUESTIONS = [
+  { type:'eligibility', criterion:'업력', section:'자격 진단',
+    text:'우리 회사의 사업 영위 기간은?',
+    options:['예비창업 ~ 1년 미만','1~3년 (창업기)','3~7년 (도약기)','7년 이상 (성숙기)'] },
+  { type:'eligibility', criterion:'매출 추이', section:'자격 진단',
+    text:'최근 3년간 매출 추이는?',
+    options:['데이터 없음 (예비/신생)','정체 또는 감소','완만한 성장 (10% 미만)','빠른 성장 (10% 이상)'] },
+  { type:'eligibility', criterion:'재무 건전성', section:'자격 진단',
+    text:'국세·지방세 체납, 4대보험 체납 등 재무 결격 사유는?',
+    options:['체납 또는 결격 사유 있음','일부 정리 중','없음, 모든 납세 증명 가능','모든 증명 발급 완료, 즉시 신청 가능'] },
+  { type:'eligibility', criterion:'기본 서류·인증', section:'자격 진단',
+    text:'기본 서류(사업자등록·재무제표·중소기업확인서)와 인증 보유 현황은?',
+    options:['준비된 것 거의 없음','기본 서류만 일부 보유','기본 서류 완비','기본 서류 + 벤처·이노비즈·메인비즈 등 인증 보유'] },
+  { type:'axis', axis:'G', section:'G · 성장단계',
+    text:'우리 회사의 다음 1년 성장 목표는?',
+    options:['아이디어 사업화·생존이 우선 (창업기)','안정화 우선 (창업기 후반)','스케일업·매출 확대 (도약기)','신사업 진출·재도약 (성숙기)'] },
+  { type:'axis', axis:'E', section:'E · 수출',
+    text:'수출 의지와 현황은?',
+    options:['수출 경험·의지 없음','내수 위주, 수출 검토 중','일부 수출 진행 중','본격 수출 추진 또는 수출 매출 30% 이상'] },
+  { type:'axis', axis:'T', section:'T · 기술·R&D',
+    text:'기술 보유 및 R&D 활동 수준은?',
+    options:['기술 차별성 낮음, R&D 활동 없음','자체 노하우 보유, 비정기적 개선','특허·실용신안 보유, 연 1건 이상 R&D','기업부설연구소 운영, 정부 R&D 수주 경험'] },
+  { type:'axis', axis:'D', section:'D · 디지털 전환',
+    text:'디지털 시스템(ERP·MES·CRM·AI) 도입과 의지는?',
+    options:['미도입, 수기 관리, 의지 낮음','엑셀·간이 시스템 일부, 검토 단계','통합 시스템 운영, 적극 추진 중','AI·데이터 기반 고도화 진행'] },
+  { type:'axis', axis:'H', section:'H · 인력',
+    text:'신규 인력 채용 및 양성 계획은?',
+    options:['채용 계획 없음, 인력양성 활동 없음','1~2명 충원 검토, 가끔 외부 교육','3~5명 채용 계획, 정기 교육 운영','5명+ 또는 청년 적극 채용, 일학습병행'] },
+  { type:'axis', axis:'F', section:'F · 자금',
+    text:'자금 조달 필요성과 정책자금 활용 경험은?',
+    options:['자금 충분, 활용 경험 없음','향후 검토, 일반 대출만 경험','정책자금·보증 검토 중','즉시 자금 필요, 정책자금 다수 활용'] },
+  { type:'axis', axis:'C', section:'C · 인증',
+    text:'인증·등록 보유 및 취득 의지는?',
+    options:['보유 없음, 관심 없음','사업자등록만, 정보 탐색 중','벤처·이노비즈·메인비즈 중 1개 + 추가 계획','다수 인증 보유 + 추가 적극 추진'] },
+  { type:'axis', axis:'G', section:'G · 성장단계',
+    text:'현재 회사의 가장 시급한 과제는?',
+    options:['회사 설립·초기 시장 진입','제품 출시 후 초기 매출 확보','시장 확장·매출 스케일업','신사업 발굴·사업 전환'] },
+  { type:'direction', section:'자금 성격',
+    text:'우리 회사에 더 필요한 자금 성격은? (가이드: 빌리는 돈 vs 받는 돈)',
+    options:[
+      {key:'loan', text:'운전·시설자금 등 자유롭게 쓸 수 있는 정책자금(빌리는 돈)'},
+      {key:'grant', text:'특정 과제(R&D·시제품·마케팅) 수행을 조건으로 한 보조금·바우처(받는 돈)'},
+      {key:'both', text:'두 가지 모두 필요, 자금 포트폴리오 전략'},
+      {key:'unsure', text:'잘 모름, 어떤 게 맞는지 판단 필요'},
+    ] },
+  { type:'direction', section:'추진 시급도',
+    text:'정부지원사업 신청·추진의 시급도는?',
+    options:[
+      {key:'urgent', text:'즉시 (1~3개월 내) — 자금·과제가 시급'},
+      {key:'soon', text:'단기 (3~6개월 내) — 준비 후 신청'},
+      {key:'mid', text:'중기 (6~12개월 내) — 자격·서류 정비 후 신청'},
+      {key:'plan', text:'장기 (1년 이상) — 차년도 사업 기획 단계'},
+    ] },
+  { type:'direction', section:'외부 도움 의향',
+    text:'사업계획서 작성·신청 과정에 대한 외부 도움 의향은?',
+    options:[
+      {key:'self', text:'자체 작성·신청, 외부 도움 불필요'},
+      {key:'review', text:'자체 작성하되 검토 정도의 도움이 필요'},
+      {key:'consult', text:'전문 컨설턴트와 함께 작성·전략 수립'},
+      {key:'broker_warning', text:'"100% 선정 보장" 같은 제안을 받은 적 있음'},
+    ] },
+];
+const AXES = ['G','E','T','D','H','F','C'];
+const AXIS_NAMES = {
+  G:{ko:'성장단계', en:'Growth'}, E:{ko:'수출', en:'Export'}, T:{ko:'기술·R&D', en:'Tech'},
+  D:{ko:'디지털전환', en:'Digital'}, H:{ko:'인력', en:'HR'}, F:{ko:'자금', en:'Finance'}, C:{ko:'인증', en:'Certification'},
+};
+const AXIS_PROGRAMS = {
+  G:{ name:'성장단계 지원사업', detail:'창업·도약·재도약 단계별 패키지 사업',
+    low:'예비창업패키지, 초기창업패키지, 청년창업사관학교', mid:'창업도약패키지, K-Startup 도약지원', high:'강소기업, 사업전환지원, 명문장수기업' },
+  E:{ name:'수출지원사업', detail:'수출바우처, 글로벌 진출, 해외 마케팅',
+    low:'내수기업의 수출기업화 지원', mid:'수출바우처(일반), 해외전시회 참가지원', high:'수출바우처(고급), 글로벌강소기업, 무역금융' },
+  T:{ name:'R&D·기술지원', detail:'중기부·산업부 R&D, 기술보호, IP-R&D',
+    low:'기술혁신 바우처, 산학연 협력 R&D', mid:'중기부 R&D, IP-R&D, 기술보호 바우처', high:'산업부 R&D, 차세대 R&D, 딥테크 R&D' },
+  D:{ name:'디지털·AI 전환', detail:'스마트공장, AI·데이터·클라우드 바우처',
+    low:'디지털 기초역량 바우처', mid:'스마트공장(기초·고도화), 데이터·클라우드 바우처', high:'AI바우처, 스마트공장(고도화2), 마이데이터' },
+  H:{ name:'인력·교육 지원', detail:'청년채용, 일학습병행, 인력양성',
+    low:'청년채용 특별장려금', mid:'일학습병행, K-디지털 트레이닝', high:'미래내일 일경험, 청년재직자 내일채움공제' },
+  F:{ name:'정책자금·보증', detail:'중진공·신보·기보 정책금융',
+    low:'기보 일반보증, 지자체 융자', mid:'신보·기보 특례보증, 중진공 운전자금', high:'중진공 시설자금, 혁신성장 정책자금' },
+  C:{ name:'인증·등록 지원', detail:'벤처·이노비즈·메인비즈·기업부설연구소',
+    low:'벤처기업 확인, 기업부설연구소 인증', mid:'이노비즈, 메인비즈 인증', high:'명문장수기업, ISO, 단체표준 인증' },
+};
+let currentQ = 0;
+let answers = [];
+function startQuiz(){
+  document.getElementById('start-card').style.display='none';
+  document.getElementById('hero-section').style.display='none';
+  document.getElementById('quiz-screen').style.display='block';
+  currentQ = 0; answers = [];
+  renderQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const card = document.getElementById('question-card');
+  card.style.animation='none'; void card.offsetWidth;
+  card.style.animation='popIn .4s cubic-bezier(.4,0,.2,1) both';
+  document.getElementById('question-num').textContent = 'QUESTION ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('question-text').textContent = q.text;
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('progress-axis').textContent = q.section;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  if(q.type === 'direction'){
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="num">'+(idx+1)+'</span><span>'+opt.text+'</span>';
+      btn.onclick = () => answerQuestion(opt.key);
+      container.appendChild(btn);
+    });
+  } else {
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="num">'+(idx+1)+'</span><span>'+opt+'</span>';
+      btn.onclick = () => answerQuestion(idx + 1);
+      container.appendChild(btn);
+    });
+  }
+}
+function answerQuestion(value){
+  if(currentQ >= QUESTIONS.length) return;
+  answers.push(value); currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.querySelectorAll('#options-container .option').forEach(b => {
+      b.style.pointerEvents = 'none'; b.style.opacity = '0.5';
+    });
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 300);
+  } else { renderQuestion(); }
+}
+function calcEligibility(){
+  let count = 0;
+  for(let i=0; i<4; i++){ if(answers[i] >= 3) count++; }
+  return count;
+}
+function calcAxes(){
+  const sums = {
+    G: answers[4] + answers[11], E: answers[5] * 2, T: answers[6] * 2,
+    D: answers[7] * 2, H: answers[8] * 2, F: answers[9] * 2, C: answers[10] * 2,
+  };
+  const pcts = {};
+  AXES.forEach(ax => { pcts[ax] = Math.round((sums[ax]/8)*100); });
+  return { sums, pcts };
+}
+function getTop3(pcts){
+  return Object.entries(pcts).sort((a,b) => b[1] - a[1]).slice(0,3).map(([axis, pct]) => ({axis, pct}));
+}
+function getProgramsForAxis(axis, sum){
+  const data = AXIS_PROGRAMS[axis];
+  if(sum <= 3) return data.low;
+  if(sum <= 5) return data.mid;
+  return data.high;
+}
+function getDirections(){
+  return { fund: answers[12], urgency: answers[13], help: answers[14] };
+}
+function drawRadar(pcts){
+  const svg = document.getElementById('radar-svg');
+  const cx = 190, cy = 190, R = 120; const n = AXES.length;
+  let html = '';
+  for(let level=1; level<=5; level++){
+    const r = (R / 5) * level; let pts = '';
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+      pts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    pts += 'Z';
+    html += `<path d="${pts}" fill="none" stroke="rgba(54,132,255,${0.05 + level*0.025})" stroke-width="1"/>`;
+  }
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * R; const y = cy + Math.sin(angle) * R;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(54,132,255,0.1)" stroke-width="1"/>`;
+  }
+  let dataPts = ''; const dataPoints = [];
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * (pcts[AXES[i]] / 100);
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    dataPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    dataPoints.push({x, y, axis: AXES[i]});
+  }
+  dataPts += 'Z';
+  html += `<defs><linearGradient id="radarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.35"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.20"/></linearGradient></defs>`;
+  html += `<path d="${dataPts}" fill="url(#radarGrad)" stroke="#3684FF" stroke-width="2" stroke-linejoin="round"/>`;
+  dataPoints.forEach(pt => {
+    html += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="4" fill="#3684FF" stroke="#fff" stroke-width="2"/>`;
+  });
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const labelR = R + 24;
+    const x = cx + Math.cos(angle) * labelR; const y = cy + Math.sin(angle) * labelR;
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="18" fill="#3684FF">${AXES[i]}</text>`;
+    const subR = R + 44;
+    const sx = cx + Math.cos(angle) * subR; const sy = cy + Math.sin(angle) * subR;
+    html += `<text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac" font-weight="500">${AXIS_NAMES[AXES[i]].ko}</text>`;
+  }
+  svg.innerHTML = html;
+}
+function generateConsultantNote(eligibilityCount, axes, top3, directions){
+  const top1 = top3[0]; const top2 = top3[1]; const top3rd = top3[2];
+  const pctValues = AXES.map(ax => axes.pcts[ax]);
+  const allEqual = pctValues.every(v => v === pctValues[0]);
+  const maxPct = Math.max(...pctValues); const minPct = Math.min(...pctValues);
+  let paragraphs = [];
+  let p1 = '';
+  if(eligibilityCount === 4){
+    p1 = `귀사는 자격 진단 4가지 항목 모두를 충족합니다. <strong>즉시 신청 가능한 상태입니다.</strong> 업력·매출·재무건전성·기본 서류가 모두 갖춰져 있어, 적합 사업군의 공고가 뜨면 곧바로 신청 절차에 들어갈 수 있습니다. 정부지원사업 가이드의 표현으로, "공고 마감일 전에 미리 준비해두는 습관"이 이미 자리 잡혀 있는 단계입니다.`;
+  } else if(eligibilityCount === 3){
+    p1 = `귀사는 자격 진단 4가지 항목 중 3개를 충족합니다. <strong>대부분의 사업에 신청 가능하지만, 한 가지 보강이 필요합니다.</strong> 부족한 항목 하나가 채워지지 않으면 서류 단계에서 탈락할 수 있습니다. 가이드의 경고대로, "기본 요건을 충족하지 못하면 서류조차 통과할 수 없습니다." 보강이 필요한 영역을 먼저 정리하고 본격 신청을 진행하시기 바랍니다.`;
+  } else if(eligibilityCount === 2){
+    p1 = `귀사는 자격 진단 4가지 항목 중 2개를 충족합니다. <strong>기본 자격 정비가 우선되어야 할 단계입니다.</strong> 두 가지 항목이 부족한 상태에서는 신청 가능한 사업의 폭이 크게 좁아집니다. 사업 신청보다 자격 보강을 먼저 진행하는 것이 효율적이며, 보강이 끝난 후 신청하면 합격률이 비약적으로 올라갑니다.`;
+  } else {
+    p1 = `귀사는 자격 진단 4가지 항목 중 ${eligibilityCount}개를 충족합니다. <strong>본격 신청에 앞서 기본 자격의 전반적 정비가 시급한 상태입니다.</strong> 가이드에서 강조하듯, 정부지원사업의 첫 관문은 "신청자격"입니다. 자격이 정비되지 않은 상태에서 사업계획서를 아무리 잘 써도 서류 단계에서 걸립니다. 자격 정비에 3~6개월을 먼저 투자하는 것이 빠른 길입니다.`;
+  }
+  paragraphs.push(p1);
+  let p2 = '';
+  if(allEqual){
+    if(maxPct >= 60){
+      p2 = `7축 매칭 진단 결과, 모든 영역이 ${maxPct}% 적합도로 균등하게 분포되어 있습니다. <strong>특정 영역에 치우치지 않은 균형 잡힌 상태입니다.</strong> 어느 한 영역에 집중하기보다 종합적인 사업 포트폴리오 전략이 적합한 상태이며, 가이드에서 강조하는 "통합형·패키지형 과제"에 잘 맞는 분포입니다.`;
+    } else {
+      p2 = `7축 매칭 진단 결과, 모든 영역이 ${maxPct}% 적합도로 비슷한 수준에 있습니다. <strong>어느 한 영역도 두드러지지 않는 평탄한 분포입니다.</strong> 이 상태에서는 사업 신청보다 한두 영역을 의식적으로 키워 적합도를 높이는 작업이 우선입니다. 적합도 50% 이하인 영역에서는 신청해도 합격률이 낮습니다.`;
+    }
+  } else {
+    p2 = `7축 매칭 진단 결과, <strong>${AXIS_NAMES[top1.axis].ko}(${top1.pct}%) · ${AXIS_NAMES[top2.axis].ko}(${top2.pct}%) · ${AXIS_NAMES[top3rd.axis].ko}(${top3rd.pct}%)</strong> 순으로 적합도가 높습니다. 특히 <strong>${AXIS_PROGRAMS[top1.axis].name}</strong>이 우선 추진 영역입니다. `;
+    if(top1.pct >= 75){
+      p2 += `${AXIS_NAMES[top1.axis].ko} 영역 적합도가 75% 이상으로 매우 높아 즉시 신청을 검토할 수 있는 단계이며, 준비된 자원을 빠르게 정부지원과 결합시킬 수 있는 시점입니다.`;
+    } else if(top1.pct >= 50){
+      p2 += `${AXIS_NAMES[top1.axis].ko}을(를) 우선 추진하되, 두 번째 적합 영역인 ${AXIS_PROGRAMS[top2.axis].name}을(를) 병행 검토하면 시너지가 발생합니다.`;
+    } else {
+      p2 += `다만 가장 높은 적합도조차 ${top1.pct}%로, 특정 영역에 강점이 분명히 형성되지 않은 상태입니다. 한 영역의 적합도를 의식적으로 키우는 작업이 사업 신청보다 우선되어야 합니다.`;
+    }
+  }
+  paragraphs.push(p2);
+  let p3 = '';
+  if(directions.fund === 'loan'){
+    p3 += `자금 성격에서 <strong>정책자금(빌리는 돈)</strong>을 선호하시는 분포입니다. 운전·시설자금이 자유롭게 필요한 상황으로 보이며, 신보·기보 보증과 중진공 정책자금이 우선 검토 영역입니다. `;
+  } else if(directions.fund === 'grant'){
+    p3 += `자금 성격에서 <strong>지원사업(받는 돈)</strong>을 선호하시는 분포입니다. R&D·시제품·마케팅 등 특정 과제 수행이 가능한 상태로, 가이드의 표현으로 "사업계획서의 혁신성과 사업성"이 합격을 결정합니다. `;
+  } else if(directions.fund === 'both'){
+    p3 += `자금 성격에서 <strong>융자와 보조금의 자금 포트폴리오 전략</strong>을 선택하셨습니다. 가이드에서 권하는 가장 성숙한 접근으로, 두 자금의 성격 차이를 정확히 이해하고 계신 분포입니다. `;
+  } else {
+    p3 += `자금 성격에 대한 판단이 아직 정리되지 않은 상태입니다. 가이드의 표현대로, "빌리는 돈"과 "받는 돈"은 접근 전략이 완전히 다르므로, 우선 자금 성격 판단부터 명확히 하는 것이 효율적입니다. `;
+  }
+  if(directions.urgency === 'urgent'){
+    p3 += `시급도가 매우 높은 단계입니다. 다만 가이드의 경고대로, "3월에 시작된다고 해서 3월에 준비하면 이미 늦습니다." 즉시 신청 가능한 사업이 있는지 우선 점검하시고, 없다면 6개월 후 본 사업을 위한 자격·서류 정비를 즉시 시작해야 합니다.`;
+  } else if(directions.urgency === 'soon'){
+    p3 += `3~6개월 단기 시급도입니다. 가이드 5장의 STEP 1·2·3(사업 찾기 → 컨설팅 함정 회피 → 서류 준비)을 순서대로 진행하기에 적합한 시점입니다.`;
+  } else if(directions.urgency === 'mid'){
+    p3 += `6~12개월 중기 준비 단계입니다. 자격 정비와 인증 취득에 충분한 시간이 있어, 가장 합격률이 높은 형태의 신청 준비가 가능합니다.`;
+  } else {
+    p3 += `1년 이상 장기 기획 단계입니다. 가이드에서 강조하는 "1년 전부터 차근차근 준비하는 기업이 가장 성공 확률이 높다"는 원칙이 적용되는 시점입니다.`;
+  }
+  paragraphs.push(p3);
+  let p4 = '';
+  if(directions.help === 'broker_warning'){
+    p4 = `<strong>중요한 경고: "100% 선정 보장"이라는 제안을 받으신 적이 있다고 응답하셨습니다.</strong> 가이드에서 명시하듯, 정부나 공공기관은 절대 먼저 전화나 문자로 "지원 대상자로 선정되었다"고 안내하지 않습니다. 이런 연락은 99% 사기성 광고입니다. 선수수료 사기, 불법 행위 연루, 향후 3년간 정부지원사업 참여 제한이라는 큰 불이익이 따를 수 있습니다. 어려울 때는 국번없이 1357(중소기업 통합콜센터)을 이용하시거나, 합법적인 컨설팅을 통해 진행하시기 바랍니다.`;
+  } else if(directions.help === 'self'){
+    p4 = `자체 작성·신청을 선호하시는 분포입니다. 자력 진행이 가능하다면 가장 깔끔한 방식이지만, 가이드 6장의 PSST 프레임워크(Problem·Solution·Scale-up·Team)와 심사위원이 보는 관점을 사전 학습하시면 합격률이 크게 올라갑니다. <strong>먼저 움직일 것은 정해졌으니, 미루지 않는 것이 가장 중요합니다.</strong>`;
+  } else if(directions.help === 'review'){
+    p4 = `자체 작성 후 검토 단계의 외부 도움이 필요하시다는 분포입니다. 가장 효율적인 방식 중 하나로, 사업계획서 초안을 직접 작성하면서 회사의 본질을 정리하고, 외부 시각으로 부족한 부분만 보강하는 접근입니다. <strong>30분 무료 정밀 매칭 상담</strong>을 통해 어느 사업군부터 시작할지, 사업계획서의 어느 부분을 강화할지 함께 점검할 수 있습니다.`;
+  } else {
+    p4 = `전문 컨설턴트와 함께 작성·전략 수립을 원하시는 분포입니다. 다만 가이드의 경고대로, "묻지마 컨설팅"의 함정을 피해야 합니다. <strong>30분 무료 정밀 매칭 상담</strong>을 통해 귀사에 가장 적합한 사업군과 합격 가능성 높은 신청 전략을 함께 설계할 수 있습니다. 정밀 매칭은 자격 정비 → 사업군 선정 → 사업계획서 핵심 메시지 도출까지 단계적으로 진행됩니다.`;
+  }
+  paragraphs.push(p4);
+  return paragraphs.map(p => '<p>' + p + '</p>').join('');
+}
+function generateRoadmap(top3, directions){
+  const top1 = top3[0]; const top2 = top3[1]; const top3rd = top3[2];
+  return [
+    { term:'NOW', month:'1~3개월', title:AXIS_PROGRAMS[top1.axis].name + ' 우선 추진',
+      desc:`적합도가 가장 높은 영역(${top1.pct}%)입니다. 사업공고 모니터링과 동시에 신청서 초안 준비를 시작하십시오. ${getProgramsForAxis(top1.axis, top1.pct/12.5)}` },
+    { term:'NEXT', month:'3~6개월', title:AXIS_PROGRAMS[top2.axis].name + ' 단계적 준비',
+      desc:`두 번째 우선 영역(${top2.pct}%)입니다. 1단계 사업 추진과 병행하여 신청 자격·서류 정비를 시작하십시오.` },
+    { term:'LATER', month:'6~12개월', title:AXIS_PROGRAMS[top3rd.axis].name + ' + 약점 영역 보강',
+      desc:`세 번째 영역(${top3rd.pct}%)과 함께, 적합도가 낮은 축의 기초 정비(인증·시스템·인력)를 병행하십시오.` },
+  ];
+}
+function showResult(){
+  const eligibilityCount = calcEligibility();
+  const axes = calcAxes();
+  const top3 = getTop3(axes.pcts);
+  const directions = getDirections();
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('result-screen').style.display='block';
+  const statusEl = document.getElementById('eligibility-status-headline');
+  if(eligibilityCount === 4){ statusEl.innerHTML = '<span class="accent">즉시 신청</span> 가능'; }
+  else if(eligibilityCount === 3){ statusEl.innerHTML = '대부분 가능, <span class="accent">1개 보강</span>'; }
+  else if(eligibilityCount === 2){ statusEl.innerHTML = '<span class="accent">자격 보강</span>이 우선'; }
+  else { statusEl.innerHTML = '<span class="accent">기본 자격</span> 정비 시급'; }
+  document.getElementById('eligibility-count-num').textContent = eligibilityCount;
+  drawRadar(axes.pcts);
+  const top3html = top3.map((item, idx) => {
+    const axis = item.axis; const data = AXIS_PROGRAMS[axis];
+    const sumEquivalent = (item.pct / 100) * 8;
+    const programs = getProgramsForAxis(axis, sumEquivalent);
+    return `<div class="top3-card rank-${idx+1}">
+      <div class="top3-rank serif">0${idx+1}</div>
+      <div class="top3-content">
+        <div class="top3-axis">${axis} · ${AXIS_NAMES[axis].ko.toUpperCase()}</div>
+        <div class="top3-name">${data.name}</div>
+        <div class="top3-detail">${programs}</div>
+      </div>
+      <div class="top3-score">
+        <div class="pct">${item.pct}<span style="font-size:14px">%</span></div>
+        <div class="label">FIT</div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('top3-grid').innerHTML = top3html;
+  const roadmap = generateRoadmap(top3, directions);
+  const roadmapHtml = roadmap.map(item => `
+    <div class="roadmap-item">
+      <div class="roadmap-period">
+        <div class="term">${item.term}</div>
+        <div class="month">${item.month}</div>
+      </div>
+      <div class="roadmap-content">
+        <div class="title">${item.title}</div>
+        <div class="desc">${item.desc}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('roadmap-container').innerHTML = roadmapHtml;
+  document.getElementById('consultant-text').innerHTML = generateConsultantNote(eligibilityCount, axes, top3, directions);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('result-screen').style.display='none';
+  document.getElementById('hero-section').style.display='block';
+  document.getElementById('start-card').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

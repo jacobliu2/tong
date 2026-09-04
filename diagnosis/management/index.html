@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5분 경영전환 진단 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.progress-wrap{position:sticky;top:12px;z-index:20;margin:24px 0 28px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden;backdrop-filter:blur(8px)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.question-num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:14px;color:var(--primary);letter-spacing:1px;margin-bottom:12px}
+.question-text{font-size:19px;line-height:1.5;font-weight:500;color:var(--text);margin-bottom:28px;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{width:100%;padding:16px 20px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:14px}
+.option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.option:active{transform:translateY(0)}
+.option .num{width:28px;height:28px;border-radius:8px;background:rgba(54,132,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--primary);flex-shrink:0;transition:all .25s}
+.option:hover .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.bx-headline-wrap{text-align:center;margin-bottom:32px}
+.bx-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.bx-status{font-family:'Pretendard',sans-serif;font-style:normal;font-size:36px;line-height:1.2;color:var(--text);letter-spacing:-0.02em;margin-bottom:8px}
+.bx-status .accent{color:var(--primary)}
+.bx-count{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 16px;background:rgba(54,132,255,0.08);border:1px solid var(--glass-border);border-radius:99px;font-size:13px;font-weight:500;color:var(--primary);letter-spacing:0.3px}
+.bx-count .num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.cycle-wrap{margin:24px 0;padding:10px 0}
+.cycle-svg{width:100%;max-width:600px;height:auto;display:block;margin:0 auto}
+.cycle-label{font-family:'Pretendard',sans-serif;font-style:normal;fill:var(--text-muted);font-size:18px}
+.cycle-label.active{fill:var(--primary);font-size:24px;font-weight:bold}
+.cycle-sublabel{font-family:'Noto Sans KR',sans-serif;fill:var(--text-muted);font-size:11px;font-weight:500}
+.cycle-sublabel.active{fill:var(--primary);font-weight:600;font-size:12px}
+.phase-box{padding:20px 22px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:14px}
+.phase-name{font-family:'Pretendard',sans-serif;font-style:normal;font-size:24px;color:var(--primary);margin-bottom:6px;letter-spacing:-0.01em}
+.phase-name .ko{font-size:16px;color:var(--text);margin-left:8px;letter-spacing:-0.01em}
+.phase-desc{font-size:14px;line-height:1.8;color:var(--text);letter-spacing:-0.01em}
+.radar-wrap{display:flex;justify-content:center;margin:20px 0 16px;padding:10px 0}
+.radar-svg{width:100%;max-width:340px;height:auto}
+.axis-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.axis-summary-cell{text-align:center;padding:14px 6px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:12px}
+.axis-summary-cell .char{font-family:'Pretendard',sans-serif;font-style:normal;font-size:24px;color:var(--primary);margin-bottom:2px}
+.axis-summary-cell .name{font-size:11px;color:var(--text-muted);letter-spacing:0.5px;margin-bottom:6px}
+.axis-summary-cell .score{font-family:'Pretendard',sans-serif;font-style:normal;font-size:20px;color:var(--text)}
+.axis-summary-cell .score .unit{font-size:11px;color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;margin-left:2px}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.consultant-text p{margin-bottom:14px}
+.consultant-text p:last-child{margin-bottom:0}
+.consultant-text strong{color:var(--primary);font-weight:600}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .question-text{font-size:17px}
+  .card{padding:26px 22px}
+  .bx-status{font-size:28px}
+  .phase-name{font-size:22px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/management/"/><meta name="description" content="ABCDE 국면과 人營財産 축으로 지금 회사가 어느 전환점에 있는지 5분 만에 진단합니다."/><meta property="og:title" content="경영전환 자가진단 — 통 TONG"/><meta property="og:description" content="ABCDE 국면과 人營財産 축으로 지금 회사가 어느 전환점에 있는지 5분 만에 진단합니다."/><meta property="og:url" content="https://www.workstong.com/diagnosis/management/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "경영전환 자가진단", "description": "ABCDE·BX Point로 지금 회사가 어느 국면에 있는지 짚는 종합 진단", "url": "https://www.workstong.com/diagnosis/management/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "경영전환 자가진단", "item": "https://www.workstong.com/diagnosis/management/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+        <h1>경영전환<br><span class="accent">자가진단</span></h1>
+    <p>경영전환 관점에 따라 BX Point 진단·4축(人營財産) 강약·ABCDE 5단계를 한 번에 측정합니다.</p>
+  </div>
+  <div class="card popIn" id="start-card">
+    <div class="section-title">진단 안내</div>
+    <p style="font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:8px">· 총 15문항, 약 5~7분 소요 · BX Point 진단(4문항) + 4축 진단(8문항) + ABCDE 단계(3문항) · 결과: 전환 시점 판정 + 조직 코드 + 현재 단계 + 컨설턴트 진단 · 응답 데이터는 저장되지 않습니다</p>
+    <div class="notice-box">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      경영전환의 본질은 자각·BX Point·전환의 흐름 속에서 드러납니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="startQuiz()">
+      진단 시작하기 →
+    </button>
+  </div>
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span id="progress-text">1 / 15</span>
+        <span id="progress-axis">BX Point 진단</span>
+      </div>
+    </div>
+    <div class="card popIn" id="question-card">
+      <div class="question-num serif" id="question-num">QUESTION 01</div>
+      <div class="question-text" id="question-text">문항을 불러오는 중...</div>
+      <div class="options" id="options-container"></div>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none">
+    <div class="card popIn" id="result-card">
+      <div class="bx-headline-wrap">
+        <div class="bx-eyebrow">BX POINT 진단</div>
+        <div class="bx-status serif" id="bx-status-headline">—</div>
+        <div class="bx-count">
+          <span>해당 기준</span>
+          <span class="num" id="bx-count-num">0</span>
+          <span>/ 4</span>
+        </div>
+      </div>
+      <div class="section-title">현재 단계 — ABCDE 도식</div>
+      <div class="cycle-wrap">
+        <svg class="cycle-svg" id="cycle-svg" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="phase-box">
+        <div class="phase-name serif" id="phase-name">— <span class="ko">—</span></div>
+        <div class="phase-desc" id="phase-desc"></div>
+      </div>
+      <div class="section-title">4축 진단 — 人 · 營 · 財 · 産</div>
+      <div class="radar-wrap">
+        <svg class="radar-svg" id="radar-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="axis-summary" id="axis-summary"></div>
+      <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="section-title">경영전환 컨설턴트 진단</div>
+      <div class="consultant-box">
+        <div class="consultant-label">CONSULTANT'S NOTE</div>
+        <div class="consultant-text" id="consultant-text"></div>
+      </div>
+      </div><div class="cta-wrap">
+        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 상담 신청 →</a>
+        <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const QUESTIONS = [
+  { type:'bx', criterion:'성장-피로 괴리', section:'BX Point 진단',
+    text:'매출이나 성과 지표는 좋아지고 있는데, 이상하게 체감은 더 힘들어졌다.' },
+  { type:'bx', criterion:'반복 문제', section:'BX Point 진단',
+    text:'해결했다고 생각한 문제가 다른 얼굴로 다시 돌아온 적이 있다.' },
+  { type:'bx', criterion:'방향 불명확', section:'BX Point 진단',
+    text:'무엇을 더 해야 할지, 어느 방향이 옳은지 판단 기준이 흐려졌다.' },
+  { type:'bx', criterion:'추가 의존', section:'BX Point 진단',
+    text:'새로운 시스템·채널·솔루션을 도입하지만, 정작 버리는 것은 거의 없다.' },
+  { type:'axis', axis:'人', section:'人 · 사람',
+    text:'핵심 인재의 이탈이 적고, 업무 분장과 책임이 명확하다.' },
+  { type:'axis', axis:'人', section:'人 · 사람',
+    text:'대표가 자리를 비워도 조직이 정상 작동하는 위임 구조와 후계 라인이 있다.' },
+  { type:'axis', axis:'營', section:'營 · 영업',
+    text:'신규 고객 유입 채널이 다양하고, 한두 채널에 과도하게 의존하지 않는다.' },
+  { type:'axis', axis:'營', section:'營 · 영업',
+    text:'영업 단계별(인지·관심·구매·재구매) 흐름과 전환율을 데이터로 파악하고 있다.' },
+  { type:'axis', axis:'財', section:'財 · 재무',
+    text:'매출과 별개로, 현금 회전이 안정적이며 운영 자금 압박이 거의 없다.' },
+  { type:'axis', axis:'財', section:'財 · 재무',
+    text:'비용 구조와 수익 구조를 명확히 알고, 어디서 돈이 나가고 들어오는지 손에 잡힌다.' },
+  { type:'axis', axis:'産', section:'産 · 상품',
+    text:'우리 제품·서비스를 고객이 왜 선택하는지가 명확하고, 경쟁사와 차별점이 있다.' },
+  { type:'axis', axis:'産', section:'産 · 상품',
+    text:'시장과 기술 변화에 맞춰 제품·서비스를 정기적으로 업데이트·재정의하고 있다.' },
+  { type:'phase', section:'ABCDE 단계',
+    text:'지금 우리 조직의 상태를 가장 잘 표현하는 것은?',
+    options:[
+      {phase:'A', text:'무언가 어긋났다는 감각이 들기 시작했다 (자각)'},
+      {phase:'B', text:'결단의 임계 지점에 도달했다, 방향을 정해야 한다 (전환 지점)'},
+      {phase:'C', text:'결단을 내리고 새로운 방향으로 사이클을 돌리고 있다 (전환 중)'},
+      {phase:'D', text:'매출·인력·경쟁력에서 약화 신호가 나타나고 있다 (쇠퇴 진입)'},
+    ] },
+  { type:'phase', section:'ABCDE 단계',
+    text:'대표가 최근 가장 많이 한 고민은?',
+    options:[
+      {phase:'A', text:'"숫자는 괜찮은데 뭔가 이상하다, 이게 정말 잘 가고 있는 건가"'},
+      {phase:'B', text:'"이대로 갈 것인가, 다른 길을 택할 것인가, 지금 결정해야 한다"'},
+      {phase:'C', text:'"새 방향으로 가고 있다, 끝까지 가는 힘을 어떻게 유지할까"'},
+      {phase:'D', text:'"왜 이렇게 무너지고 있을까, 어디부터 손대야 할까"'},
+    ] },
+  { type:'phase', section:'ABCDE 단계',
+    text:'지난 6개월간 조직의 변화 양상은?',
+    options:[
+      {phase:'A', text:'겉으로는 평소와 같지만, 내부에서 미묘한 신호가 잡히기 시작'},
+      {phase:'B', text:'중대한 결단을 앞두고 있거나, 결단 직후의 상태'},
+      {phase:'C', text:'새 방향으로 자원과 인력을 재배치하며 추진 중'},
+      {phase:'D', text:'매출 정체·인재 이탈·경쟁력 약화가 동시에 진행 중'},
+    ] },
+];
+const SCALE_LABELS = [
+  { num:1, text:'전혀 그렇지 않다' },
+  { num:2, text:'그렇지 않다' },
+  { num:3, text:'보통이다' },
+  { num:4, text:'그렇다' },
+  { num:5, text:'매우 그렇다' },
+];
+const PHASES = {
+  A:{ en:'Awareness', ko:'자각',
+    desc:'어긋남을 느끼는 때입니다. 조직의 성장곡선이 엔트로피 선과 만나는 지점에서 처음 찾아오는 신호로, 숫자보다 먼저 대표가 감각으로 느끼는 시기입니다. 거래처가 빠졌을 때의 찜찜함, 매출은 올랐는데 마음이 무거운 그 감각이 자각입니다. 이 자각을 판단으로 옮기지 못하면 조직은 엔트로피 선을 그대로 따라갑니다.' },
+  B:{ en:'BX Point', ko:'경영전환 지점',
+    desc:'BX Point(Business eXchange Point)는 조직이 엔트로피에 그대로 순응할지 다른 경로를 택할지를 결정하는 유일한 순간입니다. 이 지점에서 세 갈래 길이 열립니다. 위로 뻗는 전환의 길, 아래로 꺾이는 쇠퇴의 길, 그리고 그대로 엔트로피 선을 따라가는 길입니다. 이 순간에 필요한 것은 더 열심히 하는 것이 아니라 판단의 방향을 바꾸는 것입니다.' },
+  C:{ en:'Conversion', ko:'전환',
+    desc:'BX Point에서 위로 뻗는 길을 선택해 새로운 사이클로 진입한 단계입니다. 버리는 일과 다시 놓는 일이 동시에 일어나며, 새로운 궤도 위에서 조직이 다시 작동하기 시작합니다. 그러나 전환에 성공해도 끝이 아닙니다. 새로운 단계에서도 결국 새로운 엔트로피가 시작되며, 다음 사이클의 자각이 다시 필요해집니다.' },
+  D:{ en:'Decline', ko:'쇠퇴',
+    desc:'BX Point에서 아래로 꺾인 길로 들어선 단계입니다. 자각의 신호는 있었으나 행동으로 옮기지 못했거나, 잘못된 방향으로 자원이 투입된 결과입니다. 외부에서 보면 아직 정상으로 보이지만 내부에서는 핵심 자산이 빠져나가고 있습니다. 쇠퇴는 평탄하게 진행되지 않습니다. 어느 임계점을 지나면 쇠퇴한 상태의 새로운 엔트로피 선에 닿게 됩니다.' },
+};
+const AXIS_NAMES = {
+  '人':{ko:'사람', en:'PEOPLE'},
+  '營':{ko:'영업', en:'SALES'},
+  '財':{ko:'재무', en:'FINANCE'},
+  '産':{ko:'상품', en:'PRODUCT'},
+};
+let currentQ = 0;
+let answers = [];
+function startQuiz(){
+  document.getElementById('start-card').style.display='none';
+  document.getElementById('hero-section').style.display='none';
+  document.getElementById('quiz-screen').style.display='block';
+  currentQ = 0; answers = [];
+  renderQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const card = document.getElementById('question-card');
+  card.style.animation='none'; void card.offsetWidth;
+  card.style.animation='popIn .4s cubic-bezier(.4,0,.2,1) both';
+  document.getElementById('question-num').textContent = 'QUESTION ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('question-text').textContent = q.text;
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('progress-axis').textContent = q.section;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  if(q.type === 'phase'){
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="num">'+opt.phase+'</span><span>'+opt.text+'</span>';
+      btn.onclick = () => answerQuestion(opt.phase);
+      container.appendChild(btn);
+    });
+  } else {
+    SCALE_LABELS.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="num">'+opt.num+'</span><span>'+opt.text+'</span>';
+      btn.onclick = () => answerQuestion(opt.num);
+      container.appendChild(btn);
+    });
+  }
+}
+function answerQuestion(value){
+  if(currentQ >= QUESTIONS.length) return;
+  answers.push(value); currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.querySelectorAll('#options-container .option').forEach(b => {
+      b.style.pointerEvents = 'none'; b.style.opacity = '0.5';
+    });
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 300);
+  } else { renderQuestion(); }
+}
+function calcBxPoint(){
+  let count = 0;
+  for(let i=0; i<4; i++){ if(answers[i] >= 4) count++; }
+  return count;
+}
+function calcAxes(){
+  const sums = {
+    '人': answers[4] + answers[5],
+    '營': answers[6] + answers[7],
+    '財': answers[8] + answers[9],
+    '産': answers[10] + answers[11],
+  };
+  return { sums };
+}
+function calcPhase(){
+  const counts = {A:0, B:0, C:0, D:0};
+  for(let i=12; i<15; i++){ if(answers[i]) counts[answers[i]]++; }
+  const maxCount = Math.max(...Object.values(counts));
+  for(const phase of ['A','B','C','D']){
+    if(counts[phase] === maxCount) return { phase, counts };
+  }
+}
+function drawRadar(sums){
+  const svg = document.getElementById('radar-svg');
+  const cx = 170, cy = 170, R = 110;
+  const axes = ['人','營','財','産']; const n = axes.length;
+  let html = '';
+  for(let level=1; level<=5; level++){
+    const r = (R / 5) * level; let pts = '';
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+      pts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    pts += 'Z';
+    html += `<path d="${pts}" fill="none" stroke="rgba(54,132,255,${0.05 + level*0.025})" stroke-width="1"/>`;
+  }
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * R; const y = cy + Math.sin(angle) * R;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(54,132,255,0.1)" stroke-width="1"/>`;
+  }
+  let dataPts = ''; const dataPoints = [];
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * (sums[axes[i]] / 10);
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    dataPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    dataPoints.push({x, y, axis: axes[i]});
+  }
+  dataPts += 'Z';
+  html += `<defs><linearGradient id="radarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.35"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.20"/></linearGradient></defs>`;
+  html += `<path d="${dataPts}" fill="url(#radarGrad)" stroke="#3684FF" stroke-width="2" stroke-linejoin="round"/>`;
+  dataPoints.forEach(pt => {
+    html += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="4" fill="#3684FF" stroke="#fff" stroke-width="2"/>`;
+  });
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const labelR = R + 24;
+    const x = cx + Math.cos(angle) * labelR; const y = cy + Math.sin(angle) * labelR;
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="20" fill="#3684FF">${axes[i]}</text>`;
+    const subR = R + 44;
+    const sx = cx + Math.cos(angle) * subR; const sy = cy + Math.sin(angle) * subR;
+    html += `<text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#8a96ac" font-weight="500">${AXIS_NAMES[axes[i]].ko}</text>`;
+  }
+  svg.innerHTML = html;
+}
+function drawCycle(activePhase){
+  const svg = document.getElementById('cycle-svg');
+  svg.setAttribute('viewBox', '0 0 600 380');
+  let html = '';
+  html += `<defs><linearGradient id="conversionGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.4"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.8"/></linearGradient><linearGradient id="declineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.4"/><stop offset="100%" stop-color="#3684FF" stop-opacity="0.3"/></linearGradient></defs>`;
+  html += `<path d="M 20 280 L 100 280 L 280 240" fill="none" stroke="rgba(54,132,255,0.18)" stroke-width="1.5" stroke-dasharray="3,4"/>`;
+  html += `<text x="20" y="270" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac" letter-spacing="0.5">엔트로피</text>`;
+  html += `<path d="M 510 70 L 580 75" fill="none" stroke="rgba(54,132,255,0.18)" stroke-width="1.5" stroke-dasharray="3,4"/>`;
+  html += `<text x="558" y="60" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac" letter-spacing="0.5" text-anchor="end">새 엔트로피</text>`;
+  html += `<path d="M 280 200 L 510 200" fill="none" stroke="rgba(54,132,255,0.18)" stroke-width="1.5" stroke-dasharray="3,4"/>`;
+  html += `<text x="510" y="186" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac" letter-spacing="0.5" text-anchor="end">엔트로피 지속</text>`;
+  html += `<path d="M 510 290 L 580 300" fill="none" stroke="rgba(54,132,255,0.18)" stroke-width="1.5" stroke-dasharray="3,4"/>`;
+  html += `<text x="580" y="318" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac" letter-spacing="0.5" text-anchor="end">쇠퇴 엔트로피</text>`;
+  const positions = { A: { x: 100, y: 200 }, B: { x: 280, y: 200 }, C: { x: 510, y: 80 }, D: { x: 510, y: 290 } };
+  html += `<path d="M 20 320 Q 50 290, 70 250 T 100 200" fill="none" stroke="${activePhase==='A' ? '#3684FF' : 'rgba(54,132,255,0.5)'}" stroke-width="${activePhase==='A' ? 3 : 2}" stroke-linecap="round"/>`;
+  const isABorLater = ['B','C','D'].includes(activePhase);
+  html += `<path d="M 100 200 L 280 200" fill="none" stroke="${isABorLater ? '#3684FF' : 'rgba(54,132,255,0.5)'}" stroke-width="${activePhase==='B' ? 3 : 2}" stroke-linecap="round"/>`;
+  const isCActive = activePhase === 'C';
+  html += `<path d="M 280 200 Q 380 140, 510 80" fill="none" stroke="${isCActive ? '#3684FF' : 'url(#conversionGrad)'}" stroke-width="${isCActive ? 3.5 : 2.2}" stroke-linecap="round"/>`;
+  const isDActive = activePhase === 'D';
+  html += `<path d="M 280 200 Q 380 240, 510 290" fill="none" stroke="${isDActive ? '#3684FF' : 'url(#declineGrad)'}" stroke-width="${isDActive ? 3.5 : 2.2}" stroke-linecap="round"/>`;
+  const phases = ['A','B','C','D'];
+  phases.forEach(p => {
+    const pos = positions[p]; const isActive = p === activePhase;
+    const r = isActive ? 24 : 17; const fill = isActive ? '#3684FF' : '#fff'; const strokeW = isActive ? 3 : 2;
+    html += `<circle cx="${pos.x}" cy="${pos.y}" r="${r}" fill="${fill}" stroke="#3684FF" stroke-width="${strokeW}"/>`;
+    const textColor = isActive ? '#fff' : '#3684FF'; const fontSize = isActive ? 22 : 17;
+    html += `<text x="${pos.x}" y="${pos.y + fontSize/3}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="${fontSize}" fill="${textColor}" font-weight="${isActive?'bold':'normal'}">${p}</text>`;
+  });
+  const labels = {
+    A: { x: 100, y: 240, anchor: 'middle', text: '자각' },
+    B: { x: 280, y: 240, anchor: 'middle', text: 'BX Point' },
+    C: { x: 480, y: 80, anchor: 'end', text: '전환' },
+    D: { x: 480, y: 290, anchor: 'end', text: '쇠퇴' },
+  };
+  Object.entries(labels).forEach(([phase, lab]) => {
+    const isActive = phase === activePhase;
+    const cls = isActive ? 'cycle-sublabel active' : 'cycle-sublabel';
+    html += `<text x="${lab.x}" y="${lab.y}" text-anchor="${lab.anchor}" dominant-baseline="middle" class="${cls}">${lab.text}</text>`;
+  });
+  html += `<text x="300" y="365" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac" letter-spacing="0.5">엔트로피는 모든 경로가 결국 닿는 배경선입니다</text>`;
+  svg.innerHTML = html;
+}
+function generateConsultantNote(bxCount, axes, phaseResult){
+  const phase = phaseResult.phase;
+  const axisOrder = ['人','營','財','産'];
+  const sortedAxes = axisOrder.slice().sort((a,b) => axes.sums[b] - axes.sums[a]);
+  const strongest = sortedAxes[0]; const weakest = sortedAxes[3];
+  const axisLabel = (ax) => `${ax}(${AXIS_NAMES[ax].ko})`;
+  let paragraphs = [];
+  let p1 = '';
+  if(bxCount === 0 || bxCount === 1){
+    p1 = `귀사는 BX Point 진단의 4가지 기준 중 ${bxCount}개에 해당합니다. <strong>아직 유지 구간입니다.</strong> 지금의 방식으로 개선을 지속하면 됩니다. 다만 경영전환에서 강조하듯, 조직이 가장 좋은 시기일수록 다음 사이클의 자각(A)이 미리 시작되어야 합니다. 잘 되고 있다는 안도감이 가장 무거운 함정이라는 것을 잊지 마시기 바랍니다.`;
+  } else if(bxCount === 2){
+    p1 = `귀사는 BX Point 진단 4가지 기준 중 2개에 해당합니다. <strong>아직 유지 구간이지만 경계가 필요한 시점입니다.</strong> 두 개의 신호가 동시에 잡혔다는 것은 한쪽 축에서 균열이 시작되었다는 의미입니다. 지금이 가장 적은 비용으로 정비할 수 있는 시점이며, 이 시점을 놓치면 6개월 후의 회복 비용은 두 배가 됩니다.`;
+  } else if(bxCount === 3){
+    p1 = `귀사는 BX Point 진단 4가지 기준 중 3개에 해당합니다. <strong>전환 직전입니다. 곧 BX Point(B 단계)에 닿습니다.</strong> 경영전환 관점에 따르면, 이 구간에서 머뭇거리는 시간이 길어질수록 위로 뻗는 전환(C)이 아니라 아래로 꺾이는 쇠퇴(D)의 길로 들어섭니다. 지금 결단의 방향을 정하지 않으면, 시간이 결정을 대신해 버립니다.`;
+  } else {
+    p1 = `귀사는 BX Point 진단 4가지 기준 모두에 해당합니다. <strong>이미 BX Point(B 단계)에 도달했습니다.</strong> 경영전환의 표현으로, 이 지점은 "개선으로는 풀리지 않는 지점"입니다. 더 열심히 하는 것이 답이 아니라, 판단의 방향을 바꾸는 것이 답입니다. 지금 필요한 것은 두 가지입니다. 버리는 일과 다시 놓는 일.`;
+  }
+  paragraphs.push(p1);
+  let p2 = '';
+  const strongScore = axes.sums[strongest]; const weakScore = axes.sums[weakest];
+  const gap = strongScore - weakScore;
+  const allLow = strongScore <= 5; const allHigh = weakScore >= 7; const allEqual = gap === 0;
+  if(allEqual){
+    if(strongScore >= 8){
+      p2 = `4축 진단 결과, 인·영·재·산 네 축이 모두 ${strongScore}점으로 균형 잡혀 있습니다. <strong>드물게 보는 안정된 분포입니다.</strong> 어느 한 축이 다른 축보다 두드러지지 않는다는 것은 조직이 균형 위에서 작동하고 있다는 의미입니다. 다만 모든 축이 동시에 좋은 시기가 길게 가지 않는다는 점도 함께 기억하시기 바랍니다. 다음 사이클의 자각이 어디에서 먼저 시작될지를 미리 점검할 시점입니다.`;
+    } else if(strongScore >= 6){
+      p2 = `4축 진단 결과, 인·영·재·산 네 축이 모두 ${strongScore}점으로 비슷한 수준에 있습니다. <strong>특별히 강한 축도, 특별히 약한 축도 보이지 않는 평탄한 분포입니다.</strong> 평균적으로 작동하는 조직이지만, 이 평탄함이 지속될수록 어디서 먼저 균열이 생길지 예측하기 어려워집니다. 한 축이라도 의식적으로 키워 강점 축을 만드는 것이 다음 단계의 출발점이 됩니다.`;
+    } else {
+      p2 = `4축 진단 결과, 인·영·재·산 네 축이 모두 ${strongScore}점으로 동등하게 약한 분포입니다. <strong>전반적인 정비가 필요한 상태입니다.</strong> 어느 한 축이 더 무너졌다고 말하기 어려운 상태이지만, 동시 개선은 불가능합니다. 정본의 원칙대로 가장 시급하게 회복이 필요한 한 축을 의식적으로 선택하고, 그 한 곳에 자원을 집중하는 것이 출발점입니다.`;
+    }
+  } else if(allHigh){
+    p2 = `4축 진단 결과, 인·영·재·산 네 축이 모두 7점 이상으로 균형 잡혀 있습니다. <strong>현실에서는 드문 건강한 상태입니다.</strong> ${axisLabel(strongest)} 축이 ${strongScore}점으로 가장 강하지만 다른 축들도 충분히 받쳐주는 분포입니다. 이 상태가 지속될 가능성에 의존하기보다, 지금의 균형 위에서 다음 BX Point를 미리 설계하는 것이 좋겠습니다. 경영전환은 위기 때만 필요한 것이 아니라, 가장 좋은 시기에 다음 사이클을 준비하는 일이기도 합니다.`;
+  } else if(allLow){
+    p2 = `4축 진단 결과, 네 축이 모두 5점 이하로 전반적으로 약화된 상태입니다. <strong>동시 개선은 불가능합니다.</strong> 정본의 원칙대로, 가장 먼저 무너진 축 한 곳부터 시작해야 합니다. 현재 가장 낮은 점수는 ${axisLabel(weakest)}(${weakScore}점)이며, 이 한 축의 회복에 자원을 집중하는 것이 출발점입니다. 다른 축은 지금 건드리지 마시고, 한 축의 회복이 가시화된 후에 다음 축으로 옮겨가는 것이 정석입니다.`;
+  } else if(gap >= 5){
+    p2 = `4축 진단 결과, ${axisLabel(strongest)} 축이 ${strongScore}점으로 가장 강하고, ${axisLabel(weakest)} 축이 ${weakScore}점으로 가장 약합니다. <strong>두 축의 격차가 ${gap}점으로 크게 벌어진 불균형 상태입니다.</strong> 강한 축에 의존해 지금까지 버텨왔다는 의미이지만, 이 의존이 길어지면 강한 축까지 함께 흔들립니다. ${axisLabel(weakest)} 축의 정비를 시급하게 시작해야 합니다. 강한 축은 그대로 두고 건드리지 마시기 바랍니다. 강한 곳을 흔들면 약한 곳을 채우기 전에 강한 곳까지 무너집니다.`;
+  } else {
+    p2 = `4축 진단 결과, ${axisLabel(strongest)} 축이 ${strongScore}점으로 가장 강하고, ${axisLabel(weakest)} 축이 ${weakScore}점으로 가장 약합니다. 4축이 비교적 고르게 분포되어 있지만, ${axisLabel(weakest)} 축의 보강이 다음 사이클의 성패를 가릅니다. 정본의 표현으로, "문제는 가장 먼저 무너진 곳"입니다. 이 약점이 보강되지 않으면, 다른 축을 아무리 강화해도 사이클이 완성되지 않습니다.`;
+  }
+  paragraphs.push(p2);
+  let p3 = '';
+  if(phase === 'A'){
+    p3 = `현재 귀사는 ABCDE 사이클의 <strong>A · 자각(Awareness) 단계</strong>에 있습니다. 어긋남을 느끼기 시작한 시기로, 숫자보다 먼저 대표의 감각이 신호를 잡아낸 단계입니다. <strong>이 단계에서 가장 비싼 선택은 "조금 더 지켜보자"입니다.</strong> 자각이 판단으로 옮겨지지 않으면 조직은 그대로 엔트로피 선을 따라 흘러갑니다. 지금 필요한 것은 "무엇이 어긋났는가"를 종이에 명문화하는 일입니다. 정본의 표현으로, 자각을 판단으로 옮기는 첫 도구는 언어입니다.`;
+  } else if(phase === 'B'){
+    p3 = `현재 귀사는 ABCDE 사이클의 <strong>B · BX Point(경영전환 지점)</strong>에 있습니다. 정본에서 "조직이 엔트로피에 그대로 순응할지 다른 경로를 택할지를 결정하는 유일한 순간"이라 부르는 자리입니다. <strong>이 단계에서 머뭇거리는 시간만큼 위로 뻗는 전환의 길이 좁아지고, 아래로 꺾이는 쇠퇴의 길이 가까워집니다.</strong> 정본의 경고대로, BX Point에 도달했다면 조직이 해야 할 일은 두 가지입니다. 버리는 일과 다시 놓는 일. 결단 없는 회의는 BX Point를 D 단계로 옮기는 가장 빠른 길입니다.`;
+  } else if(phase === 'C'){
+    p3 = `현재 귀사는 ABCDE 사이클의 <strong>C · 전환(Conversion) 단계</strong>에 있습니다. BX Point에서 위로 뻗는 길을 선택해 새로운 사이클로 진입한 시기입니다. <strong>이 단계의 핵심은 "끝까지 가는 힘"입니다.</strong> 시작은 쉽지만 끝까지 가는 것은 어렵습니다. 6개월 단위 중간 점검 체계가 없으면 1년 안에 추진력이 흐지부지됩니다. 또한 정본의 경고처럼, 전환에 성공해도 새로운 단계의 엔트로피가 곧 시작됩니다. 지금의 전환을 끝까지 가져가면서, 동시에 다음 사이클의 자각을 미리 준비하는 양방향 시야가 필요합니다.`;
+  } else {
+    p3 = `현재 귀사는 ABCDE 사이클의 <strong>D · 쇠퇴(Decline) 단계</strong>에 있습니다. BX Point에서 아래로 꺾인 길로 들어선 상태로, 자각의 신호는 있었으나 행동으로 옮기지 못했거나 잘못된 방향으로 자원이 투입된 결과입니다. <strong>D 단계의 본질적 어려움은 "외부에서 보면 아직 정상으로 보인다"는 점입니다.</strong> 그러나 내부에서는 이미 핵심 자산이 빠져나가고 있고, 이 흐름은 임계점을 넘으면 가속화됩니다. 쇠퇴는 평탄하게 진행되지 않습니다. 어느 순간 절벽처럼 쇠퇴한 상태의 새로운 엔트로피 선에 닿게 됩니다. 지금 개입하지 않으면 6개월 후의 회복 비용은 세 배가 됩니다.`;
+  }
+  paragraphs.push(p3);
+  let p4 = '';
+  const isAllEqual = (axes.sums['人'] === axes.sums['營']) && (axes.sums['營'] === axes.sums['財']) && (axes.sums['財'] === axes.sums['産']);
+  if(bxCount >= 3){
+    if(isAllEqual){
+      p4 = `<strong>BX Point에 도달한 조직에 가장 비싼 선택은 "조금 더 지켜보자"는 결정입니다.</strong> 이 시점의 시간은 자가치유의 시간이 아니라 손실 누적의 시간입니다. 4축이 균등하게 분포되어 있어 어디부터 손대야 할지 외부 시각의 점검이 필요한 상태이며, 이 작업은 내부에서 시작하기 어렵습니다. 30분 무료 상담을 통해 회복의 첫 방향을 함께 설계하시기 바랍니다.`;
+    } else {
+      p4 = `<strong>BX Point에 도달한 조직에 가장 비싼 선택은 "조금 더 지켜보자"는 결정입니다.</strong> 이 시점의 시간은 자가치유의 시간이 아니라 손실 누적의 시간입니다. 정본의 원칙대로 가장 먼저 무너진 ${axisLabel(weakest)} 축부터 손대야 하며, 이 작업은 외부 시각의 도움 없이 내부에서 시작하기 어렵습니다. 30분 무료 상담을 통해 회복의 첫 방향을 함께 설계하시기 바랍니다.`;
+    }
+  } else if(bxCount === 2){
+    if(isAllEqual){
+      p4 = `<strong>먼저 움직일 것은 정해야 합니다.</strong> 4축이 균등하게 분포되어 있을수록 어느 축부터 보강할지 의식적 선택이 필요합니다. 이 시기를 놓치면 다음 진단 때는 BX Point 도달 판정으로 바뀌어 있을 가능성이 큽니다. 아직은 작은 비용으로 정비가 가능한 시점입니다.`;
+    } else {
+      p4 = `<strong>먼저 움직일 것은 정해졌으니, 미루지 않는 것이 가장 중요합니다.</strong> ${axisLabel(weakest)} 축의 정비가 출발점이며, 이 시기를 놓치면 다음 진단 때는 BX Point 도달 판정으로 바뀌어 있을 가능성이 큽니다. 아직은 작은 비용으로 정비가 가능한 시점입니다.`;
+    }
+  } else {
+    if(isAllEqual){
+      p4 = `<strong>지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다.</strong> 4축이 균등하게 분포된 지금이 다음 사이클의 BX Point를 미리 설계하기에 가장 좋은 시점이며, 한 축이라도 의식적으로 키워 강점 축을 만드는 작업이 다음 단계 진입의 첫 작업이 될 것입니다. 이 작업은 정밀 진단을 통해 함께 점검하는 것이 효과적입니다.`;
+    } else {
+      p4 = `<strong>지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다.</strong> 다음 사이클의 BX Point를 미리 설계하기에 가장 좋은 시점이며, ${axisLabel(weakest)} 축의 보강이 다음 단계 진입의 첫 작업이 될 것입니다. 이 작업은 정밀 진단을 통해 함께 점검하는 것이 효과적입니다.`;
+    }
+  }
+  paragraphs.push(p4);
+  return paragraphs.map(p => '<p>' + p + '</p>').join('');
+}
+function showResult(){
+  const bxCount = calcBxPoint();
+  const axes = calcAxes();
+  const phaseResult = calcPhase();
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('result-screen').style.display='block';
+  const bxStatusEl = document.getElementById('bx-status-headline');
+  if(bxCount === 4){ bxStatusEl.innerHTML = '이미 <span class="accent">BX Point</span>에 도달'; }
+  else if(bxCount === 3){ bxStatusEl.innerHTML = '<span class="accent">전환 직전</span>입니다'; }
+  else if(bxCount === 2){ bxStatusEl.innerHTML = '<span class="accent">유지 구간</span>이지만 경계 필요'; }
+  else { bxStatusEl.innerHTML = '<span class="accent">유지 구간</span>입니다'; }
+  document.getElementById('bx-count-num').textContent = bxCount;
+  drawCycle(phaseResult.phase);
+  const phaseData = PHASES[phaseResult.phase];
+  document.getElementById('phase-name').innerHTML = `${phaseResult.phase} · ${phaseData.en} <span class="ko">${phaseData.ko}</span>`;
+  document.getElementById('phase-desc').textContent = phaseData.desc;
+  drawRadar(axes.sums);
+  const axisOrder = ['人','營','財','産'];
+  document.getElementById('axis-summary').innerHTML = axisOrder.map(ax => 
+    `<div class="axis-summary-cell"><div class="char">${ax}</div><div class="name">${AXIS_NAMES[ax].ko}</div><div class="score">${axes.sums[ax]}<span class="unit">/10</span></div></div>`
+  ).join('');
+  document.getElementById('consultant-text').innerHTML = generateConsultantNote(bxCount, axes, phaseResult);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('result-screen').style.display='none';
+  document.getElementById('hero-section').style.display='block';
+  document.getElementById('start-card').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

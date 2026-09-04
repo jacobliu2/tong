@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경영전환 피라미드 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.step-indicator{display:flex;justify-content:center;gap:6px;margin:20px 0 24px}
+.step-dot{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+.step-dot .num{width:24px;height:24px;border-radius:50%;background:rgba(138,150,172,0.15);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:12px;font-weight:bold}
+.step-dot.active .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.step-dot.active{color:var(--primary);font-weight:600}
+.step-dot.done .num{background:rgba(54,132,255,0.2);color:var(--primary)}
+.step-divider{width:24px;height:1px;background:rgba(138,150,172,0.3);align-self:center}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.section-title:first-child{margin-top:0}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.input-group{margin-bottom:18px}
+.input-group label{display:block;font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;letter-spacing:-0.01em}
+.input-group label .req{color:var(--primary);font-weight:600}
+.input-group label .help{display:block;font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400}
+.input-group input,.input-group select,.input-group textarea{width:100%;padding:12px 14px;border:1.5px solid rgba(54,132,255,0.18);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;background:rgba(255,255,255,0.7);color:var(--text);transition:all .25s}
+.input-group input:focus,.input-group select:focus,.input-group textarea:focus{outline:none;border-color:var(--primary);background:#fff}
+.input-group textarea{resize:vertical;min-height:80px}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.input-row{grid-template-columns:1fr}}
+.perspective-box{display:flex;align-items:center;gap:12px;padding:14px 16px;margin-bottom:18px;background:linear-gradient(135deg,rgba(54,132,255,0.08),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:12px}
+.perspective-info{display:flex;flex-direction:column;flex:1}
+.perspective-label{font-size:10px;color:var(--text-muted);letter-spacing:1.5px;font-weight:600;margin-bottom:2px}
+.perspective-value{font-size:15px;color:var(--text);font-weight:600;letter-spacing:-0.01em}
+.perspective-change-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;background:#fff;border:1.5px solid var(--primary);border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;color:var(--primary);font-weight:600;letter-spacing:-0.01em;transition:all .25s}
+.perspective-change-btn:hover{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(54,132,255,0.25)}
+.perspective-change-btn .icon{font-size:14px;font-weight:bold}
+@media (max-width:480px){.perspective-box{flex-direction:column;align-items:stretch}.perspective-change-btn{justify-content:center}}
+.classification-toggle{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.classification-btn{padding:10px 16px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;color:var(--text);transition:all .25s;font-weight:500}
+.classification-btn:hover{border-color:var(--primary);background:rgba(54,132,255,0.04)}
+.classification-btn.active{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border-color:var(--primary)}
+.classification-btn .axis{font-family:'Pretendard',sans-serif;font-style:normal;font-size:14px;margin-right:4px}
+.classification-btn .ko{font-size:11px;font-weight:400;opacity:0.75;margin-left:4px}
+.classification-panel{margin-bottom:18px;padding:16px 16px;background:rgba(255,255,255,0.4);border:1px dashed rgba(54,132,255,0.25);border-radius:12px;animation:slideDown .25s cubic-bezier(.4,0,.2,1) both}
+@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.classification-panel-title{font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-bottom:10px;font-weight:600}
+.classification-panel-help{font-size:11px;color:var(--text-muted);line-height:1.6;margin-top:4px}
+.kt-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media (max-width:560px){.kt-grid{grid-template-columns:1fr}}
+.kt-card{padding:18px 18px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:14px;position:relative}
+.kt-card.active{border-color:var(--primary);background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.03))}
+.kt-card .kt-position{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.kt-card .kt-num{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:14px;font-weight:bold}
+.kt-card .kt-pos-label{font-size:11px;color:var(--text-muted);letter-spacing:1px;font-weight:600}
+.kt-card .kt-axis-tag{display:inline-block;padding:2px 8px;border-radius:6px;background:rgba(54,132,255,0.1);color:var(--primary);font-size:11px;font-weight:600;letter-spacing:0.3px;margin-left:auto}
+.kt-card textarea{width:100%;padding:10px 12px;border:1.5px solid rgba(54,132,255,0.18);border-radius:8px;font-family:inherit;font-size:13px;background:rgba(255,255,255,0.8);resize:vertical;min-height:60px;line-height:1.5;transition:all .25s}
+.kt-card textarea:focus{outline:none;border-color:var(--primary);background:#fff}
+.perform-group{padding:18px 18px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:14px;margin-bottom:14px}
+.perform-group.collapsed .perform-list{display:none}
+.perform-group-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer;user-select:none}
+.perform-group-header .expand-icon{margin-left:auto;color:var(--text-muted);transition:transform .25s}
+.perform-group.collapsed .expand-icon{transform:rotate(-90deg)}
+.perform-group .kt-label{font-size:13px;font-weight:600;color:var(--text)}
+.perform-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.perform-list{grid-template-columns:1fr}}
+.perform-item{padding:10px 12px;background:rgba(255,255,255,0.7);border:1.5px solid rgba(54,132,255,0.15);border-radius:10px;display:flex;align-items:flex-start;gap:8px}
+.perform-item .perform-num{width:22px;height:22px;border-radius:6px;background:rgba(54,132,255,0.1);color:var(--primary);display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:11px;font-weight:bold;flex-shrink:0;margin-top:2px}
+.perform-item textarea{flex:1;border:none;background:none;font-family:inherit;font-size:12px;color:var(--text);resize:none;line-height:1.5;padding:2px 0;min-height:36px}
+.perform-item textarea:focus{outline:none}
+.mandala-wrap{position:relative;display:flex;justify-content:center;margin:24px 0;padding:20px 16px;background:linear-gradient(135deg,#fafcff 0%,#f0f5ff 100%);border:1px solid rgba(54,132,255,0.15);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.8), 0 4px 20px rgba(54,132,255,0.06)}
+.mandala-svg{width:100%;max-width:640px;height:auto}
+.mandala-cell{cursor:pointer;transition:transform .25s cubic-bezier(.4,0,.2,1), filter .25s;transform-origin:center}
+.mandala-cell:hover{filter:drop-shadow(0 6px 16px rgba(54,132,255,0.35))}
+.mandala-cell:hover .cell-hitbox{fill:rgba(54,132,255,0.12)}
+.mandala-cell:hover .kt-shape{fill:url(#midGradHover);stroke:rgba(54,132,255,0.7);stroke-width:1.5}
+.mandala-cell:hover .core-shape{stroke-width:2.5}
+.mandala-cell:hover text{font-weight:700 !important}
+.cell-hitbox{transition:fill .2s}
+.mandala-tooltip{position:absolute;pointer-events:none;padding:10px 14px;background:rgba(26,43,74,0.96);color:#fff;font-family:'Pretendard Variable','Pretendard','Noto Sans KR',sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.01em;line-height:1.5;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.2);max-width:280px;opacity:0;transform:translateY(-4px);transition:opacity .2s, transform .2s;z-index:10;white-space:pre-wrap;word-break:keep-all}
+.mandala-tooltip.show{opacity:1;transform:translateY(0)}
+.roadmap-section{margin-top:32px}
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+@media (max-width:640px){.roadmap-grid{grid-template-columns:1fr}}
+.roadmap-card{padding:20px 18px;background:rgba(255,255,255,0.7);border:1.5px solid var(--glass-border);border-radius:14px;position:relative;transition:all .25s}
+.roadmap-card:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 6px 20px rgba(54,132,255,0.10)}
+.roadmap-card .roadmap-period{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px dashed rgba(54,132,255,0.2)}
+.roadmap-card .roadmap-period .term{font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px;color:var(--primary);letter-spacing:-0.01em}
+.roadmap-card .roadmap-period .ko{font-size:12px;color:var(--text);font-weight:600}
+.roadmap-card .roadmap-tag{font-size:10px;color:var(--text-muted);letter-spacing:1px;font-weight:600;margin-left:auto;padding:2px 8px;background:rgba(54,132,255,0.08);border-radius:4px}
+.roadmap-list{display:flex;flex-direction:column;gap:8px;list-style:none}
+.roadmap-list li{font-size:12px;color:var(--text);line-height:1.55;padding-left:14px;position:relative;letter-spacing:-0.01em}
+.roadmap-list li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--primary);opacity:0.5}
+.roadmap-list li.empty{color:var(--text-muted)}
+.roadmap-list li.empty::before{background:var(--text-muted);opacity:0.3}
+.roadmap-card .roadmap-note{margin-top:14px;padding-top:12px;border-top:1px dashed rgba(54,132,255,0.2);font-size:11px;color:var(--text-muted);line-height:1.5}
+.result-headline{text-align:center;margin-bottom:24px}
+.result-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.result-title{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:28px;color:var(--text);letter-spacing:-0.03em;line-height:1.3;margin-bottom:12px}
+.result-title .accent{color:var(--primary)}
+.download-area{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.progress-wrap{margin:24px 0 20px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em;width:100%;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-primary:disabled{background:rgba(138,150,172,0.3);cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);color:var(--text)}
+.btn-ghost:hover{background:rgba(54,132,255,0.04);border-color:var(--primary)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.btn-row{display:flex;gap:10px;margin-top:24px}
+.btn-row .btn{flex:1}
+.helper-text{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:14px}
+.helper-text strong{color:var(--primary);font-weight:600}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .card{padding:26px 22px}
+  .step-divider{width:12px}
+  .result-title{font-size:24px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/pyramid/"/><meta name="description" content="최종목표에서 핵심과제 4개·수행과제 16개로 내려오는 경영전환 피라미드를 세우고 30일·3개월·3년 333 로드맵을 배치하는 계획 도구."/><meta property="og:title" content="경영전환 피라미드 — 통 TONG"/><meta property="og:description" content="최종목표에서 핵심과제 4개·수행과제 16개로 내려오는 경영전환 피라미드를 세우고 30일·3개월·3년 333 로드맵을 배치하는 계획 도구."/><meta property="og:url" content="https://www.workstong.com/diagnosis/pyramid/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "경영전환 피라미드", "description": "전환의 위계를 정리하고 30일·3개월·3년 과제를 배치하는 계획 도구", "url": "https://www.workstong.com/diagnosis/pyramid/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "경영전환 피라미드", "item": "https://www.workstong.com/diagnosis/pyramid/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+    <h1>경영전환<br><span class="accent">피라미드</span></h1>
+    <p>최종목표 1개 + 핵심과제 4개 + 수행과제 16개로 만드는 3년 로드맵.<br>만다라트의 본질을 경영전환 4축 위에 축약했습니다.</p>
+  </div>
+  <div class="step-indicator" id="step-indicator">
+    <div class="step-dot active" data-step="1"><span class="num">1</span><span>최종목표</span></div>
+    <div class="step-divider"></div>
+    <div class="step-dot" data-step="2"><span class="num">2</span><span>핵심과제</span></div>
+    <div class="step-divider"></div>
+    <div class="step-dot" data-step="3"><span class="num">3</span><span>수행과제</span></div>
+    <div class="step-divider"></div>
+    <div class="step-dot" data-step="4"><span class="num">4</span><span>완성</span></div>
+  </div>
+  <div class="card popIn" id="step1-card">
+    <div class="section-title">STEP 1 · 최종목표 설정</div>
+    <p class="helper-text"><strong>3년 후</strong> 우리 회사가 도달할 모습을 한 문장으로 정의하십시오.<br>정량 목표(매출·이익·점유율 등)와 정성 목표(브랜드·조직·시장 위치)를 결합하면 좋습니다.</p>
+    <div class="input-group">
+      <label>회사명 (선택)</label>
+      <input type="text" id="f-company" placeholder="예) ㈜한국기업">
+    </div>
+    <div class="input-group">
+      <label>최종목표 <span class="req">*</span>
+        <span class="help">예) 3년 후 매출 50억 + 신사업 비중 20% / 업계 Top 5 진입</span>
+      </label>
+      <textarea id="f-goal" placeholder="구체적이고 측정 가능한 형태로 작성"></textarea>
+    </div>
+    <div class="notice-box">
+      본 도구는 「경영전환론」을 바탕으로 한 로드맵 작성 도구입니다.<br>
+      자동 추천된 핵심과제·수행과제는 출발점일 뿐이며, 자기 회사 언어로 다듬는 작업이 가장 중요합니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px" onclick="goToStep2()">
+      핵심과제 도출하기 →
+    </button>
+  </div>
+  <div class="card popIn" id="step2-card" style="display:none">
+    <div class="section-title">STEP 2 · 핵심과제 4개</div>
+    <p class="helper-text">최종목표 달성을 위한 <strong>4가지 핵심 영역</strong>입니다.<br>자동 추천된 텍스트를 자기 회사 언어로 다듬어 주십시오.</p>
+    <div style="padding:14px 16px;background:rgba(54,132,255,0.04);border-radius:10px;margin-bottom:18px">
+      <div style="font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px">FINAL GOAL</div>
+      <div style="font-size:14px;color:var(--text);font-weight:500" id="goal-display">—</div>
+    </div>
+    <div class="perspective-box">
+      <div class="perspective-info">
+        <span class="perspective-label">현재 관점</span>
+        <span class="perspective-value" id="current-class-label">人營財産 4축</span>
+      </div>
+      <button class="perspective-change-btn" onclick="toggleClassificationPanel()">
+        <span class="icon">⇄</span>
+        <span>관점 바꾸기</span>
+      </button>
+    </div>
+    <div class="classification-panel" id="classification-panel" style="display:none">
+      <div class="classification-panel-title">다른 관점으로 핵심과제를 다시 추천받기</div>
+      <div class="classification-toggle">
+        <button class="classification-btn active" data-class="axis" onclick="changeClassification('axis')">
+          <span class="axis serif">人營財産</span> 4축 <span class="ko">(기본)</span>
+        </button>
+        <button class="classification-btn" data-class="time" onclick="changeClassification('time')">
+          시간축 <span class="ko">단·중·장·영구</span>
+        </button>
+        <button class="classification-btn" data-class="stage" onclick="changeClassification('stage')">
+          단계축 <span class="ko">탐색·검증·진입·확장</span>
+        </button>
+        <button class="classification-btn" data-class="custom" onclick="changeClassification('custom')">
+          자유 모드
+        </button>
+      </div>
+      <div class="classification-panel-help">
+        선택한 관점에 따라 핵심과제가 새로 추천됩니다. 사용자가 수정한 내용이 있으면 확인 후 초기화됩니다.
+      </div>
+    </div>
+    <div class="kt-grid" id="kt-grid"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goBackToStep1()">← 이전</button>
+      <button class="btn btn-primary" onclick="goToStep3()">수행과제 도출하기 →</button>
+    </div>
+  </div>
+  <div class="card popIn" id="step3-card" style="display:none">
+    <div class="section-title">STEP 3 · 수행과제 16개</div>
+    <p class="helper-text">각 핵심과제를 달성하기 위한 <strong>구체 수행과제 4개씩</strong>입니다.<br>추천된 과제를 자기 회사 상황에 맞춰 수정하시고, 우선순위 순으로 정렬하십시오.</p>
+    <div id="perform-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goBackToStep2()">← 이전</button>
+      <button class="btn btn-primary" onclick="goToStep4()">로드맵 완성하기 →</button>
+    </div>
+  </div>
+  <div class="card popIn" id="step4-card" style="display:none">
+    <div class="result-headline">
+      <div class="result-eyebrow">YOUR ROADMAP</div>
+      <div class="result-title" id="result-title">
+        <span class="accent">경영전환 피라미드</span>
+      </div>
+    </div>
+    <div class="mandala-wrap">
+      <svg class="mandala-svg" id="mandala-svg" viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="mandala-tooltip" id="mandala-tooltip"></div>
+    </div>
+    <div style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:-8px;margin-bottom:16px;letter-spacing:0.5px">
+      각 영역에 마우스를 올리면 전체 내용을 확인할 수 있습니다
+    </div>
+    <div class="roadmap-section">
+      <div class="section-title">333 로드맵 — 30일 · 3개월 · 3년 단계 계획</div>
+      <p class="helper-text" style="margin-bottom:16px">만다라트의 16개 수행과제를 <strong>30일 · 3개월 · 3년</strong>의 시간축에 자동 분배했습니다.<br>한 번에 모두 추진하지 마시고 <strong>30일 단계의 3~4개부터</strong> 시작하십시오.</p>
+      <div class="roadmap-grid" id="roadmap-grid"></div>
+      <div class="notice-box" style="margin-top:14px">
+        <strong>「경영전환론」 23장 333 로드맵</strong>의 원칙: 30일은 "착수가 목표", 3개월은 "지표 한 가지의 변화", 3년은 "본질의 전환".<br>
+        분류는 자동 추천이며, 자기 회사 상황에 맞춰 우선순위를 다듬으십시오.
+      </div>
+    </div>
+    <div class="notice-box">
+      이 로드맵은 출발점입니다. 16개 수행과제 중 가장 시급한 것 1~2개부터 시작하십시오.<br>
+      모든 과제를 동시에 추진하면 어느 것도 완성되지 않습니다. 「경영전환론」의 원칙대로, 한 번에 한 곳에 집중하십시오.
+    </div>
+    <div class="download-area">
+      <button class="btn btn-primary" onclick="downloadPNG()">
+        🗎 PNG 이미지로 저장
+      </button>
+      <a class="btn btn-ghost" href="../../contact/index.html">
+        30분 무료 컨설팅 상담 →
+      </a>
+      <button class="btn btn-text" onclick="restart()">처음부터 다시 작성</button>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const CLASSIFICATIONS = {
+  axis: {
+    name: '4축',
+    items: [
+      { pos:0, axis:'人', name:'사람·조직', defaultKt:'위임 가능한 조직 구조 완성', tag:'人' },
+      { pos:1, axis:'營', name:'영업·시장', defaultKt:'안정적 매출 확장 시스템 구축', tag:'營' },
+      { pos:2, axis:'財', name:'재무', defaultKt:'수익성과 현금흐름 정비', tag:'財' },
+      { pos:3, axis:'産', name:'제품·시장', defaultKt:'차별화된 제품·서비스 경쟁력', tag:'産' },
+    ]
+  },
+  time: {
+    name: '시간축',
+    items: [
+      { pos:0, axis:'단기', name:'단기 (1년)', defaultKt:'즉시 착수할 단기 과제', tag:'단기' },
+      { pos:1, axis:'중기', name:'중기 (1~2년)', defaultKt:'중기 안정화 과제', tag:'중기' },
+      { pos:2, axis:'장기', name:'장기 (2~3년)', defaultKt:'장기 도약 과제', tag:'장기' },
+      { pos:3, axis:'영구', name:'영구', defaultKt:'지속적 핵심 가치', tag:'영구' },
+    ]
+  },
+  stage: {
+    name: '단계축',
+    items: [
+      { pos:0, axis:'탐색', name:'탐색', defaultKt:'시장과 기회 탐색', tag:'탐색' },
+      { pos:1, axis:'검증', name:'검증', defaultKt:'가설 검증 및 PMF 확인', tag:'검증' },
+      { pos:2, axis:'진입', name:'진입', defaultKt:'시장 진입 및 초기 확보', tag:'진입' },
+      { pos:3, axis:'확장', name:'확장', defaultKt:'규모 확대 및 시장 점유', tag:'확장' },
+    ]
+  },
+  custom: {
+    name: '자유',
+    items: [
+      { pos:0, axis:'영역1', name:'영역 1', defaultKt:'', tag:'1' },
+      { pos:1, axis:'영역2', name:'영역 2', defaultKt:'', tag:'2' },
+      { pos:2, axis:'영역3', name:'영역 3', defaultKt:'', tag:'3' },
+      { pos:3, axis:'영역4', name:'영역 4', defaultKt:'', tag:'4' },
+    ]
+  }
+};
+const PERFORM_POOL = {
+  '人': [
+    '핵심 직무 SOP 표준화', '중간 관리자 3명 양성', '인사 평가 체계 도입',
+    '후계 라인 식별 및 육성', '온보딩 프로그램 구축', '대표 부재 시 의사결정 위임 구조',
+    '핵심 인재 이탈 방지 정책', '정기 1on1 미팅 정착',
+  ],
+  '營': [
+    '신규 고객 유입 채널 다변화', '영업 파이프라인 데이터화', '재구매율 측정·관리 체계',
+    '고객 등급 차별화 관리', '이탈 사전 감지 체계', '영업 멘트·제안서 표준화',
+    '주요 거래처 분산 (의존도 20% 이하)', '정기 고객 커뮤니케이션 운영',
+  ],
+  '財': [
+    '월 고정비 3개월치 현금 확보', '제품·서비스별 공헌이익 분석', '매출채권 회수 기간 단축',
+    '재고자산 회전율 개선', '손익·현금흐름 월간 리뷰 체계', '고정비·변동비 구조 정비',
+    '부채비율 정상화', '비수익 사업·고객 정리',
+  ],
+  '産': [
+    '핵심 차별점 1줄 정의', '타겟 고객 페르소나 명확화', '고객 인터뷰 정기화',
+    '제품 정기 업데이트 주기 확립', '경쟁사 분석 정기 운영', '5년 후 제품 로드맵 수립',
+    '고객 피드백 반영 체계 구축', '신제품 사전 검증 프로세스',
+  ],
+  '단기': [
+    '월 고정비 점검 및 절감', '핵심 고객 3곳 집중 관리', '즉시 매출 가능 활동 식별',
+    '운영 비용 30일 점검', 'KPI 1개 즉시 추적 시작', '결정 미뤄진 사항 정리',
+    '정책자금 즉시 활용 검토', '핵심 인재 이탈 방지',
+  ],
+  '중기': [
+    '신규 채널 1개 안착', '제품 1차 업데이트', '재무 구조 정비',
+    '조직 구조 재설계', '인사 평가 체계 도입', '신규 시장 1곳 진출 검증',
+    '디지털 시스템 1개 도입', '브랜드 포지셔닝 정립',
+  ],
+  '장기': [
+    '신사업 1개 본격 추진', '글로벌 또는 신시장 진출', '플랫폼 또는 생태계 전환',
+    '인수합병 또는 투자 유치 검토', '차세대 제품 출시', '조직 자생력 완성',
+    '인증·표준 다수 보유', '업계 Top 진입',
+  ],
+  '영구': [
+    '고객 중심 사고 체화', '학습 조직 문화 정착', '윤리·신뢰 기반 강화',
+    '재무 건전성 유지', '핵심 가치 일관 유지', '지속 가능 경영 체계',
+    '대표의 학습 루틴', '조직 자기부정 문화',
+  ],
+  '탐색': [
+    '시장 규모 및 동향 분석', '잠재 고객 인터뷰 10건', '경쟁 환경 매핑',
+    '기회 영역 우선순위', '핵심 가설 정의', '내부 역량 평가',
+    '파일럿 후보 3개 선정', '예산 및 자원 검토',
+  ],
+  '검증': [
+    'MVP 또는 프로토타입 제작', '소규모 파일럿 실행', '고객 피드백 수집·분석',
+    '핵심 지표 측정 체계', 'PMF 검증', '가격 정책 테스트',
+    '운영 리스크 점검', '피봇 여부 결정',
+  ],
+  '진입': [
+    '본격 출시 및 마케팅', '영업 채널 구축', '고객 획득 비용 최적화',
+    '초기 고객 100명 확보', '초기 운영 안정화', '브랜드 인지도 구축',
+    '파트너십 확보', '고객 피드백 반영 사이클',
+  ],
+  '확장': [
+    '규모 확대 (인력·생산)', '신규 시장·지역 진출', '제품 라인업 확장',
+    '운영 자동화·시스템화', '데이터 기반 의사결정', '대형 거래처·계약 확보',
+    '인수합병 또는 투자', '브랜드 자산 구축',
+  ],
+  '영역1': ['', '', '', ''],
+  '영역2': ['', '', '', ''],
+  '영역3': ['', '', '', ''],
+  '영역4': ['', '', '', ''],
+};
+let state = {
+  classification: 'axis',
+  goal: '',
+  company: '',
+  kt: ['', '', '', ''],
+  ktEdited: [false,false,false,false],
+  perform: [[], [], [], []],
+};
+const CLASSIFICATION_LABELS = {
+  axis: '人營財産 4축',
+  time: '시간축',
+  stage: '단계축',
+  custom: '자유 모드',
+};
+function toggleClassificationPanel(){
+  const panel = document.getElementById('classification-panel');
+  if(panel.style.display === 'none' || panel.style.display === ''){
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+function changeClassification(newClass){
+  if(state.classification === newClass) return;
+  saveKtFromInputs();
+  const hasEdit = state.ktEdited.some(e => e);
+  if(hasEdit){
+    if(!confirm('분류를 변경하면 입력하신 핵심과제가 초기화됩니다. 계속하시겠습니까?')) return;
+  }
+  state.classification = newClass;
+  document.querySelectorAll('.classification-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.classification-btn[data-class="${newClass}"]`).classList.add('active');
+  document.getElementById('current-class-label').textContent = CLASSIFICATION_LABELS[newClass];
+  const cls = CLASSIFICATIONS[newClass];
+  state.kt = cls.items.map(item => suggestKt(item, state.goal));
+  state.ktEdited = [false, false, false, false];
+  state.perform = [[], [], [], []];
+  renderKtCards();
+  document.getElementById('classification-panel').style.display = 'none';
+}
+function updateStepIndicator(activeStep){
+  document.querySelectorAll('.step-dot').forEach(dot => {
+    const step = parseInt(dot.dataset.step);
+    dot.classList.remove('active', 'done');
+    if(step < activeStep) dot.classList.add('done');
+    if(step === activeStep) dot.classList.add('active');
+  });
+}
+function goToStep2(){
+  const goal = document.getElementById('f-goal').value.trim();
+  const company = document.getElementById('f-company').value.trim();
+  if(!goal){
+    alert('최종목표를 입력해 주십시오.');
+    document.getElementById('f-goal').focus();
+    return;
+  }
+  state.goal = goal;
+  state.company = company;
+  const cls = CLASSIFICATIONS[state.classification];
+  state.kt = cls.items.map(item => suggestKt(item, goal));
+  state.ktEdited = [false, false, false, false];
+  document.getElementById('goal-display').textContent = goal;
+  renderKtCards();
+  document.getElementById('step1-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('step2-card').style.display = 'block';
+  updateStepIndicator(2);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goBackToStep1(){
+  saveKtFromInputs();
+  document.getElementById('step2-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('step1-card').style.display = 'block';
+  updateStepIndicator(1);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goToStep3(){
+  saveKtFromInputs();
+  if(state.kt.some(k => !k.trim())){
+    if(!confirm('일부 핵심과제가 비어 있습니다. 그대로 진행하시겠습니까?')) return;
+  }
+  const cls = CLASSIFICATIONS[state.classification];
+  state.perform = cls.items.map(item => {
+    const pool = PERFORM_POOL[item.axis] || ['', '', '', ''];
+    return pool.slice(0, 4).map(s => s);
+  });
+  renderPerformGroups();
+  document.getElementById('step2-card').style.display = 'none';
+  document.getElementById('step3-card').style.display = 'block';
+  updateStepIndicator(3);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goBackToStep2(){
+  savePerformFromInputs();
+  document.getElementById('step3-card').style.display = 'none';
+  document.getElementById('step2-card').style.display = 'block';
+  updateStepIndicator(2);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function goToStep4(){
+  savePerformFromInputs();
+  document.getElementById('step3-card').style.display = 'none';
+  document.getElementById('step4-card').style.display = 'block';
+  updateStepIndicator(4);
+  drawMandala();
+  drawRoadmap();
+  if(state.company){
+    document.getElementById('result-title').innerHTML = 
+      `<span class="accent">${escapeHtml(state.company)}</span>의 경영전환 피라미드`;
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('step4-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('step1-card').style.display = 'block';
+  document.getElementById('f-goal').value = '';
+  document.getElementById('f-company').value = '';
+  state = {
+    classification: 'axis', goal: '', company: '',
+    kt: ['', '', '', ''],
+    ktEdited: [false, false, false, false],
+    perform: [[], [], [], []],
+  };
+  document.getElementById('current-class-label').textContent = '人營財産 4축';
+  document.querySelectorAll('.classification-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.classification-btn[data-class="axis"]').classList.add('active');
+  document.getElementById('classification-panel').style.display = 'none';
+  updateStepIndicator(1);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function suggestKt(item, goal){
+  const goalLower = goal.toLowerCase();
+  let kt = item.defaultKt;
+  if(item.axis === '人'){
+    if(goalLower.includes('인재') || goalLower.includes('조직')) kt = '핵심 인재 양성과 위임 구조 완성';
+    else if(goalLower.includes('확장') || goalLower.includes('성장')) kt = '확장 가능한 조직 시스템 구축';
+  } else if(item.axis === '營'){
+    if(goalLower.includes('매출') || goalLower.includes('영업')) kt = '안정적 매출 시스템과 채널 다변화';
+    else if(goalLower.includes('수출') || goalLower.includes('글로벌')) kt = '글로벌 진출과 신규 시장 개척';
+  } else if(item.axis === '財'){
+    if(goalLower.includes('이익') || goalLower.includes('수익')) kt = '수익 구조 정비와 이익률 향상';
+    else if(goalLower.includes('투자') || goalLower.includes('자금')) kt = '재무 건전성과 자금 조달 능력';
+  } else if(item.axis === '産'){
+    if(goalLower.includes('신사업') || goalLower.includes('신제품')) kt = '신사업·신제품 개발과 시장 검증';
+    else if(goalLower.includes('차별') || goalLower.includes('경쟁')) kt = '차별화된 제품·시장 포지셔닝';
+  }
+  return kt;
+}
+const POSITION_LABELS = ['위', '우측', '아래', '좌측'];
+function renderKtCards(){
+  const cls = CLASSIFICATIONS[state.classification];
+  const grid = document.getElementById('kt-grid');
+  grid.innerHTML = cls.items.map((item, i) => `
+    <div class="kt-card active">
+      <div class="kt-position">
+        <span class="kt-num">${i+1}</span>
+        <span class="kt-pos-label">${POSITION_LABELS[item.pos]} 면 · ${item.name}</span>
+        <span class="kt-axis-tag">${item.tag}</span>
+      </div>
+      <textarea data-kt-idx="${i}" placeholder="핵심과제를 입력하세요">${escapeHtml(state.kt[i] || '')}</textarea>
+    </div>
+  `).join('');
+}
+function saveKtFromInputs(){
+  document.querySelectorAll('[data-kt-idx]').forEach(t => {
+    const idx = parseInt(t.dataset.ktIdx);
+    const newValue = t.value.trim();
+    if(newValue !== state.kt[idx]){
+      state.ktEdited[idx] = true;
+    }
+    state.kt[idx] = newValue;
+  });
+}
+function renderPerformGroups(){
+  const cls = CLASSIFICATIONS[state.classification];
+  const container = document.getElementById('perform-container');
+  container.innerHTML = cls.items.map((item, i) => `
+    <div class="perform-group" data-group="${i}">
+      <div class="perform-group-header" onclick="toggleGroup(${i})">
+        <span class="kt-num">${i+1}</span>
+        <span class="kt-label">${escapeHtml(state.kt[i] || '(핵심과제 미입력)')}</span>
+        <span class="kt-axis-tag">${item.tag}</span>
+        <span class="expand-icon">▼</span>
+      </div>
+      <div class="perform-list">
+        ${[0,1,2,3].map(j => `
+          <div class="perform-item">
+            <span class="perform-num">${j+1}</span>
+            <textarea data-perform="${i}-${j}" placeholder="수행과제 ${j+1}">${escapeHtml(state.perform[i][j] || '')}</textarea>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+function toggleGroup(i){
+  document.querySelector(`[data-group="${i}"]`).classList.toggle('collapsed');
+}
+function savePerformFromInputs(){
+  document.querySelectorAll('[data-perform]').forEach(t => {
+    const [i, j] = t.dataset.perform.split('-').map(Number);
+    if(!state.perform[i]) state.perform[i] = [];
+    state.perform[i][j] = t.value.trim();
+  });
+}
+function drawMandala(){
+  const svg = document.getElementById('mandala-svg');
+  const vw = 600, vh = 540;
+  const margin = 50;
+  const out = {
+    l: margin, r: vw - margin,
+    t: margin, b: vh - margin,
+  };
+  const coreW = 180, coreH = 110;
+  const core = {
+    l: (vw - coreW) / 2, r: (vw + coreW) / 2,
+    t: (vh - coreH) / 2, b: (vh + coreH) / 2,
+  };
+  const t = 0.40;
+  const mid = {
+    l: out.l + (core.l - out.l) * t,
+    r: out.r + (core.r - out.r) * t,
+    t: out.t + (core.t - out.t) * t,
+    b: out.b + (core.b - out.b) * t,
+  };
+  let html = '';
+  html += `<defs>
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3684FF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#5A9DFF" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="midGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F1FF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#D1E2FF" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="midGradHover" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9DFFF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#A8C7FF" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="outGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFCFF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F2F6FE" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="cellShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="coreShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="3"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.30"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>`;
+  html += `<rect x="${out.l}" y="${out.t}" width="${out.r-out.l}" height="${out.b-out.t}"
+           fill="url(#outGrad)" stroke="rgba(54,132,255,0.25)" stroke-width="1" rx="6"/>`;
+  const diagStroke = 'rgba(54,132,255,0.35)';
+  html += `<line x1="${out.l}" y1="${out.t}" x2="${core.l}" y2="${core.t}" stroke="${diagStroke}" stroke-width="1.2"/>`;
+  html += `<line x1="${out.r}" y1="${out.t}" x2="${core.r}" y2="${core.t}" stroke="${diagStroke}" stroke-width="1.2"/>`;
+  html += `<line x1="${out.l}" y1="${out.b}" x2="${core.l}" y2="${core.b}" stroke="${diagStroke}" stroke-width="1.2"/>`;
+  html += `<line x1="${out.r}" y1="${out.b}" x2="${core.r}" y2="${core.b}" stroke="${diagStroke}" stroke-width="1.2"/>`;
+  const subDiagStroke = 'rgba(54,132,255,0.20)';
+  for(let i=1; i<4; i++){
+    const xOut = out.l + (out.r - out.l) * i / 4;
+    const xMid = mid.l + (mid.r - mid.l) * i / 4;
+    html += `<line x1="${xOut}" y1="${out.t}" x2="${xMid}" y2="${mid.t}" stroke="${subDiagStroke}" stroke-width="0.8"/>`;
+    html += `<line x1="${xOut}" y1="${out.b}" x2="${xMid}" y2="${mid.b}" stroke="${subDiagStroke}" stroke-width="0.8"/>`;
+    const yOut = out.t + (out.b - out.t) * i / 4;
+    const yMid = mid.t + (mid.b - mid.t) * i / 4;
+    html += `<line x1="${out.l}" y1="${yOut}" x2="${mid.l}" y2="${yMid}" stroke="${subDiagStroke}" stroke-width="0.8"/>`;
+    html += `<line x1="${out.r}" y1="${yOut}" x2="${mid.r}" y2="${yMid}" stroke="${subDiagStroke}" stroke-width="0.8"/>`;
+  }
+  for(let i=0; i<4; i++){
+    const xOutL = out.l + (out.r - out.l) * i / 4;
+    const xOutR = out.l + (out.r - out.l) * (i+1) / 4;
+    const xMidL = mid.l + (mid.r - mid.l) * i / 4;
+    const xMidR = mid.l + (mid.r - mid.l) * (i+1) / 4;
+    const cx = (xOutL + xOutR + xMidL + xMidR) / 4;
+    const cy = (out.t + mid.t) / 2;
+    const cellW = ((xOutR - xOutL) + (xMidR - xMidL)) / 2 - 10;
+    const text = state.perform[0]?.[i] || '';
+    html += `<g class="mandala-cell perform-cell" data-fulltext="${escapeXml(text || '수행과제 ' + (i+1))}" data-position="top">`;
+    html += `<polygon points="${xOutL},${out.t} ${xOutR},${out.t} ${xMidR},${mid.t} ${xMidL},${mid.t}" 
+             fill="transparent" class="cell-hitbox"/>`;
+    drawPerformText(s => html += s, text, i+1, cx, cy, cellW);
+    html += `</g>`;
+  }
+  for(let i=0; i<4; i++){
+    const yOutT = out.t + (out.b - out.t) * i / 4;
+    const yOutB = out.t + (out.b - out.t) * (i+1) / 4;
+    const yMidT = mid.t + (mid.b - mid.t) * i / 4;
+    const yMidB = mid.t + (mid.b - mid.t) * (i+1) / 4;
+    const cx = (out.r + mid.r) / 2;
+    const cy = (yOutT + yOutB + yMidT + yMidB) / 4;
+    const text = state.perform[1]?.[i] || '';
+    html += `<g class="mandala-cell perform-cell" data-fulltext="${escapeXml(text || '수행과제 ' + (i+1))}" data-position="right">`;
+    html += `<polygon points="${out.r},${yOutT} ${out.r},${yOutB} ${mid.r},${yMidB} ${mid.r},${yMidT}" 
+             fill="transparent" class="cell-hitbox"/>`;
+    drawPerformText(s => html += s, text, i+1, cx, cy, (out.r - mid.r) - 12);
+    html += `</g>`;
+  }
+  for(let i=0; i<4; i++){
+    const xOutL = out.l + (out.r - out.l) * i / 4;
+    const xOutR = out.l + (out.r - out.l) * (i+1) / 4;
+    const xMidL = mid.l + (mid.r - mid.l) * i / 4;
+    const xMidR = mid.l + (mid.r - mid.l) * (i+1) / 4;
+    const cx = (xOutL + xOutR + xMidL + xMidR) / 4;
+    const cy = (mid.b + out.b) / 2;
+    const cellW = ((xOutR - xOutL) + (xMidR - xMidL)) / 2 - 10;
+    const text = state.perform[2]?.[i] || '';
+    html += `<g class="mandala-cell perform-cell" data-fulltext="${escapeXml(text || '수행과제 ' + (i+1))}" data-position="bottom">`;
+    html += `<polygon points="${xOutL},${out.b} ${xOutR},${out.b} ${xMidR},${mid.b} ${xMidL},${mid.b}" 
+             fill="transparent" class="cell-hitbox"/>`;
+    drawPerformText(s => html += s, text, i+1, cx, cy, cellW);
+    html += `</g>`;
+  }
+  for(let i=0; i<4; i++){
+    const yOutT = out.t + (out.b - out.t) * i / 4;
+    const yOutB = out.t + (out.b - out.t) * (i+1) / 4;
+    const yMidT = mid.t + (mid.b - mid.t) * i / 4;
+    const yMidB = mid.t + (mid.b - mid.t) * (i+1) / 4;
+    const cx = (out.l + mid.l) / 2;
+    const cy = (yOutT + yOutB + yMidT + yMidB) / 4;
+    const text = state.perform[3]?.[i] || '';
+    html += `<g class="mandala-cell perform-cell" data-fulltext="${escapeXml(text || '수행과제 ' + (i+1))}" data-position="left">`;
+    html += `<polygon points="${out.l},${yOutT} ${out.l},${yOutB} ${mid.l},${yMidB} ${mid.l},${yMidT}" 
+             fill="transparent" class="cell-hitbox"/>`;
+    drawPerformText(s => html += s, text, i+1, cx, cy, (mid.l - out.l) - 12);
+    html += `</g>`;
+  }
+  const ktConfigs = [
+    {pos: 0, points: `${mid.l},${mid.t} ${mid.r},${mid.t} ${core.r},${core.t} ${core.l},${core.t}`,
+     cx: (mid.l+mid.r)/2, cy: (mid.t+core.t)/2, maxW: core.r - core.l - 10},
+    {pos: 1, points: `${mid.r},${mid.t} ${mid.r},${mid.b} ${core.r},${core.b} ${core.r},${core.t}`,
+     cx: (mid.r+core.r)/2, cy: (core.t+core.b)/2, maxW: mid.r - core.r - 6},
+    {pos: 2, points: `${mid.l},${mid.b} ${mid.r},${mid.b} ${core.r},${core.b} ${core.l},${core.b}`,
+     cx: (mid.l+mid.r)/2, cy: (core.b+mid.b)/2, maxW: core.r - core.l - 10},
+    {pos: 3, points: `${mid.l},${mid.t} ${mid.l},${mid.b} ${core.l},${core.b} ${core.l},${core.t}`,
+     cx: (mid.l+core.l)/2, cy: (core.t+core.b)/2, maxW: core.l - mid.l - 6},
+  ];
+  ktConfigs.forEach(cfg => {
+    const ktText = state.kt[cfg.pos] || '핵심과제';
+    html += `<g class="mandala-cell kt-cell" data-fulltext="${escapeXml(ktText)}" data-position="kt-${cfg.pos}">`;
+    html += `<polygon points="${cfg.points}" fill="url(#midGrad)" stroke="rgba(54,132,255,0.4)" stroke-width="1" class="kt-shape"/>`;
+    drawWrappedText(s => html += s, ktText, cfg.cx, cfg.cy, cfg.maxW, 12, '#1a3a6e', 'middle', 700);
+    html += `</g>`;
+  });
+  html += `<g class="mandala-cell core-cell" data-fulltext="${escapeXml(state.goal || '최종목표')}" data-position="core">`;
+  html += `<g filter="url(#coreShadow)">`;
+  html += `<rect x="${core.l}" y="${core.t}" width="${core.r-core.l}" height="${core.b-core.t}"
+           fill="url(#coreGrad)" stroke="#2168E0" stroke-width="1.5" rx="4" class="core-shape"/>`;
+  html += `<rect x="${core.l+2}" y="${core.t+2}" width="${core.r-core.l-4}" height="${(core.b-core.t)*0.4}"
+           fill="rgba(255,255,255,0.12)" rx="3"/>`;
+  html += `</g>`;
+  const goalCx = (core.l + core.r) / 2;
+  const goalCy = (core.t + core.b) / 2;
+  html += `<text x="${goalCx}" y="${core.t + 22}" text-anchor="middle"
+           font-family="Pretendard, sans-serif" font-style="normal" font-size="11"
+           fill="rgba(255,255,255,0.9)" letter-spacing="3" font-weight="bold">FINAL GOAL</text>`;
+  html += `<line x1="${goalCx-25}" y1="${core.t + 30}" x2="${goalCx+25}" y2="${core.t + 30}"
+           stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>`;
+  const goalText = state.goal || '최종목표';
+  drawWrappedText(s => html += s, goalText, goalCx, goalCy + 12, core.r - core.l - 24, 14, '#fff', 'middle', 700);
+  html += `</g>`;
+  svg.innerHTML = html;
+  attachCellHover(svg);
+}
+function attachCellHover(svg){
+  const tooltip = document.getElementById('mandala-tooltip');
+  svg.querySelectorAll('.mandala-cell').forEach(cell => {
+    cell.addEventListener('mouseenter', e => {
+      const text = cell.dataset.fulltext;
+      if(!text) return;
+      tooltip.textContent = text;
+      tooltip.classList.add('show');
+    });
+    cell.addEventListener('mousemove', e => {
+      const rect = svg.getBoundingClientRect();
+      const wrapRect = svg.parentElement.getBoundingClientRect();
+      tooltip.style.left = (e.clientX - wrapRect.left + 14) + 'px';
+      tooltip.style.top = (e.clientY - wrapRect.top + 14) + 'px';
+    });
+    cell.addEventListener('mouseleave', e => {
+      tooltip.classList.remove('show');
+    });
+  });
+}
+function drawPerformText(append, text, num, cx, cy, maxWidth){
+  const text_display = text || `수행과제 ${num}`;
+  const fillColor = text ? '#3a4a6e' : '#a8b0c0';
+  const weight = text ? 500 : 400;
+  drawWrappedText(append, text_display, cx, cy, maxWidth, 9.5, fillColor, 'middle', weight);
+}
+function drawWrappedText(append, text, cx, cy, maxWidth, fontSize, color, anchor, weight){
+  if(!text) return;
+  const charWidth = fontSize * 1.05;
+  const maxChars = Math.max(2, Math.floor(maxWidth / charWidth));
+  const words = text.split(/(\s+)/);
+  const lines = [];
+  let line = '';
+  for(const w of words){
+    if(line.length + w.length <= maxChars){
+      line += w;
+    } else {
+      if(line) lines.push(line.trim());
+      if(w.length > maxChars){
+        for(let i=0; i<w.length; i+=maxChars){
+          lines.push(w.substring(i, i+maxChars));
+        }
+        line = '';
+      } else {
+        line = w;
+      }
+    }
+  }
+  if(line.trim()) lines.push(line.trim());
+  if(lines.length > 4){
+    lines.splice(3);
+    lines.push(lines.pop().substring(0, maxChars-1) + '…');
+  }
+  const lineHeight = fontSize * 1.3;
+  const startY = cy - (lines.length - 1) * lineHeight / 2;
+  lines.forEach((l, i) => {
+    append(`<text x="${cx}" y="${startY + i * lineHeight}" text-anchor="${anchor}" dominant-baseline="middle" 
+            font-family="Pretendard Variable, Pretendard, Noto Sans KR, sans-serif" 
+            font-size="${fontSize}" fill="${color}" font-weight="${weight}">${escapeXml(l)}</text>`);
+  });
+}
+function drawRoadmap(){
+  const grid = document.getElementById('roadmap-grid');
+  const day30 = [];
+  const month3 = [];
+  const year3 = [];
+  const cls = CLASSIFICATIONS[state.classification];
+  for(let i=0; i<4; i++){
+    const ktName = state.kt[i] || cls.items[i].name;
+    const tag = cls.items[i].tag;
+    const t1 = state.perform[i]?.[0];
+    const t2 = state.perform[i]?.[1];
+    const t3 = state.perform[i]?.[2];
+    const t4 = state.perform[i]?.[3];
+    if(t1) day30.push({text: t1, ktName, tag});
+    if(t2) month3.push({text: t2, ktName, tag});
+    if(t3) month3.push({text: t3, ktName, tag});
+    if(t4) year3.push({text: t4, ktName, tag});
+  }
+  const empty = '<li class="empty">수행과제를 입력하면 자동으로 분류됩니다</li>';
+  const card1 = `
+    <div class="roadmap-card">
+      <div class="roadmap-period">
+        <span class="term">30 DAYS</span>
+        <span class="ko">30일 단기</span>
+        <span class="roadmap-tag">착수</span>
+      </div>
+      <ul class="roadmap-list">
+        ${day30.length > 0 
+          ? day30.map(item => `<li><span style="color:var(--primary);font-size:10px;font-weight:600">[${item.tag}]</span> ${escapeHtml(item.text)}</li>`).join('') 
+          : empty}
+      </ul>
+      <div class="roadmap-note">
+        목표: 착수 자체가 성공입니다. 완료가 아닌 시작이 핵심.
+      </div>
+    </div>
+  `;
+  const card2 = `
+    <div class="roadmap-card">
+      <div class="roadmap-period">
+        <span class="term">3 MONTHS</span>
+        <span class="ko">3개월 중기</span>
+        <span class="roadmap-tag">구조</span>
+      </div>
+      <ul class="roadmap-list">
+        ${month3.length > 0 
+          ? month3.map(item => `<li><span style="color:var(--primary);font-size:10px;font-weight:600">[${item.tag}]</span> ${escapeHtml(item.text)}</li>`).join('') 
+          : empty}
+      </ul>
+      <div class="roadmap-note">
+        목표: 지표 한 가지의 명확한 변화가 나타나야 합니다.
+      </div>
+    </div>
+  `;
+  const card3 = `
+    <div class="roadmap-card">
+      <div class="roadmap-period">
+        <span class="term">3 YEARS</span>
+        <span class="ko">3년 장기</span>
+        <span class="roadmap-tag">전환</span>
+      </div>
+      <ul class="roadmap-list">
+        ${year3.length > 0 
+          ? year3.map(item => `<li><span style="color:var(--primary);font-size:10px;font-weight:600">[${item.tag}]</span> ${escapeHtml(item.text)}</li>`).join('') 
+          : empty}
+      </ul>
+      <div class="roadmap-note">
+        목표: 본질의 전환. 조직의 코드 자체가 달라지는 변화.
+      </div>
+    </div>
+  `;
+  grid.innerHTML = card1 + card2 + card3;
+}
+function downloadPNG(){
+  const svg = document.getElementById('mandala-svg');
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const svgBlob = new Blob([svgData], {type:'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.onload = function(){
+    const scale = 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = 600 * scale;
+    canvas.height = 540 * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(blob => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      const fileName = state.company 
+        ? `경영전환피라미드_${state.company}.png`
+        : '경영전환피라미드.png';
+      a.download = fileName;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  img.onerror = function(){
+    alert('이미지 변환에 실패했습니다. 브라우저를 새로고침하고 다시 시도해 주십시오.');
+    URL.revokeObjectURL(url);
+  };
+  img.src = url;
+}
+function escapeHtml(s){
+  if(!s) return '';
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function escapeXml(s){
+  if(!s) return '';
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>

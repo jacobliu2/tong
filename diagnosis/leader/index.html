@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리더 유형 자가진단 — 경영전환전략연구소 통</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+:root{
+  --primary:#3684FF;
+  --primary-light:#6BA3FF;
+  --bg:#f8faff;
+  --glass-bg:rgba(255,255,255,0.75);
+  --glass-border:rgba(54,132,255,0.15);
+  --shadow:0 8px 40px rgba(54,132,255,0.10);
+  --text:#1a2b4a;
+  --text-soft:#5a6a85;
+  --text-muted:#8a96ac;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);min-height:100vh;font-weight:400;letter-spacing:-0.01em;line-height:1.6}
+body{position:relative;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(54,132,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(107,163,255,0.06), transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(54,132,255,0.05), transparent 55%);
+}
+.serif{font-family:'Pretendard',sans-serif;font-style:normal;letter-spacing:-0.02em}
+
+/* 4면 흰색 페이드 (전 페이지 공통) */
+.edge-fade{position:fixed;pointer-events:none;z-index:50}
+.edge-fade.t{top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.b{bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.l{top:0;bottom:0;left:0;width:70px;background:linear-gradient(to right,#FFF 0%,rgba(255,255,255,0) 100%)}
+.edge-fade.r{top:0;bottom:0;right:0;width:70px;background:linear-gradient(to left,#FFF 0%,rgba(255,255,255,0) 100%)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 100px}
+.header{padding:32px 0 20px}
+.brand-text{display:flex;flex-direction:column;line-height:1.3}
+.brand-name{font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;font-weight:500}
+.hero{padding:24px 0 32px;text-align:left}
+.hero h1{font-family:'Pretendard Variable','Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-weight:800;font-size:42px;line-height:1.15;color:var(--text);margin-bottom:14px;letter-spacing:-0.03em}
+.hero h1 .accent{color:var(--primary);font-family:inherit;font-weight:800;letter-spacing:-0.03em}
+.hero p{font-size:15px;color:var(--text-soft);line-height:1.7}
+.progress-wrap{position:sticky;top:12px;z-index:20;margin:24px 0 28px}
+.progress-bar{height:6px;background:rgba(54,132,255,0.12);border-radius:99px;overflow:hidden;backdrop-filter:blur(8px)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.progress-meta{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-muted)}
+.card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow);padding:32px 28px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.section-title{font-size:13px;font-weight:600;color:var(--text);padding-left:14px;border-left:3px solid var(--primary);margin:32px 0 16px;letter-spacing:0.5px}
+.notice-box{margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border-left:3px solid var(--primary);border-radius:10px;font-size:13px;color:var(--text);line-height:1.7}
+.popIn{animation:popIn .4s cubic-bezier(.4,0,.2,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.4) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.area-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.area-header .letter{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Pretendard',sans-serif;font-style:normal;font-size:18px;font-weight:bold;flex-shrink:0}
+.area-header .name{font-size:13px;color:var(--text);font-weight:600;letter-spacing:-0.01em}
+.area-header .desc{flex:1;font-size:11px;color:var(--text-muted);letter-spacing:0.3px}
+.question-num{font-family:'Pretendard',sans-serif;font-style:normal;font-size:13px;color:var(--primary);letter-spacing:1px;margin-bottom:10px}
+.question-text{font-size:18px;line-height:1.55;font-weight:500;color:var(--text);margin-bottom:24px;letter-spacing:-0.01em}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{width:100%;padding:14px 18px;background:rgba(255,255,255,0.6);border:1.5px solid rgba(54,132,255,0.18);border-radius:14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--text);text-align:left;transition:all .25s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:14px}
+.option:hover{border-color:var(--primary);background:rgba(54,132,255,0.04);transform:translateY(-1px)}
+.option:active{transform:translateY(0)}
+.option .num{width:28px;height:28px;border-radius:8px;background:rgba(54,132,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:var(--primary);flex-shrink:0;transition:all .25s}
+.option:hover .num{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff}
+.headline-wrap{text-align:center;margin-bottom:32px}
+.headline-eyebrow{font-size:11px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.leader-letter{display:inline-flex;align-items:center;justify-content:center;width:96px;height:96px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border-radius:24px;font-family:'Pretendard',sans-serif;font-style:normal;font-size:56px;font-weight:bold;box-shadow:0 8px 24px rgba(54,132,255,0.3);margin-bottom:18px;letter-spacing:-0.02em}
+.leader-name{font-family:'Pretendard',sans-serif;font-style:normal;font-size:32px;line-height:1.2;color:var(--text);letter-spacing:-0.02em;margin-bottom:6px}
+.leader-name .accent{color:var(--primary)}
+.leader-sub{font-size:15px;color:var(--text-soft);margin-bottom:16px;letter-spacing:-0.01em;line-height:1.5}
+.leader-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:99px;font-size:12px;font-weight:500;letter-spacing:-0.01em;background:rgba(54,132,255,0.10);color:var(--primary)}
+.chip .label{font-size:10px;color:var(--text-muted);letter-spacing:0.5px}
+.cycle-wrap{margin:20px 0 16px}
+.cycle-svg{width:100%;max-width:480px;height:auto;display:block;margin:0 auto}
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.area-cell{text-align:center;padding:14px 6px;background:rgba(255,255,255,0.6);border:1.5px solid var(--glass-border);border-radius:12px;position:relative}
+.area-cell.dominant{background:linear-gradient(135deg,rgba(54,132,255,0.10),rgba(107,163,255,0.06));border-color:var(--primary)}
+.area-cell.dominant::after{content:'주된 유형';position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;font-size:9px;font-weight:600;letter-spacing:0.5px;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.area-cell .letter{font-family:'Pretendard',sans-serif;font-style:normal;font-size:24px;color:var(--text);margin-bottom:2px}
+.area-cell.dominant .letter{color:var(--primary)}
+.area-cell .name{font-size:11px;color:var(--text-muted);letter-spacing:0.5px;margin-bottom:6px}
+.area-cell .score{font-family:'Pretendard',sans-serif;font-style:normal;font-size:20px;color:var(--text)}
+.area-cell .score .unit{font-size:10px;color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;font-weight:500;margin-left:1px}
+.radar-wrap{display:flex;justify-content:center;margin:16px 0}
+.radar-svg{width:100%;max-width:340px;height:auto}
+.complement-box{padding:22px 22px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:14px}
+.complement-title{font-family:'Pretendard',sans-serif;font-style:normal;font-size:15px;color:var(--primary);margin-bottom:12px;letter-spacing:-0.01em}
+.complement-list{display:flex;flex-direction:column;gap:10px}
+.complement-item{font-size:14px;color:var(--text);line-height:1.7;padding-left:16px;position:relative}
+.complement-item::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--primary)}
+.complement-item strong{color:var(--primary);font-weight:600}
+.strength-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
+@media (max-width:560px){.strength-grid{grid-template-columns:1fr}}
+.sw-box{padding:18px 20px;background:rgba(255,255,255,0.6);border:1px solid var(--glass-border);border-radius:14px}
+.sw-box .label{font-size:11px;font-weight:600;letter-spacing:1px;margin-bottom:8px}
+.sw-box.s .label{color:var(--primary)}
+.sw-box.w .label{color:#e07449}
+.sw-box .content{font-size:13px;color:var(--text);line-height:1.7}
+.consultant-box{margin-top:8px;padding:24px 22px;background:linear-gradient(135deg,rgba(54,132,255,0.06),rgba(107,163,255,0.04));border:1px solid var(--glass-border);border-radius:14px;position:relative}
+.consultant-box::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:2px}
+.consultant-label{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--primary);font-weight:600;letter-spacing:1.5px;margin-bottom:14px}
+.consultant-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--primary)}
+.consultant-text{font-size:14px;line-height:1.85;color:var(--text);letter-spacing:-0.01em}
+.consultant-text p{margin-bottom:14px}
+.consultant-text p:last-child{margin-bottom:0}
+.consultant-text strong{color:var(--primary);font-weight:600}
+.cta-wrap{display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.btn{display:flex;align-items:center;justify-content:center;padding:16px 24px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:600;border:none;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:-0.01em;width:100%}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;box-shadow:0 4px 16px rgba(54,132,255,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(54,132,255,0.35)}
+.btn-text{background:none;color:var(--text-muted);padding:12px;font-size:13px;font-weight:500}
+.btn-text:hover{color:var(--primary)}
+.foot{text-align:center;padding-top:40px;font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
+@media (max-width:560px){
+  .hero h1{font-size:34px}
+  .question-text{font-size:17px}
+  .card{padding:26px 22px}
+  .leader-letter{width:80px;height:80px;font-size:46px;border-radius:20px}
+  .leader-name{font-size:26px}
+  .edge-fade.t,.edge-fade.b{height:50px}
+  .edge-fade.l,.edge-fade.r{width:28px}
+}
+</style>
+<link rel="canonical" href="https://www.workstong.com/diagnosis/leader/"/><meta name="description" content="리더의 결정 방식을 PDF 사이클로 진단해 리더유형과 강점·약점, 옆에 두어야 할 사람을 찾는 무료 리더유형 자가진단."/><meta property="og:title" content="리더유형 자가진단 — 통 TONG"/><meta property="og:description" content="리더의 결정 방식을 PDF 사이클로 진단해 리더유형과 강점·약점, 옆에 두어야 할 사람을 찾는 무료 리더유형 자가진단."/><meta property="og:url" content="https://www.workstong.com/diagnosis/leader/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "리더유형 진단", "description": "리더의 결정 방식과 보완점을 읽는 진단", "url": "https://www.workstong.com/diagnosis/leader/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "리더유형 진단", "item": "https://www.workstong.com/diagnosis/leader/"}]}</script></head>
+<body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
+<div class="edge-fade t"></div>
+<div class="edge-fade b"></div>
+<div class="edge-fade l"></div>
+<div class="edge-fade r"></div>
+<div class="wrap">
+  <div class="header">
+    <div class="brand-text">
+      <span class="brand-name">경영전환전략연구소 통</span>
+      <span class="brand-sub">BX LAB</span>
+    </div>
+  </div>
+  <div class="hero" id="hero-section">
+    <h1>리더 유형<br><span class="accent">자가진단</span></h1>
+    <p>P(계획)·D(실행)·F(점검) 세 사이클 위에 인격(통합)이 더해진 4가지 리더 유형 중 당신은 어디에 있습니까.</p>
+  </div>
+  <div class="card popIn" id="start-card">
+    <div class="section-title">진단 안내</div>
+    <p style="font-size:14px;color:var(--text-soft);line-height:1.8;margin-bottom:8px">· 총 20문항, 약 5~7분 소요 · 4영역(P 계획·D 실행·F 점검·인격 통합) 각 5문항 · 결과: 리더 유형 + PDF 사이클 + 강점·약점 + 보완 처방 · 응답 데이터는 저장되지 않습니다</p>
+    <div class="notice-box">
+      본 진단은 「경영전환론」을 바탕으로 한 자가진단입니다.<br>
+      리더십의 본질은 강점이 아니라 약점을 보완하는 사람을 곁에 두는 일에서 결정됩니다. 해당 진단은 이를 돕기 위한 자가진단일 뿐이오니, 상세한 내용은 담당 컨설턴트와 반드시 상의하여주시길 바랍니다.
+    </div>
+    <button class="btn btn-primary" style="margin-top:24px;width:100%" onclick="startQuiz()">
+      진단 시작하기 →
+    </button>
+  </div>
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-meta">
+        <span id="progress-text">1 / 20</span>
+        <span id="progress-area">P · 계획</span>
+      </div>
+    </div>
+    <div class="card popIn" id="question-card">
+      <div class="area-header">
+        <span class="letter serif" id="area-letter">P</span>
+        <span class="name" id="area-name">계획</span>
+        <span class="desc" id="area-desc">미래를 그리고 방향을 설정</span>
+      </div>
+      <div class="question-num serif" id="question-num">QUESTION 01</div>
+      <div class="question-text" id="question-text">문항을 불러오는 중...</div>
+      <div class="options" id="options-container"></div>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none">
+    <div class="card popIn" id="result-card">
+      <div class="headline-wrap">
+        <div class="headline-eyebrow">YOUR LEADER TYPE</div>
+        <div class="leader-letter serif" id="leader-letter">P</div>
+        <div class="leader-name serif" id="leader-name">—</div>
+        <div class="leader-sub" id="leader-sub">—</div>
+        <div class="leader-chips" id="leader-chips"></div>
+      </div>
+      <div class="section-title">PDF 사이클 — 어디서 끊기는가</div>
+      <div class="cycle-wrap">
+        <svg class="cycle-svg" id="cycle-svg" viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="section-title">4영역 점수</div>
+      <div class="area-grid" id="area-grid"></div>
+      <div class="radar-wrap">
+        <svg class="radar-svg" id="radar-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="section-title">강점과 약점</div>
+      <div class="strength-grid">
+        <div class="sw-box s">
+          <div class="label">STRENGTH 강점</div>
+          <div class="content" id="strength-text">—</div>
+        </div>
+        <div class="sw-box w">
+          <div class="label">WEAKNESS 약점</div>
+          <div class="content" id="weakness-text">—</div>
+        </div>
+      </div>
+      <div class="dx-teaser"><div class="dx-teaser-k">여기까지가 스스로 볼 수 있는 것입니다.</div><div class="dx-teaser-t">보완 처방과 실행 로드맵은 <b>경영전환 진단 상담</b>에서 회사의 실제 상황을 듣고 함께 만듭니다.</div></div><div class="tp-gated" style="display:none" aria-hidden="true"><div class="section-title">보완 처방 — 어떤 사람을 옆에 두어야 하는가</div>
+      <div class="complement-box">
+        <div class="complement-title" id="complement-title">—</div>
+        <div class="complement-list" id="complement-list"></div>
+      </div>
+      <div class="section-title">경영전환 컨설턴트 진단</div>
+      <div class="consultant-box">
+        <div class="consultant-label">CONSULTANT'S NOTE</div>
+        <div class="consultant-text" id="consultant-text"></div>
+      </div>
+      </div><div class="cta-wrap">
+        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 리더십 컨설팅 →</a>
+        <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot">© 경영전환전략연구소 통 · workstong.com</div>
+</div>
+<script>
+const AREAS = [
+  { key:'P', letter:'P', name:'계획', en:'PLAN', desc:'미래를 그리고 방향을 설정', fullDesc:'장기 비전·전략·우선순위 설정 능력' },
+  { key:'D', letter:'D', name:'실행', en:'DO', desc:'결정 즉시 움직이고 추진', fullDesc:'결단력·실행 속도·추진력' },
+  { key:'F', letter:'F', name:'점검', en:'FEEDBACK', desc:'결과를 분석하고 개선', fullDesc:'성찰·데이터 기반 분석·개선 사이클' },
+  { key:'C', letter:'C', name:'인격', en:'CHARACTER', desc:'균형과 통합 · 사람을 움직이는 힘', fullDesc:'성숙도·신뢰·관계·균형' },
+];
+const QUESTIONS = [
+  {id:1, area:'P', text:'나는 1~3년 후 우리 회사가 어디로 가야 하는지 명확한 그림을 가지고 있다.', positive:true},
+  {id:2, area:'P', text:'나는 매년 회사의 우선순위 목표를 3가지 이내로 정리해 직원들과 공유한다.', positive:true},
+  {id:3, area:'P', text:'당장의 일에 쫓겨 미래에 대해 깊이 생각할 시간이 거의 없다.', positive:false},
+  {id:4, area:'P', text:'나는 시장 변화·경쟁사 동향을 정기적으로 분석하며 우리의 위치를 점검한다.', positive:true},
+  {id:5, area:'P', text:'나는 직원들에게 "왜 이 일을 해야 하는지" 큰 그림을 자주 설명한다.', positive:true},
+  {id:6, area:'D', text:'나는 결정한 일은 즉시 행동으로 옮기며 미루지 않는다.', positive:true},
+  {id:7, area:'D', text:'어려운 결단의 순간에 망설이기보다 빠르게 결론을 내리는 편이다.', positive:true},
+  {id:8, area:'D', text:'좋은 아이디어가 있어도 실행으로 옮기지 못하고 시간을 흘려보낸 경험이 많다.', positive:false},
+  {id:9, area:'D', text:'나는 추진력 있게 일을 끌고 가며 주변에 그것이 인식되어 있다.', positive:true},
+  {id:10, area:'D', text:'장애물이 나타나도 우회하거나 돌파해서 목표를 달성하는 편이다.', positive:true},
+  {id:11, area:'F', text:'나는 끝난 프로젝트나 결정에 대해 정기적으로 회고·분석을 진행한다.', positive:true},
+  {id:12, area:'F', text:'직원들에게 솔직한 피드백을 받기 위한 채널이 마련되어 있다.', positive:true},
+  {id:13, area:'F', text:'잘못된 판단이나 실수를 인정하기보다 합리화하는 경향이 있다.', positive:false},
+  {id:14, area:'F', text:'성과 지표(KPI)를 데이터로 추적하며 의사결정에 반영한다.', positive:true},
+  {id:15, area:'F', text:'나는 "왜 이렇게 됐을까"를 깊이 분석하는 시간을 정기적으로 갖는다.', positive:true},
+  {id:16, area:'C', text:'직원들은 나를 신뢰하며 어려운 상황에서도 의견을 솔직하게 말한다.', positive:true},
+  {id:17, area:'C', text:'나는 감정에 휘둘리기보다 일관된 태도로 사람을 대한다.', positive:true},
+  {id:18, area:'C', text:'성공은 내 덕, 실패는 직원 탓으로 돌리는 경향이 있다.', positive:false},
+  {id:19, area:'C', text:'나는 자신의 강점과 약점을 명확히 알고 있으며 부족한 부분을 인정한다.', positive:true},
+  {id:20, area:'C', text:'나와 다른 의견을 가진 사람을 존중하며 그 의견을 의사결정에 반영한다.', positive:true},
+];
+const SCALE_LABELS = [
+  {num:1, text:'전혀 그렇지 않다'},
+  {num:2, text:'그렇지 않다'},
+  {num:3, text:'보통이다'},
+  {num:4, text:'그렇다'},
+  {num:5, text:'매우 그렇다'},
+];
+const LEADER_TYPES = {
+  P:{
+    name:'계획형 리더',
+    sub:'미래를 그리고 방향을 제시하는 리더',
+    strength:'장기 비전과 전략적 사고가 강합니다. 시장 변화를 미리 읽고 회사가 갈 방향을 정합니다. 조직에 "왜"를 설명할 수 있는 사람으로, 사람들이 따라야 할 이유를 만들어냅니다.',
+    weakness:'계획에만 머무르고 실행이 느릴 수 있습니다. 완벽한 계획을 기다리다 시기를 놓칠 위험이 있고, 추진력이 부족해 보일 수 있습니다.',
+    complement_title:'당신에게 필요한 사람은 D형(실행) 동반자입니다',
+    complement:[
+      '<strong>결정을 즉시 행동으로 옮기는 D형 임원</strong>을 옆에 두십시오. 당신의 비전을 행동으로 번역하는 사람이 없으면 계획은 종이에 머뭅니다.',
+      '주간 단위로 "이번 주에 한 일"을 보고받는 체계를 만드십시오. 계획자에게 가장 위험한 것은 실행 검증 없이 다음 계획으로 넘어가는 일입니다.',
+      '계획 수립과 실행 보고의 시간을 의도적으로 분리하십시오. 같은 회의에서 계획과 실행을 동시에 다루면 한쪽은 반드시 약해집니다.',
+    ],
+    note_focus:'계획자의 가장 큰 함정은 실행이 따라오지 않은 채로 다음 계획을 세우는 것입니다.',
+  },
+  D:{
+    name:'실행형 리더',
+    sub:'결정 즉시 움직이고 끌고 가는 리더',
+    strength:'결단력과 추진력이 강합니다. 어려운 상황에서도 멈추지 않고 앞으로 나아가며, 시장 기회를 빠르게 잡아냅니다. 조직에 속도를 만들어내는 사람입니다.',
+    weakness:'방향을 점검할 시간이 부족할 수 있습니다. "왜 이렇게 됐을까"를 분석하기보다 "다음에 뭘 할까"로 빠르게 넘어가, 같은 실수를 반복할 위험이 있습니다.',
+    complement_title:'당신에게 필요한 사람은 F형(점검) 동반자입니다',
+    complement:[
+      '<strong>데이터를 차분히 분석하는 F형 참모</strong>를 옆에 두십시오. 당신의 추진력에 검증을 더하는 사람이 없으면 잘못된 방향으로 빠르게 갈 수 있습니다.',
+      '월 1회는 의도적으로 "지난 한 달 회고"의 시간을 가지십시오. 실행자에게 가장 비싼 비용은 분석하지 않은 채 다음 실행으로 넘어가는 것입니다.',
+      '신규 프로젝트 시작 전 24시간의 "결정 유예 시간"을 두십시오. 즉시 결정의 강점은 유지하되 결정 직전의 검토를 한 번 더 거치는 방식입니다.',
+    ],
+    note_focus:'실행자의 가장 큰 함정은 점검 없이 같은 방식을 반복하는 것입니다.',
+  },
+  F:{
+    name:'점검형 리더',
+    sub:'분석하고 개선하는 사이클을 만드는 리더',
+    strength:'데이터 기반 사고와 성찰력이 강합니다. 끝난 프로젝트에서 학습을 끌어내며, 같은 실수를 반복하지 않는 조직을 만듭니다. 조직에 깊이를 더하는 사람입니다.',
+    weakness:'분석에만 머무르고 결단이 느릴 수 있습니다. 완벽한 데이터를 기다리다 시기를 놓치거나, 새로운 방향을 그리는 추진력이 부족할 수 있습니다.',
+    complement_title:'당신에게 필요한 사람은 P형(계획) + D형(실행) 동반자입니다',
+    complement:[
+      '<strong>큰 그림을 그리는 P형 파트너</strong>를 옆에 두십시오. 당신의 분석력은 방향이 정해진 후에 가장 큰 가치를 발휘합니다.',
+      '<strong>결정을 즉시 행동으로 옮기는 D형 임원</strong>도 함께 두십시오. 점검자가 직접 실행까지 하려 하면 사이클이 느려집니다.',
+      '"분석으로 충분하다"의 기준을 미리 정해두십시오. 점검자에게 가장 큰 함정은 분석을 무한히 깊게 하면서 결정을 미루는 것입니다.',
+    ],
+    note_focus:'점검자의 가장 큰 함정은 분석을 핑계로 결정을 미루는 것입니다.',
+  },
+  C:{
+    name:'인격형 리더',
+    sub:'P·D·F를 균형 있게 갖춘 통합형 리더',
+    strength:'네 영역 모두 균형 있게 작동하는 드문 유형입니다. 계획·실행·점검의 PDF 사이클이 본인 안에서 완성되며, 더 중요한 것은 사람을 움직이는 힘이 있다는 점입니다. 직원들이 자발적으로 따르는 리더입니다.',
+    weakness:'모든 것을 본인이 다 하려는 함정에 빠질 수 있습니다. 균형이 잡혀 있다는 것이 곧 모든 일을 직접 해야 한다는 의미가 아닙니다. 조직 규모가 커지면 본인의 한계에 부딪힙니다.',
+    complement_title:'당신에게 필요한 것은 권한 위임 구조입니다',
+    complement:[
+      '<strong>네 영역 중 하나씩을 전담할 임원</strong>을 키우십시오. 당신이 모두 잘하는 것이 곧 모두 직접 해야 한다는 뜻은 아닙니다.',
+      '<strong>당신 없이도 돌아가는 시스템</strong>을 만드는 것에 자원을 집중하십시오. 인격형 리더의 다음 BX Point는 본인의 한계가 아니라 조직의 자생력에서 옵니다.',
+      '의도적으로 "내가 안 하는 영역"을 정하십시오. 계획·실행·점검 중 한 영역은 의식적으로 다른 사람에게 위임해야 진짜 인격형 조직이 만들어집니다.',
+    ],
+    note_focus:'인격형 리더의 가장 큰 함정은 "내가 다 할 수 있다"는 자신감이 조직 자생력을 막는 것입니다.',
+  },
+};
+let currentQ = 0;
+let answers = {};
+function startQuiz(){
+  document.getElementById('start-card').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  currentQ = 0; answers = {};
+  renderQuestion();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'popIn .4s cubic-bezier(.4,0,.2,1) both';
+  const area = AREAS.find(a => a.key === q.area);
+  document.getElementById('area-letter').textContent = area.letter;
+  document.getElementById('area-name').textContent = area.name;
+  document.getElementById('area-desc').textContent = area.desc;
+  document.getElementById('question-num').textContent = 'QUESTION ' + String(currentQ+1).padStart(2,'0');
+  document.getElementById('question-text').textContent = q.text;
+  const pct = ((currentQ) / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = (currentQ+1) + ' / ' + QUESTIONS.length;
+  document.getElementById('progress-area').textContent = area.letter + ' · ' + area.name;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  SCALE_LABELS.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = '<span class="num">'+opt.num+'</span><span>'+opt.text+'</span>';
+    btn.onclick = () => answerQuestion(opt.num);
+    container.appendChild(btn);
+  });
+}
+function answerQuestion(value){
+  if(currentQ >= QUESTIONS.length) return;
+  const q = QUESTIONS[currentQ];
+  if(!q) return;
+  answers[q.id] = value;
+  currentQ++;
+  if(currentQ >= QUESTIONS.length){
+    document.querySelectorAll('#options-container .option').forEach(b => {
+      b.style.pointerEvents = 'none'; b.style.opacity = '0.5';
+    });
+    document.getElementById('progress-fill').style.width = '100%';
+    setTimeout(showResult, 300);
+  } else {
+    renderQuestion();
+  }
+}
+function computeAreaScore(areaKey){
+  const qs = QUESTIONS.filter(q => q.area === areaKey);
+  let total = 0;
+  qs.forEach(q => {
+    const v = answers[q.id] || 3;
+    total += q.positive ? v : (6 - v);
+  });
+  return Math.round(((total - qs.length) / (qs.length * 4)) * 100);
+}
+function computeResult(){
+  const scores = {};
+  AREAS.forEach(a => { scores[a.key] = computeAreaScore(a.key); });
+  const order = ['C','P','D','F'];
+  let dominantKey = order[0];
+  let dominantScore = scores[order[0]];
+  order.forEach(k => {
+    if(scores[k] > dominantScore){ dominantKey = k; dominantScore = scores[k]; }
+  });
+  return {scores, dominantKey, dominantScore};
+}
+function drawCycle(scores, dominantKey){
+  const svg = document.getElementById('cycle-svg');
+  const cx = 240, cy = 200;
+  const R = 105;
+  const positions = {
+    P: { x: cx, y: cy - R, label: '위' },
+    D: { x: cx + R * Math.sin(Math.PI*2/3), y: cy + R * Math.cos(Math.PI*2/3) * -1 + R*0.5, label: '우하' },
+    F: { x: cx - R * Math.sin(Math.PI*2/3), y: cy + R * Math.cos(Math.PI*2/3) * -1 + R*0.5, label: '좌하' },
+  };
+  positions.P = { x: cx, y: cy - R };
+  positions.D = { x: cx + R * Math.cos(Math.PI/6), y: cy + R * Math.sin(Math.PI/6) };
+  positions.F = { x: cx - R * Math.cos(Math.PI/6), y: cy + R * Math.sin(Math.PI/6) };
+  let html = '';
+  html += `<defs>
+    <linearGradient id="cycleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3684FF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.05"/>
+    </linearGradient>
+    <marker id="cycleArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(54,132,255,0.6)"/>
+    </marker>
+  </defs>`;
+  const bgPath = `M ${positions.P.x} ${positions.P.y} L ${positions.D.x} ${positions.D.y} L ${positions.F.x} ${positions.F.y} Z`;
+  html += `<path d="${bgPath}" fill="url(#cycleGrad)" stroke="rgba(54,132,255,0.15)" stroke-width="1" stroke-dasharray="4,4"/>`;
+  const drawArrow = (from, to) => {
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    const len = Math.sqrt(dx*dx + dy*dy);
+    const ux = dx / len;
+    const uy = dy / len;
+    const startX = from.x + ux * 32;
+    const startY = from.y + uy * 32;
+    const endX = to.x - ux * 32;
+    const endY = to.y - uy * 32;
+    return `<line x1="${startX.toFixed(1)}" y1="${startY.toFixed(1)}" x2="${endX.toFixed(1)}" y2="${endY.toFixed(1)}" stroke="rgba(54,132,255,0.6)" stroke-width="2" marker-end="url(#cycleArrow)"/>`;
+  };
+  html += drawArrow(positions.P, positions.D);
+  html += drawArrow(positions.D, positions.F);
+  html += drawArrow(positions.F, positions.P);
+  const isCDominant = dominantKey === 'C';
+  const cRadius = isCDominant ? 40 : 32;
+  const cFill = isCDominant ? 'url(#cycleNodeActive)' : '#fff';
+  const cStroke = '#3684FF';
+  const cStrokeW = isCDominant ? 3 : 2;
+  html += `<defs>
+    <linearGradient id="cycleNodeActive" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3684FF"/>
+      <stop offset="100%" stop-color="#6BA3FF"/>
+    </linearGradient>
+  </defs>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="${cRadius}" fill="${cFill}" stroke="${cStroke}" stroke-width="${cStrokeW}"/>`;
+  const cTextColor = isCDominant ? '#fff' : '#3684FF';
+  const cFontSize = isCDominant ? 26 : 22;
+  html += `<text x="${cx}" y="${cy + cFontSize/3}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="${cFontSize}" fill="${cTextColor}" font-weight="bold">C</text>`;
+  if(isCDominant){
+    html += `<text x="${cx}" y="${cy + cRadius + 18}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#3684FF" font-weight="600">인격 (통합)</text>`;
+  } else {
+    html += `<text x="${cx}" y="${cy + cRadius + 16}" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">인격</text>`;
+  }
+  ['P','D','F'].forEach(key => {
+    const pos = positions[key];
+    const score = scores[key];
+    const isDominant = dominantKey === key;
+    const isStrong = score >= 60;
+    const r = isDominant ? 30 : 26;
+    const fill = isDominant ? '#3684FF' : (isStrong ? 'rgba(54,132,255,0.10)' : '#fff');
+    const stroke = isStrong ? '#3684FF' : 'rgba(54,132,255,0.4)';
+    const strokeW = isDominant ? 3 : 2;
+    html += `<circle cx="${pos.x.toFixed(1)}" cy="${pos.y.toFixed(1)}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+    const textColor = isDominant ? '#fff' : '#3684FF';
+    const fontSize = isDominant ? 24 : 20;
+    html += `<text x="${pos.x.toFixed(1)}" y="${(pos.y + fontSize/3).toFixed(1)}" text-anchor="middle" font-family="Pretendard, sans-serif" font-size="${fontSize}" fill="${textColor}" font-weight="bold">${key}</text>`;
+    const labelOffset = 14;
+    let lx = pos.x, ly = pos.y;
+    if(key === 'P'){ ly = pos.y - r - labelOffset; }
+    if(key === 'D'){ lx = pos.x + r + labelOffset; ly = pos.y + 4; }
+    if(key === 'F'){ lx = pos.x - r - labelOffset; ly = pos.y + 4; }
+    const areaInfo = AREAS.find(a => a.key === key);
+    const labelClass = isDominant ? 'fill="#3684FF" font-weight="600"' : 'fill="#5a6a85"';
+    const labelSize = isDominant ? 13 : 12;
+    const anchor = key === 'P' ? 'middle' : (key === 'D' ? 'start' : 'end');
+    html += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="${labelSize}" ${labelClass}>${areaInfo.name} ${score}점</text>`;
+  });
+  html += `<text x="${cx}" y="365" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#8a96ac">P → D → F 사이클이 도는 중심에 C(인격)가 있다 · 「경영전환론」 19장</text>`;
+  svg.innerHTML = html;
+}
+function drawRadar(scores){
+  const svg = document.getElementById('radar-svg');
+  const cx = 170, cy = 170, R = 110;
+  const n = AREAS.length;
+  let html = '';
+  for(let level=1; level<=5; level++){
+    const r = (R / 5) * level; let pts = '';
+    for(let i=0; i<n; i++){
+      const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+      const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+      pts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    }
+    pts += 'Z';
+    html += `<path d="${pts}" fill="none" stroke="rgba(54,132,255,${0.05 + level*0.025})" stroke-width="1"/>`;
+  }
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const x = cx + Math.cos(angle) * R; const y = cy + Math.sin(angle) * R;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(54,132,255,0.1)" stroke-width="1"/>`;
+  }
+  let boundaryPts = '';
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * 0.6;
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    boundaryPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+  }
+  boundaryPts += 'Z';
+  html += `<path d="${boundaryPts}" fill="none" stroke="rgba(255,140,90,0.5)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  let dataPts = ''; const dataPoints = [];
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const r = R * (scores[AREAS[i].key] / 100);
+    const x = cx + Math.cos(angle) * r; const y = cy + Math.sin(angle) * r;
+    dataPts += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1) + ' ';
+    dataPoints.push({x, y, area: AREAS[i], score: scores[AREAS[i].key]});
+  }
+  dataPts += 'Z';
+  html += `<defs><linearGradient id="radarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3684FF" stop-opacity="0.35"/><stop offset="100%" stop-color="#6BA3FF" stop-opacity="0.20"/></linearGradient></defs>`;
+  html += `<path d="${dataPts}" fill="url(#radarGrad)" stroke="#3684FF" stroke-width="2" stroke-linejoin="round"/>`;
+  dataPoints.forEach(pt => {
+    const fill = pt.score >= 60 ? '#3684FF' : '#8a96ac';
+    html += `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="5" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
+  });
+  for(let i=0; i<n; i++){
+    const angle = (Math.PI * 2 * i / n) - Math.PI/2;
+    const labelR = R + 24;
+    const x = cx + Math.cos(angle) * labelR; const y = cy + Math.sin(angle) * labelR;
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Pretendard, sans-serif" font-size="20" fill="#3684FF">${AREAS[i].letter}</text>`;
+    const subR = R + 44;
+    const sx = cx + Math.cos(angle) * subR; const sy = cy + Math.sin(angle) * subR;
+    html += `<text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Noto Sans KR, sans-serif" font-size="11" fill="#8a96ac" font-weight="500">${AREAS[i].name}</text>`;
+  }
+  html += `<line x1="20" y1="320" x2="36" y2="320" stroke="rgba(255,140,90,0.5)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+  html += `<text x="42" y="324" font-family="Noto Sans KR, sans-serif" font-size="10" fill="#8a96ac">강·약 경계 (60점)</text>`;
+  svg.innerHTML = html;
+}
+function generateConsultantNote(scores, dominantKey){
+  const dom = LEADER_TYPES[dominantKey];
+  const dominantArea = AREAS.find(a => a.key === dominantKey);
+  const sortedKeys = Object.keys(scores).sort((a,b) => scores[a] - scores[b]);
+  const weakestKey = sortedKeys[0];
+  const weakestArea = AREAS.find(a => a.key === weakestKey);
+  const allAbove60 = Object.values(scores).every(s => s >= 60);
+  const allBelow40 = Object.values(scores).every(s => s < 40);
+  let paragraphs = [];
+  let p1 = '';
+  p1 = `귀하는 <strong>${dom.name}(${dominantKey}형)</strong>입니다. ${dom.sub}. ${dominantArea.fullDesc}이 가장 강한 영역으로 측정되었으며, 점수는 ${scores[dominantKey]}점입니다. <strong>「경영전환론」 19장의 표현으로 "리더의 유형은 약점이 아니라 강점에서 식별된다"</strong>는 원칙대로, 이 강점을 기준으로 보완을 설계해야 합니다.`;
+  paragraphs.push(p1);
+  let p2 = '';
+  if(dominantKey === 'C'){
+    if(allAbove60){
+      p2 = `네 영역 모두 60점 이상으로 균형 잡힌 분포입니다. <strong>P·D·F 사이클 전체가 본인 안에서 작동하는 드문 유형</strong>이며, 인격(통합) 점수도 ${scores.C}점으로 높습니다. 하지만 「경영전환론」의 경고대로, "인격형 리더의 가장 큰 함정은 모든 것을 본인이 직접 하려는 것"입니다. 균형이 잡혔다는 사실이 곧 모든 영역을 직접 책임져야 한다는 뜻은 아닙니다.`;
+    } else {
+      p2 = `인격(통합) 점수가 ${scores.C}점으로 가장 높지만, <strong>${weakestArea.name}(${weakestKey}) 영역이 ${scores[weakestKey]}점으로 약점</strong>입니다. 인격형 리더가 한 영역에서 약점을 보이는 것은 의외로 흔한 패턴이며, 그 약한 영역을 본인이 직접 보강하기보다 다른 사람에게 맡기는 것이 정석입니다.`;
+    }
+  } else if(allBelow40){
+    p2 = `<strong>네 영역 모두 40점 미만으로 전반적인 리더십 정비가 필요한 상태</strong>입니다. ${dom.name}으로 분류되었지만 절대적 점수는 낮은 편입니다. 이런 분포에서는 한 영역씩 차근차근 끌어올리는 것이 정석이며, 「경영전환론」의 원칙대로 가장 점수가 낮은 ${weakestArea.name}부터 시작하는 것이 효율적입니다.`;
+  } else {
+    const dominantScore = scores[dominantKey];
+    const weakestScore = scores[weakestKey];
+    const gap = dominantScore - weakestScore;
+    if(gap >= 30){
+      p2 = `${dom.name}으로 분류되었으며, <strong>${dominantArea.name}이 ${dominantScore}점으로 매우 강하지만 ${weakestArea.name}은 ${weakestScore}점으로 큰 격차</strong>가 있습니다. 격차가 ${gap}점으로 매우 크다는 것은 본인의 강점에 의존해 약점을 외면하고 있다는 신호일 수 있습니다. 「경영전환론」의 표현으로 "강점 의존이 길어질수록 약점은 더 깊어집니다."`;
+    } else {
+      p2 = `${dom.name}으로 분류되었으며 ${dominantArea.name}이 ${dominantScore}점으로 가장 강하지만, <strong>${weakestArea.name}(${weakestScore}점)도 함께 보강이 필요</strong>합니다. 두 영역의 격차가 크지 않다는 것은 균형 잡힌 발달 가능성이 있다는 의미이며, 약점 보강 작업이 비교적 수월합니다.`;
+    }
+  }
+  paragraphs.push(p2);
+  let p3 = '';
+  if(dominantKey === 'C'){
+    p3 = `<strong>인격형 리더의 다음 BX Point는 "권한 위임 시스템"입니다.</strong> 네 영역을 모두 본인이 잘하는 강점이 곧 한계가 됩니다. 조직 규모가 30명을 넘는 시점부터 한 사람이 모든 영역을 직접 책임지는 것은 물리적으로 불가능해지며, 이때 본인의 한계가 곧 조직의 한계가 됩니다. <strong>본인이 잘하는 영역 중 하나를 의도적으로 위임</strong>하는 작업이 다음 단계의 출발점입니다.`;
+  } else if(dominantKey === 'P'){
+    p3 = `<strong>계획형 리더에게 가장 비싼 함정은 "완벽한 계획을 기다리는 것"입니다.</strong> ${dom.note_focus} 「경영전환론」 19장의 원칙대로, 계획 60% 시점에 실행을 시작해야 PDF 사이클이 한 바퀴 돌고 그 결과를 기반으로 다음 계획이 정교해집니다. 즉시 행동하는 D형 임원을 옆에 두는 것이 회복의 출발점입니다.`;
+  } else if(dominantKey === 'D'){
+    p3 = `<strong>실행형 리더에게 가장 비싼 함정은 "점검 없는 다음 실행"입니다.</strong> ${dom.note_focus} 같은 실수를 반복하면서도 그 패턴을 인지하지 못하는 상태가 가장 위험합니다. 차분히 분석하는 F형 참모를 옆에 두는 것이 회복의 출발점이며, 월 1회 의무적 회고 시간을 본인의 캘린더에 고정시키시기 바랍니다.`;
+  } else {
+    p3 = `<strong>점검형 리더에게 가장 비싼 함정은 "분석을 핑계로 한 결정 회피"입니다.</strong> ${dom.note_focus} 데이터가 충분하지 않을 때도 결정해야 하는 순간이 옵니다. 이때 분석 자체가 도피의 도구가 되면 조직은 정체됩니다. 큰 그림을 그리는 P형 파트너와 즉시 행동하는 D형 임원을 함께 두는 것이 회복의 출발점입니다.`;
+  }
+  paragraphs.push(p3);
+  let p4 = '';
+  if(allAbove60){
+    p4 = `<strong>지금이 가장 좋은 시기입니다. 그러나 가장 좋은 시기는 길지 않습니다.</strong> 네 영역의 균형이 잡혀 있을 때가 다음 사이클을 미리 설계하기에 가장 좋은 시점입니다. 30분 무료 리더십 컨설팅을 통해 본인의 균형 위에서 조직 자생력을 어떻게 키울지 함께 점검하시기 바랍니다.`;
+  } else if(allBelow40){
+    p4 = `<strong>네 영역 모두 정비가 필요한 상태에서 가장 비싼 선택은 "한꺼번에 다 잘하려는 시도"입니다.</strong> 가장 점수가 낮은 ${weakestArea.name}부터 시작하시고, 30분 무료 리더십 컨설팅을 통해 단계적 회복 경로를 함께 설계하시기 바랍니다.`;
+  } else {
+    p4 = `<strong>먼저 움직일 영역은 정해졌으니, 미루지 않는 것이 가장 중요합니다.</strong> ${weakestArea.name}(${weakestKey}) 영역의 보강이 출발점이며, 이는 본인이 직접 보강하려 하기보다 그 영역에 강한 사람을 옆에 두는 방식이 훨씬 빠르고 효과적입니다. 30분 무료 리더십 컨설팅을 통해 어떤 사람을 어떤 자리에 두어야 할지 함께 설계하시기 바랍니다.`;
+  }
+  paragraphs.push(p4);
+  return paragraphs.map(p => '<p>' + p + '</p>').join('');
+}
+function showResult(){
+  const result = computeResult();
+  const scores = result.scores;
+  const dominantKey = result.dominantKey;
+  const dom = LEADER_TYPES[dominantKey];
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('leader-letter').textContent = dominantKey;
+  document.getElementById('leader-name').innerHTML = `<span class="accent">${dominantKey}형</span> · ${dom.name}`;
+  document.getElementById('leader-sub').textContent = dom.sub;
+  const dominantArea = AREAS.find(a => a.key === dominantKey);
+  document.getElementById('leader-chips').innerHTML = `
+    <div class="chip"><span class="label">주된 유형</span> ${dominantArea.name}</div>
+    <div class="chip"><span class="label">점수</span> ${scores[dominantKey]}/100</div>
+  `;
+  drawCycle(scores, dominantKey);
+  document.getElementById('area-grid').innerHTML = AREAS.map(a => {
+    const isDominant = a.key === dominantKey;
+    const cls = isDominant ? 'dominant' : '';
+    return `<div class="area-cell ${cls}">
+      <div class="letter serif">${a.letter}</div>
+      <div class="name">${a.name}</div>
+      <div class="score serif">${scores[a.key]}<span class="unit">/100</span></div>
+    </div>`;
+  }).join('');
+  drawRadar(scores);
+  document.getElementById('strength-text').textContent = dom.strength;
+  document.getElementById('weakness-text').textContent = dom.weakness;
+  document.getElementById('complement-title').textContent = dom.complement_title;
+  document.getElementById('complement-list').innerHTML = 
+    dom.complement.map(item => `<div class="complement-item">${item}</div>`).join('');
+  document.getElementById('consultant-text').innerHTML = generateConsultantNote(scores, dominantKey);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function restart(){
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('hero-section').style.display = 'block';
+  document.getElementById('start-card').style.display = 'block';
+  answers = {}; currentQ = 0;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+<div id="tong-footer-root"></div><script src="../../assets/js/navigation.js"></script></body>
+</html>
