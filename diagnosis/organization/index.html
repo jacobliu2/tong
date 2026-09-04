@@ -188,6 +188,29 @@ body::before{
 .tp-teaser-k{font-size:12px;letter-spacing:.16em;color:#9aa5b6;font-weight:700;text-transform:uppercase;margin-bottom:10px}
 .tp-teaser-t{font-size:15px;line-height:1.8;color:#3a4657;max-width:46ch;margin:0 auto 18px}
 .tp-teaser-t b{color:#161d29}
+
+.type-profile{display:block;position:relative;width:min(980px,94vw);margin-left:50%;transform:translateX(-50%);margin-bottom:32px;padding:clamp(24px,4vw,40px);background:linear-gradient(165deg,#fff,#f4f8ff 70%);border:1px solid #e9f0fb;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(54,132,255,.10)}
+.tp-top{margin-bottom:clamp(20px,3vw,30px)}
+.tp-top .code-eyebrow{font-size:11px;letter-spacing:.22em;color:#9aa5b6;font-weight:600;text-transform:uppercase;margin-bottom:14px}
+.tp-top-row{display:flex;align-items:center;gap:clamp(16px,2.5vw,26px);flex-wrap:wrap}
+.type-profile .code-letters{display:flex;gap:9px}
+.type-profile .code-letter{width:clamp(48px,6vw,64px);height:clamp(56px,7vw,74px);font-size:clamp(26px,3.4vw,34px);border-radius:14px;background:linear-gradient(135deg,#4a90ff,#2f6fe0);box-shadow:0 10px 24px rgba(54,132,255,.26);font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center}
+.tp-name-wrap{min-width:0}
+.type-profile .code-type-name{font-weight:800;font-size:clamp(24px,3.4vw,38px);letter-spacing:-.04em;color:#161d29;line-height:1.15}
+.type-profile .code-type-name .accent{color:#3684FF}
+.type-profile .code-sub{margin-top:8px;display:inline-block;font-size:13.5px;color:#5a6783;background:#eef3fb;padding:6px 14px;border-radius:999px}
+.tp-body{display:grid;grid-template-columns:minmax(300px,40%) minmax(0,1fr);gap:clamp(24px,4vw,44px);align-items:center}
+.tp-char-wrap{position:relative;width:100%;aspect-ratio:1/1;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,#f0f5ff,#e6eefb);border-radius:22px;overflow:hidden}
+.tp-glow{position:absolute;width:70%;height:70%;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(54,132,255,.22),transparent 65%);filter:blur(10px)}
+.tp-rings{position:absolute;width:88%;height:88%;left:6%;top:6%}
+.tp-char{position:relative;z-index:1;width:86%;height:auto;display:block;filter:drop-shadow(0 20px 36px rgba(30,50,90,.24))}
+.tp-info{min-width:0;width:100%}
+.tp-info .tp-axes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:720px){.tp-body{grid-template-columns:1fr;gap:22px}.tp-char-wrap{max-width:360px;margin:0 auto}}
+html[data-theme="dark"] .type-profile{background:linear-gradient(165deg,#161f2e,#101826)!important;border-color:#28344b!important}
+html[data-theme="dark"] .tp-char-wrap{background:linear-gradient(180deg,#1a2740,#111a2b)!important}
+html[data-theme="dark"] .type-profile .code-type-name{color:#eef2f8!important}
+html[data-theme="dark"] .type-profile .code-sub{background:#1a2740!important;color:#aab4c5!important}
 </style>
 <link rel="canonical" href="https://www.workstong.com/diagnosis/organization/"/><meta name="description" content="조직의 의사결정·운영·사람과 성과의 구조를 40문항으로 진단해 16가지 조직유형과 개선 방향을 확인합니다."/><meta property="og:title" content="조직유형 16 정밀 진단 — 통 TONG"/><meta property="og:description" content="조직의 의사결정·운영·사람과 성과의 구조를 40문항으로 진단해 16가지 조직유형과 개선 방향을 확인합니다."/><meta property="og:url" content="https://www.workstong.com/diagnosis/organization/"/><meta property="og:image" content="https://www.workstong.com/assets/images/tong-logo.png"/><link rel="stylesheet" href="../../assets/css/tong.css"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "조직유형 16 진단", "description": "40문항으로 조직의 의사결정·운영 구조를 16가지 유형으로 분석", "url": "https://www.workstong.com/diagnosis/organization/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "provider": {"@type": "Organization", "name": "경영전환전략연구소 통", "url": "https://www.workstong.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.workstong.com/"}, {"@type": "ListItem", "position": 2, "name": "자가진단", "item": "https://www.workstong.com/diagnosis/"}, {"@type": "ListItem", "position": 3, "name": "조직유형 16 진단", "item": "https://www.workstong.com/diagnosis/organization/"}]}</script></head>
 <body data-depth="2" data-nav="diagnosis"><div id="tong-nav-root"></div>
@@ -309,18 +332,7 @@ body::before{
   </div>
   <div id="result-screen" style="display:none">
     <div class="card popIn" id="result-card">
-      <div class="type-profile">
-        <div class="tp-char-wrap"><span class="tp-glow"></span><svg class="tp-rings" viewBox="0 0 300 300" aria-hidden="true"><g fill="none" stroke="#3684FF" stroke-opacity=".10"><circle cx="150" cy="150" r="76"/><circle cx="150" cy="150" r="104"/><circle cx="150" cy="150" r="132"/></g></svg><img class="tp-char" id="type-char" src="" alt="" /></div>
-        <div class="code-headline-wrap tp-meta">
-          <div class="code-eyebrow">YOUR ORGANIZATION TYPE</div>
-          <div class="code-letters" id="code-letters"></div>
-          <div class="code-type-name" id="code-type-name">—</div>
-          <div class="code-sub" id="code-sub">—</div>
-          <div class="tp-axes" id="tp-axes"></div>
-          <div class="tp-read" id="tp-read"></div>
-          <div class="code-chips" id="code-chips"></div>
-        </div>
-      </div>
+      <div class="type-profile"><div class="tp-top"><div class="code-eyebrow">YOUR ORGANIZATION TYPE</div><div class="tp-top-row"><div class="code-letters" id="code-letters"></div><div class="tp-name-wrap"><div class="code-type-name" id="code-type-name">—</div><div class="code-sub" id="code-sub">—</div></div></div></div><div class="tp-body"><div class="tp-char-wrap"><span class="tp-glow"></span><svg class="tp-rings" viewBox="0 0 300 300" aria-hidden="true"><g fill="none" stroke="#3684FF" stroke-opacity=".10"><circle cx="150" cy="150" r="88"/><circle cx="150" cy="150" r="116"/><circle cx="150" cy="150" r="144"/></g></svg><img class="tp-char" id="type-char" src="" alt="" /></div><div class="tp-info"><div class="tp-axes" id="tp-axes"></div><div class="tp-read" id="tp-read"></div><div class="code-chips" id="code-chips"></div></div></div></div>
       <div class="section-title">기업 정보</div>
       <div class="company-bar" id="company-bar"></div>
       <div class="section-title">4축 진단 결과</div>
