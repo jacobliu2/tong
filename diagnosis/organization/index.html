@@ -150,10 +150,10 @@ body::before{
 /* 조직유형 결과 · 캐릭터 프로필 (homepage tone) */
 .type-profile{position:relative;display:flex;gap:clamp(24px,4vw,44px);align-items:center;margin-bottom:32px;padding:clamp(26px,4vw,42px);background:linear-gradient(160deg,#ffffff 0%,#f4f8ff 60%,#eef4ff 100%);border:1px solid #e9f0fb;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(54,132,255,.10)}
 .type-profile::before{content:"";position:absolute;right:-6%;top:-30%;width:56%;height:160%;background:radial-gradient(circle at 60% 40%,rgba(54,132,255,.10),transparent 70%);pointer-events:none}
-.tp-char-wrap{position:relative;flex:0 0 auto;width:clamp(120px,18vw,168px);display:flex;justify-content:center;align-items:flex-end}
+
 .tp-rings{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:150%;height:auto;z-index:0;pointer-events:none}
 .tp-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120%;height:120%;border-radius:50%;background:radial-gradient(circle,rgba(54,132,255,.13),transparent 68%);z-index:0}
-.tp-char{position:relative;z-index:1;width:100%;height:auto;display:block;filter:drop-shadow(0 16px 30px rgba(54,132,255,.20))}
+
 .type-profile .tp-meta{position:relative;z-index:1;flex:1 1 auto;min-width:0;text-align:left;margin-bottom:0}
 .type-profile .code-eyebrow{font-size:11px;letter-spacing:.22em;color:#9aa5b6;font-weight:600;text-transform:uppercase;margin-bottom:14px}
 .type-profile .code-letters{display:flex;justify-content:flex-start;gap:8px;margin-bottom:16px}
@@ -163,7 +163,7 @@ body::before{
 .type-profile .code-sub{font-size:15px;color:#6b7788;margin-bottom:18px;line-height:1.6}
 .type-profile .code-chips{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:8px}
 .type-profile .code-chips .chip{background:rgba(255,255,255,.75);border:1px solid #e6eefb;border-radius:999px;padding:7px 14px;font-size:12.5px;box-shadow:0 4px 12px rgba(54,132,255,.05)}
-@media (max-width:560px){.type-profile{flex-direction:column;text-align:center;padding:26px 22px}.type-profile .tp-meta{text-align:center}.type-profile .code-letters,.type-profile .code-chips{justify-content:center}.tp-char-wrap{width:150px}}
+@media (max-width:560px){.type-profile{flex-direction:column;text-align:center;padding:26px 22px}.type-profile .tp-meta{text-align:center}.type-profile .code-letters,.type-profile .code-chips{justify-content:center}}
 
 /* 좌표·핵심질문·읽는법 (homepage tone) */
 .tp-axes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
@@ -189,7 +189,7 @@ body::before{
 .tp-teaser-t{font-size:15px;line-height:1.8;color:#3a4657;max-width:46ch;margin:0 auto 18px}
 .tp-teaser-t b{color:#161d29}
 
-.type-profile{display:block;position:relative;width:min(980px,94vw);margin-left:50%;transform:translateX(-50%);margin-bottom:32px;padding:clamp(24px,4vw,40px);background:linear-gradient(165deg,#fff,#f4f8ff 70%);border:1px solid #e9f0fb;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(54,132,255,.10)}
+.type-profile{display:block;position:relative;width:min(1040px,95vw);margin-left:50%;transform:translateX(-50%);margin-bottom:32px;padding:clamp(24px,4vw,40px);background:linear-gradient(165deg,#fff,#f4f8ff 70%);border:1px solid #e9f0fb;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(54,132,255,.10)}
 .tp-top{margin-bottom:clamp(20px,3vw,30px)}
 .tp-top .code-eyebrow{font-size:11px;letter-spacing:.22em;color:#9aa5b6;font-weight:600;text-transform:uppercase;margin-bottom:14px}
 .tp-top-row{display:flex;align-items:center;gap:clamp(16px,2.5vw,26px);flex-wrap:wrap}
@@ -199,12 +199,12 @@ body::before{
 .type-profile .code-type-name{font-weight:800;font-size:clamp(24px,3.4vw,38px);letter-spacing:-.04em;color:#161d29;line-height:1.15}
 .type-profile .code-type-name .accent{color:#3684FF}
 .type-profile .code-sub{margin-top:8px;display:inline-block;font-size:13.5px;color:#5a6783;background:#eef3fb;padding:6px 14px;border-radius:999px}
-.tp-body{display:grid;grid-template-columns:minmax(300px,40%) minmax(0,1fr);gap:clamp(24px,4vw,44px);align-items:center}
-.tp-char-wrap{position:relative;width:100%;aspect-ratio:1/1;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,#f0f5ff,#e6eefb);border-radius:22px;overflow:hidden}
+.tp-body{display:grid;grid-template-columns:minmax(320px,46%) minmax(0,1fr);gap:clamp(24px,3.5vw,40px);align-items:stretch}
+.tp-char-wrap{position:relative;width:100%;aspect-ratio:1/1;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,#f0f5ff,#e6eefb);border-radius:22px;overflow:hidden;padding:8px}
 .tp-glow{position:absolute;width:70%;height:70%;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(54,132,255,.22),transparent 65%);filter:blur(10px)}
 .tp-rings{position:absolute;width:88%;height:88%;left:6%;top:6%}
-.tp-char{position:relative;z-index:1;width:86%;height:auto;display:block;filter:drop-shadow(0 20px 36px rgba(30,50,90,.24))}
-.tp-info{min-width:0;width:100%}
+.tp-char{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 18px 30px rgba(30,50,90,.20))}
+.tp-info{min-width:0;width:100%;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.5vw,26px)}
 .tp-info .tp-axes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 @media(max-width:720px){.tp-body{grid-template-columns:1fr;gap:22px}.tp-char-wrap{max-width:360px;margin:0 auto}}
 html[data-theme="dark"] .type-profile{background:linear-gradient(165deg,#161f2e,#101826)!important;border-color:#28344b!important}
@@ -350,7 +350,6 @@ html[data-theme="dark"] .type-profile .code-sub{background:#1a2740!important;col
         <a class="btn btn-primary" href="../../contact/index.html">이 결과로 진단 상담 신청 →</a>
       </div>
       <div class="cta-wrap">
-        <a class="btn btn-primary" href="../../contact/index.html">30분 무료 정밀 컨설팅 상담 →</a>
         <button class="btn btn-text" onclick="restart()">진단 다시 하기</button>
       </div>
     </div>
