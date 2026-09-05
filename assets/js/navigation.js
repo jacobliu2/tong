@@ -1,3 +1,9 @@
+/* ws-url-tidy */
+/* 주소창에 남은 /index.html 을 새로고침 없이 정리 (공유·SEO용) */
+(function(){try{var p=location.pathname;
+if(p.length>10&&p.slice(-11)==="/index.html"){
+history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}catch(e){}})();
+
 /* 통 TONG · 공유 네비/푸터 (navigation.js)
    - GNB 4개(경영전환·진단·글과저서·TONG) + CTA 문의하기, 로고→HOME (지시서 §6)
    - 깊이 인식: <body data-depth="N"> 로 상대경로 계산 → file://·GitHub·미리보기 모두 동작
@@ -7,7 +13,7 @@
   var P = depth>0 ? Array(depth+1).join('../') : './';
   function r(p){ return P + p; }
   var ROUTES = {
-    home:r('index.html'), transformation:r('transformation/index.html'), diagnosis:r('diagnosis/index.html'), story:r('story/index.html'), consulting:r('consulting/index.html'), dxai:r('dx-ai/index.html'), tong:r('tong/index.html'), links:r('links/index.html'), contact:r('contact/index.html'),
+    home:r(''), transformation:r('transformation/'), diagnosis:r('diagnosis/'), story:r('story/'), consulting:r('consulting/'), dxai:r('dx-ai/'), tong:r('tong/'), links:r('links/'), contact:r('contact/'),
     logo:r('assets/images/tong-logo.png')
   };
   window.TONG_ROUTES = ROUTES;
