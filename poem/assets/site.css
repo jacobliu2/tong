@@ -75,3 +75,14 @@ body{background-image:linear-gradient(#faf7ef80,#faf7ef80),url('hanji-paper.webp
 .art{animation-name:swift-watercolor;animation-duration:1.05s;animation-timing-function:cubic-bezier(.15,.75,.25,1)}
 @keyframes swift-watercolor{0%{opacity:0;filter:blur(15px);clip-path:ellipse(3% 4% at 60% 55%)}30%{opacity:.7;filter:blur(6px);clip-path:ellipse(60% 65% at 60% 55%)}65%{opacity:1;filter:blur(1.5px);clip-path:ellipse(115% 120% at 60% 55%)}100%{opacity:1;filter:blur(0);clip-path:ellipse(150% 150% at 60% 55%)}}
 .fully-written .title-glyph,.fully-written .glyph{filter:none;text-shadow:none}
+
+/* One character develops before the next begins. */
+.title-glyph,.glyph{display:inline-block;white-space:pre;animation-name:handwritten-letter;animation-duration:.16s;animation-timing-function:ease-out}
+@keyframes handwritten-letter{0%{opacity:0;clip-path:inset(0 100% 0 0);filter:blur(.8px)}35%{opacity:.8;clip-path:inset(0 60% 0 0);filter:blur(.3px)}100%{opacity:1;clip-path:inset(0 0 0 0);filter:none;text-shadow:none}}
+.fully-written .title-glyph,.fully-written .glyph{clip-path:none}
+.art{animation-duration:.5s}
+#poemTitle{scroll-margin-top:70px}
+.menu-toggle{position:fixed;top:14px;left:18px;z-index:15;padding:9px 14px;border:1px solid var(--line);border-radius:3px;background:#faf7efed;font-size:12px;box-shadow:0 2px 10px #63543c08}
+.menu-toggle:hover{background:#fffaf0}.sidebar{padding-top:76px}.book.reading-focus{grid-template-columns:minmax(0,1fr);max-width:1200px}.reading-focus main{padding-left:clamp(25px,7vw,100px);padding-right:clamp(25px,7vw,100px)}
+@media(max-width:700px){.sidebar{padding-top:66px}.reading-focus main{padding-left:25px;padding-right:25px}.menu-toggle{left:14px;top:10px;padding:8px 12px}.reading-focus #reader{padding-top:75px}}
+@media(prefers-reduced-motion:reduce){.title-glyph,.glyph{clip-path:none!important;filter:none!important}}
