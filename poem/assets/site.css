@@ -86,3 +86,15 @@ body{background-image:linear-gradient(#faf7ef80,#faf7ef80),url('hanji-paper.webp
 .menu-toggle:hover{background:#fffaf0}.sidebar{padding-top:76px}.book.reading-focus{grid-template-columns:minmax(0,1fr);max-width:1200px}.reading-focus main{padding-left:clamp(25px,7vw,100px);padding-right:clamp(25px,7vw,100px)}
 @media(max-width:700px){.sidebar{padding-top:66px}.reading-focus main{padding-left:25px;padding-right:25px}.menu-toggle{left:14px;top:10px;padding:8px 12px}.reading-focus #reader{padding-top:75px}}
 @media(prefers-reduced-motion:reduce){.title-glyph,.glyph{clip-path:none!important;filter:none!important}}
+
+/* A quieter surface and persistent reading preference. */
+:root{--soft:#796c5b}
+body{background-image:linear-gradient(#faf7efb3,#faf7efb3),url('hanji-paper.webp')}
+.poem-meta,.poem-meta span,.poem-item small,.cover small,.list-head,.suno-hint,.suno-version,.suno-listen,.suno-track small{color:#796c5b}
+.poem-text{background:radial-gradient(ellipse at 35% 40%,#faf7ef35,transparent 75%)}
+.menu-toggle{padding:6px 10px;font-size:11px;box-shadow:none;background:#faf7efda;border-color:#a9997b30}
+.reading-setting{position:fixed;right:18px;top:14px;z-index:15}.reading-setting select{font-family:var(--serif);font-size:11px;color:#796c5b;background:#faf7efda;border:1px solid #a9997b30;border-radius:3px;padding:6px 9px;max-width:150px;cursor:pointer}
+.reading-setting select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.instant-reading .glyph,.instant-reading .title-glyph{animation:none;opacity:1;clip-path:none;filter:none;text-shadow:none}.instant-reading .art{animation:none;opacity:1;clip-path:none;filter:none}
+@media(max-width:1000px){.art{margin:0 auto 18px;max-width:360px}.art img{max-height:290px}}
+@media(max-width:700px){.art{max-width:300px;margin-bottom:16px}.art img{max-height:245px}.room h1{margin-bottom:14px}.reading-setting{top:10px;right:14px}.reading-setting select{padding:6px 8px}.menu-toggle{padding:6px 9px}}
