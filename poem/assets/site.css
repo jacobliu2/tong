@@ -42,3 +42,22 @@ body{background:var(--paper)}
 .book{background:var(--paper);box-shadow:none}
 .sidebar{background:transparent;box-shadow:none;border-right:1px solid var(--line)}
 @media(max-width:700px){.sidebar{border-right:0;box-shadow:none}}
+
+/* Write title first, then the original poem; reserve all space from the start. */
+.room h1{animation:none}.room::before{display:none}.poem-meta{animation:none}
+.title-glyph,.glyph{opacity:0;animation:letter-write .18s both;animation-delay:calc(var(--start,.9s) + var(--order)*var(--step));filter:none;text-shadow:none}
+.title-glyph{display:inline}.fully-written .glyph,.fully-written .title-glyph{animation:none;opacity:1;filter:none}
+.art{animation:paper-art-in 1.6s .65s both}
+@keyframes letter-write{from{opacity:0}to{opacity:1}}
+@keyframes paper-art-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.title-glyph,.glyph{animation:none!important;opacity:1!important}}
+
+/* Generated mulberry-fiber paper, shared by the entire reading surface. */
+:root{--paper:#f7f3e9}
+body{background:var(--paper) url('hanji-paper.webp') repeat;background-size:900px 900px}
+body::before{display:none}
+.book{background:transparent}.book::before{display:none}
+.sidebar{background:#f7f3e918}.player{background:#f7f3e9f5 url('hanji-paper.webp') repeat;background-size:900px 900px}
+@media(max-width:700px){body{background-size:650px 650px}}
+
+body{background-image:linear-gradient(#faf7ef80,#faf7ef80),url('hanji-paper.webp')}
