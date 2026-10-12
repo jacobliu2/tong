@@ -61,3 +61,10 @@ body::before{display:none}
 @media(max-width:700px){body{background-size:650px 650px}}
 
 body{background-image:linear-gradient(#faf7ef80,#faf7ef80),url('hanji-paper.webp')}
+
+/* Finish the poem before ink spreads into the illustration. */
+.title-glyph,.glyph{animation-duration:.24s}
+.art{animation:ink-art-spread 2.8s var(--art-start,8s) both;transform-origin:60% 55%}
+@keyframes ink-art-spread{0%{opacity:0;filter:blur(22px);clip-path:ellipse(0% 0% at 60% 55%)}35%{opacity:.45;filter:blur(12px);clip-path:ellipse(35% 38% at 60% 55%)}75%{opacity:.9;filter:blur(3px);clip-path:ellipse(80% 85% at 60% 55%)}100%{opacity:1;filter:blur(0);clip-path:ellipse(150% 150% at 60% 55%)}}
+.fully-written .art{animation-delay:0s}
+@media(prefers-reduced-motion:reduce){.art{animation:none!important;opacity:1;filter:none;clip-path:none}}
