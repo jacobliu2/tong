@@ -66,7 +66,7 @@ toc: false                            # 소제목이 많으면 true
 ```
 cd _build && npm install && cd ..
 node _build/build-archive.mjs     # 끝에 문장 단위 줄바꿈(_tools/sentence_breaks.py)이 자동 실행된다
-node _tools/prerender-nav.js     # 메뉴·푸터를 바꿨을 때만
+node _tools/prerender-nav.js     # 아카이브 빌드 뒤에는 항상 (빌드가 메뉴·푸터 정적 HTML을 새로 비운 채 만든다)
 ```
 
 - 빌드는 머리말 누락, 알 수 없는 분류, 잘못된 파일 이름을 만나면 멈추고 이유를 알려 준다.
