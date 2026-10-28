@@ -1,0 +1,39 @@
+{
+  "categories": [
+    {"id": "strategy", "slug": "strategy", "name": "경영전략·사업개발"},
+    {"id": "organization", "slug": "organization", "name": "조직·인사·리더십"},
+    {"id": "sales", "slug": "sales", "name": "영업·마케팅·CRM"},
+    {"id": "finance", "slug": "finance", "name": "재무·자원배분"},
+    {"id": "product", "slug": "product", "name": "제품·서비스·사업모델"},
+    {"id": "ax-dx", "slug": "ax-dx", "name": "AI·DX·업무전환"}
+  ],
+  "series": [
+    {"id": "insamansa", "slug": "insamansa", "name": "인사만사"},
+    {"id": "business-36", "slug": "business-36", "name": "비즈니스 삼십육계"},
+    {"id": "thinking-warehouse", "slug": "thinking-warehouse", "name": "경영전환 생각창고"},
+    {"id": "transformation-theory", "slug": "transformation-theory", "name": "경영전환론"},
+    {"id": "classic-insight", "slug": "classic-insight", "name": "고전 경영 인사이트"}
+  ],
+  "authors": [
+    {"id": "yoo-youngjun", "slug": "yoo-youngjun", "name": "유영준", "job_title": "경영전환연구소 통 소장", "profile_path": "expert/",
+     "same_as": ["https://www.linkedin.com/in/bxlab", "https://brunch.co.kr/@mansudang"]}
+  ],
+  "diagnoses": [
+    {"slug": "management", "name": "경영전환 자가진단"}, {"slug": "organization", "name": "조직유형 16 진단"},
+    {"slug": "leader", "name": "리더 유형 진단"}, {"slug": "sales", "name": "영업 신호등 진단"},
+    {"slug": "market", "name": "시장 경쟁력 진단"}, {"slug": "finance", "name": "재무 건강도 진단"},
+    {"slug": "dx", "name": "DX 단계 진단"}, {"slug": "government-support", "name": "정부지원사업 매칭 진단"},
+    {"slug": "pyramid", "name": "경영전환 피라미드"}, {"slug": "oyak", "name": "오약(五若) 상태 진단"},
+    {"slug": "ceo-dependency", "name": "대표 의존도 진단"}, {"slug": "business-model", "name": "제품·사업모델 진단"},
+    {"slug": "letting-go", "name": "버림 진단"}, {"slug": "ax-readiness", "name": "AX 준비도 진단"},
+    {"slug": "crm-maturity", "name": "CRM·고객관리 성숙도 진단"}, {"slug": "entropy", "name": "낡음(엔트로피) 체크리스트"}
+  ],
+  "services": [
+    {"slug": "consulting", "name": "컨설팅 서비스", "path": "consulting/"},
+    {"slug": "ceo-dependent-organization", "name": "대표 의존형 조직 개선", "path": "solutions/ceo-dependent-organization/"},
+    {"slug": "roles-and-responsibilities", "name": "직무·권한·책임 정리", "path": "solutions/roles-and-responsibilities/"},
+    {"slug": "sales-process-crm", "name": "영업 프로세스·CRM", "path": "solutions/sales-process-crm/"},
+    {"slug": "diagnosis-roadmap", "name": "경영진단과 실행 로드맵", "path": "solutions/diagnosis-roadmap/"},
+    {"slug": "ax-operations", "name": "AI·DX 업무 운영체계 전환", "path": "solutions/ax-operations/"}
+  ]
+}

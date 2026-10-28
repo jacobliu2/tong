@@ -13,7 +13,7 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
   var P = depth>0 ? Array(depth+1).join('../') : './';
   function r(p){ return P + p; }
   var ROUTES = {
-    home:r(''), transformation:r('transformation/'), diagnosis:r('diagnosis/'), story:r('story/'), consulting:r('consulting/'), dxai:r('dx-ai/'), tong:r('tong/'), links:r('links/'), contact:r('contact/'),
+    home:r(''), transformation:r('transformation/'), diagnosis:r('diagnosis/'), story:r('story/'), consulting:r('consulting/'), dxai:r('dx-ai/'), tong:r('tong/'), links:r('links/'), contact:r('contact/'), privacy:r('privacy/'), solutions:r('solutions/'), archive:r('archive/'),
     logo:r('assets/images/tong-logo.png')
   };
   window.TONG_ROUTES = ROUTES;
@@ -25,10 +25,10 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
   var nav =
    '<nav class="tong-nav" aria-label="주 메뉴">'+
      '<a class="tong-nav-brand" href="'+ROUTES.home+'" aria-label="통 TONG 홈">'+
-       '<img src="'+ROUTES.logo+'" alt="통 TONG 홈" /><span class="tong-brand-tx"><b class="tong-brand-full">경영전환전략연구소 </b>TONG</span></a>'+
+       '<img src="'+ROUTES.logo+'" alt="통 TONG 홈" /><span class="tong-brand-tx"><b class="tong-brand-full">경영전환연구소 </b>TONG</span></a>'+
      '<button class="tong-nav-toggle" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button>'+
      '<ul class="tong-nav-menu" id="tong-nav-menu">'+
-       '<li>'+item('tong','TONG')+'</li>'+'<li>'+item('transformation','경영전환')+'</li>'+'<li>'+item('consulting','컨설팅')+'</li>'+'<li>'+item('dxai','DX·AI')+'</li>'+'<li>'+item('diagnosis','자가진단')+'</li>'+'<li>'+item('story','이야기')+'</li>'+'<li>'+item('contact','문의',true)+'</li>'+'<li class="tong-nav-tools">'+'<button class="tong-tools-btn" id="tongTools" aria-label="보기 설정" aria-expanded="false" aria-haspopup="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg></button>'+'<div class="tong-tools-pop" id="tongToolsPop" role="menu" hidden>'+'<div class="tt-row"><span>글자 크기</span><div class="tt-seg" id="ttFont"><button data-f="0">가</button><button data-f="1" class="on">가</button><button data-f="2">가</button></div></div>'+'<div class="tt-row"><span>화면 모드</span><div class="tt-seg" id="ttTheme"><button data-t="light" class="on">라이트</button><button data-t="dark">다크</button></div></div>'+'</div></li>'+
+       '<li>'+item('tong','TONG')+'</li>'+'<li>'+item('transformation','경영전환')+'</li>'+'<li>'+item('consulting','컨설팅')+'</li>'+'<li>'+item('dxai','DX·AI')+'</li>'+'<li>'+item('diagnosis','자가진단')+'</li>'+'<li class="tong-nav-sub">'+'<a href="'+ROUTES.story+'"'+((active==='story'||active==='archive')?' aria-current="page"':'')+' aria-haspopup="true">이야기</a>'+'<ul class="tong-subnav">'+'<li><a href="'+ROUTES.story+'"'+(active==='story'?' class="on"':'')+'>경영전환 이야기</a></li>'+'<li><a href="'+ROUTES.archive+'"'+(active==='archive'?' class="on"':'')+'>아카이브</a></li>'+'</ul></li>'+'<li>'+item('contact','문의',true)+'</li>'+'<li class="tong-nav-tools">'+'<button class="tong-tools-btn" id="tongTools" aria-label="보기 설정" aria-expanded="false" aria-haspopup="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg></button>'+'<div class="tong-tools-pop" id="tongToolsPop" role="menu" hidden>'+'<div class="tt-row"><span>글자 크기</span><div class="tt-seg" id="ttFont"><button data-f="0">가</button><button data-f="1" class="on">가</button><button data-f="2">가</button></div></div>'+'<div class="tt-row"><span>화면 모드</span><div class="tt-seg" id="ttTheme"><button data-t="light" class="on">라이트</button><button data-t="dark">다크</button></div></div>'+'</div></li>'+
      '</ul></nav>';
   var y=new Date().getFullYear();
   var foot =
@@ -38,14 +38,16 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
      '<div><h4>둘러보기</h4>'+
        '<a href="'+ROUTES.transformation+'">경영전환</a>'+
        '<a href="'+ROUTES.diagnosis+'">진단</a>'+
-       '<a href="'+ROUTES.story+'">경영전환 이야기</a>'+
+       '<a href="'+ROUTES.solutions+'">문제별 해법</a>'+'<a href="'+ROUTES.archive+'">아카이브</a>'+'<a href="'+ROUTES.story+'">경영전환 이야기</a>'+
        '<a href="'+ROUTES.tong+'">TONG</a></div>'+
      '<div><h4>상담</h4>'+
        '<a href="'+ROUTES.contact+'">문의하기</a>'+
        '<a href="'+ROUTES.diagnosis+'">진단하기</a></div>'+
-   '</div>'+'<div class="tong-footer-biz">'+'<b>경영전환전략연구소 통</b> · 대표 유영준 · 사업자등록번호 471-07-02776<br>'+'서울특별시 강남구 선릉로92길 28, 4층 4201호(삼성동, 강인빌딩) · jacobliu@workstong.com'+'</div>'+'<div class="tong-footer-legal">'+
-     '<span>© '+y+' 경영전환전략연구소 통 (workstong.com)</span>'+
+   '</div>'+'<div class="tong-footer-biz">'+'<b>경영전환연구소 통</b> · 소장 유영준 · 사업자등록번호 471-07-02776<br>'+'서울특별시 강남구 선릉로92길 28, 4층 4201호(삼성동, 강인빌딩) · jacobliu@workstong.com<br>'+'<a class="tong-footer-privacy" href="'+ROUTES.privacy+'">개인정보처리방침</a>'+'</div>'+'<div class="tong-footer-legal">'+
+     '<span>© '+y+' 경영전환연구소 통 (workstong.com)</span>'+
      '<span>通 · Transformation · Operation · Network · Growth</span></div></footer>';
+  /* 통계·유입 기록 스크립트 (설정은 assets/js/analytics.js 한 곳에서) */
+  (function(){if(window.__tongAnalytics)return;var sc=document.createElement('script');sc.src=P+'assets/js/analytics.js';sc.async=true;document.head.appendChild(sc);})();
   var n=document.getElementById('tong-nav-root'); if(n) n.innerHTML=nav;
   var f=document.getElementById('tong-footer-root'); if(f) f.innerHTML=foot;
 

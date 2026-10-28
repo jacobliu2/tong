@@ -1,0 +1,7 @@
+{
+  "name": "workstong-build",
+  "private": true,
+  "type": "module",
+  "description": "workstong.com 아카이브 정적 빌드",
+  "dependencies": { "sanitize-html": "2.18.1", "js-yaml": "4.3.2", "marked": "15.0.12" }
+}

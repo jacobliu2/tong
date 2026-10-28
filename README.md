@@ -1,34 +1,48 @@
-# workstong.com — GitHub Pages 사이트 (실 파일)
+# workstong.com — GitHub Pages 정적 사이트
 
-Wix 의존을 제거한 정적 사이트. 작업지시서 §4 폴더구조·§5 클린 URL·§6 GNB·§7~13 HOME 흐름을 따랐고, 진단 9종의 계산·판정 로직은 원문 그대로 보존했다.
+빌드 도구·서버·DB 없는 정적 HTML 사이트. 커스텀 도메인은 `CNAME`(www.workstong.com).
+현행 구조와 위험 요소의 상세는 `CURRENT_SYSTEM_AUDIT.md` 참조.
+
+## 구조 (폴더형 클린 URL)
+```
+/                         메인
+/tong/                    TONG 브랜드
+/transformation/          경영전환론 (ABCDE·人營財産)
+/transformation/oyak/     오약(五若)
+/consulting/              컨설팅 4개 서비스
+/dx-ai/                   DX·AI
+/story/                   경영전환 이야기 (재구성 사례·FAQ)
+/diagnosis/               자가진단 허브 + 16종 (각 폴더)
+/contact/                 문의 폼(Web3Forms) + 캘린더 예약
+/privacy/                 개인정보처리방침
+/links/                   책가도 링크 허브 (독립 레이아웃, sitemap 제외)
+/poem/                    詩, 나의 이야기 (독립 사이트, poem/README.md)
+404.html                  구 Wix 한글 슬러그 → 신 URL (JS 리디렉션)
+assets/css/tong.css       공통 디자인 토큰·컴포넌트
+assets/js/navigation.js   공통 GNB·푸터·보기 설정
+assets/js/analytics.js    방문 통계(ID 입력 시 활성) + 문의 유입 기록
+/solutions/               문제별 해법 5종 + 목록 (생성 페이지)
+/archive/                 아카이브 (빌드 생성물, 직접 수정 금지)
+/expert/                  유영준 소장 프로필 (메뉴 비노출)
+content/archive/*.md      아카이브 글 원본 (글 하나 = 파일 하나)
+content/taxonomy.json     주제·연재·진단·해법 분류표
+_build/build-archive.mjs  아카이브 생성기
+_docs/CONTENT_WORKFLOW.md 구글 드라이브 원고 → 사이트 발행 운영 방식
+_tools/prerender-nav.js   GNB·푸터 정적 폴백 생성기
+_tools/diagnosis_guides.py  진단 16종 해설 블록 원고·생성기
+_tools/solutions_content.py 문제별 해법 원고 / solutions_build.py 생성기
+_tools/expert_build.py    전문가 프로필 생성기
+```
+
+원고 수정 순서: 원고 파일 수정 → `python3 _tools/solutions_build.py` 또는 `python3 _tools/diagnosis_guides.py` → `node _tools/prerender-nav.js`
+
+## 운영 규칙
+- 링크는 폴더형으로: `href="../newpage/"` (index.html 금지)
+- 진단 16종의 문항·가중치·채점식·판정 로직은 수정 금지
+- `navigation.js`의 메뉴나 푸터를 고친 뒤에는 저장소 루트에서 `node _tools/prerender-nav.js` 실행 후 커밋
+  (각 페이지 소스에 메뉴·푸터 HTML이 미리 들어가 있어 JS를 실행하지 않는 검색 크롤러도 읽을 수 있음)
+- 새 페이지는 `<div id="tong-nav-root"></div>` / `<div id="tong-footer-root"></div>`와 navigation.js를 넣고, 위 스크립트를 한 번 실행
+- 방문 통계: `assets/js/analytics.js`의 CONFIG 한 곳에서 관리 (GTM-WFQ2X23S, 네이버 1d335814f4270d0). GA4는 GTM 컨테이너 안에서 설정하며 `GA4_ID`는 비워 둔다(중복 집계 방지). 도구를 바꾸면 개인정보처리방침 제6·7·10조도 함께 고친다
 
 ## 배포
-1. 이 폴더 전체를 GitHub 레포에 push (또는 폴더째 업로드)
-2. Settings > Pages에서 소스 지정 → `CNAME`이 www.workstong.com 고정
-3. DNS를 Wix → GitHub Pages로 전환
-
-## 로컬 확인 (서버·GitHub 불필요)
-`preview.html` 더블클릭 → 왼쪽 목록에서 20개 페이지 클릭.
-개별 페이지는 각 폴더의 `index.html`을 직접 열어도 됨(상대경로).
-
-## 구조 (클린 URL)
-```
-/                     index.html          (HOME · §7~13)
-/transformation/      경영전환론 + ABCDE 그래프
-/tong/                通 브랜드 철학 (窮則變 變則通 通則久)
-/diagnosis/           진단 허브 (§16)
-/diagnosis/management|organization|leader|sales|market|finance|dx|
-          government-support|pyramid/     진단 9종 (로직 원문 보존)
-/writings/  /about/  /links/  /contact/   글·소개·링크·문의
-/dx/                  DX 동행 (GNB 제외, 푸터/본문 링크로 접근)
-assets/css/tong.css   디자인 정본(공통)   assets/js/navigation.js  공통 네비/푸터
-robots.txt  sitemap.xml  404.html(구 한글URL→신URL 리다이렉트)  CNAME
-```
-
-## 남은 연결 작업 (1건)
-- `contact/index.html` 폼의 `YOUR_FORM_ID`를 Formspree 발급 ID로 교체 → 문의가 이메일로 수신.
-  (교체 전에는 캘린더 예약·전화 링크가 대신 동작.)
-
-## 보존 원칙
-- 진단 QUESTIONS/AXES/SCALE_LABELS/compute*/calc* 로직 = 불가침 (원문 유지)
-- 人營財産(營, 市 아님)·ABCDE·BX Point = 코드 확인된 정본만 사용
+`main`에 push하면 GitHub Pages가 배포한다.
