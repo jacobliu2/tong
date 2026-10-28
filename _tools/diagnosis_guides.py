@@ -251,3 +251,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    import sentence_breaks; sentence_breaks.main()  # 문장 단위 줄바꿈 후처리

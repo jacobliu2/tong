@@ -1207,3 +1207,6 @@ html[data-theme="dark"]{background:linear-gradient(#0e1522 50%,#164193 50%)}
 .tong-footer-brand p{max-width:44ch;word-break:keep-all}
 /* 상단 고정 메뉴에 가려지지 않도록 앵커 이동 위치 보정 */
 #cases{scroll-margin-top:96px}
+
+/* 한글 단어 중간 줄바꿈 방지 (긴 영문·주소는 넘칠 때만 끊음) */
+body{word-break:keep-all;overflow-wrap:break-word}

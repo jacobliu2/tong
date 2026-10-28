@@ -65,7 +65,7 @@ toc: false                            # 소제목이 많으면 true
 
 ```
 cd _build && npm install && cd ..
-node _build/build-archive.mjs
+node _build/build-archive.mjs     # 끝에 문장 단위 줄바꿈(_tools/sentence_breaks.py)이 자동 실행된다
 node _tools/prerender-nav.js     # 메뉴·푸터를 바꿨을 때만
 ```
 

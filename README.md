@@ -32,6 +32,7 @@ _tools/prerender-nav.js   GNB·푸터 정적 폴백 생성기
 _tools/diagnosis_guides.py  진단 16종 해설 블록 원고·생성기
 _tools/solutions_content.py 문제별 해법 원고 / solutions_build.py 생성기
 _tools/expert_build.py    전문가 프로필 생성기
+_tools/sentence_breaks.py 두 문장 이상 문구를 문장 단위로 줄바꿈 (생성기·아카이브 빌드가 자동 실행)
 ```
 
 원고 수정 순서: 원고 파일 수정 → `python3 _tools/solutions_build.py` 또는 `python3 _tools/diagnosis_guides.py` → `node _tools/prerender-nav.js`

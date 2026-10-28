@@ -7,6 +7,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 import sanitizeHtml from 'sanitize-html';
 import yaml from 'js-yaml';
 import { marked } from 'marked';
@@ -297,3 +298,6 @@ const arcUrls = written.filter(r => r.endsWith('index.html') && !r.includes('/pa
 fs.writeFileSync(smPath, `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${keep.concat(articles.length ? arcUrls : []).join('\n')}\n</urlset>\n`);
 
 console.log(`아카이브 빌드: 글 ${articles.length}편, 파일 ${written.length}개 생성, ${removed}개 정리`);
+
+// 문장 단위 줄바꿈 후처리 (_tools/sentence_breaks.py). 파이썬이 없으면 건너뛴다.
+try { execFileSync('python3', [path.join(ROOT, '_tools', 'sentence_breaks.py')], { stdio: 'inherit' }); } catch (e) { console.warn('sentence_breaks 건너뜀:', e.message); }
