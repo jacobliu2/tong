@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""두 문장 이상이 한 덩어리로 붙어 있는 화면 문구를 문장 단위로 줄바꿈한다.
+"""짧은 안내·리드 문구 가운데 두세 문장이 붙어 어색하게 끊기는 곳만 문장 단위로 줄바꿈한다.
+
+- 문단형 글(카드 설명, 진단 해설, 해법·프로필 본문, 이야기 본문, FAQ 답변)은 건드리지 않는다.
+  그런 글은 화면 폭에 따라 단어 단위로 자연스럽게 줄이 바뀐다(word-break: keep-all).
+- 적용 대상은 아래 ALLOW 표에 적은 페이지별 요소(class)뿐이다. 새 리드 문구가 생기면 표에 추가한다.
 
 - 문장 끝(. ? !, 뒤따르는 닫는 따옴표·괄호 포함) 다음의 공백을 <br class="sb">로 바꾼다.
 - 같은 텍스트 조각 안에서만 바꾼다. 태그 사이에 걸친 경계는 건드리지 않는다.
@@ -18,6 +22,16 @@ SKIP_DIRS = ('poem/', 'links/', '_build/', 'node_modules/', 'content/')
 SKIP_TAGS = {'script', 'style', 'noscript', 'textarea', 'title', 'head', 'button', 'select', 'option',
              'code', 'pre', 'svg', 'nav', 'footer', 'label'}
 SKIP_CLASS = re.compile(r'(^|\s)(tong-prose|tong-nav[\w-]*|tong-footer[\w-]*|doc)(\s|$)')
+# 페이지별로 줄바꿈을 허용하는 요소의 class (리드·안내·캡션 등 짧은 표시용 문구)
+ALLOW = {
+    'index.html': {'fin-sub'},
+    'story/index.html': {'eyebrow', 'chap-in', 'cap', 'note'},
+    'dx-ai/index.html': {'lead', 'body', 'tl-ex'},
+    'consulting/index.html': {'note', 'flow'},
+    'contact/index.html': {'card'},
+    'solutions/index.html': {'tong-sol-lead'},
+    'archive/index.html': {'tong-arc-sub'},
+}
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 
 TOKEN = re.compile(r'(<!--.*?-->|<[^>]+>)', re.S)
@@ -72,9 +86,11 @@ def break_text(text):
     return ''.join(out), n
 
 
-def process(html):
+def process(html, allow):
+    html = html.replace('<br class="sb">', ' ')  # 이전 결과를 지우고 다시 적용
     parts = TOKEN.split(html)
     skip_stack = []  # [tagname, depth]
+    allow_stack = []
     total = 0
     for i, part in enumerate(parts):
         if not part:
@@ -86,6 +102,12 @@ def process(html):
             if not m:
                 continue
             closing, name = m.group(1) == '/', m.group(2).lower()
+            if allow_stack and not skip_stack:
+                top = allow_stack[-1]
+                if name == top[0] and name not in VOID and not part.endswith('/>'):
+                    top[1] += -1 if closing else 1
+                    if top[1] == 0:
+                        allow_stack.pop()
             if skip_stack:
                 top = skip_stack[-1]
                 if name == top[0] and name not in VOID and not part.endswith('/>'):
@@ -99,8 +121,10 @@ def process(html):
             cls = (cm.group(1) or cm.group(2)) if cm else ''
             if name in SKIP_TAGS or (cls and SKIP_CLASS.search(cls)):
                 skip_stack.append([name, 1])
+            elif not allow_stack and cls and allow & set(cls.split()):
+                allow_stack.append([name, 1])
             continue
-        if skip_stack:
+        if skip_stack or not allow_stack:
             continue
         new, n = break_text(part)
         if n:
@@ -118,11 +142,11 @@ def main():
         if rel.startswith(SKIP_DIRS):
             continue
         s = open(f, encoding='utf-8').read()
-        t, n = process(s)
-        if n:
+        t, n = process(s, ALLOW.get(rel, set()))
+        if t != s:
             open(f, 'w', encoding='utf-8').write(t)
             grand += n
-            changed += 1
+            changed += 1 if n else 0
             if '-v' in sys.argv:
                 print(f'{n:4d}  {rel}')
     print(f'문장 줄바꿈: {changed}개 파일, {grand}곳')
