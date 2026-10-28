@@ -18,7 +18,7 @@
 import re, os, glob, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SKIP_DIRS = ('poem/', 'links/', '_build/', 'node_modules/', 'content/')
+SKIP_DIRS = ('poem/', 'links/', 'lab/', '_build/', 'node_modules/', 'content/')
 SKIP_TAGS = {'script', 'style', 'noscript', 'textarea', 'title', 'head', 'button', 'select', 'option',
              'code', 'pre', 'svg', 'nav', 'footer', 'label'}
 SKIP_CLASS = re.compile(r'(^|\s)(tong-prose|tong-nav[\w-]*|tong-footer[\w-]*|doc)(\s|$)')

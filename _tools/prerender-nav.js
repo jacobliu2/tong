@@ -9,7 +9,7 @@ const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');
 const SKIP=new Set(['404.html']);
 const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.svg':'image/svg+xml','.woff2':'font/woff2'};
-function walk(d,o=[]){for(const f of fs.readdirSync(d)){if(f.startsWith('.')||f==='_tools'||f==='poem'||f==='node_modules')continue;const p=path.join(d,f);const st=fs.statSync(p);if(st.isDirectory())walk(p,o);else if(f.endsWith('.html'))o.push(p);}return o;}
+function walk(d,o=[]){for(const f of fs.readdirSync(d)){if(f.startsWith('.')||f==='_tools'||f==='poem'||f==='lab'||f==='node_modules')continue;const p=path.join(d,f);const st=fs.statSync(p);if(st.isDirectory())walk(p,o);else if(f.endsWith('.html'))o.push(p);}return o;}
 const RE_NAV=/<div id="tong-nav-root">(?:<!--prerender:nav-->[\s\S]*?<!--\/prerender:nav-->)?<\/div>/;
 const RE_FOOT=/<div id="tong-footer-root">(?:<!--prerender:footer-->[\s\S]*?<!--\/prerender:footer-->)?<\/div>/;
 (async()=>{
