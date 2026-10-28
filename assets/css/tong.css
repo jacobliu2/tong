@@ -75,7 +75,7 @@ body *,.tong-root,.tong-root *{
 .tong-footer-brand img { height: 40px; filter: brightness(0) invert(1); opacity: .92; }
 .tong-footer-biz{max-width:1180px;margin:28px auto 0;font-size:12.5px;line-height:1.9;color:rgba(255,255,255,.6)}
 .tong-footer-biz b{color:rgba(255,255,255,.82);font-weight:700}
-.tong-footer .tong-footer-privacy{display:inline-block;padding:6px 0 0;color:rgba(255,255,255,.9);font-weight:700}
+.tong-footer .tong-footer-privacy{display:inline-block;padding:6px 0 0;font-size:inherit;line-height:inherit;color:rgba(255,255,255,.82);font-weight:700}
 .tong-footer-legal {
   max-width: 1180px; margin: 36px auto 0; padding-top: 24px;
   border-top: 1px solid rgba(255,255,255,.12); font-size: 12.5px; color: rgba(255,255,255,.5);
@@ -1202,3 +1202,8 @@ html,body{margin:0}
 html{background:linear-gradient(#fff 50%,#164193 50%)}
 html[data-theme="dark"]{background:linear-gradient(#0e1522 50%,#164193 50%)}
 .tong-footer{margin:0;width:auto;background:linear-gradient(160deg,#2f6fe0,#1f57c3 55%,#164193)!important;color:rgba(255,255,255,.78)}
+
+/* 푸터 소개 문구: 두 줄(브랜드 / 설명)을 단어 단위로 유지 */
+.tong-footer-brand p{max-width:44ch;word-break:keep-all}
+/* 상단 고정 메뉴에 가려지지 않도록 앵커 이동 위치 보정 */
+#cases{scroll-margin-top:96px}

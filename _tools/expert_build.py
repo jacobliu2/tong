@@ -56,7 +56,8 @@ def build():
              '<p>경영전환론의 개념은 <a href="../transformation/">경영전환</a>에서, 진단 도구는 <a href="../diagnosis/">자가진단</a>에서 보실 수 있습니다.</p></section>')
     b.append('<section><h2><span>05</span>공식 채널</h2><ul>' + ''.join(
         f'<li><a href="{html.escape(u)}" target="_blank" rel="noopener me">{E(n)}</a></li>' for n, u in P['channels']) + '</ul></section>')
-    b.append('<section><h2><span>06</span>상담</h2><p>아직 어떤 방식이 필요한지 정하지 않으셔도 됩니다. 지금 상황을 듣고 필요한 것부터 함께 정리합니다.</p>'
+    b.append('<section><h2><span>06</span>사례</h2><p>실명을 공개할 수 없는 일이 대부분이라, 회사와 사람을 보호하기 위해 익명화·재구성한 사례로 소개합니다. <a href="../story/#cases">경영전환 이야기의 재구성 사례 보기 →</a></p></section>')
+    b.append('<section><h2><span>07</span>상담</h2><p>아직 어떤 방식이 필요한지 정하지 않으셔도 됩니다. 지금 상황을 듣고 필요한 것부터 함께 정리합니다.</p>'
              '<p class="tong-sol-cta"><a class="tong-btn tong-btn-primary" href="../contact/">상담 문의하기 →</a></p></section>')
     b.append('</div></main>\n<div id="tong-footer-root"></div>\n<script src="../assets/js/navigation.js"></script>\n</body></html>\n')
     os.makedirs(os.path.join(ROOT, 'expert'), exist_ok=True)

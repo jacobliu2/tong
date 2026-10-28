@@ -8,6 +8,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from solutions_content import PAGES, ORDER
 from diagnosis_guides import NAMES as DIAG_NAMES
 
+# 『경영전환론』 재구성 사례(/story/#cases)와의 연결. 실명 사례가 아니므로 '재구성 사례'로만 표기한다.
+CASES = {
+    'ceo-dependent-organization': [('유통사 G', '대표가 2주 비우자 보였다'), ('밀착 서비스 스타트업', '반응이 오자, 속도부터 냈다')],
+    'roles-and-responsibilities': [('SaaS 기업 H', '급여를 올려도 사람이 나갔다'), ('식품 회사', '출고 오류는 사람 탓이 아니었다')],
+    'sales-process-crm': [('뷰티 브랜드', '결제 직전에 고객이 사라졌다'), ('밀착 서비스 스타트업', '반응이 오자, 속도부터 냈다')],
+    'diagnosis-roadmap': [('금속가공 업체', '흑자인데 급여일마다 대출했다'), ('식품 제조기업', '매출을 줄이자 현금이 살았다'), ('같은 상권의 두 카페', '버릴 줄 아는 곳이 남았다')],
+    'ax-operations': [('식품 회사', '출고 오류는 사람 탓이 아니었다'), ('HR 솔루션 창업', '조직을 키우지 않고, 규모를 키웠다')],
+}
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://www.workstong.com'
 ORG = '경영전환연구소 통'
@@ -70,10 +79,13 @@ def page(slug):
         f'<li><b>{E(t)}</b><p>{E(d)}</p></li>' for t, d in g['methods']) + '</ol>')
     sec('06', '기대 산출물', '<ul>' + ''.join(f'<li>{E(x)}</li>' for x in g['outputs']) + '</ul>')
     sec('07', '적용의 전제와 한계', '<ul>' + ''.join(f'<li>{E(x)}</li>' for x in g['limits']) + '</ul>')
+    cs = ''.join(f'<li><a href="../../story/#cases"><b>{E(w)}</b> · {E(t)}</a></li>' for w, t in CASES.get(slug, []))
+    sec('08', '비슷한 사례', '<p>『경영전환론』에 실린 사례 가운데 이 문제와 닮은 것입니다. 회사와 사람을 보호하기 위해 익명화·재구성했습니다.</p>'
+        f'<ul class="tong-sol-links">{cs}</ul>')
     rel = ''.join(f'<li><a href="../../diagnosis/{d}/">{E(DIAG_NAMES[d])}</a></li>' for d in g['diags'])
-    sec('08', '먼저 해 볼 수 있는 자가진단', f'<ul class="tong-sol-links">{rel}</ul>')
+    sec('09', '먼저 해 볼 수 있는 자가진단', f'<ul class="tong-sol-links">{rel}</ul>')
     sv = ' · '.join(g['services'])
-    sec('09', '담당과 상담', f'<p>이 과제는 경영전환론을 만든 <a href="../../expert/">유영준 소장</a>이 직접 맡습니다. 관련 컨설팅 방식은 <a href="../../consulting/">{E(sv)}</a>입니다.</p>'
+    sec('10', '담당과 상담', f'<p>이 과제는 경영전환론을 만든 <a href="../../expert/">유영준 소장</a>이 직접 맡습니다. 관련 컨설팅 방식은 <a href="../../consulting/">{E(sv)}</a>입니다.</p>'
         '<p>아직 어떤 방식이 필요한지 정하지 않으셔도 됩니다. 지금 상황을 듣고 필요한 것부터 함께 정리합니다.</p>'
         '<p class="tong-sol-cta"><a class="tong-btn tong-btn-primary" href="../../contact/">상담 문의하기 →</a></p>')
     others = [s for s in ORDER if s != slug]

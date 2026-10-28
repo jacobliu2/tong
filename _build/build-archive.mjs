@@ -186,7 +186,6 @@ for (const a of articles) {
     crumbsLd([['홈', ''], ['아카이브', 'archive/'], [a.title, rel]])] };
   const updated = a.pub_updated_at && ymd(a.pub_updated_at) !== ymd(a.published_at);
   const authorName = author ? (authorUrl ? `<a href="${up(depth)}${author.profile_path}">${esc(author.name)}</a>` : esc(author.name)) : '';
-  const srcLabel = { linkedin: 'LinkedIn', brunch: '브런치', book: '책', original: '' }[a.source_platform] ?? a.source_platform;
   const ctaText = a.content_type === 'guide'
     ? '우리 회사에 어떻게 적용할지 함께 정리하고 싶으시면 상담을 신청해 주십시오.'
     : '이 글과 관련해 지금 회사의 상황을 이야기 나누고 싶으시면 편하게 문의해 주십시오.';
@@ -202,7 +201,6 @@ ${a.subtitle ? `<p class="tong-arc-sub">${esc(a.subtitle)}</p>` : ''}
 ${a.cover_image ? `<figure class="tong-arc-cover"><img src="${esc(a.cover_image)}" alt="${esc(a.cover_alt || '')}" loading="eager"/></figure>` : ''}
 ${a.show_toc && toc.length > 2 ? `<nav class="tong-arc-toc" aria-label="목차"><p class="k">목차</p>${tocHtml(toc)}</nav>` : ''}
 <div class="tong-prose">${html}</div>
-${a.source_url ? `<p class="tong-arc-source">원문${srcLabel ? ` (${esc(srcLabel)})` : ''}: <a href="${esc(a.source_url)}" target="_blank" rel="noopener">${esc(a.source_url)}</a></p>` : ''}
 <div class="tong-arc-terms">${c ? `<a href="../topic/${c.slug}/">${esc(c.name)}</a>` : ''}${sub.map(x => `<a href="../topic/${x.slug}/">${esc(x.name)}</a>`).join('')}${s ? `<a href="../series/${s.slug}/">${esc(s.name)}</a>` : ''}</div>
 ${rd.length || rs.length ? `<section class="tong-arc-next"><h2>이어서 보기</h2><ul>${rd.map(d => `<li><a href="${up(depth)}diagnosis/${d.slug}/">자가진단 · ${esc(d.name)}</a></li>`).join('')}${rs.map(v => `<li><a href="${up(depth)}${v.path}">${v.slug === 'consulting' ? '' : '문제별 해법 · '}${esc(v.name)}</a></li>`).join('')}</ul></section>` : ''}
 ${related.length ? `<section class="tong-arc-next"><h2>관련 글</h2><ul>${related.map(r => `<li><a href="../${r.slug}/">${esc(r.title)}</a></li>`).join('')}</ul></section>` : ''}

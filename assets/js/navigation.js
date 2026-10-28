@@ -34,7 +34,7 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
   var foot =
    '<footer class="tong-footer"><div class="tong-footer-inner">'+
      '<div class="tong-footer-brand"><img src="'+ROUTES.logo+'" alt="통 TONG" />'+
-       '<p>업무를 잇다, TONG. 사람과 조직, 기업과 고객, 전략과 실행을 다시 잇습니다.</p></div>'+
+       '<p>업무를 잇다, TONG.<br>사람과 조직, 기업과 고객, 전략과 실행을 다시 잇습니다.</p></div>'+
      '<div><h4>둘러보기</h4>'+
        '<a href="'+ROUTES.transformation+'">경영전환</a>'+
        '<a href="'+ROUTES.diagnosis+'">진단</a>'+
