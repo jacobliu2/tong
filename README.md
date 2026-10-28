@@ -43,7 +43,7 @@ _tools/sentence_breaks.py 두 문장 이상 문구를 문장 단위로 줄바꿈
 - `navigation.js`의 메뉴나 푸터를 고친 뒤에는 저장소 루트에서 `node _tools/prerender-nav.js` 실행 후 커밋
   (각 페이지 소스에 메뉴·푸터 HTML이 미리 들어가 있어 JS를 실행하지 않는 검색 크롤러도 읽을 수 있음)
 - 새 페이지는 `<div id="tong-nav-root"></div>` / `<div id="tong-footer-root"></div>`와 navigation.js를 넣고, 위 스크립트를 한 번 실행
-- 방문 통계: `assets/js/analytics.js`의 CONFIG 한 곳에서 관리 (GTM-WFQ2X23S, 네이버 1d335814f4270d0). GA4는 GTM 컨테이너 안에서 설정하며 `GA4_ID`는 비워 둔다(중복 집계 방지). 도구를 바꾸면 개인정보처리방침 제6·7·10조도 함께 고친다
+- 방문 통계: `assets/js/analytics.js`의 CONFIG 한 곳에서 관리 (GTM-WFQ2X23S, 네이버 1d335814f4270d0). GA4(G-BNC0PC7LY9)는 `GA4_ID`로 직접 불러오며, GTM 컨테이너 안에는 GA4 태그를 넣지 않는다(중복 집계 방지). 도구를 바꾸면 개인정보처리방침 제6·7·10조도 함께 고친다
 
 ## 배포
 `main`에 push하면 GitHub Pages가 배포한다.

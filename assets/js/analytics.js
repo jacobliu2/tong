@@ -8,8 +8,8 @@
   if (window.__tongAnalytics) return; window.__tongAnalytics = true;
 
   var CONFIG = {
-    GTM_ID: 'GTM-WFQ2X23S',      // Google 태그 관리자 컨테이너. GA4는 이 컨테이너 안에서 설정한다.
-    GA4_ID: '',                  // GTM을 쓰므로 비워 둔다. 둘 다 채우면 방문이 두 번 집계된다.
+    GTM_ID: 'GTM-WFQ2X23S',      // Google 태그 관리자 컨테이너 (현재 비어 있음, 향후 전환 측정용)
+    GA4_ID: 'G-BNC0PC7LY9',      // GA4를 여기서 직접 불러온다. GTM 안에 GA4 태그를 또 넣으면 방문이 두 번 집계되므로 넣지 않는다.
     NAVER_WA_ID: '1d335814f4270d0' // 네이버 애널리틱스 발급ID
   };
 
