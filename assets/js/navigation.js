@@ -13,7 +13,7 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
   var P = depth>0 ? Array(depth+1).join('../') : './';
   function r(p){ return P + p; }
   var ROUTES = {
-    home:r(''), transformation:r('transformation/'), diagnosis:r('diagnosis/'), story:r('story/'), consulting:r('consulting/'), dxai:r('dx-ai/'), tong:r('tong/'), links:r('links/'), contact:r('contact/'), privacy:r('privacy/'), solutions:r('solutions/'), archive:r('archive/'),
+    home:r(''), transformation:r('transformation/'), diagnosis:r('diagnosis/'), story:r('story/'), consulting:r('consulting/'), dxai:r('dx-ai/'), tong:r('tong/'), links:r('links/'), contact:r('contact/'), privacy:r('privacy/'), solutions:r('solutions/'), archive:r('archive/'), glossary:r('glossary/'),
     logo:r('assets/images/tong-logo.png')
   };
   window.TONG_ROUTES = ROUTES;
@@ -37,6 +37,7 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
        '<p>업무를 잇다, TONG.<br>사람과 조직, 기업과 고객, 전략과 실행을 다시 잇습니다.</p></div>'+
      '<div><h4>둘러보기</h4>'+
        '<a href="'+ROUTES.transformation+'">경영전환</a>'+
+       '<a href="'+ROUTES.glossary+'">용어사전</a>'+
        '<a href="'+ROUTES.diagnosis+'">진단</a>'+
        '<a href="'+ROUTES.solutions+'">문제별 해법</a>'+'<a href="'+ROUTES.archive+'">아카이브</a>'+'<a href="'+ROUTES.story+'">경영전환 이야기</a>'+
        '<a href="'+ROUTES.tong+'">TONG</a></div>'+
