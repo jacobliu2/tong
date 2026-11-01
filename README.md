@@ -24,6 +24,7 @@ assets/js/analytics.js    방문 통계(ID 입력 시 활성) + 문의 유입 �
 /solutions/               문제별 해법 5종 + 목록 (생성 페이지)
 /archive/                 아카이브 (빌드 생성물, 직접 수정 금지)
 /expert/                  유영준 소장 프로필 (메뉴 비노출)
+/economy/                 TONG 비즈니스 이코노미 (히든: 검색 제외·메뉴 미등록, _tools/economy_publish.py로 갱신)
 /glossary/                경영전환 용어사전 (생성 페이지, 푸터 링크)
 content/archive/*.md      아카이브 글 원본 (글 하나 = 파일 하나)
 content/taxonomy.json     주제·연재·진단·해법 분류표
