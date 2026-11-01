@@ -34,6 +34,8 @@ _tools/diagnosis_guides.py  진단 16종 해설 블록 원고·생성기 (아카
 _tools/solutions_content.py 문제별 해법 원고 / solutions_build.py 생성기
 _tools/expert_build.py    전문가 프로필 생성기
 _tools/glossary_content.py 용어사전 원고 / glossary_build.py 생성기
+_tools/og_build.js         아카이브 글 공유 이미지(16:9) 생성기 → assets/og/archive/ (제목·분류가 바뀐 글만 다시 그림)
+assets/js/diag-handoff.js  진단 결과 → 문의 페이지로 진단명·결과 전달 / contact-prefill.js 문의폼 자동 채움
 _tools/sentence_breaks.py 두 문장 이상 문구를 문장 단위로 줄바꿈 (생성기·아카이브 빌드가 자동 실행)
 ```
 

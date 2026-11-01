@@ -65,6 +65,7 @@ toc: false                            # 소제목이 많으면 true
 
 ```
 cd _build && npm install && cd ..
+node _tools/og_build.js           # 새 글·제목이 바뀐 글의 공유 이미지(16:9) 생성
 node _build/build-archive.mjs     # 끝에 문장 단위 줄바꿈(_tools/sentence_breaks.py)이 자동 실행된다
 node _tools/prerender-nav.js     # 아카이브 빌드 뒤에는 항상 (빌드가 메뉴·푸터 정적 HTML을 새로 비운 채 만든다)
 ```

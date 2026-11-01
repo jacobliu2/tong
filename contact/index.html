@@ -17,7 +17,7 @@
 .card{margin:36px 0 90px;background:#fff;border:1px solid #e9eef7;border-radius:20px;padding:clamp(24px,4vw,40px);box-shadow:0 20px 60px rgba(30,60,120,.06)}
 .fld{margin-bottom:16px}
 .fld label{display:block;font-weight:700;font-size:14px;margin-bottom:7px;color:#0e1626}
-.fld input,.fld textarea,.fld select{width:100%;padding:13px 15px;font:inherit;color:#0e1626;background:#fff;border:1px solid #e2e8f4;border-radius:12px;transition:border-color .2s,box-shadow .2s}
+.fld input,.fld textarea,.fld select{box-sizing:border-box;width:100%;padding:13px 15px;font:inherit;color:#0e1626;background:#fff;border:1px solid #e2e8f4;border-radius:12px;transition:border-color .2s,box-shadow .2s}
 .fld input:focus,.fld textarea:focus,.fld select:focus{outline:none;border-color:#3684FF;box-shadow:0 0 0 3px rgba(54,132,255,.15)}
 .fld textarea{min-height:130px;resize:vertical}
 .req{color:#3684FF}
@@ -95,4 +95,4 @@
   });
 })();
 </script>
-<script>(function(){try{var q=new URLSearchParams(location.search);if(q.get('doc')==='intro'){var b=document.getElementById('doc-banner');if(b)b.style.display='block';var sel=document.querySelector('select[name="type"],select[name="문의유형"],#inquiry-type');if(sel){for(var i=0;i<sel.options.length;i++){if(/소개서|자료|문의/.test(sel.options[i].text)){sel.selectedIndex=i;break;}}}var ta=document.querySelector('textarea');if(ta&&!ta.value){ta.value='[회사소개서 요청]\n회사명: \n관심 분야(진단·자문·동행·AX 등): \n';}var t=document.querySelector('h1,.contact-title');}}catch(e){}})();</script></body></html>
+<script>(function(){try{var q=new URLSearchParams(location.search);if(q.get('doc')==='intro'){var b=document.getElementById('doc-banner');if(b)b.style.display='block';var sel=document.querySelector('select[name="type"],select[name="문의유형"],#inquiry-type');if(sel){for(var i=0;i<sel.options.length;i++){if(/소개서|자료|문의/.test(sel.options[i].text)){sel.selectedIndex=i;break;}}}var ta=document.querySelector('textarea');if(ta&&!ta.value){ta.value='[회사소개서 요청]\n회사명: \n관심 분야(진단·자문·동행·AX 등): \n';}var t=document.querySelector('h1,.contact-title');}}catch(e){}})();</script><script src="../assets/js/contact-prefill.js"></script></body></html>

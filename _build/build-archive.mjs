@@ -43,7 +43,7 @@ async function loadData() {
       primary_category_id: h.category, series_id: h.series || null, author_id: h.author || 'yoo-youngjun',
       published_at: new Date(h.date).toISOString(), pub_updated_at: h.updated ? new Date(h.updated).toISOString() : null,
       cover_image: h.cover_image || null, cover_alt: h.cover_alt || null, source_platform: h.source || null, source_url: h.source_url || null,
-      seo_title: h.seo_title || null, seo_description: h.seo_description || null, og_image: h.og_image || null, canonical_url: h.canonical_url || null,
+      seo_title: h.seo_title || null, seo_description: h.seo_description || null, og_image: h.og_image || (fs.existsSync(path.join(ROOT, 'assets', 'og', 'archive', slug + '.jpg')) ? `${SITE}/assets/og/archive/${slug}.jpg` : null), canonical_url: h.canonical_url || null,
       show_toc: !!h.toc, categories: h.secondary || [], related: h.related || [], diagnoses: h.diagnoses || [], services: h.services || [],
     });
   }
