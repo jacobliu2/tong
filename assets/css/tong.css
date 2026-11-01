@@ -1221,3 +1221,10 @@ body{word-break:keep-all;overflow-wrap:break-word}
 html[data-theme="dark"] .tong-dguide ul.tong-dguide-reads,html[data-theme="dark"] .tong-dguide-reads li{border-color:#1c2636}
 html[data-theme="dark"] .tong-dguide-reads a{color:#eef2f8!important}
 html[data-theme="dark"] .tong-dguide-reads span{color:#8b97ab!important}
+/* 모바일 메뉴: 반투명 배경 위로 본문 글자가 비치던 문제 정리 (2026-11-01) */
+@media (max-width: 860px){
+  .tong-nav-menu{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 16px 32px rgba(20,30,50,.08)}
+  .tong-nav-tools{position:relative;align-self:center}
+  .tong-nav-tools .tong-tools-pop{left:50%;right:auto;transform:translateX(-50%)}
+  .tong-nav-menu .tong-nav-sub>a{text-align:center}
+}

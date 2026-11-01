@@ -28,7 +28,7 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
        '<img src="'+ROUTES.logo+'" alt="통 TONG 홈" /><span class="tong-brand-tx"><b class="tong-brand-full">경영전환연구소 </b>TONG</span></a>'+
      '<button class="tong-nav-toggle" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button>'+
      '<ul class="tong-nav-menu" id="tong-nav-menu">'+
-       '<li>'+item('tong','TONG')+'</li>'+'<li>'+item('transformation','경영전환')+'</li>'+'<li>'+item('consulting','컨설팅')+'</li>'+'<li>'+item('dxai','DX·AI')+'</li>'+'<li>'+item('diagnosis','자가진단')+'</li>'+'<li class="tong-nav-sub">'+'<a href="'+ROUTES.story+'"'+((active==='story'||active==='archive')?' aria-current="page"':'')+' aria-haspopup="true">이야기</a>'+'<ul class="tong-subnav">'+'<li><a href="'+ROUTES.story+'"'+(active==='story'?' class="on"':'')+'>경영전환 이야기</a></li>'+'<li><a href="'+ROUTES.archive+'"'+(active==='archive'?' class="on"':'')+'>아카이브</a></li>'+'</ul></li>'+'<li>'+item('contact','문의',true)+'</li>'+'<li class="tong-nav-tools">'+'<button class="tong-tools-btn" id="tongTools" aria-label="보기 설정" aria-expanded="false" aria-haspopup="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg></button>'+'<div class="tong-tools-pop" id="tongToolsPop" role="menu" hidden>'+'<div class="tt-row"><span>글자 크기</span><div class="tt-seg" id="ttFont"><button data-f="0">가</button><button data-f="1" class="on">가</button><button data-f="2">가</button></div></div>'+'<div class="tt-row"><span>화면 모드</span><div class="tt-seg" id="ttTheme"><button data-t="light" class="on">라이트</button><button data-t="dark">다크</button></div></div>'+'</div></li>'+
+       '<li>'+item('tong','TONG')+'</li>'+'<li>'+item('transformation','경영전환')+'</li>'+'<li>'+item('consulting','컨설팅')+'</li>'+'<li>'+item('dxai','DX·AI')+'</li>'+'<li>'+item('diagnosis','자가진단')+'</li>'+'<li class="tong-nav-sub">'+'<a href="'+ROUTES.story+'"'+((active==='story'||active==='archive')?' aria-current="page"':'')+' aria-haspopup="true">이야기</a>'+'<ul class="tong-subnav">'+'<li><a href="'+ROUTES.story+'"'+(active==='story'?' class="on"':'')+'>경영전환 이야기</a></li>'+'<li><a href="'+ROUTES.archive+'"'+(active==='archive'?' class="on"':'')+'>아카이브</a></li>'+'</ul></li>'+'<li>'+item('contact','문의',true)+'</li>'+'<li class="tong-nav-tools">'+'<button class="tong-tools-btn" id="tongTools" aria-label="글자 크기" aria-expanded="false" aria-haspopup="true"><span aria-hidden="true" style="font-size:15px;font-weight:800;line-height:1;letter-spacing:-.02em">가</span></button>'+'<div class="tong-tools-pop" id="tongToolsPop" role="menu" hidden>'+'<div class="tt-row"><span>글자 크기</span><div class="tt-seg" id="ttFont"><button data-f="0">가</button><button data-f="1" class="on">가</button><button data-f="2">가</button></div></div>'+'</div></li>'+
      '</ul></nav>';
   var y=new Date().getFullYear();
   var foot =
@@ -62,12 +62,11 @@ history.replaceState(null,"",p.slice(0,-10)+location.search+location.hash);}}cat
     var FS=['15px','16.5px','18.5px'];
     function setFont(i){document.documentElement.style.fontSize=FS[i];try{localStorage.setItem('tong-fs',i)}catch(e){}
       var g=document.querySelectorAll('#ttFont button');g.forEach(function(b,k){b.classList.toggle('on',k==i);});}
-    function setTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('tong-theme',t)}catch(e){}
-      document.querySelectorAll('#ttTheme button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-t')===t);});}
     document.querySelectorAll('#ttFont button').forEach(function(b){b.addEventListener('click',function(){setFont(+b.getAttribute('data-f'));});});
-    document.querySelectorAll('#ttTheme button').forEach(function(b){b.addEventListener('click',function(){setTheme(b.getAttribute('data-t'));});});
-    var sf=1,st='light';try{var _v=localStorage.getItem('tong-fs');if(_v!==null&&!isNaN(+_v))sf=+_v;st=localStorage.getItem('tong-theme')||'light';}catch(e){}
-    setFont(sf);setTheme(st);
+    var sf=1;try{var _v=localStorage.getItem('tong-fs');if(_v!==null&&!isNaN(+_v))sf=+_v;}catch(e){}
+    setFont(sf);
+    /* 다크모드 폐지(2026-11-01): 예전에 다크를 고른 방문자도 라이트로 되돌린다 */
+    document.documentElement.removeAttribute('data-theme');try{localStorage.removeItem('tong-theme')}catch(e){}
   })();
 
   var t=document.querySelector('.tong-nav-toggle'), m=document.getElementById('tong-nav-menu');
