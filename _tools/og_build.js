@@ -4,7 +4,7 @@
    실행: node _tools/og_build.js && node _build/build-archive.mjs && node _tools/prerender-nav.js */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http'),crypto=require('crypto');
 const ROOT=path.resolve(__dirname,'..');const OUT=path.join(ROOT,'assets','og','archive');const MAN=path.join(OUT,'.og-manifest.json');
-const VERSION='v2';
+const VERSION='v4';
 const T=JSON.parse(fs.readFileSync(path.join(ROOT,'content','taxonomy.json'),'utf8'));
 const CAT=Object.fromEntries(T.categories.map(c=>[c.id,c.name]));const SER=Object.fromEntries(T.series.map(c=>[c.id,c.name]));
 function fm(raw){const m=raw.match(/^---\n([\s\S]*?)\n---/);const o={};for(const l of m[1].split('\n')){const k=l.match(/^([a-z_]+):\s*(.*)$/);if(k)o[k[1]]=k[2];}return o;}
@@ -21,7 +21,7 @@ body{font-family:P,sans-serif;background:#fff;position:relative;overflow:hidden;
 .brand img{height:46px}
 .mid{position:absolute;left:88px;right:130px;top:150px;bottom:130px;display:flex;flex-direction:column;justify-content:center}
 .lab{margin-bottom:22px;font-size:24px;font-weight:700;color:#3684FF;letter-spacing:.02em}
-.t{font-size:var(--fs);font-weight:820;line-height:1.28;letter-spacing:-.035em;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.t{text-wrap:balance;font-size:var(--fs);font-weight:820;line-height:1.28;letter-spacing:-.035em;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .foot{position:absolute;left:88px;bottom:62px;font-size:22px;color:#7b879c;font-weight:600}
 .foot b{color:#161d29}
 </style></head><body><div class="bar"></div><div class="glow"></div><div class="tong">通</div>
@@ -39,7 +39,9 @@ body{font-family:P,sans-serif;background:#fff;position:relative;overflow:hidden;
     const key=crypto.createHash('sha1').update(VERSION+'|'+title+'|'+label).digest('hex');const out=path.join(OUT,slug+'.jpg');
     if(man[slug]===key&&fs.existsSync(out)){kept++;continue;}
     srv.page=html(title,label);await pg.goto(`http://localhost:${port}/__og`);await pg.evaluate(()=>document.fonts.ready);
-    await pg.evaluate(()=>{const t=document.getElementById('t');const len=t.textContent.length;t.style.setProperty('--fs',(len<=18?72:len<=30?62:54)+'px');});
+    await pg.evaluate(()=>{const t=document.getElementById('t');const raw=t.textContent;const len=raw.length;t.style.setProperty('--fs',(len<=18?72:len<=30?62:54)+'px');
+      /* 문장이 길면 쉼표·마침표·물음표 뒤에서 줄을 나누고, 없으면 두 줄 길이를 고르게 맞춘다 */
+      if(len>16){const m=raw.match(/^(.{6,}?[,.?!·])\s+(.{4,})$/)||raw.match(/^(.{6,}?(?:아닌|아니라|아니다\.?))\s+(.{4,})$/);if(m){t.textContent='';t.append(m[1],document.createElement('br'),m[2]);}}});
     await pg.screenshot({path:out,type:'jpeg',quality:86});man[slug]=key;made++;}
   for(const k of Object.keys(man))if(!seen.has(k)){delete man[k];try{fs.unlinkSync(path.join(OUT,k+'.jpg'))}catch(e){}}
   fs.writeFileSync(MAN,JSON.stringify(man,null,1)+'\n');await b.close();srv.close();console.log('공유 이미지: 새로 그림',made,'· 그대로',kept);
