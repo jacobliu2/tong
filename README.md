@@ -30,7 +30,7 @@ content/taxonomy.json     주제·연재·진단·해법 분류표
 _build/build-archive.mjs  아카이브 생성기
 _docs/CONTENT_WORKFLOW.md 구글 드라이브 원고 → 사이트 발행 운영 방식
 _tools/prerender-nav.js   GNB·푸터 정적 폴백 생성기
-_tools/diagnosis_guides.py  진단 16종 해설 블록 원고·생성기
+_tools/diagnosis_guides.py  진단 16종 해설 블록 원고·생성기 (아카이브 글 머리말 diagnoses로 "이 진단과 이어지는 글" 자동 구성)
 _tools/solutions_content.py 문제별 해법 원고 / solutions_build.py 생성기
 _tools/expert_build.py    전문가 프로필 생성기
 _tools/glossary_content.py 용어사전 원고 / glossary_build.py 생성기

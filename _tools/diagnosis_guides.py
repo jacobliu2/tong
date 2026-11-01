@@ -206,6 +206,44 @@ SOL = {'ceo-dependency':'ceo-dependent-organization','leader':'ceo-dependent-org
        'letting-go':'diagnosis-roadmap','business-model':'diagnosis-roadmap','government-support':'diagnosis-roadmap',
        'ax-readiness':'ax-operations','dx':'ax-operations'}
 
+# ── 진단별 이어지는 아카이브 글 (content/archive/*.md 머리말 기준) ──
+# 1순위: 글 머리말 diagnoses에 이 진단이 지정된 글 / 2순위: 진단 주제와 같은 분류(category·secondary)의 글. 최신순 최대 3편.
+DIAG_CAT = {'management': 'strategy', 'organization': 'organization', 'leader': 'organization', 'sales': 'sales',
+            'market': 'sales', 'finance': 'finance', 'dx': 'ax-dx', 'government-support': 'strategy',
+            'pyramid': 'strategy', 'oyak': 'strategy', 'ceo-dependency': 'organization', 'business-model': 'product',
+            'letting-go': 'strategy', 'ax-readiness': 'ax-dx', 'crm-maturity': 'sales', 'entropy': 'organization'}
+READS_MAX = 3
+import json as _json
+CAT_NAMES = {c['id']: c['name'] for c in _json.load(open(os.path.join(ROOT, 'content', 'taxonomy.json'), encoding='utf-8'))['categories']}
+
+
+def _load_articles():
+    import glob, json as _j
+    arts = []
+    for f in sorted(glob.glob(os.path.join(ROOT, 'content', 'archive', '*.md'))):
+        fm = open(f, encoding='utf-8').read().split('---', 2)[1]
+        def g(k):
+            m = re.search(r'^' + k + r':\s*(.*)$', fm, re.M)
+            return m.group(1).strip() if m else ''
+        def lst(k):
+            v = g(k)
+            return _j.loads(v) if v.startswith('[') else []
+        arts.append(dict(slug=os.path.basename(f)[:-3], title=_j.loads(g('title')), summary=_j.loads(g('summary')),
+                         date=g('date'), cat=g('category'), sec=lst('secondary'), diags=lst('diagnoses')))
+    arts.sort(key=lambda a: a['date'], reverse=True)
+    return arts
+
+
+ARTS = _load_articles()
+
+
+def reads_for(key):
+    tagged = [a for a in ARTS if key in a['diags']]
+    cat = DIAG_CAT.get(key)
+    more = [a for a in ARTS if a not in tagged and (a['cat'] == cat or cat in a['sec'])]
+    return (tagged + more)[:READS_MAX], cat
+
+
 CTA = '이 진단 결과를 바탕으로 해석과 다음 단계를 함께 정리하고 싶으시면 결과 화면의 상담 신청이나 문의하기를 이용해 주십시오.'
 
 
@@ -222,6 +260,14 @@ def build(key):
     out += ['<h3>이런 회사에 먼저 권합니다</h3><ul>'] + [f'<li>{esc(x)}</li>' for x in g['fit']] + ['</ul>']
     out += ['<h3>결과를 읽는 법</h3>'] + [f'<p>{esc(p)}</p>' for p in g['result']]
     out += ['<h3>자가진단의 한계</h3>', f'<p>{esc(g["limit"])}</p>']
+    reads, cat = reads_for(key)
+    if reads:
+        out.append('<h3>이 진단과 이어지는 글</h3><ul class="tong-dguide-reads">')
+        for a in reads:
+            out.append(f'<li><a href="../../archive/{a["slug"]}/">{esc(a["title"])}</a><span>{esc(a["summary"])}</span></li>')
+        out.append('</ul>')
+        if cat:
+            out.append(f'<p class="tong-dguide-more"><a href="../../archive/topic/{cat}/">{esc(CAT_NAMES[cat])} 글 모두 보기 →</a></p>')
     out += ['<h3>함께 보면 좋은 것</h3><ul class="tong-dguide-links">']
     for r in g['related']:
         out.append(f'<li><a href="../{r}/">{esc(NAMES[r])}</a></li>')

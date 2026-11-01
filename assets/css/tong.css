@@ -1210,3 +1210,14 @@ html[data-theme="dark"]{background:linear-gradient(#0e1522 50%,#164193 50%)}
 
 /* 한글 단어 중간 줄바꿈 방지 (긴 영문·주소는 넘칠 때만 끊음) */
 body{word-break:keep-all;overflow-wrap:break-word}
+/* 진단 해설 · 이어지는 글 */
+.tong-dguide ul.tong-dguide-reads{list-style:none;padding:0;margin:4px 0 8px;border-top:1px solid #e2e8f4}
+.tong-dguide-reads li{margin:0;padding:14px 0;border-bottom:1px solid #e2e8f4}
+.tong-dguide-reads a{display:block;text-decoration:none!important;font-size:16px;font-weight:700;color:var(--tong-ink)!important;line-height:1.5}
+.tong-dguide-reads a:hover{color:var(--tong-primary)!important}
+.tong-dguide-reads span{display:block;margin-top:4px;font-size:14.5px;line-height:1.7;color:#5a6783}
+.tong-dguide-more{margin-top:6px!important;font-size:14.5px}
+.tong-dguide-more a{text-decoration:none!important}
+html[data-theme="dark"] .tong-dguide ul.tong-dguide-reads,html[data-theme="dark"] .tong-dguide-reads li{border-color:#1c2636}
+html[data-theme="dark"] .tong-dguide-reads a{color:#eef2f8!important}
+html[data-theme="dark"] .tong-dguide-reads span{color:#8b97ab!important}
