@@ -203,7 +203,7 @@ G = {
 SOL = {'ceo-dependency':'ceo-dependent-organization','leader':'ceo-dependent-organization','organization':'roles-and-responsibilities',
        'entropy':'roles-and-responsibilities','sales':'sales-process-crm','crm-maturity':'sales-process-crm','market':'sales-process-crm',
        'management':'diagnosis-roadmap','finance':'diagnosis-roadmap','pyramid':'diagnosis-roadmap','oyak':'diagnosis-roadmap',
-       'letting-go':'diagnosis-roadmap','business-model':'diagnosis-roadmap','government-support':'diagnosis-roadmap',
+       'letting-go':'diagnosis-roadmap','business-model':'diagnosis-roadmap','government-support':'government-support',
        'ax-readiness':'ax-operations','dx':'ax-operations'}
 
 # ── 진단별 이어지는 아카이브 글 (content/archive/*.md 머리말 기준) ──

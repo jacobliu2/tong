@@ -7,7 +7,7 @@ category: strategy
 secondary: ["finance"]
 series: null
 diagnoses: ["government-support", "business-model"]
-services: []
+services: ["government-support"]
 source: linkedin
 source_url: "https://www.linkedin.com/feed/update/urn%3Ali%3Ashare%3A7416248980684169217"
 ---

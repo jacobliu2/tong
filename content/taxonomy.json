@@ -34,6 +34,7 @@
     {"slug": "roles-and-responsibilities", "name": "직무·권한·책임 정리", "path": "solutions/roles-and-responsibilities/"},
     {"slug": "sales-process-crm", "name": "영업 프로세스·CRM", "path": "solutions/sales-process-crm/"},
     {"slug": "diagnosis-roadmap", "name": "경영진단과 실행 로드맵", "path": "solutions/diagnosis-roadmap/"},
-    {"slug": "ax-operations", "name": "AI·DX 업무 운영체계 전환", "path": "solutions/ax-operations/"}
+    {"slug": "ax-operations", "name": "AI·DX 업무 운영체계 전환", "path": "solutions/ax-operations/"},
+    {"slug": "government-support", "name": "정부지원사업 활용 설계", "path": "solutions/government-support/"}
   ]
 }

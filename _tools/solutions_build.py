@@ -20,6 +20,7 @@ CASES = {
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://www.workstong.com'
 ORG = '경영전환연구소 통'
+KN = {4: '네', 5: '다섯', 6: '여섯', 7: '일곱', 8: '여덟'}
 E = lambda s: html.escape(s, quote=False)
 A = lambda s: html.escape(s, quote=True)
 
@@ -44,6 +45,12 @@ def head(title, desc, path, ld, depth):
 </head>'''
 
 
+def archive_title(slug):
+    import re
+    t = open(os.path.join(ROOT, 'content', 'archive', slug + '.md'), encoding='utf-8').read()
+    return json.loads(re.search(r'^title:\s*(".*")\s*$', t, re.M).group(1))
+
+
 def crumbs_ld(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": SITE + "/" + p} for i, (n, p) in enumerate(items)]}
@@ -66,8 +73,10 @@ def page(slug):
     b.append(f'<div class="tong-sol-summary"><p class="k">요약</p><p>{E(g["summary"])}</p></div>')
     b.append('</div></header><div class="tong-sol-in tong-sol-body">')
 
-    def sec(no, t, inner):
-        b.append(f'<section><h2><span>{no}</span>{E(t)}</h2>{inner}</section>')
+    n = [0]
+    def sec(_no, t, inner):  # 번호는 실제 출력 순서대로 매긴다
+        n[0] += 1
+        b.append(f'<section><h2><span>{n[0]:02d}</span>{E(t)}</h2>{inner}</section>')
 
     sec('01', '어떤 기업의 문제인가', ''.join(f'<p>{E(p)}</p>' for p in g['who']))
     sec('02', '이런 증상으로 나타납니다', '<ul>' + ''.join(f'<li>{E(x)}</li>' for x in g['symptoms']) + '</ul>')
@@ -80,8 +89,12 @@ def page(slug):
     sec('06', '기대 산출물', '<ul>' + ''.join(f'<li>{E(x)}</li>' for x in g['outputs']) + '</ul>')
     sec('07', '적용의 전제와 한계', '<ul>' + ''.join(f'<li>{E(x)}</li>' for x in g['limits']) + '</ul>')
     cs = ''.join(f'<li><a href="../../story/#cases"><b>{E(w)}</b> · {E(t)}</a></li>' for w, t in CASES.get(slug, []))
-    sec('08', '비슷한 사례', '<p>『경영전환론』에 실린 사례 가운데 이 문제와 닮은 것입니다. 회사와 사람을 보호하기 위해 익명화·재구성했습니다.</p>'
-        f'<ul class="tong-sol-links">{cs}</ul>')
+    if cs:
+        sec('08', '비슷한 사례', '<p>『경영전환론』에 실린 사례 가운데 이 문제와 닮은 것입니다. 회사와 사람을 보호하기 위해 익명화·재구성했습니다.</p>'
+            f'<ul class="tong-sol-links">{cs}</ul>')
+    if g.get('reads'):
+        rd = ''.join(f'<li><a href="../../archive/{r}/">{E(archive_title(r))}</a></li>' for r in g['reads'])
+        sec('', '유영준 소장의 글', '<p>이 문제를 다룬 아카이브 글입니다.</p>' f'<ul class="tong-sol-links">{rd}</ul>')
     rel = ''.join(f'<li><a href="../../diagnosis/{d}/">{E(DIAG_NAMES[d])}</a></li>' for d in g['diags'])
     sec('09', '먼저 해 볼 수 있는 자가진단', f'<ul class="tong-sol-links">{rel}</ul>')
     sv = ' · '.join(g['services'])
@@ -108,7 +121,7 @@ def index():
          '<header class="tong-sol-hero"><div class="tong-sol-in">',
          '<nav class="tong-sol-crumb" aria-label="현재 위치"><a href="../">홈</a> / <span>문제별 해법</span></nav>',
          '<h1>문제별 해법</h1>',
-         '<p class="tong-sol-lead">회사의 문제는 대개 한 부서에서만 시작되지 않습니다. 대표들이 가장 자주 꺼내는 다섯 가지 문제를 골라, 어떤 회사에서 나타나는지, 원인은 무엇인지, 어떤 순서로 바꾸는지를 정리했습니다.</p>',
+         f'<p class="tong-sol-lead">회사의 문제는 대개 한 부서에서만 시작되지 않습니다. 대표들이 가장 자주 꺼내는 {KN[len(ORDER)]} 가지 문제를 골라, 어떤 회사에서 나타나는지, 원인은 무엇인지, 어떤 순서로 바꾸는지를 정리했습니다.</p>',
          '</div></header><div class="tong-sol-in tong-sol-body"><ol class="tong-sol-index">']
     for s in ORDER:
         g = PAGES[s]
