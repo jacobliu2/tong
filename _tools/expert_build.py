@@ -19,7 +19,7 @@ P = dict(
            '좋은 기업은 사람이 열심히 일하는 기업이 아니라 구조가 일하는 기업이라고 믿습니다.'],
     expertise=[('경영전환 진단과 실행 로드맵', 'diagnosis-roadmap'), ('대표 의존형 조직 개선', 'ceo-dependent-organization'),
                ('직무·권한·책임 정리', 'roles-and-responsibilities'), ('영업 프로세스와 CRM', 'sales-process-crm'),
-               ('AI·DX 업무 전환', 'ax-operations'), ('정부지원사업 활용', None)],
+               ('AI·DX 업무 전환', 'ax-operations'), ('정부지원사업 활용', 'government-support')],
     career=[('경영전환연구소 통', '소장'), ('코리아경영자문(KBMC)', '전략파트장')],
     research=['경영전환론 — ABCDE 전환 사이클, 人營財産 4축, 오약(五若)·사도(四度) 체계',
               '경영 자가진단 16종 설계 (조직유형 16, 리더 유형, 영업 신호등, 대표 의존도 등)',
