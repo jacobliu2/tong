@@ -16,7 +16,8 @@ i = s.find('<head>'); assert 0 < i < 400, '<head> 위치 확인 필요'
 inj = ('<meta name="robots" content="noindex, nofollow"/>'
        '<link rel="icon" href="../assets/images/tong-logo.png"/>'
        '<style>@font-face{font-family:Pretendard;font-weight:45 920;font-style:normal;font-display:swap;'
-       "src:url('../assets/fonts/PretendardVariable.woff2') format('woff2-variations'),url('../assets/fonts/PretendardVariable.woff2') format('woff2')}</style>")
+       "src:url('../assets/fonts/PretendardVariable.woff2') format('woff2-variations'),url('../assets/fonts/PretendardVariable.woff2') format('woff2')}</style>"
+       '<script src="../assets/js/analytics.js" async></script>')
 s = s[:i+6] + inj + s[i+6:]
 os.makedirs(os.path.join(ROOT, 'economy'), exist_ok=True)
 open(os.path.join(ROOT, 'economy', 'index.html'), 'w', encoding='utf-8').write(s)
