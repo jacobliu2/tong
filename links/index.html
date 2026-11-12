@@ -211,32 +211,17 @@ a:focus-visible,button:focus-visible{outline:none}
     box-shadow:0 0 0 2px rgba(54,132,255,.65), 0 0 18px rgba(54,132,255,.28);
   }
 
-  /* 족자에 없는 메뉴 — 족자 종이와 같은 결의 카드 */
-  .more{
-    display:block;margin:0 auto;padding:18px 14px calc(26px + env(safe-area-inset-bottom));
-    width:min(100vw, 560px);
+  /* 족자 아래 '더 알아보기' — 홈페이지로 이동 */
+  .more{display:block;text-align:center;padding:10px 0 calc(18px + env(safe-area-inset-bottom))}
+  .more-btn{
+    display:inline-flex;align-items:center;text-decoration:none;
+    min-height:44px;padding:10px 18px;border:0;border-radius:22px;cursor:pointer;
+    background:transparent;color:rgba(243,236,226,.78);
+    font:inherit;font-size:13.5px;font-weight:600;letter-spacing:.01em;
   }
-  .more-card{
-    background:linear-gradient(180deg,#f6efe2,#efe5d3);
-    border-radius:14px;padding:18px 16px 8px;
-    box-shadow:0 0 0 1px rgba(169,128,63,.35),0 18px 40px -20px rgba(0,0,0,.7);
-  }
-  .more h2{margin:0 0 2px;font-size:17px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
-  .more .more-lead{margin:0 0 10px;font-size:12.5px;color:#6b5f4c}
-  .more ul{list-style:none;margin:0;padding:0}
-  .more-g + .more-g{border-top:1px solid rgba(120,92,58,.18)}
-  .more-h{margin:12px 0 2px;font-size:12px;font-weight:700;color:var(--bronze);letter-spacing:.02em}
-  .more a{
-    display:flex;flex-direction:column;justify-content:center;
-    min-height:48px;padding:8px 26px 8px 2px;position:relative;
-    text-decoration:none;color:var(--ink);-webkit-tap-highlight-color:rgba(54,132,255,.12);
-  }
-  .more a::after{content:'›';position:absolute;right:6px;top:50%;transform:translateY(-50%);color:#a08f74;font-size:18px}
-  .more a b{font-size:15px;font-weight:650;line-height:1.35}
-  .more a span{font-size:12px;color:#6b6457;line-height:1.4}
-  .more a:active b,.more a:focus-visible b{color:var(--blue)}
-  .more a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
-  .more-foot{margin:14px 0 0;text-align:center;font-size:11px;color:rgba(243,236,226,.55)}
+  .more-btn span{margin-left:2px}
+  .more-btn:active,.more-btn:focus-visible{color:#fff;background:rgba(255,255,255,.08);outline:none}
+  .more-btn:focus-visible{box-shadow:0 0 0 2px var(--blue)}
 }
 
 
@@ -245,7 +230,7 @@ a:focus-visible,button:focus-visible{outline:none}
 .sheet[hidden]{display:none}
 .sheet-open body{overflow:hidden}
 .sheet-box{
-  width:min(100vw,560px);background:var(--paper);color:var(--ink);
+  width:min(100vw,560px);max-height:82vh;max-height:82dvh;overflow:auto;overscroll-behavior:contain;background:var(--paper);color:var(--ink);
   border-radius:18px 18px 0 0;padding:8px 14px calc(14px + env(safe-area-inset-bottom));
   box-shadow:0 -18px 40px -16px rgba(0,0,0,.5);animation:sheetUp .22s var(--ease);
 }
@@ -256,6 +241,8 @@ a:focus-visible,button:focus-visible{outline:none}
 .sheet-x:focus-visible{outline:2px solid var(--blue)}
 .sheet ul{list-style:none;margin:4px 0 0;padding:0}
 .sheet li + li{border-top:1px solid rgba(120,92,58,.12)}
+.sheet li.sheet-g{border-top:0;padding:14px 4px 2px;font-size:12px;font-weight:700;color:var(--bronze);letter-spacing:.02em}
+.sheet-h{position:sticky;top:-8px;background:var(--paper);z-index:1}
 .sheet a{display:flex;flex-direction:column;justify-content:center;min-height:56px;padding:8px 26px 8px 4px;position:relative;text-decoration:none;color:var(--ink);-webkit-tap-highlight-color:rgba(54,132,255,.12)}
 .sheet a::after{content:'›';position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#a08f74;font-size:20px}
 .sheet a b{font-size:16px;font-weight:700}
@@ -290,14 +277,9 @@ a:focus-visible,button:focus-visible{outline:none}
        width="941" height="1672" decoding="async"
        onerror="if(window.matchMedia('(max-width:900px), (orientation:portrait) and (max-width:1024px)').matches)document.documentElement.classList.add('hub-noimg')">
 </div>
-<nav class="more" aria-labelledby="more-title">
-  <div class="more-card">
-    <h2 id="more-title">더 둘러보기</h2>
-    <p class="more-lead">문제별 해법, DX·AI, 콘텐츠 서재까지</p>
-    <ul id="hub-more-list"></ul>
-  </div>
-  <p class="more-foot">경영전환연구소 통 TONG</p>
-</nav>
+<div class="more">
+  <a class="more-btn" href="../" data-hub-obj="more" data-hub-menu="더 알아보기">더 알아보기 <span aria-hidden="true">›</span></a>
+</div>
 
 <!-- ══ 전체 메뉴 목록 (키보드 건너뛰기 · 이미지 로딩 실패 시 대체 경로) ══ -->
 <nav class="idx" id="hub-index" aria-labelledby="idx-title">

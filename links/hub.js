@@ -246,8 +246,9 @@
       head.appendChild(x); box.appendChild(head);
       var ul = el('ul');
       s.menu.forEach(function (m) {
+        if (m.group) { ul.appendChild(el('li', { class: 'sheet-g', 'aria-hidden': 'true', text: m.group })); }
         var at = linkAttrs(m.href, m.external);
-        at['data-hub-obj'] = 'scroll'; at['data-hub-menu'] = s.label + ' > ' + m.label;
+        at['data-hub-obj'] = s.obj || 'scroll'; at['data-hub-menu'] = s.label + ' > ' + m.label;
         var a = el('a', at, '<b>' + esc(m.label) + '</b>' + (m.desc ? '<span>' + esc(m.desc) + '</span>' : ''));
         if (at.target) a.setAttribute('aria-label', m.label + ' (새 창)');
         a.addEventListener('click', function () { setTimeout(closeSheet, 0); });
@@ -256,7 +257,7 @@
       box.appendChild(ul); sheet.appendChild(box);
       sheetBtn = btn; btn.setAttribute('aria-expanded', 'true');
       sheet.hidden = false; doc.documentElement.classList.add('sheet-open');
-      var f = sheet.querySelector('ul a'); if (f) f.focus({ preventScroll: true });
+      box.scrollTop = 0; var f = sheet.querySelector('ul a'); if (f) f.focus({ preventScroll: true });
     }
     var hotStyle = function (s) { return 'left:' + sx[0] + '%;width:' + sx[1] + '%;top:' + s.top + '%;height:' + s.height + '%'; };
     HUB.scroll.forEach(function (s) {
@@ -278,34 +279,6 @@
     });
 
     /* 족자에 없는 목적지 → '더 둘러보기' (중앙 설정에서 자동 수집) */
-    var more = doc.getElementById('hub-more-list');
-    if (more) {
-      /* 단일 목적지는 '바로가기' 한 묶음으로, 복수 목적지는 사물 이름을 제목으로 묶는다 */
-      var singles = [], groups = [];
-      HUB.objects.forEach(function (obj) {
-        if (obj.menu) {
-          var items = obj.menu.filter(function (m) { return !onScroll[m.href]; });
-          if (items.length) groups.push({ title: obj.label, id: obj.id, items: items });
-        } else if (!onScroll[obj.href]) {
-          singles.push({ label: obj.label, desc: obj.desc, href: obj.href, external: obj.external, obj: obj.id });
-        }
-      });
-      if (singles.length) groups.unshift({ title: '바로가기', items: singles });
-      groups.forEach(function (gr) {
-        var g = el('li', { class: 'more-g' });
-        g.appendChild(el('p', { class: 'more-h', text: gr.title }));
-        var ul = el('ul');
-        gr.items.forEach(function (m) {
-          var at = linkAttrs(m.href, m.external);
-          at['data-hub-obj'] = m.obj || gr.id; at['data-hub-menu'] = m.label;
-          var a = el('a', at, '<b>' + esc(m.label) + '</b>' + (m.desc ? '<span>' + esc(m.desc) + '</span>' : ''));
-          if (at.target) a.setAttribute('aria-label', m.label + ' (새 창)');
-          var li = el('li'); li.appendChild(a); ul.appendChild(li);
-        });
-        g.appendChild(ul);
-        more.appendChild(g);
-      });
-    }
   }
 
   /* ══ 3. 전체 메뉴 목록 (키보드 건너뛰기 · 이미지 실패 시 대체 경로) ══ */
